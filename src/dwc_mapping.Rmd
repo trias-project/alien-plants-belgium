@@ -40,7 +40,7 @@ read_excel(
 ) -> checklist
 ```
 
-Remove empty rows and process the `presence` headers on the second row:
+Remove empty rows and process the `Fl.`, `Br.`, `Wa.` "presence" headers on the first row:
 
 ```{r handle_empty_rows}
 checklist %>%
@@ -123,7 +123,11 @@ mutate(
   # nomenclaturalStatus
   # taxonRemarks
 ) %>%
+  
+# Remove the original columns
 select(-one_of(checklist_colnames)) -> taxon
+
+# Preview data
 head(taxon)
 ```
 
