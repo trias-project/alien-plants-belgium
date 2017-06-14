@@ -71,3 +71,64 @@ Preview data:
 head(checklist)
 ```
 
+## Create taxon core
+
+Map the source data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml):
+
+```{r map_to_taxon}
+checklist %>%
+mutate(
+  id = ID,
+  # modified
+  language = "en",
+  license = "http://creativecommons.org/publicdomain/zero/1.0/",
+  rightsHolder = "Botanic Garden Meise",
+  # accessRights
+  # bibliographicCitation
+  # informationWithheld
+  datasetID = "", # Should become the DOI
+  datasetName = "Manual of the Alien Plants of Belgium", 
+  # references
+  taxonID = ID,
+  # scientificNameID
+  # acceptedNameUsageID
+  # parentNameUsageID
+  # originalNameUsageID
+  # nameAccordingToID
+  # namePublishedInID
+  # taxonConceptID
+  scientificName = Taxon,
+  # acceptedNameUsage
+  # parentNameUsage
+  # originalNameUsage
+  # nameAccordingTo
+  # namePublishedIn
+  # namePublishedInYear
+  # higherClassification
+  kingdom = "Plantae",
+  # phylum
+  # class
+  # order
+  family = Family,
+  # genus
+  # subgenus
+  # specificEpithet
+  # infraspecificEpithet
+  # taxonRank
+  # verbatimTaxonRank
+  # scientificNameAuthorship
+  # vernacularName
+  nomenclaturalCode = "ICBN"
+  # taxonomicStatus
+  # nomenclaturalStatus
+  # taxonRemarks
+) %>%
+select(-one_of(checklist_colnames)) -> taxon
+head(taxon)
+```
+
+Save to CSV:
+
+```{r save_taxon_csv}
+write.csv(taxon, file = output_taxon_file, na = "", row.names = FALSE)
+```
