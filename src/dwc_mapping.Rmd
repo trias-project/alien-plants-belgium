@@ -9,6 +9,65 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
 
+## Setup
+
+Load libraries:
+
+```{r load_libraries}
+library(janitor)
+library(dplyr)
+library(readxl)
+```
+
+Set file paths:
+
+```{r set_file_paths}
+# All paths should be relative to this script
+input_checklist_file = "../data/raw/Checklist2.xls"
+output_taxon_file = "../data/processed/taxon.csv"
+output_distribution_file = "../data/processed/distribution.csv"
+output_description_file = "../data/processed/description.csv"
+```
+
 ## Read data
 
-...
+Read the source checklist (an Excel file):
+
+```{r read_excel}
+read_excel(
+  path = input_checklist_file,
+  skip = 1 # First row is empty
+) -> checklist
+```
+
+Remove empty rows and process the `presence` headers on the second row:
+
+```{r handle_empty_rows}
+checklist %>%
+# Remove empty rows
+remove_empty_rows() %>%
+
+# The headers for "Presence" are on the first row (Fl., Br., Wa.), so we need to 
+# rename the first row headers to keep this information
+rename(Presence_Fl = Presence, Presence_Br = X__1, Presence_Wa = X__2) %>%
+  
+# We can now remove that first row, by slicing from 2 till the end
+slice(2:(n())) -> checklist
+```
+
+Add row number as an identifier (`ID`) and save the column names for future reference:
+
+```{r add_id_store_colnames}
+# Add ID
+checklist <- cbind("ID" = seq.int(nrow(checklist)), checklist)
+
+# Save column names
+checklist_colnames <- colnames(checklist)
+```
+
+Preview data:
+
+```{r head_checklist}
+head(checklist)
+```
+
