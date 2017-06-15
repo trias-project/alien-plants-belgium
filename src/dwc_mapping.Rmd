@@ -167,10 +167,20 @@ mutate(
     .$presence_area == "Presence_Br" ~ "Brussels-Capital Region"
   ),
   countryCode = "BE",
+  # lifeStage
   occurrenceStatus = case_when(
     .$presence_value == "X" ~ "present",
     .$presence_value == "?" ~ "unknown"
   )
+  # threatStatus
+  # establishmentMeans
+  # appendixCITES
+  # eventDate
+  # startDayOfYear
+  # endDayOfYear
+  # source
+  # occurrenceRemarks
+  # datasetID
 ) %>%
   
 # Remove the original columns + the two presence ones
