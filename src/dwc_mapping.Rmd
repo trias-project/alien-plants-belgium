@@ -140,16 +140,20 @@ write.csv(taxon, file = output_taxon_file, na = "", row.names = FALSE)
 
 ## Create distribution extension
 
+Create records for each value in the presence columns FL, BR, WA, but not for `NA` values:
+
+```{r create_distribution_records}
+checklist %>%
+gather(presence_area, presence_value, Presence_Fl, Presence_Br, Presence_Wa, na.rm = TRUE, convert = FALSE) %>%
+  
+# Sort on ID
+arrange(ID) -> distribution
+```
+
 Map the source data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
 
 ```{r distribution_mapping}
-checklist %>%
-
-# Create records for each value in FL, BR, WA, but not for NA values  
-gather(presence_area, presence_value, Presence_Fl, Presence_Br, Presence_Wa, na.rm = TRUE, convert = FALSE) %>%
-arrange(ID) %>%
-
-# Map to Darwin Core
+distribution %>%
 mutate(
   id = ID,
   locationID = paste0("ISO3166-2:", case_when(
