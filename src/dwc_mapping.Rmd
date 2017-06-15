@@ -11,6 +11,13 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 ## Setup
 
+Set locale (so we use UTF-8 character encoding):
+
+```{r set_locale}
+# This works on Mac OS X, might not work on other OS
+Sys.setlocale("LC_ALL", 'en_US.UTF-8')
+```
+
 Load libraries:
 
 ```{r load_libraries}
