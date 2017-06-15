@@ -147,12 +147,27 @@ write.csv(taxon, file = output_taxon_file, na = "", row.names = FALSE)
 
 ## Create distribution extension
 
-Create records for each value in the presence columns FL, BR, WA, but not for `NA` values:
+Create a `Presence_Be` column, which contains `X` if any of the regions has `X` and if not has `?` if any of the regions has `?`:
+
+```{r add_presence_be}
+checklist %>%
+mutate(Presence_Be = case_when(
+  .$Presence_Fl == "X" | .$Presence_Br == "X" | .$Presence_Wa == "X" ~ "X",
+  .$Presence_Fl == "?" | .$Presence_Br == "?" | .$Presence_Wa == "?" ~ "?")
+) -> distribution
+```
+
+Create records for each value in the four presence columns but not for `NA` values:
 
 ```{r create_distribution_records}
-checklist %>%
-gather(presence_area, presence_value, Presence_Fl, Presence_Br, Presence_Wa, na.rm = TRUE, convert = FALSE) %>%
-  
+distribution %>%
+gather(
+  presence_area, presence_value,
+  Presence_Be, Presence_Br, Presence_Fl, Presence_Wa,
+  na.rm = TRUE,
+  convert = FALSE
+) %>%
+
 # Sort on ID
 arrange(ID) -> distribution
 ```
@@ -164,14 +179,16 @@ distribution %>%
 mutate(
   id = ID,
   locationID = paste0("ISO3166-2:", case_when(
+    .$presence_area == "Presence_Be" ~ "BE",
+    .$presence_area == "Presence_Br" ~ "BE-BRU",
     .$presence_area == "Presence_Fl" ~ "BE-VLG",
-    .$presence_area == "Presence_Wa" ~ "BE-WAL",
-    .$presence_area == "Presence_Br" ~ "BE-BRU")
-  ),
+    .$presence_area == "Presence_Wa" ~ "BE-WAL"
+  )),
   locality = case_when(
+    .$presence_area == "Presence_Be" ~ "Belgium",
+    .$presence_area == "Presence_Br" ~ "Brussels-Capital Region",
     .$presence_area == "Presence_Fl" ~ "Flemish Region",
-    .$presence_area == "Presence_Wa" ~ "Walloon Region",
-    .$presence_area == "Presence_Br" ~ "Brussels-Capital Region"
+    .$presence_area == "Presence_Wa" ~ "Walloon Region"
   ),
   countryCode = "BE",
   # lifeStage
