@@ -15,6 +15,7 @@ Load libraries:
 
 ```{r load_libraries}
 library(janitor)
+library(tidyr)
 library(dplyr)
 library(readxl)
 ```
@@ -58,7 +59,7 @@ slice(2:(n())) -> checklist
 Add row number as an identifier (`ID`) and save the column names for future reference:
 
 ```{r add_id_store_colnames}
-# Add ID
+# Add ID as first column
 checklist <- cbind("ID" = seq.int(nrow(checklist)), checklist)
 
 # Save column names
@@ -75,7 +76,7 @@ head(checklist)
 
 Map the source data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml):
 
-```{r map_to_taxon}
+```{r taxon_mapping}
 checklist %>%
 mutate(
   id = ID,
@@ -135,4 +136,48 @@ Save to CSV:
 
 ```{r save_taxon_csv}
 write.csv(taxon, file = output_taxon_file, na = "", row.names = FALSE)
+```
+
+## Create distribution extension
+
+Map the source data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
+
+```{r distribution_mapping}
+checklist %>%
+
+# Create records for each value in FL, BR, WA, but not for NA values  
+gather(presence_area, presence_value, Presence_Fl, Presence_Br, Presence_Wa, na.rm = TRUE, convert = FALSE) %>%
+arrange(ID) %>%
+
+# Map to Darwin Core
+mutate(
+  id = ID,
+  locationID = paste0("ISO3166-2:", case_when(
+    .$presence_area == "Presence_Fl" ~ "BE-VLG",
+    .$presence_area == "Presence_Wa" ~ "BE-WAL",
+    .$presence_area == "Presence_Br" ~ "BE-BRU")
+  ),
+  locality = case_when(
+    .$presence_area == "Presence_Fl" ~ "Flemish Region",
+    .$presence_area == "Presence_Wa" ~ "Walloon Region",
+    .$presence_area == "Presence_Br" ~ "Brussels-Capital Region"
+  ),
+  countryCode = "BE",
+  occurrenceStatus = case_when(
+    .$presence_value == "X" ~ "present",
+    .$presence_value == "?" ~ "unknown"
+  )
+) %>%
+  
+# Remove the original columns + the two presence ones
+select(-one_of(checklist_colnames), -presence_area, -presence_value) -> distribution
+
+# Preview data
+head(distribution)
+```
+
+Save to CSV:
+
+```{r save_taxon_csv}
+write.csv(distribution, file = output_distribution_file, na = "", row.names = FALSE)
 ```
