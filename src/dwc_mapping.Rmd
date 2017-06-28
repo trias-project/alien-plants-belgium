@@ -214,18 +214,11 @@ Map the source data to [Species Distribution](http://rs.gbif.org/extension/gbif/
 distribution %>%
 mutate(
   id = ID,
-  locationID = paste0("ISO3166-2:", case_when(
-    .$presence_area == "Presence_Be" ~ "BE",
-    .$presence_area == "Presence_Br" ~ "BE-BRU",
-    .$presence_area == "Presence_Fl" ~ "BE-VLG",
-    .$presence_area == "Presence_Wa" ~ "BE-WAL"
-  )),
-  locality = case_when(
-    .$presence_area == "Presence_Be" ~ "Belgium",
-    .$presence_area == "Presence_Br" ~ "Brussels-Capital Region",
-    .$presence_area == "Presence_Fl" ~ "Flemish Region",
-    .$presence_area == "Presence_Wa" ~ "Walloon Region"
+  locationID = paste0(
+    "ISO3166-2:",
+    recode(.$presence_area, !!!term_lookup(lookup_table, "locationID"))
   ),
+  locality = recode(.$presence_area, !!!term_lookup(lookup_table, "locality")),
   countryCode = "BE",
   # lifeStage
   occurrenceStatus = case_when(
