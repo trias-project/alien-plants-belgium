@@ -1,6 +1,6 @@
 ---
 title: "Mapping to Darwin Core"
-author: "Quentin Groom & Peter Desmet"
+author: "Peter Desmet & Quentin Groom"
 date: "`r Sys.Date()`"
 output: html_document
 ---
@@ -8,6 +8,8 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
+
+This document describes how we've mapped the checklist data to Darwin Core.
 
 ## Setup
 
@@ -48,18 +50,18 @@ read_excel(
 ) -> checklist
 ```
 
-Remove empty rows and process the `Fl.`, `Br.`, `Wa.` "presence" headers on the first row:
+Remove empty rows and process the "Presence" subheaders `Fl.`, `Br.`, `Wa.`:
 
 ```{r handle_empty_rows}
 checklist %>%
 # Remove empty rows
 remove_empty_rows() %>%
 
-# The headers for "Presence" are on the first row (Fl., Br., Wa.), so we need to 
-# rename the first row headers to keep this information
+# The first row contains subheaders for "Presence": Fl., Br., Wa.
+# So, we'll rename to actual headers to keep this information
 rename(Presence_Fl = Presence, Presence_Br = X__1, Presence_Wa = X__2) %>%
   
-# We can now remove that first row, by slicing from 2 till the end
+# That first row can now be removed, by slicing from 2 till the end
 slice(2:(n())) -> checklist
 ```
 
@@ -216,6 +218,6 @@ head(distribution)
 
 Save to CSV:
 
-```{r save_taxon_csv}
+```{r save_distribution_csv}
 write.csv(distribution, file = output_distribution_file, na = "", row.names = FALSE)
 ```
