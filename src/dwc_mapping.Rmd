@@ -27,6 +27,7 @@ library(janitor)
 library(tidyr)
 library(dplyr)
 library(readxl)
+library(pander)
 ```
 
 Set file paths:
@@ -78,7 +79,7 @@ checklist_colnames <- colnames(checklist)
 Preview data:
 
 ```{r head_checklist}
-head(checklist)
+pander(head(checklist))
 ```
 
 ## Create taxon core
@@ -138,7 +139,7 @@ mutate(
 select(-one_of(checklist_colnames)) -> taxon
 
 # Preview data
-head(taxon)
+pander(head(taxon))
 ```
 
 Save to CSV:
@@ -213,7 +214,7 @@ mutate(
 select(-one_of(checklist_colnames), -presence_area, -presence_value) -> distribution
 
 # Preview data
-head(distribution)
+pander(head(distribution))
 ```
 
 Save to CSV:
