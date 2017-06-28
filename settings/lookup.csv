@@ -1,0 +1,9 @@
+term,lookup_value,new_value
+locationID,Presence_Be,BE
+locationID,Presence_Br,BE-BRU
+locationID,Presence_Fl,BE-VLG
+locationID,Presence_Wa,BE-WAL
+locality,Presence_Be,Belgium
+locality,Presence_Br,Brussels-Capital Region
+locality,Presence_Fl,Flemish Region
+locality,Presence_Wa,Walloon Region
