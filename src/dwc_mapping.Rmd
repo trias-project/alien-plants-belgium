@@ -35,9 +35,42 @@ Set file paths:
 ```{r set_file_paths}
 # All paths should be relative to this script
 input_checklist_file = "../data/raw/Checklist2.xls"
+lookup_file = "../settings/lookup.csv"
 output_taxon_file = "../data/processed/taxon.csv"
 output_distribution_file = "../data/processed/distribution.csv"
 output_description_file = "../data/processed/description.csv"
+```
+
+Create term lookup function:
+
+```{r lookup_function}
+term_lookup <- function(lookup_table, term) {
+  # Filter lookup table on term (expected to be first column)
+  
+  # Unfortunately we cannot pass 'term' as a variable to 
+  # filter(lookup_table[[1]] == term)
+  # So, we need to create the condition as a string and pass to filter_()
+  condition <- paste0(colnames(lookup_table)[[1]], "==\"", term, "\"")
+  # e.g. 'term == "locationID"'
+  lookup_table %>%
+  filter_(condition) -> term_lookup_table
+  
+  # Throw error if filter returns no results
+  if (nrow(term_lookup_table) == 0) stop(paste0("Term \"", term, "\" not found in first column of lookup table."))
+  
+  # Create list with new values (expected to be 3rd column) as values
+  lookup_vector <- as.vector(term_lookup_table[[3]])
+  # And lookup values (expected to be 2nd column) as names
+  lookup_vector <- setNames(lookup_vector, term_lookup_table[[2]])
+  
+  return(lookup_vector)
+}
+```
+
+Read lookup file:
+
+```{r lookup_file}
+lookup_table <- read.csv(lookup_file)
 ```
 
 ## Read data
