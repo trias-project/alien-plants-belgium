@@ -203,7 +203,7 @@ Create records for each value in the four presence columns but not for `NA` valu
 ```{r create_distribution_records}
 distribution %>%
 gather(
-  raw_presence_area, raw_presence_value,
+  raw_presence_region, raw_presence_value,
   raw_presence_be, raw_presence_br, raw_presence_fl, raw_presence_wa,
   na.rm = TRUE,
   convert = FALSE
@@ -221,9 +221,9 @@ mutate(
   id = raw_id,
   locationID = paste0(
     "ISO3166-2:",
-    recode(.$raw_presence_area, !!!term_lookup(lookup_table, "locationID"))
+    recode(.$raw_presence_region, !!!term_lookup(lookup_table, "locationID"))
   ),
-  locality = recode(.$raw_presence_area, !!!term_lookup(lookup_table, "locality")),
+  locality = recode(.$raw_presence_region, !!!term_lookup(lookup_table, "locality")),
   countryCode = "BE",
   # lifeStage
   occurrenceStatus = case_when(
@@ -242,7 +242,7 @@ mutate(
 ) %>%
   
 # Remove the original columns + the two presence ones
-select(-one_of(raw_colnames), -raw_presence_area, -raw_presence_value) -> distribution
+select(-one_of(raw_colnames), -raw_presence_region, -raw_presence_value) -> distribution
 
 # Preview data
 pander(head(distribution))
