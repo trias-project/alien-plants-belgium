@@ -101,13 +101,16 @@ rename(presence_fl = presence, presence_br = x_1, presence_wa = x_2) %>%
 slice(2:(n())) -> checklist
 ```
 
-Add row number as an identifier (`id`) and save the column names for future reference:
+Add row number as an identifier (`id`):
 
-```{r add_id_store_colnames}
+```{r add_id}
 # Add ID as first column
 checklist <- cbind("id" = seq.int(nrow(checklist)), checklist)
+```
 
-# Add prefix "raw_" to all column names to avoid dwc name clashes
+Add prefix `_raw` to all column names to avoid name clashes with Darwin Core terms and save those column names as a list (so these can be removed easily later):
+
+```{r add_colname_prefix}
 colnames(checklist) <- paste0("raw_", colnames(checklist))
 
 # Save column names
