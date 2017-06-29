@@ -132,10 +132,9 @@ $(document).ready(function () {
 Sys.setlocale(&quot;LC_ALL&quot;, 'en_US.UTF-8')</code></pre>
 <pre><code>## [1] &quot;en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/C&quot;</code></pre>
 <p>Load libraries:</p>
-<pre class="r"><code>library(janitor)
-library(tidyr)
-library(dplyr)
-library(readxl)
+<pre class="r"><code>library(tidyverse)
+library(readxl) # Not part of core tidyverse
+library(janitor)
 library(pander)</code></pre>
 <p>Set file paths:</p>
 <pre class="r"><code># All paths should be relative to this script
@@ -181,40 +180,41 @@ output_description_file = &quot;../data/processed/description.csv&quot;</code></
 # Remove empty rows
 remove_empty_rows() %&gt;%
 
-# The first row contains subheaders for &quot;Presence&quot;: Fl., Br., Wa.
+# Have sensible (lowercase) column names
+clean_names() %&gt;%
+
+# The first row contains subheaders for &quot;presence&quot;: Fl., Br., Wa.
 # So, we'll rename to actual headers to keep this information
-rename(Presence_Fl = Presence, Presence_Br = X__1, Presence_Wa = X__2) %&gt;%
-  
+rename(presence_fl = presence, presence_br = x_1, presence_wa = x_2) %&gt;%
+
 # That first row can now be removed, by slicing from 2 till the end
 slice(2:(n())) -&gt; checklist</code></pre>
-<p>Add row number as an identifier (<code>ID</code>) and save the column names for future reference:</p>
+<p>Add row number as an identifier (<code>id</code>):</p>
 <pre class="r"><code># Add ID as first column
-checklist &lt;- cbind(&quot;ID&quot; = seq.int(nrow(checklist)), checklist)
+checklist &lt;- cbind(&quot;id&quot; = seq.int(nrow(checklist)), checklist)</code></pre>
+<p>Add prefix <code>_raw</code> to all column names to avoid name clashes with Darwin Core terms and save those column names as a list (so these can be removed easily later):</p>
+<pre class="r"><code>colnames(checklist) &lt;- paste0(&quot;raw_&quot;, colnames(checklist))
 
 # Save column names
-checklist_colnames &lt;- colnames(checklist)</code></pre>
+raw_colnames &lt;- colnames(checklist)</code></pre>
 <p>Preview data:</p>
 <pre class="r"><code>pander(head(checklist))</code></pre>
 <table>
 <caption>Table continues below</caption>
 <colgroup>
-<col width="6%"></col>
+<col width="11%"></col>
 <col width="40%"></col>
-<col width="13%"></col>
 <col width="18%"></col>
-<col width="7%"></col>
-<col width="6%"></col>
-<col width="6%"></col>
+<col width="18%"></col>
+<col width="11%"></col>
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center">ID</th>
-<th align="center">Taxon</th>
-<th align="center">Synonym</th>
-<th align="center">Family</th>
-<th align="center">M/I</th>
-<th align="center">FR</th>
-<th align="center">MRR</th>
+<th align="center">raw_id</th>
+<th align="center">raw_taxon</th>
+<th align="center">raw_synonym</th>
+<th align="center">raw_family</th>
+<th align="center">raw_m_i</th>
 </tr>
 </thead>
 <tbody>
@@ -224,8 +224,6 @@ checklist_colnames &lt;- colnames(checklist)</code></pre>
 <td align="center">NA</td>
 <td align="center">Acanthaceae</td>
 <td align="center">D</td>
-<td align="center">1998</td>
-<td align="center">2016</td>
 </tr>
 <tr class="even">
 <td align="center">2</td>
@@ -233,8 +231,6 @@ checklist_colnames &lt;- colnames(checklist)</code></pre>
 <td align="center">NA</td>
 <td align="center">Acanthaceae</td>
 <td align="center">D</td>
-<td align="center">2016</td>
-<td align="center">2016</td>
 </tr>
 <tr class="odd">
 <td align="center">3</td>
@@ -242,8 +238,6 @@ checklist_colnames &lt;- colnames(checklist)</code></pre>
 <td align="center">NA</td>
 <td align="center">Acoraceae</td>
 <td align="center">D</td>
-<td align="center">1680</td>
-<td align="center">N</td>
 </tr>
 <tr class="even">
 <td align="center">4</td>
@@ -251,8 +245,6 @@ checklist_colnames &lt;- colnames(checklist)</code></pre>
 <td align="center">NA</td>
 <td align="center">Actinidiaceae</td>
 <td align="center">D</td>
-<td align="center">2000</td>
-<td align="center">Ann.</td>
 </tr>
 <tr class="odd">
 <td align="center">5</td>
@@ -260,8 +252,6 @@ checklist_colnames &lt;- colnames(checklist)</code></pre>
 <td align="center">NA</td>
 <td align="center">Adoxaceae</td>
 <td align="center">D</td>
-<td align="center">1972</td>
-<td align="center">2015</td>
 </tr>
 <tr class="even">
 <td align="center">6</td>
@@ -269,75 +259,112 @@ checklist_colnames &lt;- colnames(checklist)</code></pre>
 <td align="center">NA</td>
 <td align="center">Adoxaceae</td>
 <td align="center">D</td>
-<td align="center">2014</td>
-<td align="center">2015</td>
 </tr>
 </tbody>
 </table>
-<table style="width:97%;">
+<table style="width:94%;">
+<caption>Table continues below</caption>
 <colgroup>
-<col width="15%"></col>
-<col width="19%"></col>
-<col width="19%"></col>
-<col width="19%"></col>
-<col width="8%"></col>
-<col width="15%"></col>
+<col width="12%"></col>
+<col width="13%"></col>
+<col width="18%"></col>
+<col width="25%"></col>
+<col width="25%"></col>
 </colgroup>
 <thead>
 <tr class="header">
-<th align="center">Origin</th>
-<th align="center">Presence_Fl</th>
-<th align="center">Presence_Br</th>
-<th align="center">Presence_Wa</th>
-<th align="center">D/N</th>
-<th align="center">V/I</th>
+<th align="center">raw_fr</th>
+<th align="center">raw_mrr</th>
+<th align="center">raw_origin</th>
+<th align="center">raw_presence_fl</th>
+<th align="center">raw_presence_br</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
+<td align="center">1998</td>
+<td align="center">2016</td>
 <td align="center">E AF</td>
 <td align="center">X</td>
 <td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">2016</td>
+<td align="center">2016</td>
+<td align="center">E AF AS-Te</td>
+<td align="center">X</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center">1680</td>
+<td align="center">N</td>
+<td align="center">AS-Te</td>
+<td align="center">X</td>
+<td align="center">X</td>
+</tr>
+<tr class="even">
+<td align="center">2000</td>
+<td align="center">Ann.</td>
+<td align="center">AS-Te</td>
+<td align="center">X</td>
+<td align="center">NA</td>
+</tr>
+<tr class="odd">
+<td align="center">1972</td>
+<td align="center">2015</td>
+<td align="center">NAM</td>
+<td align="center">X</td>
+<td align="center">NA</td>
+</tr>
+<tr class="even">
+<td align="center">2014</td>
+<td align="center">2015</td>
+<td align="center">AS-Te</td>
+<td align="center">X</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table>
+<table style="width:54%;">
+<colgroup>
+<col width="25%"></col>
+<col width="13%"></col>
+<col width="15%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">raw_presence_wa</th>
+<th align="center">raw_d_n</th>
+<th align="center">raw_v_i</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td align="center">X</td>
 <td align="center">Cas.</td>
 <td align="center">Hort.</td>
 </tr>
 <tr class="even">
-<td align="center">E AF AS-Te</td>
-<td align="center">X</td>
-<td align="center">NA</td>
 <td align="center">NA</td>
 <td align="center">Cas.</td>
 <td align="center">Hort.</td>
 </tr>
 <tr class="odd">
-<td align="center">AS-Te</td>
-<td align="center">X</td>
-<td align="center">X</td>
 <td align="center">X</td>
 <td align="center">Nat.</td>
 <td align="center">Hort.</td>
 </tr>
 <tr class="even">
-<td align="center">AS-Te</td>
-<td align="center">X</td>
-<td align="center">NA</td>
 <td align="center">X</td>
 <td align="center">Cas.</td>
 <td align="center">Food refuse</td>
 </tr>
 <tr class="odd">
-<td align="center">NAM</td>
-<td align="center">X</td>
-<td align="center">NA</td>
 <td align="center">NA</td>
 <td align="center">Cas.</td>
 <td align="center">Hort.</td>
 </tr>
 <tr class="even">
-<td align="center">AS-Te</td>
-<td align="center">X</td>
-<td align="center">NA</td>
 <td align="center">NA</td>
 <td align="center">Cas.</td>
 <td align="center">Hort.</td>
@@ -350,7 +377,7 @@ checklist_colnames &lt;- colnames(checklist)</code></pre>
 <p>Map the source data to <a href="http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml">Darwin Core Taxon</a>:</p>
 <pre class="r"><code>checklist %&gt;%
 mutate(
-  id = ID,
+  id = raw_id,
   # modified
   language = &quot;en&quot;,
   license = &quot;http://creativecommons.org/publicdomain/zero/1.0/&quot;,
@@ -361,7 +388,7 @@ mutate(
   datasetID = &quot;&quot;, # Should become the DOI
   datasetName = &quot;Manual of the Alien Plants of Belgium&quot;, 
   # references
-  taxonID = ID,
+  taxonID = raw_id,
   # scientificNameID
   # acceptedNameUsageID
   # parentNameUsageID
@@ -369,7 +396,7 @@ mutate(
   # nameAccordingToID
   # namePublishedInID
   # taxonConceptID
-  scientificName = Taxon,
+  scientificName = raw_taxon,
   # acceptedNameUsage
   # parentNameUsage
   # originalNameUsage
@@ -381,7 +408,7 @@ mutate(
   # phylum
   # class
   # order
-  family = Family,
+  family = raw_family,
   # genus
   # subgenus
   # specificEpithet
@@ -397,7 +424,7 @@ mutate(
 ) %&gt;%
   
 # Remove the original columns
-select(-one_of(checklist_colnames)) -&gt; taxon
+select(-one_of(raw_colnames)) -&gt; taxon
 
 # Preview data
 pander(head(taxon))</code></pre>
@@ -562,38 +589,35 @@ pander(head(taxon))</code></pre>
 </div>
 <div id="create-distribution-extension" class="section level2">
 <h2>Create distribution extension</h2>
-<p>Create a <code>Presence_Be</code> column, which contains <code>X</code> if any of the regions has <code>X</code> and if not has <code>?</code> if any of the regions has <code>?</code>:</p>
+<p>Create a <code>raw_presence_be</code> column, which contains <code>X</code> if any of the regions has <code>X</code> and if not has <code>?</code> if any of the regions has <code>?</code>:</p>
 <pre class="r"><code>checklist %&gt;%
-mutate(Presence_Be = case_when(
-  .$Presence_Fl == &quot;X&quot; | .$Presence_Br == &quot;X&quot; | .$Presence_Wa == &quot;X&quot; ~ &quot;X&quot;,
-  .$Presence_Fl == &quot;?&quot; | .$Presence_Br == &quot;?&quot; | .$Presence_Wa == &quot;?&quot; ~ &quot;?&quot;)
+mutate(raw_presence_be = case_when(
+  .$raw_presence_fl == &quot;X&quot; | .$raw_presence_br == &quot;X&quot; | .$raw_presence_wa == &quot;X&quot; ~ &quot;X&quot;,
+  .$raw_presence_fl == &quot;?&quot; | .$raw_presence_br == &quot;?&quot; | .$raw_presence_wa == &quot;?&quot; ~ &quot;?&quot;)
 ) -&gt; distribution</code></pre>
 <p>Create records for each value in the four presence columns but not for <code>NA</code> values:</p>
 <pre class="r"><code>distribution %&gt;%
 gather(
-  presence_area, presence_value,
-  Presence_Be, Presence_Br, Presence_Fl, Presence_Wa,
+  raw_presence_region, raw_presence_value,
+  raw_presence_be, raw_presence_br, raw_presence_fl, raw_presence_wa,
   na.rm = TRUE,
   convert = FALSE
 ) %&gt;%
 
 # Sort on ID
-arrange(ID) -&gt; distribution</code></pre>
+arrange(raw_id) -&gt; distribution</code></pre>
 <p>Map the source data to <a href="http://rs.gbif.org/extension/gbif/1.0/distribution.xml">Species Distribution</a>:</p>
 <pre class="r"><code>distribution %&gt;%
 mutate(
-  id = ID,
+  id = raw_id,
   locationID = paste0(
     &quot;ISO3166-2:&quot;,
-    recode(.$presence_area, !!!term_lookup(lookup_table, &quot;locationID&quot;))
+    recode(.$raw_presence_region, !!!term_lookup(lookup_table, &quot;locationID&quot;))
   ),
-  locality = recode(.$presence_area, !!!term_lookup(lookup_table, &quot;locality&quot;)),
+  locality = recode(.$raw_presence_region, !!!term_lookup(lookup_table, &quot;locality&quot;)),
   countryCode = &quot;BE&quot;,
   # lifeStage
-  occurrenceStatus = case_when(
-    .$presence_value == &quot;X&quot; ~ &quot;present&quot;,
-    .$presence_value == &quot;?&quot; ~ &quot;unknown&quot;
-  )
+  occurrenceStatus = recode(.$raw_presence_value, !!!term_lookup(lookup_table, &quot;occurrenceStatus&quot;))
   # threatStatus
   # establishmentMeans
   # appendixCITES
@@ -606,7 +630,7 @@ mutate(
 ) %&gt;%
   
 # Remove the original columns + the two presence ones
-select(-one_of(checklist_colnames), -presence_area, -presence_value) -&gt; distribution
+select(-one_of(raw_colnames), -raw_presence_region, -raw_presence_value) -&gt; distribution
 
 # Preview data
 pander(head(distribution))</code></pre>
@@ -674,6 +698,10 @@ pander(head(distribution))</code></pre>
 </table>
 <p>Save to CSV:</p>
 <pre class="r"><code>write.csv(distribution, file = output_distribution_file, na = &quot;&quot;, row.names = FALSE)</code></pre>
+</div>
+<div id="create-description-extension" class="section level2">
+<h2>Create description extension</h2>
+<p>…</p>
 </div>
 
 
