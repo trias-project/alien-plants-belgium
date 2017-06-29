@@ -107,9 +107,11 @@ Add row number as an identifier (`id`) and save the column names for future refe
 # Add ID as first column
 checklist <- cbind("id" = seq.int(nrow(checklist)), checklist)
 
+# Add prefix "raw_" to all column names to avoid dwc name clashes
+colnames(checklist) <- paste0("raw_", colnames(checklist))
 
 # Save column names
-checklist_colnames <- colnames(checklist)
+raw_colnames <- colnames(checklist)
 ```
 
 Preview data:
@@ -125,7 +127,7 @@ Map the source data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_201
 ```{r taxon_mapping}
 checklist %>%
 mutate(
-  id = ID,
+  id = raw_id,
   # modified
   language = "en",
   license = "http://creativecommons.org/publicdomain/zero/1.0/",
@@ -136,7 +138,7 @@ mutate(
   datasetID = "", # Should become the DOI
   datasetName = "Manual of the Alien Plants of Belgium", 
   # references
-  taxonID = ID,
+  taxonID = raw_id,
   # scientificNameID
   # acceptedNameUsageID
   # parentNameUsageID
@@ -144,7 +146,7 @@ mutate(
   # nameAccordingToID
   # namePublishedInID
   # taxonConceptID
-  scientificName = Taxon,
+  scientificName = raw_taxon,
   # acceptedNameUsage
   # parentNameUsage
   # originalNameUsage
@@ -156,7 +158,7 @@ mutate(
   # phylum
   # class
   # order
-  family = Family,
+  family = raw_family,
   # genus
   # subgenus
   # specificEpithet
@@ -172,7 +174,7 @@ mutate(
 ) %>%
   
 # Remove the original columns
-select(-one_of(checklist_colnames)) -> taxon
+select(-one_of(raw_colnames)) -> taxon
 
 # Preview data
 pander(head(taxon))
@@ -186,13 +188,13 @@ write.csv(taxon, file = output_taxon_file, na = "", row.names = FALSE)
 
 ## Create distribution extension
 
-Create a `Presence_Be` column, which contains `X` if any of the regions has `X` and if not has `?` if any of the regions has `?`:
+Create a `raw_presence_be` column, which contains `X` if any of the regions has `X` and if not has `?` if any of the regions has `?`:
 
 ```{r add_presence_be}
 checklist %>%
-mutate(Presence_Be = case_when(
-  .$Presence_Fl == "X" | .$Presence_Br == "X" | .$Presence_Wa == "X" ~ "X",
-  .$Presence_Fl == "?" | .$Presence_Br == "?" | .$Presence_Wa == "?" ~ "?")
+mutate(raw_presence_be = case_when(
+  .$raw_presence_fl == "X" | .$raw_presence_br == "X" | .$raw_presence_wa == "X" ~ "X",
+  .$raw_presence_fl == "?" | .$raw_presence_br == "?" | .$raw_presence_wa == "?" ~ "?")
 ) -> distribution
 ```
 
@@ -201,14 +203,14 @@ Create records for each value in the four presence columns but not for `NA` valu
 ```{r create_distribution_records}
 distribution %>%
 gather(
-  presence_area, presence_value,
-  Presence_Be, Presence_Br, Presence_Fl, Presence_Wa,
+  raw_presence_area, raw_presence_value,
+  raw_presence_be, raw_presence_br, raw_presence_fl, raw_presence_wa,
   na.rm = TRUE,
   convert = FALSE
 ) %>%
 
 # Sort on ID
-arrange(ID) -> distribution
+arrange(raw_id) -> distribution
 ```
 
 Map the source data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
@@ -216,17 +218,17 @@ Map the source data to [Species Distribution](http://rs.gbif.org/extension/gbif/
 ```{r distribution_mapping}
 distribution %>%
 mutate(
-  id = ID,
+  id = raw_id,
   locationID = paste0(
     "ISO3166-2:",
-    recode(.$presence_area, !!!term_lookup(lookup_table, "locationID"))
+    recode(.$raw_presence_area, !!!term_lookup(lookup_table, "locationID"))
   ),
-  locality = recode(.$presence_area, !!!term_lookup(lookup_table, "locality")),
+  locality = recode(.$raw_presence_area, !!!term_lookup(lookup_table, "locality")),
   countryCode = "BE",
   # lifeStage
   occurrenceStatus = case_when(
-    .$presence_value == "X" ~ "present",
-    .$presence_value == "?" ~ "unknown"
+    .$raw_presence_value == "X" ~ "present",
+    .$raw_presence_value == "?" ~ "unknown"
   )
   # threatStatus
   # establishmentMeans
@@ -240,7 +242,7 @@ mutate(
 ) %>%
   
 # Remove the original columns + the two presence ones
-select(-one_of(checklist_colnames), -presence_area, -presence_value) -> distribution
+select(-one_of(raw_colnames), -raw_presence_area, -raw_presence_value) -> distribution
 
 # Preview data
 pander(head(distribution))
