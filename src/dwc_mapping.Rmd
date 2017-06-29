@@ -23,10 +23,9 @@ Sys.setlocale("LC_ALL", 'en_US.UTF-8')
 Load libraries:
 
 ```{r load_libraries}
+library(tidyverse)
+library(readxl) # Not part of core tidyverse
 library(janitor)
-library(tidyr)
-library(dplyr)
-library(readxl)
 library(pander)
 ```
 
