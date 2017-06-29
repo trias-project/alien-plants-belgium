@@ -1,9 +1,9 @@
 term,lookup_value,new_value
-locationID,Presence_Be,BE
-locationID,Presence_Br,BE-BRU
-locationID,Presence_Fl,BE-VLG
-locationID,Presence_Wa,BE-WAL
-locality,Presence_Be,Belgium
-locality,Presence_Br,Brussels-Capital Region
-locality,Presence_Fl,Flemish Region
-locality,Presence_Wa,Walloon Region
+locationID,raw_presence_be,BE
+locationID,raw_presence_br,BE-BRU
+locationID,raw_presence_fl,BE-VLG
+locationID,raw_presence_wa,BE-WAL
+locality,raw_presence_be,Belgium
+locality,raw_presence_br,Brussels-Capital Region
+locality,raw_presence_fl,Flemish Region
+locality,raw_presence_wa,Walloon Region
