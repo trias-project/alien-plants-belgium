@@ -90,19 +90,23 @@ checklist %>%
 # Remove empty rows
 remove_empty_rows() %>%
 
-# The first row contains subheaders for "Presence": Fl., Br., Wa.
+# Have sensible (lowercase) column names
+clean_names() %>%
+
+# The first row contains subheaders for "presence": Fl., Br., Wa.
 # So, we'll rename to actual headers to keep this information
-rename(Presence_Fl = Presence, Presence_Br = X__1, Presence_Wa = X__2) %>%
-  
+rename(presence_fl = presence, presence_br = x_1, presence_wa = x_2) %>%
+
 # That first row can now be removed, by slicing from 2 till the end
 slice(2:(n())) -> checklist
 ```
 
-Add row number as an identifier (`ID`) and save the column names for future reference:
+Add row number as an identifier (`id`) and save the column names for future reference:
 
 ```{r add_id_store_colnames}
 # Add ID as first column
-checklist <- cbind("ID" = seq.int(nrow(checklist)), checklist)
+checklist <- cbind("id" = seq.int(nrow(checklist)), checklist)
+
 
 # Save column names
 checklist_colnames <- colnames(checklist)
