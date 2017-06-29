@@ -229,10 +229,7 @@ mutate(
   locality = recode(.$raw_presence_region, !!!term_lookup(lookup_table, "locality")),
   countryCode = "BE",
   # lifeStage
-  occurrenceStatus = case_when(
-    .$raw_presence_value == "X" ~ "present",
-    .$raw_presence_value == "?" ~ "unknown"
-  )
+  occurrenceStatus = recode(.$raw_presence_value, !!!term_lookup(lookup_table, "occurrenceStatus"))
   # threatStatus
   # establishmentMeans
   # appendixCITES
