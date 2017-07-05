@@ -17,6 +17,7 @@ Sys.setlocale("LC_ALL", 'en_US.UTF-8')
 
 #' Load libraries:
 library(tidyverse) # For data transformations
+library(magrittr)  # For %<>% pipes (not part of core tidyverse)
 library(readxl)    # For reading Excel (not part of core tidyverse)
 library(janitor)   # For cleaning input data
 library(knitr)     # For nicer (kable) tables
@@ -41,17 +42,17 @@ raw_data <- read_excel(
 ) 
 
 #' Clean data somewhat:
-raw_data %>%
+raw_data %<>%
   # Remove empty rows
   remove_empty_rows() %>%
   # Have sensible (lowercase) column names
-  clean_names() -> raw_data
+  clean_names()
 
 #' The first row contains subheaders for "presence": `Fl.`, `Br.`, `Wa.` so, we'll rename to actual headers to keep this information:
-raw_data %>%
+raw_data %<>%
   rename(presence_fl = presence, presence_br = x_1, presence_wa = x_2) %>%
   # That first row can now be removed, by slicing from 2 till the end
-  slice(2:(n())) -> raw_data
+  slice(2:(n()))
 
 #' Add row number as an identifier (`id`):
 raw_data <- cbind("id" = seq.int(nrow(raw_data)), raw_data)
@@ -73,30 +74,30 @@ taxon <- raw_data
 #' Map the source data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml):
 #' 
 #' #### id
-taxon <- mutate(taxon, id = raw_id)
+taxon %<>% mutate(id = raw_id)
 
 #' #### modified
 #' #### language
-taxon <- mutate(taxon, language = "en")
+taxon %<>% mutate(language = "en")
 
 #' #### license
-taxon <- mutate(taxon, license = "http://creativecommons.org/publicdomain/zero/1.0/")
+taxon %<>% mutate(license = "http://creativecommons.org/publicdomain/zero/1.0/")
 
 #' #### rightsHolder
-taxon <- mutate(taxon, license = "Botanic Garden Meise")
+taxon %<>% mutate(rightsHolder = "Botanic Garden Meise")
 
 #' #### accessRights
 #' #### bibliographicCitation
 #' #### informationWithheld
 #' #### datasetID
-taxon <- mutate(taxon, datasetID = "") # Should become dataset DOI
+taxon %<>% mutate(datasetID = "") # Should become dataset DOI
 
 #' #### datasetName
-taxon <- mutate(taxon, datasetName = "Manual of the Alien Plants of Belgium")
+taxon %<>% mutate(datasetName = "Manual of the Alien Plants of Belgium")
 
 #' #### references
 #' #### taxonID
-taxon <- mutate(taxon, taxonID = raw_id)
+taxon %<>% mutate(taxonID = raw_id)
 
 #' #### scientificNameID
 # Code to be added
@@ -108,7 +109,7 @@ taxon <- mutate(taxon, taxonID = raw_id)
 #' #### namePublishedInID
 #' #### taxonConceptID
 #' #### scientificName
-taxon <- mutate(taxon, scientificName = raw_taxon)
+taxon %<>% mutate(scientificName = raw_taxon)
 
 #' #### acceptedNameUsage
 #' #### parentNameUsage
@@ -118,13 +119,13 @@ taxon <- mutate(taxon, scientificName = raw_taxon)
 #' #### namePublishedInYear
 #' #### higherClassification
 #' #### kingdom
-taxon <- mutate(taxon, kingdom = "Plantae")
+taxon %<>% mutate(kingdom = "Plantae")
 
 #' #### phylum
 #' #### class
 #' #### order
 #' #### family
-taxon <- mutate(taxon, family = raw_family)
+taxon %<>% mutate(family = raw_family)
 
 #' #### genus
 #' #### subgenus
@@ -137,7 +138,7 @@ taxon <- mutate(taxon, family = raw_family)
 #' #### scientificNameAuthorship
 #' #### vernacularName
 #' #### nomenclaturalCode
-taxon <- mutate(taxon, nomenclaturalCode = "ICBN")
+taxon %<>% mutate(nomenclaturalCode = "ICBN")
 
 #' #### taxonomicStatus
 #' #### nomenclaturalStatus
@@ -146,7 +147,7 @@ taxon <- mutate(taxon, nomenclaturalCode = "ICBN")
 #' ### Post-processing
 #' 
 #' Remove the original columns:
-taxon <- select(taxon, -one_of(raw_colnames))
+taxon %<>% select(-one_of(raw_colnames))
 
 #' Preview data:
 kable(head(taxon))
