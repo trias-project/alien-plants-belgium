@@ -216,8 +216,13 @@ distribution %<>% mutate(countryCode = "BE")
 
 #' #### lifeStage
 #' #### occurrenceStatus
+#' 
+#' Use lookup table to map to [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
+occurrencestatus_lookup <- term_mapping(lookup_table, "occurrenceStatus")
+stack(occurrencestatus_lookup)
+
 distribution %<>% mutate(occurrenceStatus = 
-  recode(raw_presence_value, !!!term_mapping(lookup_table, "occurrenceStatus"))
+  recode(raw_presence_value, !!!occurrencestatus_lookup)
 )
 
 #' #### threatStatus

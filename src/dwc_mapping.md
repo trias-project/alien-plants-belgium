@@ -417,10 +417,23 @@ distribution %<>% mutate(countryCode = "BE")
 #### lifeStage
 #### occurrenceStatus
 
+Use lookup table to map to [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
+
+
+```r
+occurrencestatus_lookup <- term_mapping(lookup_table, "occurrenceStatus")
+stack(occurrencestatus_lookup)
+```
+
+```
+##               values ind
+## 1             extant   X
+## 2 presence uncertain   ?
+```
 
 ```r
 distribution %<>% mutate(occurrenceStatus = 
-  recode(raw_presence_value, !!!term_mapping(lookup_table, "occurrenceStatus"))
+  recode(raw_presence_value, !!!occurrencestatus_lookup)
 )
 ```
 
@@ -478,12 +491,12 @@ kable(head(distribution))
 
 | id|locationID       |locality       |countryCode |occurrenceStatus |
 |--:|:----------------|:--------------|:-----------|:----------------|
-|  1|ISO3166-2:BE     |Belgium        |BE          |present          |
-|  1|ISO3166-2:BE-VLG |Flemish Region |BE          |present          |
-|  1|ISO3166-2:BE-WAL |Walloon Region |BE          |present          |
-|  2|ISO3166-2:BE     |Belgium        |BE          |present          |
-|  2|ISO3166-2:BE-VLG |Flemish Region |BE          |present          |
-|  3|ISO3166-2:BE     |Belgium        |BE          |present          |
+|  1|ISO3166-2:BE     |Belgium        |BE          |extant           |
+|  1|ISO3166-2:BE-VLG |Flemish Region |BE          |extant           |
+|  1|ISO3166-2:BE-WAL |Walloon Region |BE          |extant           |
+|  2|ISO3166-2:BE     |Belgium        |BE          |extant           |
+|  2|ISO3166-2:BE-VLG |Flemish Region |BE          |extant           |
+|  3|ISO3166-2:BE     |Belgium        |BE          |extant           |
 
 Save to CSV:
 
