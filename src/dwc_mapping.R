@@ -66,58 +66,87 @@ raw_colnames <- colnames(raw_data)
 kable(head(raw_data))
 
 #' ## Create taxon core
+taxon <- raw_data
+
+#' ### Term mapping
 #' 
 #' Map the source data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml):
-raw_data %>% mutate(
-  id = raw_id,
-  # modified
-  language = "en",
-  license = "http://creativecommons.org/publicdomain/zero/1.0/",
-  rightsHolder = "Botanic Garden Meise",
-  # accessRights
-  # bibliographicCitation
-  # informationWithheld
-  datasetID = "", # Should become the DOI
-  datasetName = "Manual of the Alien Plants of Belgium", 
-  # references
-  taxonID = raw_id,
-  # scientificNameID
-  # acceptedNameUsageID
-  # parentNameUsageID
-  # originalNameUsageID
-  # nameAccordingToID
-  # namePublishedInID
-  # taxonConceptID
-  scientificName = raw_taxon,
-  # acceptedNameUsage
-  # parentNameUsage
-  # originalNameUsage
-  # nameAccordingTo
-  # namePublishedIn
-  # namePublishedInYear
-  # higherClassification
-  kingdom = "Plantae",
-  # phylum
-  # class
-  # order
-  family = raw_family,
-  # genus
-  # subgenus
-  # specificEpithet
-  # infraspecificEpithet
-  # taxonRank
-  # verbatimTaxonRank
-  # scientificNameAuthorship
-  # vernacularName
-  nomenclaturalCode = "ICBN"
-  # taxonomicStatus
-  # nomenclaturalStatus
-  # taxonRemarks
-) -> interim_taxon
-  
+#' 
+#' #### id
+taxon <- mutate(taxon, id = raw_id)
+
+#' #### modified
+#' #### language
+taxon <- mutate(taxon, language = "en")
+
+#' #### license
+taxon <- mutate(taxon, license = "http://creativecommons.org/publicdomain/zero/1.0/")
+
+#' #### rightsHolder
+taxon <- mutate(taxon, license = "Botanic Garden Meise")
+
+#' #### accessRights
+#' #### bibliographicCitation
+#' #### informationWithheld
+#' #### datasetID
+taxon <- mutate(taxon, datasetID = "") # Should become dataset DOI
+
+#' #### datasetName
+taxon <- mutate(taxon, datasetName = "Manual of the Alien Plants of Belgium")
+
+#' #### references
+#' #### taxonID
+taxon <- mutate(taxon, taxonID = raw_id)
+
+#' #### scientificNameID
+# Code to be added
+
+#' #### acceptedNameUsageID
+#' #### parentNameUsageID
+#' #### originalNameUsageID
+#' #### nameAccordingToID
+#' #### namePublishedInID
+#' #### taxonConceptID
+#' #### scientificName
+taxon <- mutate(taxon, scientificName = raw_taxon)
+
+#' #### acceptedNameUsage
+#' #### parentNameUsage
+#' #### originalNameUsage
+#' #### nameAccordingTo
+#' #### namePublishedIn
+#' #### namePublishedInYear
+#' #### higherClassification
+#' #### kingdom
+taxon <- mutate(taxon, kingdom = "Plantae")
+
+#' #### phylum
+#' #### class
+#' #### order
+#' #### family
+taxon <- mutate(taxon, family = raw_family)
+
+#' #### genus
+#' #### subgenus
+#' #### specificEpithet
+#' #### infraspecificEpithet
+#' #### taxonRank
+# Code to be added
+
+#' #### verbatimTaxonRank
+#' #### scientificNameAuthorship
+#' #### vernacularName
+#' #### nomenclaturalCode
+taxon <- mutate(taxon, nomenclaturalCode = "ICBN")
+
+#' #### taxonomicStatus
+#' #### nomenclaturalStatus
+#' #### taxonRemarks
+#'
+#' ### Post-processing
+#' 
 #' Remove the original columns:
-interim_taxon %>%
-  select(-one_of(raw_colnames)) -> taxon
+taxon <- select(taxon, -one_of(raw_colnames))
 
 #' Preview data:
 kable(head(taxon))
