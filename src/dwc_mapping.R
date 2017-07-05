@@ -1,6 +1,7 @@
 #' # Darwin Core mapping
 #' 
 #' Peter Desmet & Quentin Groom
+#' 
 #' `r Sys.Date()`
 #'
 #' This document describes how we map the checklist data to Darwin Core.
@@ -28,16 +29,16 @@ dwc_taxon_file = "../data/processed/taxon.csv"
 dwc_distribution_file = "../data/processed/distribution.csv"
 dwc_description_file = "../data/processed/description.csv"
 
-#' Load lookup table
+#' Load lookup table (contains information to map values):
 lookup_table <- read.csv(lookup_file)
 
 #' ## Read data
 #' 
-#' Read the source data (an Excel file):
-read_excel(
+#' Read the source data:
+raw_data <- read_excel(
   path = raw_data_file,
   skip = 1 # First row is empty
-) -> raw_data
+) 
 
 #' Clean data somewhat:
 raw_data %>%
@@ -46,7 +47,7 @@ raw_data %>%
   # Have sensible (lowercase) column names
   clean_names() -> raw_data
 
-#' The first row contains subheaders for "presence": Fl., Br., Wa. so, we'll rename to actual headers to keep this information:
+#' The first row contains subheaders for "presence": `Fl.`, `Br.`, `Wa.` so, we'll rename to actual headers to keep this information:
 raw_data %>%
   rename(presence_fl = presence, presence_br = x_1, presence_wa = x_2) %>%
   # That first row can now be removed, by slicing from 2 till the end
