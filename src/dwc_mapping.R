@@ -157,54 +157,91 @@ write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE)
 
 #' ## Create distribution extension
 #' 
-#' Create a `raw_presence_be` column, which contains `X` if any of the regions has `X` and if not has `?` if any of the regions has `?`:
-raw_data %>%
-  mutate(raw_presence_be = case_when(
-    .$raw_presence_fl == "X" | .$raw_presence_br == "X" | .$raw_presence_wa == "X" ~ "X",
-    .$raw_presence_fl == "?" | .$raw_presence_br == "?" | .$raw_presence_wa == "?" ~ "?")
-  ) -> interim_distribution
+#' ### Pre-processing
+distribution <- raw_data
 
-#' Transpose the data for the four presence columns, but not for `NA` values:
-interim_distribution %>%
+#' Create a `raw_presence_be` column, which contains `X` if any of the regions has `X` or else `?` if any of the regions has `?`:
+distribution %<>% mutate(raw_presence_be =
+  case_when(
+    raw_presence_fl == "X" | raw_presence_br == "X" | raw_presence_wa == "X" ~ "X", # One is "X"
+    raw_presence_fl == "?" | raw_presence_br == "?" | raw_presence_wa == "?" ~ "?" # One is "?"
+  )
+)
+
+#' Transpose the data for the presence columns, but not for `NA` values:
+distribution %<>%
   gather(
     raw_presence_region, raw_presence_value,
     raw_presence_be, raw_presence_br, raw_presence_fl, raw_presence_wa,
     na.rm = TRUE,
     convert = FALSE
   ) %>%
-  arrange(raw_id) -> interim_distribution # Sort on ID
+  arrange(raw_id)
 
 #' Preview the newly created columns:
-interim_distribution %>% 
+distribution %>% 
   select(raw_id, raw_presence_region, raw_presence_value) %>%
   head() %>%
   kable()
 
+#' ### Term mapping
+#' 
 #' Map the source data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
-interim_distribution %>% mutate(
-  id = raw_id,
-  locationID = paste0(
-    "ISO3166-2:",
-    recode(.$raw_presence_region, !!!term_mapping(lookup_table, "locationID"))
-  ),
-  locality = recode(.$raw_presence_region, !!!term_mapping(lookup_table, "locality")),
-  countryCode = "BE",
-  # lifeStage
-  occurrenceStatus = recode(.$raw_presence_value, !!!term_mapping(lookup_table, "occurrenceStatus"))
-  # threatStatus
-  # establishmentMeans
-  # appendixCITES
-  # eventDate
-  # startDayOfYear
-  # endDayOfYear
-  # source
-  # occurrenceRemarks
-  # datasetID
-) -> interim_distribution
-  
+
+#' #### id
+distribution %<>% mutate(id = raw_id)
+
+#' #### locationID
+#' 
+#' Use lookup table to get region ISO codes:
+locationid_lookup <- term_mapping(lookup_table, "locationID")
+stack(location_id_lookup)
+
+distribution %<>% mutate(locationID = 
+  paste0("ISO3166-2:", recode(raw_presence_region, !!!locationid_lookup))
+)
+
+#' #### locality
+#' 
+#' Use lookup table to get region names:
+locality_lookup <- term_mapping(lookup_table, "locality")
+stack(locality_lookup)
+
+distribution %<>% mutate(locality = 
+  recode(raw_presence_region, !!!locality_lookup)
+)
+
+#' #### countryCode
+distribution %<>% mutate(countryCode = "BE")
+
+#' #### lifeStage
+#' #### occurrenceStatus
+distribution %<>% mutate(occurrenceStatus = 
+  recode(raw_presence_value, !!!term_mapping(lookup_table, "occurrenceStatus"))
+)
+
+#' #### threatStatus
+#' #### establishmentMeans
+# To be added
+
+#' #### appendixCITES
+#' #### eventDate
+# To be added
+
+#' #### startDayOfYear
+#' #### endDayOfYear
+#' #### source
+# Add?
+
+#' #### occurrenceRemarks
+# Add?
+
+#' #### datasetID
+#' 
+#' ### Post-processing
+#' 
 #' Remove the original columns + the two new ones:
-interim_distribution %>%
-  select(-one_of(raw_colnames), -raw_presence_region, -raw_presence_value) -> distribution
+distribution %<>% select(-one_of(raw_colnames), -raw_presence_region, -raw_presence_value)
 
 #' Preview data:
 kable(head(distribution))
@@ -214,18 +251,21 @@ write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE
 
 #' ## Create description extension
 #' 
-#' Transpose the data for the four description columns, including for NA values:
-raw_data %>%
+#' ### Pre-processing
+description <- raw_data
+
+#' Transpose the data for the description columns, including for NA values:
+description %<>%
   gather(
     raw_description_type, raw_description_value,
-    raw_fr, raw_mrr, raw_origin, raw_d_n, raw_v_i,
+    raw_origin, raw_d_n, raw_v_i,
     na.rm = FALSE,
     convert = FALSE
   ) %>%
-  arrange(raw_id) -> interim_description # Sort on ID
+  arrange(raw_id)
 
 #' Preview the newly created columns:
-interim_description %>% 
+description %>% 
   select(raw_id, raw_description_type, raw_description_value) %>%
   head() %>%
   kable()
