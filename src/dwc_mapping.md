@@ -2,7 +2,7 @@
 
 Peter Desmet & Quentin Groom
 
-2017-07-05
+2017-08-02
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -366,7 +366,7 @@ Use lookup table to get region ISO codes:
 
 ```r
 locationid_lookup <- term_mapping(lookup_table, "locationID")
-stack(location_id_lookup)
+stack(locationid_lookup)
 ```
 
 ```

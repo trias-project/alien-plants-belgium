@@ -195,7 +195,7 @@ distribution %<>% mutate(id = raw_id)
 #' 
 #' Use lookup table to get region ISO codes:
 locationid_lookup <- term_mapping(lookup_table, "locationID")
-stack(location_id_lookup)
+stack(locationid_lookup)
 
 distribution %<>% mutate(locationID = 
   paste0("ISO3166-2:", recode(raw_presence_region, !!!locationid_lookup))
