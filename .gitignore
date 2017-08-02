@@ -34,3 +34,5 @@ vignettes/*.pdf
 
 # Other
 .DS_Store
+.Rproj.user
+src/*.html

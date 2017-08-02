@@ -7,8 +7,7 @@ term_mapping <- function(lookup_table, term) {
   condition <- paste0(colnames(lookup_table)[[1]], "==\"", term, "\"")
   # e.g. 'term == "locationID"'
   
-  lookup_table %>%
-    filter_(condition) -> term_lookup_table
+  term_lookup_table <- filter_(lookup_table, condition)
   
   # Throw error if filter returns no results
   if (nrow(term_lookup_table) == 0) stop(paste0("Term \"", term, "\" not found in first column of lookup table."))
