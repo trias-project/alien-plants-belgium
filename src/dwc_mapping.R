@@ -21,7 +21,7 @@ library(magrittr)  # For %<>% pipes (not part of core tidyverse)
 library(readxl)    # For reading Excel (not part of core tidyverse)
 library(janitor)   # For cleaning input data
 library(knitr)     # For nicer (kable) tables
-source("term_mapping.R") # For mapping values
+source("functions/term_mapping.R") # For mapping values
 
 #' Set file paths (all paths should be relative to this script):
 raw_data_file = "../data/raw/Checklist2.xls"
