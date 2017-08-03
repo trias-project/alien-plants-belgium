@@ -341,7 +341,7 @@ stack(occurrencestatus_lookup)
 
 ```
 ##               values      ind
-## 1             extant        X
+## 1            present        X
 ## 2 presence uncertain        ?
 ## 3             absent .missing
 ```
@@ -406,12 +406,12 @@ kable(head(distribution))
 
 | id|locationID   |locality |countryCode |occurrenceStatus |
 |--:|:------------|:--------|:-----------|:----------------|
-|  1|ISO3166-2:BE |Belgium  |BE          |extant           |
-|  2|ISO3166-2:BE |Belgium  |BE          |extant           |
-|  3|ISO3166-2:BE |Belgium  |BE          |extant           |
-|  4|ISO3166-2:BE |Belgium  |BE          |extant           |
-|  5|ISO3166-2:BE |Belgium  |BE          |extant           |
-|  6|ISO3166-2:BE |Belgium  |BE          |extant           |
+|  1|ISO3166-2:BE |Belgium  |BE          |present          |
+|  2|ISO3166-2:BE |Belgium  |BE          |present          |
+|  3|ISO3166-2:BE |Belgium  |BE          |present          |
+|  4|ISO3166-2:BE |Belgium  |BE          |present          |
+|  5|ISO3166-2:BE |Belgium  |BE          |present          |
+|  6|ISO3166-2:BE |Belgium  |BE          |present          |
 
 Save to CSV:
 
