@@ -2,7 +2,7 @@
 
 Peter Desmet & Quentin Groom
 
-2017-08-02
+2017-08-03
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -39,7 +39,7 @@ Set file paths (all paths should be relative to this script):
 
 
 ```r
-raw_data_file = "../data/raw/Checklist2.xls"
+raw_data_file = "../data/raw/Checklist2.xlsx"
 lookup_file = "../settings/lookup.csv"
 dwc_taxon_file = "../data/processed/taxon.csv"
 dwc_distribution_file = "../data/processed/distribution.csv"
@@ -60,8 +60,7 @@ Read the source data:
 
 ```r
 raw_data <- read_excel(
-  path = raw_data_file,
-  skip = 1 # First row is empty
+  path = raw_data_file
 ) 
 ```
 
@@ -74,23 +73,6 @@ raw_data %<>%
   remove_empty_rows() %>%
   # Have sensible (lowercase) column names
   clean_names()
-```
-
-The first row contains subheaders for "presence": `Fl.`, `Br.`, `Wa.` so, we'll rename to actual headers to keep this information:
-
-
-```r
-raw_data %<>%
-  rename(presence_fl = presence, presence_br = x_1, presence_wa = x_2) %>%
-  # That first row can now be removed, by slicing from 2 till the end
-  slice(2:(n()))
-```
-
-Add row number as an identifier (`id`):
-
-
-```r
-raw_data <- cbind("id" = seq.int(nrow(raw_data)), raw_data)
 ```
 
 Add prefix `raw_` to all column names to avoid name clashes with Darwin Core terms:
@@ -116,14 +98,14 @@ kable(head(raw_data))
 
 
 
-| raw_id|raw_taxon                                                   |raw_synonym |raw_family    |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i     |
-|------:|:-----------------------------------------------------------|:-----------|:-------------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-----------|
-|      1|Acanthus mollis L.                                          |NA          |Acanthaceae   |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.       |
-|      2|Acanthus spinosus L.                                        |NA          |Acanthaceae   |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.       |
-|      3|Acorus calamus L.                                           |NA          |Acoraceae     |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.       |
-|      4|Actinidia deliciosa (Chevalier) C.S. Liang et A.R. Ferguson |NA          |Actinidiaceae |D       |2000   |Ann.    |AS-Te      |X               |NA              |X               |Cas.    |Food refuse |
-|      5|Sambucus canadensis L.                                      |NA          |Adoxaceae     |D       |1972   |2015    |NAM        |X               |NA              |NA              |Cas.    |Hort.       |
-|      6|Viburnum davidii Franch.                                    |NA          |Adoxaceae     |D       |2014   |2015    |AS-Te      |X               |NA              |NA              |Cas.    |Hort.       |
+| raw_id|raw_taxon                                                  |raw_hybrid_formula |raw_synonym |raw_family    |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i     |raw_taxonrank |raw_scientificnameid                             |
+|------:|:----------------------------------------------------------|:------------------|:-----------|:-------------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-----------|:-------------|:------------------------------------------------|
+|      1|Acanthus mollis L.                                         |NA                 |NA          |Acanthaceae   |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1  |
+|      2|Acanthus spinosus L.                                       |NA                 |NA          |Acanthaceae   |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1  |
+|      3|Acorus calamus L.                                          |NA                 |NA          |Acoraceae     |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1  |
+|      4|Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |NA                 |NA          |Actinidiaceae |D       |2000   |Ann.    |AS-Te      |X               |NA              |X               |Cas.    |Food refuse |species       |http://ipni.org/urn:lsid:ipni.org:names:913605-1 |
+|      5|Sambucus canadensis L.                                     |NA                 |NA          |Adoxaceae     |D       |1972   |2015    |NAM        |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:321978-2 |
+|      6|Viburnum davidii Franch.                                   |NA                 |NA          |Adoxaceae     |D       |2014   |2015    |AS-Te      |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:149642-1 |
 
 ## Create taxon core
 
@@ -277,14 +259,14 @@ kable(head(taxon))
 
 
 
-| id|language |license                                           |rightsHolder         |datasetID |datasetName                           | taxonID|scientificName                                              |kingdom |family        |nomenclaturalCode |
-|--:|:--------|:-------------------------------------------------|:--------------------|:---------|:-------------------------------------|-------:|:-----------------------------------------------------------|:-------|:-------------|:-----------------|
-|  1|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       1|Acanthus mollis L.                                          |Plantae |Acanthaceae   |ICBN              |
-|  2|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       2|Acanthus spinosus L.                                        |Plantae |Acanthaceae   |ICBN              |
-|  3|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       3|Acorus calamus L.                                           |Plantae |Acoraceae     |ICBN              |
-|  4|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       4|Actinidia deliciosa (Chevalier) C.S. Liang et A.R. Ferguson |Plantae |Actinidiaceae |ICBN              |
-|  5|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       5|Sambucus canadensis L.                                      |Plantae |Adoxaceae     |ICBN              |
-|  6|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       6|Viburnum davidii Franch.                                    |Plantae |Adoxaceae     |ICBN              |
+| id|language |license                                           |rightsHolder         |datasetID |datasetName                           | taxonID|scientificName                                             |kingdom |family        |nomenclaturalCode |
+|--:|:--------|:-------------------------------------------------|:--------------------|:---------|:-------------------------------------|-------:|:----------------------------------------------------------|:-------|:-------------|:-----------------|
+|  1|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       1|Acanthus mollis L.                                         |Plantae |Acanthaceae   |ICBN              |
+|  2|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       2|Acanthus spinosus L.                                       |Plantae |Acanthaceae   |ICBN              |
+|  3|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       3|Acorus calamus L.                                          |Plantae |Acoraceae     |ICBN              |
+|  4|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       4|Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |Plantae |Actinidiaceae |ICBN              |
+|  5|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       5|Sambucus canadensis L.                                     |Plantae |Adoxaceae     |ICBN              |
+|  6|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       6|Viburnum davidii Franch.                                   |Plantae |Adoxaceae     |ICBN              |
 
 Save to CSV:
 

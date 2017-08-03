@@ -24,7 +24,7 @@ library(knitr)     # For nicer (kable) tables
 source("functions/term_mapping.R") # For mapping values
 
 #' Set file paths (all paths should be relative to this script):
-raw_data_file = "../data/raw/Checklist2.xls"
+raw_data_file = "../data/raw/Checklist2.xlsx"
 lookup_file = "../settings/lookup.csv"
 dwc_taxon_file = "../data/processed/taxon.csv"
 dwc_distribution_file = "../data/processed/distribution.csv"
@@ -37,8 +37,7 @@ lookup_table <- read.csv(lookup_file)
 #' 
 #' Read the source data:
 raw_data <- read_excel(
-  path = raw_data_file,
-  skip = 1 # First row is empty
+  path = raw_data_file
 ) 
 
 #' Clean data somewhat:
@@ -47,15 +46,6 @@ raw_data %<>%
   remove_empty_rows() %>%
   # Have sensible (lowercase) column names
   clean_names()
-
-#' The first row contains subheaders for "presence": `Fl.`, `Br.`, `Wa.` so, we'll rename to actual headers to keep this information:
-raw_data %<>%
-  rename(presence_fl = presence, presence_br = x_1, presence_wa = x_2) %>%
-  # That first row can now be removed, by slicing from 2 till the end
-  slice(2:(n()))
-
-#' Add row number as an identifier (`id`):
-raw_data <- cbind("id" = seq.int(nrow(raw_data)), raw_data)
 
 #' Add prefix `raw_` to all column names to avoid name clashes with Darwin Core terms:
 colnames(raw_data) <- paste0("raw_", colnames(raw_data))
