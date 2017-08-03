@@ -284,6 +284,7 @@ write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE)
 distribution <- raw_data
 ```
 
+The checklist contains minimal presence information (`X` or `?`) for the three regions in Belgium (Flanders, Wallonia and the Brussels-Capital Region). Information regarding pathway, status, first and last recorded observation however apply to the distribution in Belgium as a whole. Since it is impossible to extrapolate that information for the regions, we decided to only provide distribution information for Belgium.
 Create a `raw_presence_be` column, which contains `X` if any of the regions has `X` or else `?` if any of the regions has `?`:
 
 
@@ -295,41 +296,6 @@ distribution %<>% mutate(raw_presence_be =
   )
 )
 ```
-
-Transpose the data for the presence columns, but not for `NA` values:
-
-
-```r
-distribution %<>%
-  gather(
-    raw_presence_region, raw_presence_value,
-    raw_presence_be, raw_presence_br, raw_presence_fl, raw_presence_wa,
-    na.rm = TRUE,
-    convert = FALSE
-  ) %>%
-  arrange(raw_id)
-```
-
-Preview the newly created columns:
-
-
-```r
-distribution %>% 
-  select(raw_id, raw_presence_region, raw_presence_value) %>%
-  head() %>%
-  kable()
-```
-
-
-
-| raw_id|raw_presence_region |raw_presence_value |
-|------:|:-------------------|:------------------|
-|      1|raw_presence_be     |X                  |
-|      1|raw_presence_fl     |X                  |
-|      1|raw_presence_wa     |X                  |
-|      2|raw_presence_be     |X                  |
-|      2|raw_presence_fl     |X                  |
-|      3|raw_presence_be     |X                  |
 
 ### Term mapping
 
@@ -343,50 +309,16 @@ distribution %<>% mutate(id = raw_id)
 
 #### locationID
 
-Use lookup table to get region ISO codes:
-
 
 ```r
-locationid_lookup <- term_mapping(lookup_table, "locationID")
-stack(locationid_lookup)
-```
-
-```
-##   values             ind
-## 1     BE raw_presence_be
-## 2 BE-BRU raw_presence_br
-## 3 BE-VLG raw_presence_fl
-## 4 BE-WAL raw_presence_wa
-```
-
-```r
-distribution %<>% mutate(locationID = 
-  paste0("ISO3166-2:", recode(raw_presence_region, !!!locationid_lookup))
-)
+distribution %<>% mutate(locationID = "ISO3166-2:BE")
 ```
 
 #### locality
 
-Use lookup table to get region names:
-
 
 ```r
-locality_lookup <- term_mapping(lookup_table, "locality")
-stack(locality_lookup)
-```
-
-```
-##                    values             ind
-## 1                 Belgium raw_presence_be
-## 2 Brussels-Capital Region raw_presence_br
-## 3          Flemish Region raw_presence_fl
-## 4          Walloon Region raw_presence_wa
-```
-
-```r
-distribution %<>% mutate(locality = 
-  recode(raw_presence_region, !!!locality_lookup)
-)
+distribution %<>% mutate(locality = "Belgium")
 ```
 
 #### countryCode
@@ -415,7 +347,7 @@ stack(occurrencestatus_lookup)
 
 ```r
 distribution %<>% mutate(occurrenceStatus = 
-  recode(raw_presence_value, !!!occurrencestatus_lookup)
+  recode(raw_presence_be, !!!occurrencestatus_lookup)
 )
 ```
 
@@ -455,11 +387,11 @@ distribution %<>% mutate(occurrenceStatus =
 
 ### Post-processing
 
-Remove the original columns + the two new ones:
+Remove the original columns:
 
 
 ```r
-distribution %<>% select(-one_of(raw_colnames), -raw_presence_region, -raw_presence_value)
+distribution %<>% select(-one_of(raw_colnames), -raw_presence_be)
 ```
 
 Preview data:
@@ -471,14 +403,14 @@ kable(head(distribution))
 
 
 
-| id|locationID       |locality       |countryCode |occurrenceStatus |
-|--:|:----------------|:--------------|:-----------|:----------------|
-|  1|ISO3166-2:BE     |Belgium        |BE          |extant           |
-|  1|ISO3166-2:BE-VLG |Flemish Region |BE          |extant           |
-|  1|ISO3166-2:BE-WAL |Walloon Region |BE          |extant           |
-|  2|ISO3166-2:BE     |Belgium        |BE          |extant           |
-|  2|ISO3166-2:BE-VLG |Flemish Region |BE          |extant           |
-|  3|ISO3166-2:BE     |Belgium        |BE          |extant           |
+| id|locationID   |locality |countryCode |occurrenceStatus |
+|--:|:------------|:--------|:-----------|:----------------|
+|  1|ISO3166-2:BE |Belgium  |BE          |extant           |
+|  2|ISO3166-2:BE |Belgium  |BE          |extant           |
+|  3|ISO3166-2:BE |Belgium  |BE          |extant           |
+|  4|ISO3166-2:BE |Belgium  |BE          |extant           |
+|  5|ISO3166-2:BE |Belgium  |BE          |extant           |
+|  6|ISO3166-2:BE |Belgium  |BE          |extant           |
 
 Save to CSV:
 

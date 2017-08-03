@@ -150,6 +150,8 @@ write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE)
 #' ### Pre-processing
 distribution <- raw_data
 
+#' The checklist contains minimal presence information (`X` or `?`) for the three regions in Belgium (Flanders, Wallonia and the Brussels-Capital Region). Information regarding pathway, status, first and last recorded observation however apply to the distribution in Belgium as a whole. Since it is impossible to extrapolate that information for the regions, we decided to only provide distribution information for Belgium.
+
 #' Create a `raw_presence_be` column, which contains `X` if any of the regions has `X` or else `?` if any of the regions has `?`:
 distribution %<>% mutate(raw_presence_be =
   case_when(
@@ -157,22 +159,6 @@ distribution %<>% mutate(raw_presence_be =
     raw_presence_fl == "?" | raw_presence_br == "?" | raw_presence_wa == "?" ~ "?" # One is "?"
   )
 )
-
-#' Transpose the data for the presence columns, but not for `NA` values:
-distribution %<>%
-  gather(
-    raw_presence_region, raw_presence_value,
-    raw_presence_be, raw_presence_br, raw_presence_fl, raw_presence_wa,
-    na.rm = TRUE,
-    convert = FALSE
-  ) %>%
-  arrange(raw_id)
-
-#' Preview the newly created columns:
-distribution %>% 
-  select(raw_id, raw_presence_region, raw_presence_value) %>%
-  head() %>%
-  kable()
 
 #' ### Term mapping
 #' 
@@ -182,24 +168,10 @@ distribution %>%
 distribution %<>% mutate(id = raw_id)
 
 #' #### locationID
-#' 
-#' Use lookup table to get region ISO codes:
-locationid_lookup <- term_mapping(lookup_table, "locationID")
-stack(locationid_lookup)
-
-distribution %<>% mutate(locationID = 
-  paste0("ISO3166-2:", recode(raw_presence_region, !!!locationid_lookup))
-)
+distribution %<>% mutate(locationID = "ISO3166-2:BE")
 
 #' #### locality
-#' 
-#' Use lookup table to get region names:
-locality_lookup <- term_mapping(lookup_table, "locality")
-stack(locality_lookup)
-
-distribution %<>% mutate(locality = 
-  recode(raw_presence_region, !!!locality_lookup)
-)
+distribution %<>% mutate(locality = "Belgium")
 
 #' #### countryCode
 distribution %<>% mutate(countryCode = "BE")
@@ -212,7 +184,7 @@ occurrencestatus_lookup <- term_mapping(lookup_table, "occurrenceStatus")
 stack(occurrencestatus_lookup)
 
 distribution %<>% mutate(occurrenceStatus = 
-  recode(raw_presence_value, !!!occurrencestatus_lookup)
+  recode(raw_presence_be, !!!occurrencestatus_lookup)
 )
 
 #' #### threatStatus
@@ -235,8 +207,8 @@ distribution %<>% mutate(occurrenceStatus =
 #' 
 #' ### Post-processing
 #' 
-#' Remove the original columns + the two new ones:
-distribution %<>% select(-one_of(raw_colnames), -raw_presence_region, -raw_presence_value)
+#' Remove the original columns:
+distribution %<>% select(-one_of(raw_colnames), -raw_presence_be)
 
 #' Preview data:
 kable(head(distribution))
