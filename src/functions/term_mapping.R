@@ -1,21 +1,37 @@
 term_mapping <- function(lookup_table, term) {
-  # Filter lookup table on term (expected to be first column)
+  # The lookup table is expected to have 3 columns: term, lookup_value, new_value
+  # e.g. occurrenceStatus, ?, presence uncertain
+  # The column names don't matter, their position does.
   
-  # Unfortunately we cannot pass 'term' as a variable to 
-  # filter(lookup_table[[1]] == term)
-  # So, we need to create the condition as a string and pass to filter_()
+  # FILTER
+  # Filter the lookup table on the chosen term (column 1)
   condition <- paste0(colnames(lookup_table)[[1]], "==\"", term, "\"")
-  # e.g. 'term == "locationID"'
-  
+  # In the above statement we need need to pass the condition as a string, e.g.
+  # 'term == "locationID"' because this unfortunately doesn't work: 
+  # filter(lookup_table[[1]] == term)
   term_lookup_table <- filter_(lookup_table, condition)
   
   # Throw error if filter returns no results
   if (nrow(term_lookup_table) == 0) stop(paste0("Term \"", term, "\" not found in first column of lookup table."))
   
-  # Create list with new values (expected to be 3rd column) as values
-  term_map <- as.vector(term_lookup_table[[3]])
-  # And lookup values (expected to be 2nd column) as names
-  term_map <- setNames(term_map, term_lookup_table[[2]])
+  # NEW VALUES
+  # Create a list from the new values (column 3)
+  new_values <- as.vector(term_lookup_table[[3]])
+  term_map <- new_values
   
+  # LOOKUP VALUES
+  # Create a list from the lookup values (column 2)
+  lookup_values <- as.vector(term_lookup_table[[2]])
+  
+  # Replace empty lookup values with ".missing", which allows these to be mapped
+  # later with the dplyr::recode()
+  lookup_values[lookup_values == ""] <- ".missing"
+  
+  # Throw error if there are duplicate lookup values
+  if (any(duplicated(lookup_values))) stop(paste0("Duplicate lookup values found for \"", term, "\"."))
+  
+  # Set lookup values as names for the new values
+  term_map <- setNames(term_map, lookup_values)
+
   return(term_map)
 }
