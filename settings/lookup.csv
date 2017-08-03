@@ -9,3 +9,4 @@ locality,raw_presence_fl,Flemish Region
 locality,raw_presence_wa,Walloon Region
 occurrenceStatus,X,extant
 occurrenceStatus,?,presence uncertain
+occurrenceStatus,,absent

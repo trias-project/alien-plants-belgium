@@ -340,9 +340,10 @@ stack(occurrencestatus_lookup)
 ```
 
 ```
-##               values ind
-## 1             extant   X
-## 2 presence uncertain   ?
+##               values      ind
+## 1             extant        X
+## 2 presence uncertain        ?
+## 3             absent .missing
 ```
 
 ```r
