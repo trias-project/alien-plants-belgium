@@ -285,11 +285,11 @@ distribution <- raw_data
 ```
 
 The checklist contains minimal presence information (`X` or `?`) for the three regions in Belgium (Flanders, Wallonia and the Brussels-Capital Region). Information regarding pathway, status, first and last recorded observation however apply to the distribution in Belgium as a whole. Since it is impossible to extrapolate that information for the regions, we decided to only provide distribution information for Belgium.
-Create a `raw_presence_be` column, which contains `X` if any of the regions has `X` or else `?` if any of the regions has `?`:
+Create a `presence_be` column, which contains `X` if any of the regions has `X` or else `?` if any of the regions has `?`:
 
 
 ```r
-distribution %<>% mutate(raw_presence_be =
+distribution %<>% mutate(presence_be =
   case_when(
     raw_presence_fl == "X" | raw_presence_br == "X" | raw_presence_wa == "X" ~ "X", # One is "X"
     raw_presence_fl == "?" | raw_presence_br == "?" | raw_presence_wa == "?" ~ "?" # One is "?"
@@ -348,7 +348,7 @@ stack(occurrencestatus_lookup)
 
 ```r
 distribution %<>% mutate(occurrenceStatus = 
-  recode(raw_presence_be, !!!occurrencestatus_lookup)
+  recode(presence_be, !!!occurrencestatus_lookup)
 )
 ```
 
@@ -365,7 +365,12 @@ distribution %<>% mutate(occurrenceStatus =
 
 
 ```r
-# To be added
+distribution %<>% mutate(first_year = raw_fr)
+distribution %<>% mutate(last_year = raw_mrr)
+
+distribution %<>% mutate(eventDate = 
+  paste(first_year, last_year, sep = "/")
+)
 ```
 
 #### startDayOfYear
@@ -392,7 +397,7 @@ Remove the original columns:
 
 
 ```r
-distribution %<>% select(-one_of(raw_colnames), -raw_presence_be)
+distribution %<>% select(-one_of(raw_colnames), -presence_be, -first_year, -last_year)
 ```
 
 Preview data:
@@ -404,14 +409,14 @@ kable(head(distribution))
 
 
 
-| id|locationID   |locality |countryCode |occurrenceStatus |
-|--:|:------------|:--------|:-----------|:----------------|
-|  1|ISO3166-2:BE |Belgium  |BE          |present          |
-|  2|ISO3166-2:BE |Belgium  |BE          |present          |
-|  3|ISO3166-2:BE |Belgium  |BE          |present          |
-|  4|ISO3166-2:BE |Belgium  |BE          |present          |
-|  5|ISO3166-2:BE |Belgium  |BE          |present          |
-|  6|ISO3166-2:BE |Belgium  |BE          |present          |
+| id|locationID   |locality |countryCode |occurrenceStatus |eventDate |
+|--:|:------------|:--------|:-----------|:----------------|:---------|
+|  1|ISO3166-2:BE |Belgium  |BE          |present          |1998/2016 |
+|  2|ISO3166-2:BE |Belgium  |BE          |present          |2016/2016 |
+|  3|ISO3166-2:BE |Belgium  |BE          |present          |1680/N    |
+|  4|ISO3166-2:BE |Belgium  |BE          |present          |2000/Ann. |
+|  5|ISO3166-2:BE |Belgium  |BE          |present          |1972/2015 |
+|  6|ISO3166-2:BE |Belgium  |BE          |present          |2014/2015 |
 
 Save to CSV:
 
