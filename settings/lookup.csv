@@ -1,12 +1,4 @@
 term,lookup_value,new_value
-locationID,raw_presence_be,BE
-locationID,raw_presence_br,BE-BRU
-locationID,raw_presence_fl,BE-VLG
-locationID,raw_presence_wa,BE-WAL
-locality,raw_presence_be,Belgium
-locality,raw_presence_br,Brussels-Capital Region
-locality,raw_presence_fl,Flemish Region
-locality,raw_presence_wa,Walloon Region
 occurrenceStatus,X,present
 occurrenceStatus,?,presence uncertain
 occurrenceStatus,,absent
