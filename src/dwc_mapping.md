@@ -2,7 +2,7 @@
 
 Peter Desmet & Quentin Groom
 
-2017-08-03
+2017-08-08
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -28,8 +28,13 @@ Load libraries:
 
 ```r
 library(tidyverse) # For data transformations
-library(magrittr)  # For %<>% pipes (not part of core tidyverse)
-library(readxl)    # For reading Excel (not part of core tidyverse)
+
+# None core tidyverse packages:
+library(magrittr)  # For %<>% pipes
+library(readxl)    # For reading Excel
+library(stringr)   # For string manipulation
+
+# Other packages
 library(janitor)   # For cleaning input data
 library(knitr)     # For nicer (kable) tables
 source("functions/term_mapping.R") # For mapping values
@@ -363,13 +368,213 @@ distribution %<>% mutate(occurrenceStatus =
 #### appendixCITES
 #### eventDate
 
+Create `start_year` from `raw_fr` (first record):
+
 
 ```r
-distribution %<>% mutate(first_year = raw_fr)
-distribution %<>% mutate(last_year = raw_mrr)
+distribution %<>% mutate(start_year = raw_fr)
+```
 
+Strip `?`, `ca.`, `>` and `<` from the values:
+
+
+```r
+distribution %<>% mutate(start_year = 
+  str_replace_all(start_year, "(\\?|ca. |<|>)", "")
+)
+```
+
+Show reformatted values:
+
+
+```r
+distribution %>%
+  select(raw_fr, start_year) %>%
+  group_by(raw_fr, start_year) %>%
+  summarize(records = n()) %>%
+  filter(nchar(raw_fr) != 4) %>% # Only show values that were not YYYY
+  kable()
+```
+
+
+
+|raw_fr    |start_year | records|
+|:---------|:----------|-------:|
+|?         |           |      53|
+|<1800     |1800       |      16|
+|<1812     |1812       |       1|
+|<1824     |1824       |       1|
+|<1827     |1827       |       2|
+|<1830     |1830       |       4|
+|<1834     |1834       |       1|
+|<1835     |1835       |      38|
+|<1836     |1836       |       2|
+|<1837     |1837       |       2|
+|<1842     |1842       |       1|
+|<1850     |1850       |      67|
+|<1858     |1858       |       6|
+|<1861     |1861       |       2|
+|<1865     |1865       |       1|
+|<1868     |1868       |       1|
+|<1885     |1885       |       1|
+|<1890     |1890       |       1|
+|<1893     |1893       |       2|
+|<1895     |1895       |       2|
+|<1899     |1899       |       1|
+|<1900     |1900       |      13|
+|<1900?    |1900       |       1|
+|<1929     |1929       |       1|
+|<1934     |1934       |       1|
+|<1949     |1949       |       1|
+|<1950     |1950       |       5|
+|<1951     |1951       |       1|
+|<1957     |1957       |       1|
+|<1980     |1980       |       1|
+|<1994     |1994       |       1|
+|<1997     |1997       |       1|
+|<1999     |1999       |       5|
+|<2010     |2010       |       1|
+|<2011     |2011       |       1|
+|<2012     |2012       |       1|
+|>1972     |1972       |       1|
+|1813?     |1813       |       1|
+|1817?     |1817       |       1|
+|1860?     |1860       |       1|
+|1866?     |1866       |       1|
+|1886?     |1886       |       1|
+|1893?     |1893       |       1|
+|1911?     |1911       |       1|
+|1931?     |1931       |       1|
+|1955?     |1955       |       1|
+|1960?     |1960       |       1|
+|1963?     |1963       |       1|
+|1965?     |1965       |       1|
+|1975?     |1975       |       1|
+|1976?     |1976       |       1|
+|1979?     |1979       |       1|
+|1985?     |1985       |       1|
+|1998?     |1998       |       1|
+|2000?     |2000       |       1|
+|2002?     |2002       |       1|
+|2006?     |2006       |       1|
+|ca. 1975  |1975       |       1|
+|ca. 1985? |1985       |       1|
+|ca. 1996  |1996       |       1|
+
+Create `end_year` from `raw_mrr` (most recent record):
+
+
+```r
+distribution %<>% mutate(end_year = raw_mrr)
+```
+
+Strip `?`, `ca.`, `>` and `<` from the values:
+
+
+```r
+distribution %<>% mutate(end_year = 
+  str_replace_all(end_year, "(\\?|ca. |<|>)", "")
+)
+```
+
+If `end_year` is `Ann.` or `N` use current year:
+
+
+```r
+current_year = format(Sys.Date(), "%Y")
+distribution %<>% mutate(end_year =
+  recode(end_year, "Ann." = current_year, "N" = current_year)
+)
+```
+
+If `last_year` is empty we leave it empty.
+
+Show reformatted values:
+
+
+```r
+distribution %>%
+  select(raw_mrr, end_year) %>%
+  group_by(raw_mrr, end_year) %>%
+  summarize(records = n()) %>%
+  filter(nchar(raw_mrr) != 4) %>% # Only show values that were not YYYY
+  kable()
+```
+
+
+
+|raw_mrr |end_year | records|
+|:-------|:--------|-------:|
+|?       |         |      23|
+|<1812   |1812     |       1|
+|<1827   |1827     |       1|
+|<1835   |1835     |       3|
+|<1837   |1837     |       2|
+|<1850   |1850     |      25|
+|<1858   |1858     |       2|
+|<1861   |1861     |       1|
+|<1890   |1890     |       1|
+|<1893   |1893     |       2|
+|<1900   |1900     |       5|
+|<1900?  |1900     |       1|
+|<1914   |1914     |       1|
+|<1927   |1927     |       1|
+|<1934   |1934     |       1|
+|<1949   |1949     |       2|
+|<1950   |1950     |       2|
+|<1951   |1951     |       1|
+|<1957   |1957     |       1|
+|<1963   |1963     |       1|
+|<1979   |1979     |       1|
+|<1994   |1994     |       2|
+|<1997   |1997     |       1|
+|<1999   |1999     |       1|
+|<2003   |2003     |       1|
+|>1940   |1940     |       1|
+|1912?   |1912     |       1|
+|1947?   |1947     |       1|
+|1959?   |1959     |       1|
+|1960?   |1960     |       1|
+|1965?   |1965     |       1|
+|1972?   |1972     |       1|
+|1976?   |1976     |       1|
+|1979?   |1979     |       1|
+|1985?   |1985     |       1|
+|2004?   |2004     |       1|
+|2010?   |2010     |       1|
+|N       |2017     |     512|
+|N?      |2017     |      99|
+
+Check if any `start_year` fall after `end_year` (expected to be none):
+
+
+```r
+distribution %>%
+  select(start_year, end_year) %>%
+  mutate(start_year = as.numeric(start_year)) %>%
+  mutate(end_year = as.numeric(end_year)) %>%
+  group_by(start_year, end_year) %>%
+  summarize(records = n()) %>%
+  filter(start_year > end_year) %>%
+  kable()
+```
+
+
+
+| start_year| end_year| records|
+|----------:|--------:|-------:|
+
+Combine `start_year` and `end_year` in an ranged `eventDate` (ISO 8601 format). If any those two dates is empty, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
+
+
+```r
 distribution %<>% mutate(eventDate = 
-  paste(first_year, last_year, sep = "/")
+  case_when(
+    start_year == "" & end_year == "" ~ "",
+    start_year == ""                  ~ end_year,
+    end_year == ""                    ~ start_year,
+    TRUE                              ~ paste(start_year, end_year, sep = "/")
+  )
 )
 ```
 
@@ -397,7 +602,7 @@ Remove the original columns:
 
 
 ```r
-distribution %<>% select(-one_of(raw_colnames), -presence_be, -first_year, -last_year)
+distribution %<>% select(-one_of(raw_colnames), -presence_be, -start_year, -end_year)
 ```
 
 Preview data:
@@ -413,8 +618,8 @@ kable(head(distribution))
 |--:|:------------|:--------|:-----------|:----------------|:---------|
 |  1|ISO3166-2:BE |Belgium  |BE          |present          |1998/2016 |
 |  2|ISO3166-2:BE |Belgium  |BE          |present          |2016/2016 |
-|  3|ISO3166-2:BE |Belgium  |BE          |present          |1680/N    |
-|  4|ISO3166-2:BE |Belgium  |BE          |present          |2000/Ann. |
+|  3|ISO3166-2:BE |Belgium  |BE          |present          |1680/2017 |
+|  4|ISO3166-2:BE |Belgium  |BE          |present          |2000/2017 |
 |  5|ISO3166-2:BE |Belgium  |BE          |present          |1972/2015 |
 |  6|ISO3166-2:BE |Belgium  |BE          |present          |2014/2015 |
 

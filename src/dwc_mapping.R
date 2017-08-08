@@ -17,8 +17,13 @@ Sys.setlocale("LC_ALL", 'en_US.UTF-8')
 
 #' Load libraries:
 library(tidyverse) # For data transformations
-library(magrittr)  # For %<>% pipes (not part of core tidyverse)
-library(readxl)    # For reading Excel (not part of core tidyverse)
+
+# None core tidyverse packages:
+library(magrittr)  # For %<>% pipes
+library(readxl)    # For reading Excel
+library(stringr)   # For string manipulation
+
+# Other packages
 library(janitor)   # For cleaning input data
 library(knitr)     # For nicer (kable) tables
 source("functions/term_mapping.R") # For mapping values
@@ -193,11 +198,65 @@ distribution %<>% mutate(occurrenceStatus =
 
 #' #### appendixCITES
 #' #### eventDate
-distribution %<>% mutate(first_year = raw_fr)
-distribution %<>% mutate(last_year = raw_mrr)
+#' 
+#' Create `start_year` from `raw_fr` (first record):
+distribution %<>% mutate(start_year = raw_fr)
 
+#' Strip `?`, `ca.`, `>` and `<` from the values:
+distribution %<>% mutate(start_year = 
+  str_replace_all(start_year, "(\\?|ca. |<|>)", "")
+)
+
+#' Show reformatted values:
+distribution %>%
+  select(raw_fr, start_year) %>%
+  group_by(raw_fr, start_year) %>%
+  summarize(records = n()) %>%
+  filter(nchar(raw_fr) != 4) %>% # Only show values that were not YYYY
+  kable()
+
+#' Create `end_year` from `raw_mrr` (most recent record):
+distribution %<>% mutate(end_year = raw_mrr)
+
+#' Strip `?`, `ca.`, `>` and `<` from the values:
+distribution %<>% mutate(end_year = 
+  str_replace_all(end_year, "(\\?|ca. |<|>)", "")
+)
+
+#' If `end_year` is `Ann.` or `N` use current year:
+current_year = format(Sys.Date(), "%Y")
+distribution %<>% mutate(end_year =
+  recode(end_year, "Ann." = current_year, "N" = current_year)
+)
+
+#' If `last_year` is empty we leave it empty.
+#'
+#' Show reformatted values:
+distribution %>%
+  select(raw_mrr, end_year) %>%
+  group_by(raw_mrr, end_year) %>%
+  summarize(records = n()) %>%
+  filter(nchar(raw_mrr) != 4) %>% # Only show values that were not YYYY
+  kable()
+
+#'Check if any `start_year` fall after `end_year` (expected to be none):
+distribution %>%
+  select(start_year, end_year) %>%
+  mutate(start_year = as.numeric(start_year)) %>%
+  mutate(end_year = as.numeric(end_year)) %>%
+  group_by(start_year, end_year) %>%
+  summarize(records = n()) %>%
+  filter(start_year > end_year) %>%
+  kable()
+
+#' Combine `start_year` and `end_year` in an ranged `eventDate` (ISO 8601 format). If any those two dates is empty, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
 distribution %<>% mutate(eventDate = 
-  paste(first_year, last_year, sep = "/")
+  case_when(
+    start_year == "" & end_year == "" ~ "",
+    start_year == ""                  ~ end_year,
+    end_year == ""                    ~ start_year,
+    TRUE                              ~ paste(start_year, end_year, sep = "/")
+  )
 )
 
 #' #### startDayOfYear
@@ -213,7 +272,7 @@ distribution %<>% mutate(eventDate =
 #' ### Post-processing
 #' 
 #' Remove the original columns:
-distribution %<>% select(-one_of(raw_colnames), -presence_be, -first_year, -last_year)
+distribution %<>% select(-one_of(raw_colnames), -presence_be, -start_year, -end_year)
 
 #' Preview data:
 kable(head(distribution))
