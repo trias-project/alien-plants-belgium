@@ -564,7 +564,7 @@ distribution %>%
 | start_year| end_year| records|
 |----------:|--------:|-------:|
 
-Combine `start_year` and `end_year` in an ranged `eventDate` (ISO 8601 format). If any those two dates is empty, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
+Combine `start_year` and `end_year` in an ranged `eventDate` (ISO 8601 format). If any those two dates is empty or the same, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
 
 
 ```r
@@ -573,6 +573,7 @@ distribution %<>% mutate(eventDate =
     start_year == "" & end_year == "" ~ "",
     start_year == ""                  ~ end_year,
     end_year == ""                    ~ start_year,
+    start_year == end_year            ~ start_year,
     TRUE                              ~ paste(start_year, end_year, sep = "/")
   )
 )
@@ -617,7 +618,7 @@ kable(head(distribution))
 | id|locationID   |locality |countryCode |occurrenceStatus |eventDate |
 |--:|:------------|:--------|:-----------|:----------------|:---------|
 |  1|ISO3166-2:BE |Belgium  |BE          |present          |1998/2016 |
-|  2|ISO3166-2:BE |Belgium  |BE          |present          |2016/2016 |
+|  2|ISO3166-2:BE |Belgium  |BE          |present          |2016      |
 |  3|ISO3166-2:BE |Belgium  |BE          |present          |1680/2017 |
 |  4|ISO3166-2:BE |Belgium  |BE          |present          |2000/2017 |
 |  5|ISO3166-2:BE |Belgium  |BE          |present          |1972/2015 |

@@ -249,12 +249,13 @@ distribution %>%
   filter(start_year > end_year) %>%
   kable()
 
-#' Combine `start_year` and `end_year` in an ranged `eventDate` (ISO 8601 format). If any those two dates is empty, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
+#' Combine `start_year` and `end_year` in an ranged `eventDate` (ISO 8601 format). If any those two dates is empty or the same, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
 distribution %<>% mutate(eventDate = 
   case_when(
     start_year == "" & end_year == "" ~ "",
     start_year == ""                  ~ end_year,
     end_year == ""                    ~ start_year,
+    start_year == end_year            ~ start_year,
     TRUE                              ~ paste(start_year, end_year, sep = "/")
   )
 )
