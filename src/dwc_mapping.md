@@ -192,7 +192,7 @@ taxon %<>% mutate(taxonID = raw_id)
 
 
 ```r
-# Code to be added
+taxon %<>% mutate(scientificNameID = raw_scientificnameid)
 ```
 
 #### acceptedNameUsageID
@@ -262,8 +262,29 @@ length(unique(taxon[["family"]]))
 
 
 ```r
-# Code to be added
+taxon %<>% mutate(taxonRank = raw_taxonrank)
 ```
+
+Show unique values:
+
+
+```r
+taxon %>%
+  distinct(taxonRank) %>%
+  arrange(taxonRank) %>%
+  kable()
+```
+
+
+
+|taxonRank  |
+|:----------|
+|cultivar   |
+|genus      |
+|hybrid     |
+|species    |
+|subspecies |
+|variety    |
 
 #### verbatimTaxonRank
 #### scientificNameAuthorship
@@ -297,14 +318,14 @@ kable(head(taxon))
 
 
 
-| id|language |license                                           |rightsHolder         |datasetID |datasetName                           | taxonID|scientificName                                             |kingdom |family        |nomenclaturalCode |
-|--:|:--------|:-------------------------------------------------|:--------------------|:---------|:-------------------------------------|-------:|:----------------------------------------------------------|:-------|:-------------|:-----------------|
-|  1|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       1|Acanthus mollis L.                                         |Plantae |Acanthaceae   |ICBN              |
-|  2|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       2|Acanthus spinosus L.                                       |Plantae |Acanthaceae   |ICBN              |
-|  3|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       3|Acorus calamus L.                                          |Plantae |Acoraceae     |ICBN              |
-|  4|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       4|Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |Plantae |Actinidiaceae |ICBN              |
-|  5|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       5|Sambucus canadensis L.                                     |Plantae |Adoxaceae     |ICBN              |
-|  6|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       6|Viburnum davidii Franch.                                   |Plantae |Adoxaceae     |ICBN              |
+| id|language |license                                           |rightsHolder         |datasetID |datasetName                           | taxonID|scientificNameID                                 |scientificName                                             |kingdom |family        |taxonRank |nomenclaturalCode |
+|--:|:--------|:-------------------------------------------------|:--------------------|:---------|:-------------------------------------|-------:|:------------------------------------------------|:----------------------------------------------------------|:-------|:-------------|:---------|:-----------------|
+|  1|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       1|http://ipni.org/urn:lsid:ipni.org:names:44892-1  |Acanthus mollis L.                                         |Plantae |Acanthaceae   |species   |ICBN              |
+|  2|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       2|http://ipni.org/urn:lsid:ipni.org:names:44920-1  |Acanthus spinosus L.                                       |Plantae |Acanthaceae   |species   |ICBN              |
+|  3|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       3|http://ipni.org/urn:lsid:ipni.org:names:84009-1  |Acorus calamus L.                                          |Plantae |Acoraceae     |species   |ICBN              |
+|  4|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       4|http://ipni.org/urn:lsid:ipni.org:names:913605-1 |Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |Plantae |Actinidiaceae |species   |ICBN              |
+|  5|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       5|http://ipni.org/urn:lsid:ipni.org:names:321978-2 |Sambucus canadensis L.                                     |Plantae |Adoxaceae     |species   |ICBN              |
+|  6|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       6|http://ipni.org/urn:lsid:ipni.org:names:149642-1 |Viburnum davidii Franch.                                   |Plantae |Adoxaceae     |species   |ICBN              |
 
 Save to CSV:
 

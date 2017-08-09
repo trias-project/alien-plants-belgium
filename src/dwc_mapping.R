@@ -98,7 +98,7 @@ taxon %<>% mutate(datasetName = "Manual of the Alien Plants of Belgium")
 taxon %<>% mutate(taxonID = raw_id)
 
 #' #### scientificNameID
-# Code to be added
+taxon %<>% mutate(scientificNameID = raw_scientificnameid)
 
 #' #### acceptedNameUsageID
 #' #### parentNameUsageID
@@ -136,7 +136,13 @@ length(unique(taxon[["family"]]))
 #' #### specificEpithet
 #' #### infraspecificEpithet
 #' #### taxonRank
-# Code to be added
+taxon %<>% mutate(taxonRank = raw_taxonrank)
+
+#' Show unique values:
+taxon %>%
+  distinct(taxonRank) %>%
+  arrange(taxonRank) %>%
+  kable()
 
 #' #### verbatimTaxonRank
 #' #### scientificNameAuthorship
