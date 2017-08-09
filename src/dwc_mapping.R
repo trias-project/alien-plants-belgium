@@ -386,7 +386,34 @@ distribution %<>% mutate(eventDate =
 #' #### source
 #' #### occurrenceRemarks
 #' #### datasetID
-#' 
+#' #### origin
+#'
+#' Add new `origin` field as suggested in [ias-dwc-proposal](https://github.com/qgroom/ias-dwc-proposal/blob/master/proposal.md#origin-new-term):
+distribution %<>% mutate(origin = raw_d_n)
+
+#' Strip `?` from the values:
+distribution %<>% mutate(origin = 
+  str_replace_all(origin, "\\?", "")
+)
+
+#' Map values:
+distribution %<>% mutate(origin = recode(origin,
+  "Cas." = "vagrant",
+  "Nat." = "introduced",
+  "Ext." = "",
+  "Inv." = "",
+  "Ext./Cas." = "",
+  .default = ""
+))
+
+#' Show mapped values:
+distribution %>%
+  select(raw_d_n, origin) %>%
+  group_by(raw_d_n, origin) %>%
+  summarize(records = n()) %>%
+  arrange(raw_d_n) %>%
+  kable()
+
 #' ### Post-processing
 #' 
 #' Remove the original columns:
@@ -408,7 +435,14 @@ write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE
 #' ### Pre-processing
 description <- raw_data
 
-#' Transpose the data for the description columns, including for NA values:
+#' ### Create an 
+
+#' ### Term mapping
+#' 
+#' Map the source data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml):
+
+
+#' Gather the data for the description columns, including for NA values:
 description %<>%
   gather(
     raw_description_type, raw_description_value,

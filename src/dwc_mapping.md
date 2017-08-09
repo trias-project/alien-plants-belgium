@@ -892,6 +892,62 @@ distribution %<>% mutate(eventDate =
 #### source
 #### occurrenceRemarks
 #### datasetID
+#### origin
+
+Add new `origin` field as suggested in [ias-dwc-proposal](https://github.com/qgroom/ias-dwc-proposal/blob/master/proposal.md#origin-new-term):
+
+
+```r
+distribution %<>% mutate(origin = raw_d_n)
+```
+
+Strip `?` from the values:
+
+
+```r
+distribution %<>% mutate(origin = 
+  str_replace_all(origin, "\\?", "")
+)
+```
+
+Map values:
+
+
+```r
+distribution %<>% mutate(origin = recode(origin,
+  "Cas." = "vagrant",
+  "Nat." = "introduced",
+  "Ext." = "",
+  "Inv." = "",
+  "Ext./Cas." = "",
+  .default = ""
+))
+```
+
+Show mapped values:
+
+
+```r
+distribution %>%
+  select(raw_d_n, origin) %>%
+  group_by(raw_d_n, origin) %>%
+  summarize(records = n()) %>%
+  arrange(raw_d_n) %>%
+  kable()
+```
+
+
+
+|raw_d_n   |origin     | records|
+|:---------|:----------|-------:|
+|Cas.      |vagrant    |    1792|
+|Cas.?     |vagrant    |      51|
+|Ext.      |           |      15|
+|Ext.?     |           |       4|
+|Ext./Cas. |           |       4|
+|Inv.      |           |      64|
+|Nat.      |introduced |     447|
+|Nat.?     |introduced |     100|
 
 ### Post-processing
 
@@ -916,14 +972,14 @@ kable(head(distribution))
 
 
 
-| id|locationID   |locality |countryCode |occurrenceStatus |establishmentMeans  |eventDate |
-|--:|:------------|:--------|:-----------|:----------------|:-------------------|:---------|
-|  1|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1998/2016 |
-|  2|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2016      |
-|  3|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1680/2017 |
-|  4|ISO3166-2:BE |Belgium  |BE          |present          |escape:food_bait    |2000/2017 |
-|  5|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1972/2015 |
-|  6|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2014/2015 |
+| id|locationID   |locality |countryCode |occurrenceStatus |establishmentMeans  |eventDate |origin     |
+|--:|:------------|:--------|:-----------|:----------------|:-------------------|:---------|:----------|
+|  1|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1998/2016 |vagrant    |
+|  2|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2016      |vagrant    |
+|  3|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1680/2017 |introduced |
+|  4|ISO3166-2:BE |Belgium  |BE          |present          |escape:food_bait    |2000/2017 |vagrant    |
+|  5|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1972/2015 |vagrant    |
+|  6|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2014/2015 |vagrant    |
 
 Save to CSV:
 
@@ -941,7 +997,11 @@ write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE
 description <- raw_data
 ```
 
-Transpose the data for the description columns, including for NA values:
+### Create an 
+### Term mapping
+
+Map the source data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml):
+Gather the data for the description columns, including for NA values:
 
 
 ```r
