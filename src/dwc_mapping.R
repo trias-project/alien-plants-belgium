@@ -324,14 +324,6 @@ distribution %<>% mutate(start_year =
   str_replace_all(start_year, "(\\?|ca. |<|>)", "")
 )
 
-#' Show reformatted values:
-distribution %>%
-  select(raw_fr, start_year) %>%
-  group_by(raw_fr, start_year) %>%
-  summarize(records = n()) %>%
-  filter(nchar(raw_fr) != 4) %>% # Only show values that were not YYYY
-  kable()
-
 #' Create `end_year` from `raw_mrr` (most recent record):
 distribution %<>% mutate(end_year = raw_mrr)
 
@@ -347,14 +339,17 @@ distribution %<>% mutate(end_year = recode(end_year,
   "N" = current_year)
 )
 
-#' If `last_year` is empty we leave it empty.
-#'
-#' Show reformatted values:
+#' Show reformatted values for both `raw_fr` and `raw_mrr`:
 distribution %>%
-  select(raw_mrr, end_year) %>%
-  group_by(raw_mrr, end_year) %>%
-  summarize(records = n()) %>%
-  filter(nchar(raw_mrr) != 4) %>% # Only show values that were not YYYY
+  select(raw_fr, start_year) %>%
+  rename(raw_year = raw_fr, formatted_year = start_year) %>%
+  union( # Union with raw_mrr. Will also remove duplicates
+    distribution %>%
+      select(raw_mrr, end_year) %>%
+      rename(raw_year = raw_mrr, formatted_year = end_year)
+  ) %>%
+  filter(nchar(raw_year) != 4) %>% # Don't show raw values that were already YYYY
+  arrange(raw_year) %>%
   kable()
 
 #'Check if any `start_year` fall after `end_year` (expected to be none):
