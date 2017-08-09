@@ -200,10 +200,8 @@ distribution %<>% mutate(occurrenceStatus =
 #' Create `pathway` from `raw_v_i`:
 distribution %<>% mutate(pathway = raw_v_i)
 
-#' Interpret `?` values as `unknown`:
-distribution %<>% mutate(pathway =
-  recode(pathway, "?" = "unknown")
-)
+#' Interpret `?` as empty (note that some raw values are already):
+distribution %<>% mutate(pathway = recode(pathway, "?" = ""))
 
 #' Separate pathway on `,` in 4 columns:
 # In case there are more than 4 values, these will be merged in pathway_4. 
@@ -295,14 +293,15 @@ distribution %<>% mutate(mapped_value = na_if(mapped_value, ""))
 #' Spread values back to columns:
 distribution %<>% spread(key, mapped_value)
 
-#' Create `establishmentMeans` columns where these values are concatentated with ` | `:
+#' Create `establishmentMeans` columns where these values are concatentated with ` | ` (omit `NA` values):
 distribution %<>% mutate(establishmentMeans = 
   paste(pathway_1, pathway_2, pathway_3, pathway_4, sep = " | ")              
 )
 
-#' Since the above `paste()` function does not provide an `rm.na` parameter, `NA` values will be listed as ` | NA`, so we strip those out:
-distribution %<>% mutate(establishmentMeans = 
-  str_replace_all(establishmentMeans, " \\| NA", "")
+#' Annoyingly the `paste()` function does not provide an `rm.na` parameter, so `NA` values will be included as ` | NA`. We can strip those out like this:
+distribution %<>% mutate(
+  establishmentMeans = str_replace_all(establishmentMeans, " \\| NA", ""), # Remove ' | NA'
+  establishmentMeans = recode(establishmentMeans, "NA" = "") # Remove NA at start of string
 )
 
 #' #### appendixCITES
@@ -334,8 +333,9 @@ distribution %<>% mutate(end_year =
 
 #' If `end_year` is `Ann.` or `N` use current year:
 current_year = format(Sys.Date(), "%Y")
-distribution %<>% mutate(end_year =
-  recode(end_year, "Ann." = current_year, "N" = current_year)
+distribution %<>% mutate(end_year = recode(end_year,
+  "Ann." = current_year,
+  "N" = current_year)
 )
 
 #' If `last_year` is empty we leave it empty.

@@ -369,13 +369,11 @@ Create `pathway` from `raw_v_i`:
 distribution %<>% mutate(pathway = raw_v_i)
 ```
 
-Interpret `?` values as `unknown`:
+Interpret `?` as empty (note that some raw values are already):
 
 
 ```r
-distribution %<>% mutate(pathway =
-  recode(pathway, "?" = "unknown")
-)
+distribution %<>% mutate(pathway = recode(pathway, "?" = ""))
 ```
 
 Separate pathway on `,` in 4 columns:
@@ -430,7 +428,7 @@ distribution %>%
 
 |value            | records|
 |:----------------|-------:|
-|                 |       1|
+|                 |     148|
 |...              |       3|
 |…                |       4|
 |agric.           |       3|
@@ -486,7 +484,6 @@ distribution %>%
 |Timber?          |       2|
 |Tourists         |       8|
 |Traffic?         |       4|
-|unknown          |     147|
 |Urban weed       |       9|
 |Waterfowl        |       2|
 |Waterfowl?       |      12|
@@ -559,7 +556,7 @@ distribution %>%
 
 |value           |mapped_value                 | records|
 |:---------------|:----------------------------|-------:|
-|                |                             |     393|
+|                |                             |     540|
 |agric.          |escape:agriculture           |      85|
 |bird seed       |contaminant:seed             |       1|
 |birdseed        |contaminant:seed             |      31|
@@ -585,7 +582,6 @@ distribution %>%
 |timber          |contaminant:timber           |      10|
 |tourists        |stowaway:people_luggage      |      10|
 |traffic         |                             |       4|
-|unknown         |unknown                      |     147|
 |urban weed      |stowaway                     |      10|
 |waterfowl       |contaminant:on_animals       |      14|
 |wool            |contaminant:on_animals       |     565|
@@ -612,7 +608,7 @@ Spread values back to columns:
 distribution %<>% spread(key, mapped_value)
 ```
 
-Create `establishmentMeans` columns where these values are concatentated with ` | `:
+Create `establishmentMeans` columns where these values are concatentated with ` | ` (omit `NA` values):
 
 
 ```r
@@ -621,12 +617,13 @@ distribution %<>% mutate(establishmentMeans =
 )
 ```
 
-Since the above `paste()` function does not provide an `rm.na` parameter, `NA` values will be listed as ` | NA`, so we strip those out:
+Annoyingly the `paste()` function does not provide an `rm.na` parameter, so `NA` values will be included as ` | NA`. We can strip those out like this:
 
 
 ```r
-distribution %<>% mutate(establishmentMeans = 
-  str_replace_all(establishmentMeans, " \\| NA", "")
+distribution %<>% mutate(
+  establishmentMeans = str_replace_all(establishmentMeans, " \\| NA", ""), # Remove ' | NA'
+  establishmentMeans = recode(establishmentMeans, "NA" = "") # Remove NA at start of string
 )
 ```
 
@@ -747,8 +744,9 @@ If `end_year` is `Ann.` or `N` use current year:
 
 ```r
 current_year = format(Sys.Date(), "%Y")
-distribution %<>% mutate(end_year =
-  recode(end_year, "Ann." = current_year, "N" = current_year)
+distribution %<>% mutate(end_year = recode(end_year,
+  "Ann." = current_year,
+  "N" = current_year)
 )
 ```
 
