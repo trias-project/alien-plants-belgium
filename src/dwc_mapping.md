@@ -510,35 +510,35 @@ Map values:
 
 ```r
 distribution %<>% mutate(mapped_value = recode(value, 
-  "agric." = "escape > agriculture (including biofuel feedstocks)",
-  "bird seed" = "contaminant > seed contaminant",
-  "birdseed" = "contaminant > seed contaminant",
+  "agric." = "escape:agriculture",
+  "bird seed" = "contaminant:seed",
+  "birdseed" = "contaminant:seed",
   "bulbs" = "",
-  "coconut mats" = "contaminant > seed contaminant",
+  "coconut mats" = "contaminant:seed",
   "fish" = "",
-  "food refuse" = "escape > live food and live bait",
-  "grain" = "contaminant > seed contaminant",
-  "grain (rice)" = "contaminant > seed contaminant",
-  "grass seed" = "contaminant > seed contaminant",
+  "food refuse" = "escape:food_bait",
+  "grain" = "contaminant:seed",
+  "grain (rice)" = "contaminant:seed",
+  "grass seed" = "contaminant:seed",
   "hay" = "",
-  "hort" = "escape > horticulture",
-  "hort." = "escape > horticulture",
+  "hort" = "escape:horticulture",
+  "hort." = "escape:horticulture",
   "hybridization" = "",
   "military troops" = "",
-  "nurseries" = "contaminant > contaminant nursery material",
-  "ore" = "contaminant > transportation of habitat material (soil, vegetation,…)",
-  "pines" = "contaminant > contaminant on plants (except parasites, species transported by host/vector)",
+  "nurseries" = "contaminant:nursery",
+  "ore" = "contaminant:habitat_material",
+  "pines" = "contaminant:on_plants",
   "rice" = "",
   "salt" = "",
-  "seeds" = "contaminant > seed contaminant",
-  "timber" = "contaminant > timber trade",
-  "tourists" = "stowaway > people and their luggage/equipment (in particular tourism)",
+  "seeds" = "contaminant:seed",
+  "timber" = "contaminant:timber",
+  "tourists" = "stowaway:people_luggage",
   "traffic" = "",
   "unknown" = "unknown",
   "urban weed" = "stowaway",
-  "waterfowl" = "contaminant > contaminant on animals (except parasites, species transported by host/vector)",
-  "wool" = "contaminant > contaminant on animals (except parasites, species transported by host/vector)",
-  "wool alien" = "contaminant > contaminant on animals (except parasites, species transported by host/vector)",
+  "waterfowl" = "contaminant:on_animals",
+  "wool" = "contaminant:on_animals",
+  "wool alien" = "contaminant:on_animals",
   .default = ""
 ))
 ```
@@ -557,39 +557,39 @@ distribution %>%
 
 
 
-|value           |mapped_value                                                                                | records|
-|:---------------|:-------------------------------------------------------------------------------------------|-------:|
-|                |                                                                                            |     393|
-|agric.          |escape > agriculture (including biofuel feedstocks)                                         |      85|
-|bird seed       |contaminant > seed contaminant                                                              |       1|
-|birdseed        |contaminant > seed contaminant                                                              |      31|
-|bulbs           |                                                                                            |       1|
-|coconut mats    |contaminant > seed contaminant                                                              |       1|
-|etc.            |                                                                                            |       1|
-|fish            |                                                                                            |       3|
-|food refuse     |escape > live food and live bait                                                            |      21|
-|grain           |contaminant > seed contaminant                                                              |     540|
-|grain (rice)    |contaminant > seed contaminant                                                              |       3|
-|grass seed      |contaminant > seed contaminant                                                              |       8|
-|hay             |                                                                                            |       1|
-|hort            |escape > horticulture                                                                       |       2|
-|hort.           |escape > horticulture                                                                       |    1082|
-|hybridization   |                                                                                            |      48|
-|military troops |                                                                                            |       9|
-|nurseries       |contaminant > contaminant nursery material                                                  |      19|
-|ore             |contaminant > transportation of habitat material (soil, vegetation,…)                       |      87|
-|pines           |contaminant > contaminant on plants (except parasites, species transported by host/vector)  |       4|
-|rice            |                                                                                            |       1|
-|salt            |                                                                                            |       2|
-|seeds           |contaminant > seed contaminant                                                              |      64|
-|timber          |contaminant > timber trade                                                                  |      10|
-|tourists        |stowaway > people and their luggage/equipment (in particular tourism)                       |      10|
-|traffic         |                                                                                            |       4|
-|unknown         |unknown                                                                                     |     147|
-|urban weed      |stowaway                                                                                    |      10|
-|waterfowl       |contaminant > contaminant on animals (except parasites, species transported by host/vector) |      14|
-|wool            |contaminant > contaminant on animals (except parasites, species transported by host/vector) |     565|
-|wool alien      |contaminant > contaminant on animals (except parasites, species transported by host/vector) |       1|
+|value           |mapped_value                 | records|
+|:---------------|:----------------------------|-------:|
+|                |                             |     393|
+|agric.          |escape:agriculture           |      85|
+|bird seed       |contaminant:seed             |       1|
+|birdseed        |contaminant:seed             |      31|
+|bulbs           |                             |       1|
+|coconut mats    |contaminant:seed             |       1|
+|etc.            |                             |       1|
+|fish            |                             |       3|
+|food refuse     |escape:food_bait             |      21|
+|grain           |contaminant:seed             |     540|
+|grain (rice)    |contaminant:seed             |       3|
+|grass seed      |contaminant:seed             |       8|
+|hay             |                             |       1|
+|hort            |escape:horticulture          |       2|
+|hort.           |escape:horticulture          |    1082|
+|hybridization   |                             |      48|
+|military troops |                             |       9|
+|nurseries       |contaminant:nursery          |      19|
+|ore             |contaminant:habitat_material |      87|
+|pines           |contaminant:on_plants        |       4|
+|rice            |                             |       1|
+|salt            |                             |       2|
+|seeds           |contaminant:seed             |      64|
+|timber          |contaminant:timber           |      10|
+|tourists        |stowaway:people_luggage      |      10|
+|traffic         |                             |       4|
+|unknown         |unknown                      |     147|
+|urban weed      |stowaway                     |      10|
+|waterfowl       |contaminant:on_animals       |      14|
+|wool            |contaminant:on_animals       |     565|
+|wool alien      |contaminant:on_animals       |       1|
 
 Drop `value` column:
 
@@ -885,14 +885,14 @@ kable(head(distribution))
 
 
 
-| id|locationID   |locality |countryCode |occurrenceStatus |establishmentMeans               |eventDate |
-|--:|:------------|:--------|:-----------|:----------------|:--------------------------------|:---------|
-|  1|ISO3166-2:BE |Belgium  |BE          |present          |escape > horticulture            |1998/2016 |
-|  2|ISO3166-2:BE |Belgium  |BE          |present          |escape > horticulture            |2016      |
-|  3|ISO3166-2:BE |Belgium  |BE          |present          |escape > horticulture            |1680/2017 |
-|  4|ISO3166-2:BE |Belgium  |BE          |present          |escape > live food and live bait |2000/2017 |
-|  5|ISO3166-2:BE |Belgium  |BE          |present          |escape > horticulture            |1972/2015 |
-|  6|ISO3166-2:BE |Belgium  |BE          |present          |escape > horticulture            |2014/2015 |
+| id|locationID   |locality |countryCode |occurrenceStatus |establishmentMeans  |eventDate |
+|--:|:------------|:--------|:-----------|:----------------|:-------------------|:---------|
+|  1|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1998/2016 |
+|  2|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2016      |
+|  3|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1680/2017 |
+|  4|ISO3166-2:BE |Belgium  |BE          |present          |escape:food_bait    |2000/2017 |
+|  5|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1972/2015 |
+|  6|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2014/2015 |
 
 Save to CSV:
 
