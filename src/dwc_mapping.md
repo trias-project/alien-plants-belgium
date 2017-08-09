@@ -837,19 +837,7 @@ distribution %<>% mutate(eventDate =
 #### startDayOfYear
 #### endDayOfYear
 #### source
-
-
-```r
-# Add?
-```
-
 #### occurrenceRemarks
-
-
-```r
-# Add?
-```
-
 #### datasetID
 
 ### Post-processing
