@@ -130,6 +130,17 @@ Map the source data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_201
 taxon %<>% mutate(id = raw_id)
 ```
 
+Number of duplicates: (should be 0):
+
+
+```r
+anyDuplicated(taxon[["id"]])
+```
+
+```
+## [1] 0
+```
+
 #### modified
 #### language
 
@@ -197,6 +208,17 @@ taxon %<>% mutate(taxonID = raw_id)
 taxon %<>% mutate(scientificName = raw_taxon)
 ```
 
+Number of unique scientific names:
+
+
+```r
+length(unique(taxon[["scientificName"]]))
+```
+
+```
+## [1] 2481
+```
+
 #### acceptedNameUsage
 #### parentNameUsage
 #### originalNameUsage
@@ -219,6 +241,17 @@ taxon %<>% mutate(kingdom = "Plantae")
 
 ```r
 taxon %<>% mutate(family = raw_family)
+```
+
+Number of unique families:
+
+
+```r
+length(unique(taxon[["family"]]))
+```
+
+```
+## [1] 152
 ```
 
 #### genus

@@ -71,6 +71,9 @@ taxon <- raw_data
 #' #### id
 taxon %<>% mutate(id = raw_id)
 
+#' Number of duplicates: (should be 0):
+anyDuplicated(taxon[["id"]])
+
 #' #### modified
 #' #### language
 taxon %<>% mutate(language = "en")
@@ -106,6 +109,9 @@ taxon %<>% mutate(taxonID = raw_id)
 #' #### scientificName
 taxon %<>% mutate(scientificName = raw_taxon)
 
+#' Number of unique scientific names:
+length(unique(taxon[["scientificName"]]))
+
 #' #### acceptedNameUsage
 #' #### parentNameUsage
 #' #### originalNameUsage
@@ -121,6 +127,9 @@ taxon %<>% mutate(kingdom = "Plantae")
 #' #### order
 #' #### family
 taxon %<>% mutate(family = raw_family)
+
+#' Number of unique families:
+length(unique(taxon[["family"]]))
 
 #' #### genus
 #' #### subgenus
