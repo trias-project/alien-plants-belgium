@@ -109,8 +109,12 @@ taxon %<>% mutate(scientificNameID = raw_scientificnameid)
 #' #### scientificName
 taxon %<>% mutate(scientificName = raw_taxon)
 
-#' Number of unique scientific names:
-length(unique(taxon[["scientificName"]]))
+#' Number of records, `taxonID`s, `scientificNames`, and `scientificNameID`s (expected to be the same):
+nrow(taxon)
+n_distinct(taxon[["taxonID"]], na.rm = TRUE)
+n_distinct(taxon[["scientificName"]], na.rm = TRUE)
+n_distinct(taxon[["scientificNameID"]], na.rm = TRUE) # Can contain NAs
+n_distinct(taxon[["scientificNameID"]], na.rm = TRUE) + sum(is.na(taxon[["scientificNameID"]])) # Unique + NA
 
 #' #### acceptedNameUsage
 #' #### parentNameUsage
@@ -129,7 +133,7 @@ taxon %<>% mutate(kingdom = "Plantae")
 taxon %<>% mutate(family = raw_family)
 
 #' Number of unique families:
-length(unique(taxon[["family"]]))
+n_distinct(taxon[["family"]])
 
 #' #### genus
 #' #### subgenus

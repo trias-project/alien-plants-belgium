@@ -208,11 +208,43 @@ taxon %<>% mutate(scientificNameID = raw_scientificnameid)
 taxon %<>% mutate(scientificName = raw_taxon)
 ```
 
-Number of unique scientific names:
+Number of records, `taxonID`s, `scientificNames`, and `scientificNameID`s (expected to be the same):
 
 
 ```r
-length(unique(taxon[["scientificName"]]))
+nrow(taxon)
+```
+
+```
+## [1] 2481
+```
+
+```r
+n_distinct(taxon[["taxonID"]], na.rm = TRUE)
+```
+
+```
+## [1] 2481
+```
+
+```r
+n_distinct(taxon[["scientificName"]], na.rm = TRUE)
+```
+
+```
+## [1] 2481
+```
+
+```r
+n_distinct(taxon[["scientificNameID"]], na.rm = TRUE) # Can contain NAs
+```
+
+```
+## [1] 1707
+```
+
+```r
+n_distinct(taxon[["scientificNameID"]], na.rm = TRUE) + sum(is.na(taxon[["scientificNameID"]])) # Unique + NA
 ```
 
 ```
@@ -247,7 +279,7 @@ Number of unique families:
 
 
 ```r
-length(unique(taxon[["family"]]))
+n_distinct(taxon[["family"]])
 ```
 
 ```
