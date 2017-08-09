@@ -219,10 +219,10 @@ distribution %<>% mutate(occurrenceStatus =
 #' Create `pathway` from `raw_v_i`:
 distribution %<>% mutate(pathway = raw_v_i)
 
-#' Interpret `?` as empty (note that some raw values are already):
+#' Interpret `?` as empty (note that some raw values are already empty):
 distribution %<>% mutate(pathway = recode(pathway, "?" = ""))
 
-#' Separate pathway on `,` in 4 columns:
+#' Separate `pathway` on `,` in 4 columns:
 # In case there are more than 4 values, these will be merged in pathway_4. 
 # The dataset currently contains no more than 3 values per record, so pathway_4
 # will be empty.
@@ -386,33 +386,6 @@ distribution %<>% mutate(eventDate =
 #' #### source
 #' #### occurrenceRemarks
 #' #### datasetID
-#' #### origin
-#'
-#' Add new `origin` field as suggested in [ias-dwc-proposal](https://github.com/qgroom/ias-dwc-proposal/blob/master/proposal.md#origin-new-term):
-distribution %<>% mutate(origin = raw_d_n)
-
-#' Strip `?` from the values:
-distribution %<>% mutate(origin = 
-  str_replace_all(origin, "\\?", "")
-)
-
-#' Map values:
-distribution %<>% mutate(origin = recode(origin,
-  "Cas." = "vagrant",
-  "Nat." = "introduced",
-  "Ext." = "",
-  "Inv." = "",
-  "Ext./Cas." = "",
-  .default = ""
-))
-
-#' Show mapped values:
-distribution %>%
-  select(raw_d_n, origin) %>%
-  group_by(raw_d_n, origin) %>%
-  summarize(records = n()) %>%
-  arrange(raw_d_n) %>%
-  kable()
 
 #' ### Post-processing
 #' 
