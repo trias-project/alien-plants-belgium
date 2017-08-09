@@ -194,7 +194,116 @@ distribution %<>% mutate(occurrenceStatus =
 
 #' #### threatStatus
 #' #### establishmentMeans
-# To be added
+#'
+#' `establishmentMeans` is based on `raw_v_i`, which contains a list of introductions pathways (e.g. `Agric., wool`). We'll separate, clean, map and combine these values.
+#' 
+#' Create `pathway` from `raw_v_i`:
+distribution %<>% mutate(pathway = raw_v_i)
+
+#' Interpret `?` values as `unknown`:
+distribution %<>% mutate(pathway =
+  recode(pathway, "?" = "unknown")
+)
+
+#' Separate pathway on `,` in 4 columns:
+# In case there are more than 4 values, these will be merged in pathway_4. 
+# The dataset currently contains no more than 3 values per record, so pathway_4
+# will be empty.
+distribution %<>% separate(
+  pathway,
+  into = c("pathway_1", "pathway_2", "pathway_3", "pathway_4"),
+  sep = ",",
+  remove = TRUE,
+  convert = FALSE,
+  extra = "merge"
+)
+
+#' Gather pathways in a key and value column:
+distribution %<>% gather(
+  key, value,
+  pathway_1, pathway_2, pathway_3, pathway_4,
+  na.rm = TRUE,
+  convert = FALSE
+)
+
+#' Sort on ID to see pathways in context for each record:
+distribution %<>% arrange(id)
+
+#' Show unique values:
+distribution %>%
+  select(value) %>%
+  group_by(value) %>%
+  summarize(records = n()) %>%
+  arrange(value) %>%
+  kable()
+
+#' Strip `?`, `...` from values, convert to lowercase, and clean whitespace:
+distribution %<>% mutate(
+  value = str_replace_all(value, "\\?|…|\\.{3}", ""),
+  value = str_to_lower(value),
+  value = str_trim(value)
+)
+
+#' Map values:
+distribution %<>% mutate(mapped_value = recode(value, 
+  "agric." = "escape > agriculture (including biofuel feedstocks)",
+  "bird seed" = "contaminant > seed contaminant",
+  "birdseed" = "contaminant > seed contaminant",
+  "bulbs" = "",
+  "coconut mats" = "contaminant > seed contaminant",
+  "fish" = "",
+  "food refuse" = "escape > live food and live bait",
+  "grain" = "contaminant > seed contaminant",
+  "grain (rice)" = "contaminant > seed contaminant",
+  "grass seed" = "contaminant > seed contaminant",
+  "hay" = "",
+  "hort" = "escape > horticulture",
+  "hort." = "escape > horticulture",
+  "hybridization" = "",
+  "military troops" = "",
+  "nurseries" = "contaminant > contaminant nursery material",
+  "ore" = "contaminant > transportation of habitat material (soil, vegetation,…)",
+  "pines" = "contaminant > contaminant on plants (except parasites, species transported by host/vector)",
+  "rice" = "",
+  "salt" = "",
+  "seeds" = "contaminant > seed contaminant",
+  "timber" = "contaminant > timber trade",
+  "tourists" = "stowaway > people and their luggage/equipment (in particular tourism)",
+  "traffic" = "",
+  "unknown" = "unknown",
+  "urban weed" = "stowaway",
+  "waterfowl" = "contaminant > contaminant on animals (except parasites, species transported by host/vector)",
+  "wool" = "contaminant > contaminant on animals (except parasites, species transported by host/vector)",
+  "wool alien" = "contaminant > contaminant on animals (except parasites, species transported by host/vector)",
+  .default = ""
+))
+
+#' Show mapped values:
+distribution %>%
+  select(value, mapped_value) %>%
+  group_by(value, mapped_value) %>%
+  summarize(records = n()) %>%
+  arrange(value) %>%
+  kable()
+
+#' Drop `value` column:
+distribution %<>% select(-value)
+
+#' Convert empty values as `NA`:
+distribution %<>% mutate(mapped_value = na_if(mapped_value, ""))
+
+#' Spread values back to columns:
+distribution %<>% spread(key, mapped_value)
+
+#' Create `establishmentMeans` columns where these values are concatentated with ` | `:
+distribution %<>% mutate(establishmentMeans = 
+  paste(pathway_1, pathway_2, pathway_3, pathway_4, sep = " | ")              
+)
+
+#' Since the above `paste()` function does not provide an `rm.na` parameter, `NA` values will be listed as ` | NA`, so we strip those out:
+distribution %<>% mutate(establishmentMeans = 
+  str_replace_all(establishmentMeans, " \\| NA", "")
+)
 
 #' #### appendixCITES
 #' #### eventDate
@@ -273,7 +382,12 @@ distribution %<>% mutate(eventDate =
 #' ### Post-processing
 #' 
 #' Remove the original columns:
-distribution %<>% select(-one_of(raw_colnames), -presence_be, -start_year, -end_year)
+distribution %<>% select(
+  -one_of(raw_colnames),
+  -presence_be,
+  -pathway_1, -pathway_2, -pathway_3, -pathway_4,
+  -start_year, -end_year
+)
 
 #' Preview data:
 kable(head(distribution))

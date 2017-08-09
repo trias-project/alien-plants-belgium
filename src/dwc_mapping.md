@@ -2,7 +2,7 @@
 
 Peter Desmet & Quentin Groom
 
-2017-08-08
+2017-08-09
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -360,9 +360,274 @@ distribution %<>% mutate(occurrenceStatus =
 #### threatStatus
 #### establishmentMeans
 
+`establishmentMeans` is based on `raw_v_i`, which contains a list of introductions pathways (e.g. `Agric., wool`). We'll separate, clean, map and combine these values.
+
+Create `pathway` from `raw_v_i`:
+
 
 ```r
-# To be added
+distribution %<>% mutate(pathway = raw_v_i)
+```
+
+Interpret `?` values as `unknown`:
+
+
+```r
+distribution %<>% mutate(pathway =
+  recode(pathway, "?" = "unknown")
+)
+```
+
+Separate pathway on `,` in 4 columns:
+
+
+```r
+# In case there are more than 4 values, these will be merged in pathway_4. 
+# The dataset currently contains no more than 3 values per record, so pathway_4
+# will be empty.
+distribution %<>% separate(
+  pathway,
+  into = c("pathway_1", "pathway_2", "pathway_3", "pathway_4"),
+  sep = ",",
+  remove = TRUE,
+  convert = FALSE,
+  extra = "merge"
+)
+```
+
+Gather pathways in a key and value column:
+
+
+```r
+distribution %<>% gather(
+  key, value,
+  pathway_1, pathway_2, pathway_3, pathway_4,
+  na.rm = TRUE,
+  convert = FALSE
+)
+```
+
+Sort on ID to see pathways in context for each record:
+
+
+```r
+distribution %<>% arrange(id)
+```
+
+Show unique values:
+
+
+```r
+distribution %>%
+  select(value) %>%
+  group_by(value) %>%
+  summarize(records = n()) %>%
+  arrange(value) %>%
+  kable()
+```
+
+
+
+|value            | records|
+|:----------------|-------:|
+|                 |       1|
+|...              |       3|
+|…                |       4|
+|agric.           |       3|
+|birdseed         |       3|
+|etc.             |       1|
+|grain            |      61|
+|grain?           |       4|
+|hort.            |       9|
+|hort.?           |       4|
+|nurseries        |       1|
+|ore              |      11|
+|Ore              |       1|
+|ore?             |       1|
+|salt             |       2|
+|seeds            |      19|
+|timber?          |       1|
+|tourists         |       2|
+|urban weed       |       1|
+|wool             |     174|
+|...              |      11|
+|…                |     374|
+|Agric.           |      82|
+|Bird seed        |       1|
+|Birdseed         |      26|
+|Birdseed?        |       2|
+|Bulbs?           |       1|
+|Coconut mats     |       1|
+|Fish             |       3|
+|Food refuse      |      20|
+|Food refuse?     |       1|
+|Grain            |     433|
+|Grain (rice)     |       3|
+|Grain?           |      42|
+|Grass seed       |       7|
+|Grass seed?      |       1|
+|Hay?             |       1|
+|Hort             |       2|
+|hort.            |       1|
+|Hort.            |    1021|
+|Hort.?           |      47|
+|Hybridization    |      48|
+|Military troops  |       1|
+|Military troops? |       8|
+|Nurseries        |      16|
+|Nurseries?       |       2|
+|Ore              |      42|
+|Ore?             |      32|
+|Pines            |       4|
+|Rice             |       1|
+|Seeds            |      36|
+|Seeds?           |       9|
+|Timber           |       7|
+|Timber?          |       2|
+|Tourists         |       8|
+|Traffic?         |       4|
+|unknown          |     147|
+|Urban weed       |       9|
+|Waterfowl        |       2|
+|Waterfowl?       |      12|
+|Wool             |     388|
+|Wool alien       |       1|
+|Wool?            |       3|
+
+Strip `?`, `...` from values, convert to lowercase, and clean whitespace:
+
+
+```r
+distribution %<>% mutate(
+  value = str_replace_all(value, "\\?|…|\\.{3}", ""),
+  value = str_to_lower(value),
+  value = str_trim(value)
+)
+```
+
+Map values:
+
+
+```r
+distribution %<>% mutate(mapped_value = recode(value, 
+  "agric." = "escape > agriculture (including biofuel feedstocks)",
+  "bird seed" = "contaminant > seed contaminant",
+  "birdseed" = "contaminant > seed contaminant",
+  "bulbs" = "",
+  "coconut mats" = "contaminant > seed contaminant",
+  "fish" = "",
+  "food refuse" = "escape > live food and live bait",
+  "grain" = "contaminant > seed contaminant",
+  "grain (rice)" = "contaminant > seed contaminant",
+  "grass seed" = "contaminant > seed contaminant",
+  "hay" = "",
+  "hort" = "escape > horticulture",
+  "hort." = "escape > horticulture",
+  "hybridization" = "",
+  "military troops" = "",
+  "nurseries" = "contaminant > contaminant nursery material",
+  "ore" = "contaminant > transportation of habitat material (soil, vegetation,…)",
+  "pines" = "contaminant > contaminant on plants (except parasites, species transported by host/vector)",
+  "rice" = "",
+  "salt" = "",
+  "seeds" = "contaminant > seed contaminant",
+  "timber" = "contaminant > timber trade",
+  "tourists" = "stowaway > people and their luggage/equipment (in particular tourism)",
+  "traffic" = "",
+  "unknown" = "unknown",
+  "urban weed" = "stowaway",
+  "waterfowl" = "contaminant > contaminant on animals (except parasites, species transported by host/vector)",
+  "wool" = "contaminant > contaminant on animals (except parasites, species transported by host/vector)",
+  "wool alien" = "contaminant > contaminant on animals (except parasites, species transported by host/vector)",
+  .default = ""
+))
+```
+
+Show mapped values:
+
+
+```r
+distribution %>%
+  select(value, mapped_value) %>%
+  group_by(value, mapped_value) %>%
+  summarize(records = n()) %>%
+  arrange(value) %>%
+  kable()
+```
+
+
+
+|value           |mapped_value                                                                                | records|
+|:---------------|:-------------------------------------------------------------------------------------------|-------:|
+|                |                                                                                            |     393|
+|agric.          |escape > agriculture (including biofuel feedstocks)                                         |      85|
+|bird seed       |contaminant > seed contaminant                                                              |       1|
+|birdseed        |contaminant > seed contaminant                                                              |      31|
+|bulbs           |                                                                                            |       1|
+|coconut mats    |contaminant > seed contaminant                                                              |       1|
+|etc.            |                                                                                            |       1|
+|fish            |                                                                                            |       3|
+|food refuse     |escape > live food and live bait                                                            |      21|
+|grain           |contaminant > seed contaminant                                                              |     540|
+|grain (rice)    |contaminant > seed contaminant                                                              |       3|
+|grass seed      |contaminant > seed contaminant                                                              |       8|
+|hay             |                                                                                            |       1|
+|hort            |escape > horticulture                                                                       |       2|
+|hort.           |escape > horticulture                                                                       |    1082|
+|hybridization   |                                                                                            |      48|
+|military troops |                                                                                            |       9|
+|nurseries       |contaminant > contaminant nursery material                                                  |      19|
+|ore             |contaminant > transportation of habitat material (soil, vegetation,…)                       |      87|
+|pines           |contaminant > contaminant on plants (except parasites, species transported by host/vector)  |       4|
+|rice            |                                                                                            |       1|
+|salt            |                                                                                            |       2|
+|seeds           |contaminant > seed contaminant                                                              |      64|
+|timber          |contaminant > timber trade                                                                  |      10|
+|tourists        |stowaway > people and their luggage/equipment (in particular tourism)                       |      10|
+|traffic         |                                                                                            |       4|
+|unknown         |unknown                                                                                     |     147|
+|urban weed      |stowaway                                                                                    |      10|
+|waterfowl       |contaminant > contaminant on animals (except parasites, species transported by host/vector) |      14|
+|wool            |contaminant > contaminant on animals (except parasites, species transported by host/vector) |     565|
+|wool alien      |contaminant > contaminant on animals (except parasites, species transported by host/vector) |       1|
+
+Drop `value` column:
+
+
+```r
+distribution %<>% select(-value)
+```
+
+Convert empty values as `NA`:
+
+
+```r
+distribution %<>% mutate(mapped_value = na_if(mapped_value, ""))
+```
+
+Spread values back to columns:
+
+
+```r
+distribution %<>% spread(key, mapped_value)
+```
+
+Create `establishmentMeans` columns where these values are concatentated with ` | `:
+
+
+```r
+distribution %<>% mutate(establishmentMeans = 
+  paste(pathway_1, pathway_2, pathway_3, pathway_4, sep = " | ")              
+)
+```
+
+Since the above `paste()` function does not provide an `rm.na` parameter, `NA` values will be listed as ` | NA`, so we strip those out:
+
+
+```r
+distribution %<>% mutate(establishmentMeans = 
+  str_replace_all(establishmentMeans, " \\| NA", "")
+)
 ```
 
 #### appendixCITES
@@ -400,7 +665,7 @@ distribution %>%
 
 |raw_fr    |start_year | records|
 |:---------|:----------|-------:|
-|?         |           |      53|
+|?         |           |      52|
 |<1800     |1800       |      16|
 |<1812     |1812       |       1|
 |<1824     |1824       |       1|
@@ -505,7 +770,7 @@ distribution %>%
 
 |raw_mrr |end_year | records|
 |:-------|:--------|-------:|
-|?       |         |      23|
+|?       |         |      22|
 |<1812   |1812     |       1|
 |<1827   |1827     |       1|
 |<1835   |1835     |       3|
@@ -603,7 +868,12 @@ Remove the original columns:
 
 
 ```r
-distribution %<>% select(-one_of(raw_colnames), -presence_be, -start_year, -end_year)
+distribution %<>% select(
+  -one_of(raw_colnames),
+  -presence_be,
+  -pathway_1, -pathway_2, -pathway_3, -pathway_4,
+  -start_year, -end_year
+)
 ```
 
 Preview data:
@@ -615,14 +885,14 @@ kable(head(distribution))
 
 
 
-| id|locationID   |locality |countryCode |occurrenceStatus |eventDate |
-|--:|:------------|:--------|:-----------|:----------------|:---------|
-|  1|ISO3166-2:BE |Belgium  |BE          |present          |1998/2016 |
-|  2|ISO3166-2:BE |Belgium  |BE          |present          |2016      |
-|  3|ISO3166-2:BE |Belgium  |BE          |present          |1680/2017 |
-|  4|ISO3166-2:BE |Belgium  |BE          |present          |2000/2017 |
-|  5|ISO3166-2:BE |Belgium  |BE          |present          |1972/2015 |
-|  6|ISO3166-2:BE |Belgium  |BE          |present          |2014/2015 |
+| id|locationID   |locality |countryCode |occurrenceStatus |establishmentMeans               |eventDate |
+|--:|:------------|:--------|:-----------|:----------------|:--------------------------------|:---------|
+|  1|ISO3166-2:BE |Belgium  |BE          |present          |escape > horticulture            |1998/2016 |
+|  2|ISO3166-2:BE |Belgium  |BE          |present          |escape > horticulture            |2016      |
+|  3|ISO3166-2:BE |Belgium  |BE          |present          |escape > horticulture            |1680/2017 |
+|  4|ISO3166-2:BE |Belgium  |BE          |present          |escape > live food and live bait |2000/2017 |
+|  5|ISO3166-2:BE |Belgium  |BE          |present          |escape > horticulture            |1972/2015 |
+|  6|ISO3166-2:BE |Belgium  |BE          |present          |escape > horticulture            |2014/2015 |
 
 Save to CSV:
 
