@@ -450,79 +450,77 @@ Show unique values:
 
 ```r
 distribution %>%
-  select(value) %>%
-  group_by(value) %>%
-  summarize(records = n()) %>%
+  distinct(value) %>%
   arrange(value) %>%
   kable()
 ```
 
 
 
-|value            | records|
-|:----------------|-------:|
-|                 |     148|
-|...              |       3|
-|…                |       4|
-|agric.           |       3|
-|birdseed         |       3|
-|etc.             |       1|
-|grain            |      61|
-|grain?           |       4|
-|hort.            |       9|
-|hort.?           |       4|
-|nurseries        |       1|
-|ore              |      11|
-|Ore              |       1|
-|ore?             |       1|
-|salt             |       2|
-|seeds            |      19|
-|timber?          |       1|
-|tourists         |       2|
-|urban weed       |       1|
-|wool             |     174|
-|...              |      11|
-|…                |     374|
-|Agric.           |      82|
-|Bird seed        |       1|
-|Birdseed         |      26|
-|Birdseed?        |       2|
-|Bulbs?           |       1|
-|Coconut mats     |       1|
-|Fish             |       3|
-|Food refuse      |      20|
-|Food refuse?     |       1|
-|Grain            |     433|
-|Grain (rice)     |       3|
-|Grain?           |      42|
-|Grass seed       |       7|
-|Grass seed?      |       1|
-|Hay?             |       1|
-|Hort             |       2|
-|hort.            |       1|
-|Hort.            |    1021|
-|Hort.?           |      47|
-|Hybridization    |      48|
-|Military troops  |       1|
-|Military troops? |       8|
-|Nurseries        |      16|
-|Nurseries?       |       2|
-|Ore              |      42|
-|Ore?             |      32|
-|Pines            |       4|
-|Rice             |       1|
-|Seeds            |      36|
-|Seeds?           |       9|
-|Timber           |       7|
-|Timber?          |       2|
-|Tourists         |       8|
-|Traffic?         |       4|
-|Urban weed       |       9|
-|Waterfowl        |       2|
-|Waterfowl?       |      12|
-|Wool             |     388|
-|Wool alien       |       1|
-|Wool?            |       3|
+|value            |
+|:----------------|
+|                 |
+|...              |
+|…                |
+|agric.           |
+|birdseed         |
+|etc.             |
+|grain            |
+|grain?           |
+|hort.            |
+|hort.?           |
+|nurseries        |
+|ore              |
+|Ore              |
+|ore?             |
+|salt             |
+|seeds            |
+|timber?          |
+|tourists         |
+|urban weed       |
+|wool             |
+|...              |
+|…                |
+|Agric.           |
+|Bird seed        |
+|Birdseed         |
+|Birdseed?        |
+|Bulbs?           |
+|Coconut mats     |
+|Fish             |
+|Food refuse      |
+|Food refuse?     |
+|Grain            |
+|Grain (rice)     |
+|Grain?           |
+|Grass seed       |
+|Grass seed?      |
+|Hay?             |
+|Hort             |
+|hort.            |
+|Hort.            |
+|Hort.?           |
+|Hybridization    |
+|Military troops  |
+|Military troops? |
+|Nurseries        |
+|Nurseries?       |
+|Ore              |
+|Ore?             |
+|Pines            |
+|Rice             |
+|Seeds            |
+|Seeds?           |
+|Timber           |
+|Timber?          |
+|Tourists         |
+|Traffic?         |
+|Urban weed       |
+|Waterfowl        |
+|Waterfowl?       |
+|Wool             |
+|Wool alien       |
+|Wool?            |
 
 Strip `?`, `...` from values, convert to lowercase, and clean whitespace:
 

@@ -238,9 +238,7 @@ distribution %<>% arrange(id)
 
 #' Show unique values:
 distribution %>%
-  select(value) %>%
-  group_by(value) %>%
-  summarize(records = n()) %>%
+  distinct(value) %>%
   arrange(value) %>%
   kable()
 
