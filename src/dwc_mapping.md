@@ -1110,15 +1110,8 @@ Strip `?` from values and clean whitespace:
 ```r
 native_range %<>% mutate(
   value = str_replace_all(value, "\\?", ""),
-  value = str_trim(value))
+  value = str_trim(value)
 )
-```
-
-```
-## Error: <text>:4:1: unexpected ')'
-## 3:   value = str_trim(value))
-## 4: )
-##    ^
 ```
 
 Map values:
@@ -1157,21 +1150,20 @@ native_range %>%
 
 
 
-|value  |mapped_value      | records|
-|:------|:-----------------|-------:|
-|AF     |Africa            |     630|
-|AM     |pan-American      |      92|
-|AS     |Asia              |      71|
-|AS-Te  |temperate Asia    |    1042|
-|AS-Te? |                  |       2|
-|AS-Tr  |tropical Asia     |      12|
-|AUS    |Australasia       |     117|
-|Cult.  |cultivated origin |      88|
-|E      |Europe            |    1111|
-|Hybr.  |hybrid origin     |      67|
-|NAM    |Northern America  |     360|
-|SAM    |Southern America  |     157|
-|Trop.  |Pantropical       |      37|
+|value |mapped_value      | records|
+|:-----|:-----------------|-------:|
+|AF    |Africa            |     630|
+|AM    |pan-American      |      92|
+|AS    |Asia              |      71|
+|AS-Te |temperate Asia    |    1044|
+|AS-Tr |tropical Asia     |      12|
+|AUS   |Australasia       |     117|
+|Cult. |cultivated origin |      88|
+|E     |Europe            |    1111|
+|Hybr. |hybrid origin     |      67|
+|NAM   |Northern America  |     360|
+|SAM   |Southern America  |     157|
+|Trop. |Pantropical       |      37|
 
 Drop `key` and `value` column and rename `mapped value`:
 

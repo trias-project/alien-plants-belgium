@@ -493,7 +493,7 @@ native_range %<>% arrange(raw_id)
 #' Strip `?` from values and clean whitespace:
 native_range %<>% mutate(
   value = str_replace_all(value, "\\?", ""),
-  value = str_trim(value))
+  value = str_trim(value)
 )
 
 #' Map values:
