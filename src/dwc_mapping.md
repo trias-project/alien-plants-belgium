@@ -455,13 +455,6 @@ Create `pathway` from `raw_v_i`:
 distribution %<>% mutate(pathway = raw_v_i)
 ```
 
-Interpret `?` as empty (note that some raw values are already empty):
-
-
-```r
-distribution %<>% mutate(pathway = recode(pathway, "?" = ""))
-```
-
 Separate `pathway` on `,` in 4 columns:
 
 
@@ -533,6 +526,7 @@ distribution %>%
 |tourists         |
 |urban weed       |
 |wool             |
+|?                |
 |...              |
 |…                |
 |Agric.           |

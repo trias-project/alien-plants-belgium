@@ -219,9 +219,6 @@ distribution %<>% mutate(occurrenceStatus =
 #' Create `pathway` from `raw_v_i`:
 distribution %<>% mutate(pathway = raw_v_i)
 
-#' Interpret `?` as empty (note that some raw values are already empty):
-distribution %<>% mutate(pathway = recode(pathway, "?" = ""))
-
 #' Separate `pathway` on `,` in 4 columns:
 # In case there are more than 4 values, these will be merged in pathway_4. 
 # The dataset currently contains no more than 3 values per record, so pathway_4
