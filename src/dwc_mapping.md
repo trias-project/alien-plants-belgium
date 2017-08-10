@@ -479,7 +479,7 @@ Gather pathways in a key and value column:
 distribution %<>% gather(
   key, value,
   pathway_1, pathway_2, pathway_3, pathway_4,
-  na.rm = TRUE,
+  na.rm = TRUE, # Also removes records for which there is no pathway_1
   convert = FALSE
 )
 ```
@@ -614,7 +614,8 @@ distribution %<>% mutate(mapped_value = recode(value,
   "waterfowl" = "contaminant:on_animals",
   "wool" = "contaminant:on_animals",
   "wool alien" = "contaminant:on_animals",
-  .default = ""
+  .default = "",
+  .missing = "" # As result of stripping, records with no pathway already removed by gather()
 ))
 ```
 
@@ -1092,7 +1093,7 @@ Gather native ranges in a key and value column:
 native_range %<>% gather(
   key, value,
   native_range_1, native_range_2, native_range_3, native_range_4,
-  na.rm = TRUE,
+  na.rm = TRUE, # Also removes records for which there is no native_range_1
   convert = FALSE
 )
 ```
@@ -1132,7 +1133,7 @@ native_range %<>% mutate(mapped_value = recode(value,
   "SAM" = "Southern America",
   "Trop." = "Pantropical",
   .default = "",
-  .missing = ""
+  .missing = "" # As result of stripping, records with no native range already removed by gather()
 ))
 ```
 
