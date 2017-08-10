@@ -927,49 +927,395 @@ write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE
 
 ## Create description extension
 
+In the description extension we want to include **species origin/status** (`raw_d_n`) and **native range** (`raw_origin`) information. We'll create a separate data frame for both and then combine these with union.
+
 ### Pre-processing
 
+#### Species status
+
+Since Darwin Core has no `origin` field yet as suggested in [ias-dwc-proposal](https://github.com/qgroom/ias-dwc-proposal/blob/master/proposal.md#origin-new-term), we'll add this information in the description extension.
+
+Create new data frame:
+
 
 ```r
-description <- raw_data
+species_status <- raw_data
 ```
 
-### Create an 
-### Term mapping
-
-Map the source data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml):
-Gather the data for the description columns, including for NA values:
+Create `description` from `raw_d_n`:
 
 
 ```r
-description %<>%
-  gather(
-    raw_description_type, raw_description_value,
-    raw_origin, raw_d_n, raw_v_i,
-    na.rm = FALSE,
-    convert = FALSE
-  ) %>%
-  arrange(raw_id)
+species_status %<>% mutate(description = raw_d_n)
 ```
 
-Preview the newly created columns:
+Create a `type` field to indicate the type of description:
 
 
 ```r
-description %>% 
-  select(raw_id, raw_description_type, raw_description_value) %>%
-  head() %>%
+species_status %<>% mutate(type = "origin")
+```
+
+Strip `?` from the values and clean whitespace:
+
+
+```r
+species_status %<>% mutate(description = 
+  str_replace_all(description, "\\?", ""),
+  description = str_trim(description)
+)
+```
+
+Map values using [this vocabulary](https://github.com/qgroom/ias-dwc-proposal/blob/master/vocabulary/origin.tsv):
+
+
+```r
+species_status %<>% mutate(description = recode(description,
+  "Cas." = "vagrant",
+  "Nat." = "introduced",
+  "Ext." = "",
+  "Inv." = "",
+  "Ext./Cas." = "",
+  .default = "",
+  .missing = ""
+))
+```
+
+Show mapped values:
+
+
+```r
+species_status %>%
+  select(raw_d_n, description) %>%
+  group_by(raw_d_n, description) %>%
+  summarize(records = n()) %>%
+  arrange(raw_d_n) %>%
   kable()
 ```
 
 
 
-| raw_id|raw_description_type |raw_description_value |
-|------:|:--------------------|:---------------------|
-|      1|raw_origin           |E AF                  |
-|      1|raw_d_n              |Cas.                  |
-|      1|raw_v_i              |Hort.                 |
-|      2|raw_origin           |E AF AS-Te            |
-|      2|raw_d_n              |Cas.                  |
-|      2|raw_v_i              |Hort.                 |
+|raw_d_n   |description | records|
+|:---------|:-----------|-------:|
+|Cas.      |vagrant     |    1795|
+|Cas.?     |vagrant     |      51|
+|Ext.      |            |      15|
+|Ext.?     |            |       4|
+|Ext./Cas. |            |       4|
+|Inv.      |            |      64|
+|Nat.      |introduced  |     447|
+|Nat.?     |introduced  |     100|
+|NA        |            |       1|
+
+Keep only non-empty descriptions:
+
+
+```r
+# species_status %<>% filter(!is.na(description) & description != "")
+```
+
+Number of records:
+
+
+```r
+nrow(species_status)
+```
+
+```
+## [1] 2481
+```
+
+Preview data:
+
+
+```r
+kable(head(species_status))
+```
+
+
+
+| raw_id|raw_taxon                                                  |raw_hybrid_formula |raw_synonym |raw_family    |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i     |raw_taxonrank |raw_scientificnameid                             |description |type   |
+|------:|:----------------------------------------------------------|:------------------|:-----------|:-------------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-----------|:-------------|:------------------------------------------------|:-----------|:------|
+|      1|Acanthus mollis L.                                         |NA                 |NA          |Acanthaceae   |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1  |vagrant     |origin |
+|      2|Acanthus spinosus L.                                       |NA                 |NA          |Acanthaceae   |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1  |vagrant     |origin |
+|      3|Acorus calamus L.                                          |NA                 |NA          |Acoraceae     |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1  |introduced  |origin |
+|      4|Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |NA                 |NA          |Actinidiaceae |D       |2000   |Ann.    |AS-Te      |X               |NA              |X               |Cas.    |Food refuse |species       |http://ipni.org/urn:lsid:ipni.org:names:913605-1 |vagrant     |origin |
+|      5|Sambucus canadensis L.                                     |NA                 |NA          |Adoxaceae     |D       |1972   |2015    |NAM        |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:321978-2 |vagrant     |origin |
+|      6|Viburnum davidii Franch.                                   |NA                 |NA          |Adoxaceae     |D       |2014   |2015    |AS-Te      |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:149642-1 |vagrant     |origin |
+
+#### Native range
+
+`raw_origin` contains native range information (e.g. `E AS-Te NAM`). We'll separate, clean, map and combine these values.
+
+Create new data frame:
+
+
+```r
+native_range <- raw_data
+```
+
+Create `description` from `raw_d_n`:
+
+
+```r
+native_range %<>% mutate(description = raw_origin)
+```
+
+Create a `type` field to indicate the type of description:
+
+
+```r
+native_range %<>% mutate(type = "native range")
+```
+
+Separate `description` on space in 4 columns:
+
+
+```r
+# In case there are more than 4 values, these will be merged in native_range_4. 
+# The dataset currently contains no more than 4 values per record.
+native_range %<>% separate(
+  description,
+  into = c("native_range_1", "native_range_2", "native_range_3", "native_range_4"),
+  sep = " ",
+  remove = TRUE,
+  convert = FALSE,
+  extra = "merge",
+  fill = "right"
+)
+```
+
+Gather native ranges in a key and value column:
+
+
+```r
+native_range %<>% gather(
+  key, value,
+  native_range_1, native_range_2, native_range_3, native_range_4,
+  na.rm = TRUE,
+  convert = FALSE
+)
+```
+
+Sort on ID to see pathways in context for each record:
+
+
+```r
+native_range %<>% arrange(raw_id)
+```
+
+Strip `?` from values and clean whitespace:
+
+
+```r
+native_range %<>% mutate(
+  value = str_replace_all(value, "\\?", ""),
+  value = str_trim(value))
+)
+```
+
+```
+## Error: <text>:4:1: unexpected ')'
+## 3:   value = str_trim(value))
+## 4: )
+##    ^
+```
+
+Map values:
+
+
+```r
+native_range %<>% mutate(mapped_value = recode(value,
+  "AF" = "Africa",
+  "AM" = "pan-American",
+  "AS" = "Asia",
+  "AS-Te" = "temperate Asia",
+  "AS-Tr" = "tropical Asia",
+  "AUS" = "Australasia",
+  "Cult." = "cultivated origin",
+  "E" = "Europe",
+  "Hybr." = "hybrid origin",
+  "NAM" = "Northern America",
+  "SAM" = "Southern America",
+  "Trop." = "Pantropical",
+  .default = "",
+  .missing = ""
+))
+```
+
+Show mapped values:
+
+
+```r
+native_range %>%
+  select(value, mapped_value) %>%
+  group_by(value, mapped_value) %>%
+  summarize(records = n()) %>%
+  arrange(value) %>%
+  kable()
+```
+
+
+
+|value  |mapped_value      | records|
+|:------|:-----------------|-------:|
+|AF     |Africa            |     630|
+|AM     |pan-American      |      92|
+|AS     |Asia              |      71|
+|AS-Te  |temperate Asia    |    1042|
+|AS-Te? |                  |       2|
+|AS-Tr  |tropical Asia     |      12|
+|AUS    |Australasia       |     117|
+|Cult.  |cultivated origin |      88|
+|E      |Europe            |    1111|
+|Hybr.  |hybrid origin     |      67|
+|NAM    |Northern America  |     360|
+|SAM    |Southern America  |     157|
+|Trop.  |Pantropical       |      37|
+
+Drop `key` and `value` column and rename `mapped value`:
+
+
+```r
+native_range %<>% select(-key, -value)
+native_range %<>% rename(description = mapped_value)
+```
+
+Keep only non-empty descriptions:
+
+
+```r
+# native_range %<>% filter(!is.na(description) & description != "")
+```
+
+Number of records:
+
+
+```r
+nrow(native_range)
+```
+
+```
+## [1] 3786
+```
+
+Preview data:
+
+
+```r
+kable(head(native_range))
+```
+
+
+
+| raw_id|raw_taxon            |raw_hybrid_formula |raw_synonym |raw_family  |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i |raw_taxonrank |raw_scientificnameid                            |type         |description    |
+|------:|:--------------------|:------------------|:-----------|:-----------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-------|:-------------|:-----------------------------------------------|:------------|:--------------|
+|      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |native range |Europe         |
+|      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |native range |Africa         |
+|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |native range |Europe         |
+|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |native range |Africa         |
+|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |native range |temperate Asia |
+|      3|Acorus calamus L.    |NA                 |NA          |Acoraceae   |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1 |native range |temperate Asia |
+
+#### Union species status and native range
+
+
+
+```r
+description_ext <- union_all(species_status, native_range)
+```
+
+### Term mapping
+
+Map the source data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml):
+
+#### id
+
+
+```r
+description_ext %<>% mutate(id = raw_id)
+```
+
+#### description
+
+
+```r
+description_ext %<>% mutate(description = description)
+```
+
+#### type
+
+
+```r
+description_ext %<>% mutate(type = type)
+```
+
+#### source
+#### language
+
+
+```r
+description_ext %<>% mutate(language = "en")
+```
+
+#### created
+#### creator
+#### contributor
+#### audience
+#### license
+#### rightsHolder
+#### datasetID
+### Post-processing
+
+Remove the original columns:
+
+
+```r
+description_ext %<>% select(
+  -one_of(raw_colnames)
+)
+```
+
+Move `id` to the first position:
+
+
+```r
+description_ext %<>% select(id, everything())
+```
+
+Number of records
+
+
+```r
+nrow(description_ext)
+```
+
+```
+## [1] 6267
+```
+
+Preview data:
+
+
+```r
+kable(head(description_ext))
+```
+
+
+
+| id|description |type   |language |
+|--:|:-----------|:------|:--------|
+|  1|vagrant     |origin |en       |
+|  2|vagrant     |origin |en       |
+|  3|introduced  |origin |en       |
+|  4|vagrant     |origin |en       |
+|  5|vagrant     |origin |en       |
+|  6|vagrant     |origin |en       |
+
+Save to CSV:
+
+
+```r
+write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE)
+```
 

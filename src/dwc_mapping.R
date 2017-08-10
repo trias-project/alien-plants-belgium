@@ -402,28 +402,183 @@ write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE
 
 #' ## Create description extension
 #' 
+#' In the description extension we want to include **species origin/status** (`raw_d_n`) and **native range** (`raw_origin`) information. We'll create a separate data frame for both and then combine these with union.
+#' 
 #' ### Pre-processing
-description <- raw_data
+#' 
+#' #### Species status
+#' 
+#' Since Darwin Core has no `origin` field yet as suggested in [ias-dwc-proposal](https://github.com/qgroom/ias-dwc-proposal/blob/master/proposal.md#origin-new-term), we'll add this information in the description extension.
+#' 
+#' Create new data frame:
+species_status <- raw_data
 
-#' ### Create an 
+#' Create `description` from `raw_d_n`:
+species_status %<>% mutate(description = raw_d_n)
+
+#' Create a `type` field to indicate the type of description:
+species_status %<>% mutate(type = "origin")
+
+#' Strip `?` from the values and clean whitespace:
+species_status %<>% mutate(description = 
+  str_replace_all(description, "\\?", ""),
+  description = str_trim(description)
+)
+
+#' Map values using [this vocabulary](https://github.com/qgroom/ias-dwc-proposal/blob/master/vocabulary/origin.tsv):
+species_status %<>% mutate(description = recode(description,
+  "Cas." = "vagrant",
+  "Nat." = "introduced",
+  "Ext." = "",
+  "Inv." = "",
+  "Ext./Cas." = "",
+  .default = "",
+  .missing = ""
+))
+
+#' Show mapped values:
+species_status %>%
+  select(raw_d_n, description) %>%
+  group_by(raw_d_n, description) %>%
+  summarize(records = n()) %>%
+  arrange(raw_d_n) %>%
+  kable()
+
+#' Keep only non-empty descriptions:
+# species_status %<>% filter(!is.na(description) & description != "")
+
+#' Number of records:
+nrow(species_status)
+
+#' Preview data:
+kable(head(species_status))
+
+#' #### Native range
+#' 
+#' `raw_origin` contains native range information (e.g. `E AS-Te NAM`). We'll separate, clean, map and combine these values.
+#' 
+#' Create new data frame:
+native_range <- raw_data
+
+#' Create `description` from `raw_d_n`:
+native_range %<>% mutate(description = raw_origin)
+
+#' Create a `type` field to indicate the type of description:
+native_range %<>% mutate(type = "native range")
+
+#' Separate `description` on space in 4 columns:
+# In case there are more than 4 values, these will be merged in native_range_4. 
+# The dataset currently contains no more than 4 values per record.
+native_range %<>% separate(
+  description,
+  into = c("native_range_1", "native_range_2", "native_range_3", "native_range_4"),
+  sep = " ",
+  remove = TRUE,
+  convert = FALSE,
+  extra = "merge",
+  fill = "right"
+)
+
+#' Gather native ranges in a key and value column:
+native_range %<>% gather(
+  key, value,
+  native_range_1, native_range_2, native_range_3, native_range_4,
+  na.rm = TRUE,
+  convert = FALSE
+)
+
+#' Sort on ID to see pathways in context for each record:
+native_range %<>% arrange(raw_id)
+
+#' Strip `?` from values and clean whitespace:
+native_range %<>% mutate(
+  value = str_replace_all(value, "\\?", ""),
+  value = str_trim(value))
+)
+
+#' Map values:
+native_range %<>% mutate(mapped_value = recode(value,
+  "AF" = "Africa",
+  "AM" = "pan-American",
+  "AS" = "Asia",
+  "AS-Te" = "temperate Asia",
+  "AS-Tr" = "tropical Asia",
+  "AUS" = "Australasia",
+  "Cult." = "cultivated origin",
+  "E" = "Europe",
+  "Hybr." = "hybrid origin",
+  "NAM" = "Northern America",
+  "SAM" = "Southern America",
+  "Trop." = "Pantropical",
+  .default = "",
+  .missing = ""
+))
+
+#' Show mapped values:
+native_range %>%
+  select(value, mapped_value) %>%
+  group_by(value, mapped_value) %>%
+  summarize(records = n()) %>%
+  arrange(value) %>%
+  kable()
+
+#' Drop `key` and `value` column and rename `mapped value`:
+native_range %<>% select(-key, -value)
+native_range %<>% rename(description = mapped_value)
+
+#' Keep only non-empty descriptions:
+# native_range %<>% filter(!is.na(description) & description != "")
+
+#' Number of records:
+nrow(native_range)
+
+#' Preview data:
+kable(head(native_range))
+
+#' #### Union species status and native range
+#' 
+description_ext <- union_all(species_status, native_range)
 
 #' ### Term mapping
 #' 
 #' Map the source data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml):
+#' 
+#' #### id
+description_ext %<>% mutate(id = raw_id)
 
+#' #### description
+description_ext %<>% mutate(description = description)
 
-#' Gather the data for the description columns, including for NA values:
-description %<>%
-  gather(
-    raw_description_type, raw_description_value,
-    raw_origin, raw_d_n, raw_v_i,
-    na.rm = FALSE,
-    convert = FALSE
-  ) %>%
-  arrange(raw_id)
+#' #### type
+description_ext %<>% mutate(type = type)
 
-#' Preview the newly created columns:
-description %>% 
-  select(raw_id, raw_description_type, raw_description_value) %>%
-  head() %>%
-  kable()
+#' #### source
+#' #### language
+description_ext %<>% mutate(language = "en")
+
+#' #### created
+#' #### creator
+#' #### contributor
+#' #### audience
+#' #### license
+#' #### rightsHolder
+#' #### datasetID
+
+#' ### Post-processing
+#' 
+#' Remove the original columns:
+description_ext %<>% select(
+  -one_of(raw_colnames)
+)
+
+#' Move `id` to the first position:
+description_ext %<>% select(id, everything())
+
+#' Number of records
+nrow(description_ext)
+
+#' Preview data:
+kable(head(description_ext))
+
+#' Save to CSV:
+write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE)
