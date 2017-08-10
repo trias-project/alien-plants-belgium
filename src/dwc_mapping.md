@@ -1012,7 +1012,7 @@ Keep only non-empty descriptions:
 
 
 ```r
-# species_status %<>% filter(!is.na(description) & description != "")
+species_status %<>% filter(!is.na(description) & description != "")
 ```
 
 Number of records:
@@ -1023,7 +1023,7 @@ nrow(species_status)
 ```
 
 ```
-## [1] 2481
+## [1] 2393
 ```
 
 Preview data:
@@ -1178,7 +1178,7 @@ Keep only non-empty descriptions:
 
 
 ```r
-# native_range %<>% filter(!is.na(description) & description != "")
+native_range %<>% filter(!is.na(description) & description != "")
 ```
 
 Number of records:
@@ -1284,7 +1284,7 @@ nrow(description_ext)
 ```
 
 ```
-## [1] 6267
+## [1] 6179
 ```
 
 Preview data:

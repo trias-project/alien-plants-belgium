@@ -446,7 +446,7 @@ species_status %>%
   kable()
 
 #' Keep only non-empty descriptions:
-# species_status %<>% filter(!is.na(description) & description != "")
+species_status %<>% filter(!is.na(description) & description != "")
 
 #' Number of records:
 nrow(species_status)
@@ -528,7 +528,7 @@ native_range %<>% select(-key, -value)
 native_range %<>% rename(description = mapped_value)
 
 #' Keep only non-empty descriptions:
-# native_range %<>% filter(!is.na(description) & description != "")
+native_range %<>% filter(!is.na(description) & description != "")
 
 #' Number of records:
 nrow(native_range)
