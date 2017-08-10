@@ -22,17 +22,10 @@ The repository structure is based on [cookiecutter-data-science](https://github.
 │   ├── raw           : Source data, input for mapping script
 │   └── processed     : Output of mapping script GENERATED
 │
-├── settings
-│   └── lookup.csv    : Lookup table to translate values to controlled vocabulary values, input for mapping script
-
-│
 └── src
     ├── dwc_mapping.R : Darwin Core mapping script, core functionality of this repository
     ├── dwc_mapping.md: Nicer rendition of mapping script, created by knitr::spin GENERATED
-    ├── src.Rproj     : RStudio project file
-    │
-    └── functions     : Functions used by mapping script
-        └── term_mapping.R : Function to create key=values from lookup table
+    └── src.Rproj     : RStudio project file
 ```
 
 ## Installation
