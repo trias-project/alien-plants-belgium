@@ -569,14 +569,14 @@ distribution %>%
 |Wool alien       |
 |Wool?            |
 
-Strip `?`, `...` from values, convert to lowercase, and clean whitespace:
+Clean values:
 
 
 ```r
 distribution %<>% mutate(
-  value = str_replace_all(value, "\\?|…|\\.{3}", ""),
-  value = str_to_lower(value),
-  value = str_trim(value)
+  value = str_replace_all(value, "\\?|…|\\.{3}", ""), # Strip ?, …, ...
+  value = str_to_lower(value), # Convert to lowercase
+  value = str_trim(value) # Clean whitespace
 )
 ```
 
@@ -715,12 +715,12 @@ Create `start_year` from `raw_fr` (first record):
 distribution %<>% mutate(start_year = raw_fr)
 ```
 
-Strip `?`, `ca.`, `>` and `<` from the values:
+Clean values:
 
 
 ```r
 distribution %<>% mutate(start_year = 
-  str_replace_all(start_year, "(\\?|ca. |<|>)", "")
+  str_replace_all(start_year, "(\\?|ca. |<|>)", "") # Strip ?, ca., < and >
 )
 ```
 
@@ -731,12 +731,12 @@ Create `end_year` from `raw_mrr` (most recent record):
 distribution %<>% mutate(end_year = raw_mrr)
 ```
 
-Strip `?`, `ca.`, `>` and `<` from the values:
+Clean values:
 
 
 ```r
 distribution %<>% mutate(end_year = 
-  str_replace_all(end_year, "(\\?|ca. |<|>)", "")
+  str_replace_all(end_year, "(\\?|ca. |<|>)", "") # Strip ?, ca., < and >
 )
 ```
 
@@ -956,13 +956,13 @@ Create a `type` field to indicate the type of description:
 species_status %<>% mutate(type = "origin")
 ```
 
-Strip `?` from the values and clean whitespace:
+Clean values:
 
 
 ```r
 species_status %<>% mutate(description = 
-  str_replace_all(description, "\\?", ""),
-  description = str_trim(description)
+  str_replace_all(description, "\\?", ""), # Strip ?
+  description = str_trim(description) # Clean whitespace
 )
 ```
 
@@ -1104,13 +1104,13 @@ Sort on ID to see pathways in context for each record:
 native_range %<>% arrange(raw_id)
 ```
 
-Strip `?` from values and clean whitespace:
+Clean values:
 
 
 ```r
 native_range %<>% mutate(
-  value = str_replace_all(value, "\\?", ""),
-  value = str_trim(value)
+  value = str_replace_all(value, "\\?", ""), # Strip ?
+  value = str_trim(value) # Clean whitespace
 )
 ```
 

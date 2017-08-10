@@ -249,11 +249,11 @@ distribution %>%
   arrange(value) %>%
   kable()
 
-#' Strip `?`, `...` from values, convert to lowercase, and clean whitespace:
+#' Clean values:
 distribution %<>% mutate(
-  value = str_replace_all(value, "\\?|…|\\.{3}", ""),
-  value = str_to_lower(value),
-  value = str_trim(value)
+  value = str_replace_all(value, "\\?|…|\\.{3}", ""), # Strip ?, …, ...
+  value = str_to_lower(value), # Convert to lowercase
+  value = str_trim(value) # Clean whitespace
 )
 
 #' Map values:
@@ -324,17 +324,17 @@ distribution %<>% mutate(
 #' Create `start_year` from `raw_fr` (first record):
 distribution %<>% mutate(start_year = raw_fr)
 
-#' Strip `?`, `ca.`, `>` and `<` from the values:
+#' Clean values:
 distribution %<>% mutate(start_year = 
-  str_replace_all(start_year, "(\\?|ca. |<|>)", "")
+  str_replace_all(start_year, "(\\?|ca. |<|>)", "") # Strip ?, ca., < and >
 )
 
 #' Create `end_year` from `raw_mrr` (most recent record):
 distribution %<>% mutate(end_year = raw_mrr)
 
-#' Strip `?`, `ca.`, `>` and `<` from the values:
+#' Clean values:
 distribution %<>% mutate(end_year = 
-  str_replace_all(end_year, "(\\?|ca. |<|>)", "")
+  str_replace_all(end_year, "(\\?|ca. |<|>)", "") # Strip ?, ca., < and >
 )
 
 #' If `end_year` is `Ann.` or `N` use current year:
@@ -419,10 +419,10 @@ species_status %<>% mutate(description = raw_d_n)
 #' Create a `type` field to indicate the type of description:
 species_status %<>% mutate(type = "origin")
 
-#' Strip `?` from the values and clean whitespace:
+#' Clean values:
 species_status %<>% mutate(description = 
-  str_replace_all(description, "\\?", ""),
-  description = str_trim(description)
+  str_replace_all(description, "\\?", ""), # Strip ?
+  description = str_trim(description) # Clean whitespace
 )
 
 #' Map values using [this vocabulary](https://github.com/qgroom/ias-dwc-proposal/blob/master/vocabulary/origin.tsv):
@@ -490,10 +490,10 @@ native_range %<>% gather(
 #' Sort on ID to see pathways in context for each record:
 native_range %<>% arrange(raw_id)
 
-#' Strip `?` from values and clean whitespace:
+#' Clean values:
 native_range %<>% mutate(
-  value = str_replace_all(value, "\\?", ""),
-  value = str_trim(value)
+  value = str_replace_all(value, "\\?", ""), # Strip ?
+  value = str_trim(value) # Clean whitespace
 )
 
 #' Map values:
