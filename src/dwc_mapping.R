@@ -232,7 +232,8 @@ distribution %<>% separate(
   sep = ",",
   remove = TRUE,
   convert = FALSE,
-  extra = "merge"
+  extra = "merge",
+  fill = "right"
 )
 
 #' Gather pathways in a key and value column:
