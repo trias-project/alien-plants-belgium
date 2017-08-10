@@ -2,7 +2,7 @@
 
 Peter Desmet & Quentin Groom
 
-2017-08-09
+2017-08-10
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -460,8 +460,7 @@ Separate `pathway` on `,` in 4 columns:
 
 ```r
 # In case there are more than 4 values, these will be merged in pathway_4. 
-# The dataset currently contains no more than 3 values per record, so pathway_4
-# will be empty.
+# The dataset currently contains no more than 3 values per record.
 distribution %<>% separate(
   pathway,
   into = c("pathway_1", "pathway_2", "pathway_3", "pathway_4"),
@@ -673,7 +672,7 @@ Drop `value` column:
 distribution %<>% select(-value)
 ```
 
-Convert empty values as `NA`:
+Convert empty values to `NA` (important to be able to remove them after paste):
 
 
 ```r
@@ -687,7 +686,7 @@ Spread values back to columns:
 distribution %<>% spread(key, mapped_value)
 ```
 
-Create `establishmentMeans` columns where these values are concatentated with ` | ` (omit `NA` values):
+Create `establishmentMeans` columns where these values are concatentated with ` | `:
 
 
 ```r

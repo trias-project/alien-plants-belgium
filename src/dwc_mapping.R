@@ -221,8 +221,7 @@ distribution %<>% mutate(pathway = raw_v_i)
 
 #' Separate `pathway` on `,` in 4 columns:
 # In case there are more than 4 values, these will be merged in pathway_4. 
-# The dataset currently contains no more than 3 values per record, so pathway_4
-# will be empty.
+# The dataset currently contains no more than 3 values per record.
 distribution %<>% separate(
   pathway,
   into = c("pathway_1", "pathway_2", "pathway_3", "pathway_4"),
@@ -302,13 +301,13 @@ distribution %>%
 #' Drop `value` column:
 distribution %<>% select(-value)
 
-#' Convert empty values as `NA`:
+#' Convert empty values to `NA` (important to be able to remove them after paste):
 distribution %<>% mutate(mapped_value = na_if(mapped_value, ""))
 
 #' Spread values back to columns:
 distribution %<>% spread(key, mapped_value)
 
-#' Create `establishmentMeans` columns where these values are concatentated with ` | ` (omit `NA` values):
+#' Create `establishmentMeans` columns where these values are concatentated with ` | `:
 distribution %<>% mutate(establishmentMeans = 
   paste(pathway_1, pathway_2, pathway_3, pathway_4, sep = " | ")              
 )
