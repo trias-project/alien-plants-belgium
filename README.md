@@ -54,7 +54,7 @@ The repository structure is based on [cookiecutter-data-science](https://github.
 
 ## Contributors
 
-See [contributors on GitHub](https://github.com/trias-project/alienplantsbelgium/graphs/contributors).
+[List of contributors](https://github.com/trias-project/alienplantsbelgium/contributors).
 
 ## License
 
