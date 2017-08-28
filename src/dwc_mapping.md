@@ -45,17 +45,9 @@ Set file paths (all paths should be relative to this script):
 
 ```r
 raw_data_file = "../data/raw/Checklist2.xlsx"
-lookup_file = "../settings/lookup.csv"
 dwc_taxon_file = "../data/processed/taxon.csv"
 dwc_distribution_file = "../data/processed/distribution.csv"
 dwc_description_file = "../data/processed/description.csv"
-```
-
-Load lookup table (contains information to map values):
-
-
-```r
-lookup_table <- read.csv(lookup_file)
 ```
 
 ## Read data
@@ -422,25 +414,16 @@ distribution %<>% mutate(countryCode = "BE")
 #### lifeStage
 #### occurrenceStatus
 
-Use lookup table to map to [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
+Map values using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
 
 
 ```r
-occurrencestatus_lookup <- term_mapping(lookup_table, "occurrenceStatus")
-stack(occurrencestatus_lookup)
-```
-
-```
-##               values      ind
-## 1            present        X
-## 2 presence uncertain        ?
-## 3             absent .missing
-```
-
-```r
-distribution %<>% mutate(occurrenceStatus = 
-  recode(presence_be, !!!occurrencestatus_lookup)
-)
+distribution %<>% mutate(occurrenceStatus = recode(presence_be,
+  "X" = "present",
+  "?" = "presence uncertain",
+  .default = "",
+  .missing = "absent"
+))
 ```
 
 #### threatStatus
