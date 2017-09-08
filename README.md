@@ -32,7 +32,7 @@ The repository structure is based on [cookiecutter-data-science](https://github.
 
 ### Run the code
 
-1. Clone or fork the [repository](https://github.com/trias-project/alienplantsbelgium)
+1. Clone or fork the [repository](https://github.com/trias-project/alien-plants-belgium)
 2. Open the RStudio project file: [src.Rproj](src/src.Rproj)
 3. Install [any required packages](src/dwc_mapping.md#setup)
 4. Run the code with `knitr::spin("dwc_mapping.R")`
