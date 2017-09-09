@@ -162,7 +162,7 @@ taxon %<>% select(-one_of(raw_colnames))
 kable(head(taxon))
 
 #' Save to CSV:
-write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE)
+write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
 
 #' ## Create distribution extension
 #' 
@@ -394,7 +394,7 @@ distribution %<>% select(
 kable(head(distribution))
 
 #' Save to CSV:
-write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE)
+write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
 
 #' ## Create description extension
 #' 
