@@ -577,4 +577,5 @@ nrow(description_ext)
 kable(head(description_ext))
 
 #' Save to CSV:
-write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE)
+write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+
