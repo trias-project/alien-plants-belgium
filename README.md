@@ -8,6 +8,8 @@ This repository contains the functionality to standardize the [Manual of the Ali
 
 * Description of the [Darwin Core mapping](src/dwc_mapping.md) (= a rendition of the [mapping script](src/dwc_mapping.R))
 * Generated [Darwin Core files](data/processed)
+* Published [dataset on the IPT](http://ipt.biodiversity.be/resource?r=alien-plants-belgium)
+* Published [dataset on GBIF](https://www.gbif.org/dataset/9ff7d317-609b-4c08-bd86-3bc404b77c42)
 
 ## Repo structure
 
