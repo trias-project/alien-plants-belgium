@@ -235,7 +235,7 @@ distribution %<>% gather(
   convert = FALSE
 )
 
-#' Sort on ID to see pathways in context for each record:
+#' Sort on `id` to see pathways in context for each record:
 distribution %<>% arrange(id)
 
 #' Show unique values:
@@ -389,6 +389,9 @@ distribution %<>% select(
   -pathway_1, -pathway_2, -pathway_3, -pathway_4,
   -start_year, -end_year
 )
+
+#' Sort on `id`:
+distribution %<>% arrange(id)
 
 #' Preview data:
 kable(head(distribution))
@@ -570,12 +573,14 @@ description_ext %<>% select(
 #' Move `id` to the first position:
 description_ext %<>% select(id, everything())
 
+#' Sort on `id`:
+description_ext %<>% arrange(id)
+
 #' Number of records
 nrow(description_ext)
 
 #' Preview data:
-kable(head(description_ext))
+kable(head(description_ext, 10))
 
 #' Save to CSV:
 write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
-

@@ -466,7 +466,7 @@ distribution %<>% gather(
 )
 ```
 
-Sort on ID to see pathways in context for each record:
+Sort on `id` to see pathways in context for each record:
 
 
 ```r
@@ -883,6 +883,13 @@ distribution %<>% select(
 )
 ```
 
+Sort on `id`:
+
+
+```r
+distribution %<>% arrange(id)
+```
+
 Preview data:
 
 
@@ -1259,6 +1266,13 @@ Move `id` to the first position:
 description_ext %<>% select(id, everything())
 ```
 
+Sort on `id`:
+
+
+```r
+description_ext %<>% arrange(id)
+```
+
 Number of records
 
 
@@ -1274,19 +1288,23 @@ Preview data:
 
 
 ```r
-kable(head(description_ext))
+kable(head(description_ext, 10))
 ```
 
 
 
-| id|description |type   |language |
-|--:|:-----------|:------|:--------|
-|  1|vagrant     |origin |en       |
-|  2|vagrant     |origin |en       |
-|  3|introduced  |origin |en       |
-|  4|vagrant     |origin |en       |
-|  5|vagrant     |origin |en       |
-|  6|vagrant     |origin |en       |
+| id|description    |type         |language |
+|--:|:--------------|:------------|:--------|
+|  1|vagrant        |origin       |en       |
+|  1|Europe         |native range |en       |
+|  1|Africa         |native range |en       |
+|  2|vagrant        |origin       |en       |
+|  2|Europe         |native range |en       |
+|  2|Africa         |native range |en       |
+|  2|temperate Asia |native range |en       |
+|  3|introduced     |origin       |en       |
+|  3|temperate Asia |native range |en       |
+|  4|vagrant        |origin       |en       |
 
 Save to CSV:
 
