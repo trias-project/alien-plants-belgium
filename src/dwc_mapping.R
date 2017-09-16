@@ -66,9 +66,6 @@ taxon <- raw_data
 #' #### id
 taxon %<>% mutate(id = raw_id)
 
-#' Number of duplicates: (should be 0):
-anyDuplicated(taxon[["id"]])
-
 #' #### modified
 #' #### language
 taxon %<>% mutate(language = "en")
@@ -104,13 +101,6 @@ taxon %<>% mutate(scientificNameID = raw_scientificnameid)
 #' #### scientificName
 taxon %<>% mutate(scientificName = raw_taxon)
 
-#' Number of records, `taxonID`s, `scientificNames`, and `scientificNameID`s (expected to be the same):
-nrow(taxon)
-n_distinct(taxon[["taxonID"]], na.rm = TRUE)
-n_distinct(taxon[["scientificName"]], na.rm = TRUE)
-n_distinct(taxon[["scientificNameID"]], na.rm = TRUE) # Can contain NAs
-n_distinct(taxon[["scientificNameID"]], na.rm = TRUE) + sum(is.na(taxon[["scientificNameID"]])) # Unique + NA
-
 #' #### acceptedNameUsage
 #' #### parentNameUsage
 #' #### originalNameUsage
@@ -126,9 +116,6 @@ taxon %<>% mutate(kingdom = "Plantae")
 #' #### order
 #' #### family
 taxon %<>% mutate(family = raw_family)
-
-#' Number of unique families:
-n_distinct(taxon[["family"]])
 
 #' #### genus
 #' #### subgenus
@@ -446,9 +433,6 @@ origin %>%
 #' Keep only non-empty descriptions:
 origin %<>% filter(!is.na(description) & description != "")
 
-#' Number of records:
-nrow(origin)
-
 #' Preview data:
 kable(head(origin))
 
@@ -528,9 +512,6 @@ native_range %<>% rename(description = mapped_value)
 #' Keep only non-empty descriptions:
 native_range %<>% filter(!is.na(description) & description != "")
 
-#' Number of records:
-nrow(native_range)
-
 #' Preview data:
 kable(head(native_range))
 
@@ -576,11 +557,31 @@ description_ext %<>% select(id, everything())
 #' Sort on `id`:
 description_ext %<>% arrange(id)
 
-#' Number of records
-nrow(description_ext)
-
 #' Preview data:
 kable(head(description_ext, 10))
 
 #' Save to CSV:
 write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+
+#' ## Summary
+#' 
+#' ### Number of records
+#' 
+#' * Source file: `r nrow(raw_data)`
+#' * Taxon core: `r nrow(taxon)`
+#' * Distribution extension: `r nrow(distribution)`
+#' * Description extension: `r nrow(description_ext)`
+#'
+#' ### Taxon core
+#' 
+#' Number of duplicates: `r anyDuplicated(taxon[["id"]])` (should be 0)
+#' 
+#' The following numbers are expected to be the same:
+#' 
+#' * Number of records: `r nrow(taxon)`
+#' * Number of distinct `taxonID`: `r n_distinct(taxon[["taxonID"]], na.rm = TRUE)`
+#' * Number of distinct `scientificName`: `r n_distinct(taxon[["scientificName"]], na.rm = TRUE)`
+#' * Number of distinct `scientificNameID`: `r n_distinct(taxon[["scientificNameID"]], na.rm = TRUE)` (can contain NAs)
+#' * Number of distinct `scientificNameID` and `NA`: `r n_distinct(taxon[["scientificNameID"]], na.rm = TRUE) + sum(is.na(taxon[["scientificNameID"]]))`
+#'
+#' Number of unique families: `r n_distinct(taxon[["family"]])`

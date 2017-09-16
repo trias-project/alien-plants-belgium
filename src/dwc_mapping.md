@@ -121,17 +121,6 @@ Map the source data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_201
 taxon %<>% mutate(id = raw_id)
 ```
 
-Number of duplicates: (should be 0):
-
-
-```r
-anyDuplicated(taxon[["id"]])
-```
-
-```
-## [1] 0
-```
-
 #### modified
 #### language
 
@@ -199,49 +188,6 @@ taxon %<>% mutate(scientificNameID = raw_scientificnameid)
 taxon %<>% mutate(scientificName = raw_taxon)
 ```
 
-Number of records, `taxonID`s, `scientificNames`, and `scientificNameID`s (expected to be the same):
-
-
-```r
-nrow(taxon)
-```
-
-```
-## [1] 2500
-```
-
-```r
-n_distinct(taxon[["taxonID"]], na.rm = TRUE)
-```
-
-```
-## [1] 2500
-```
-
-```r
-n_distinct(taxon[["scientificName"]], na.rm = TRUE)
-```
-
-```
-## [1] 2500
-```
-
-```r
-n_distinct(taxon[["scientificNameID"]], na.rm = TRUE) # Can contain NAs
-```
-
-```
-## [1] 1707
-```
-
-```r
-n_distinct(taxon[["scientificNameID"]], na.rm = TRUE) + sum(is.na(taxon[["scientificNameID"]])) # Unique + NA
-```
-
-```
-## [1] 2500
-```
-
 #### acceptedNameUsage
 #### parentNameUsage
 #### originalNameUsage
@@ -264,17 +210,6 @@ taxon %<>% mutate(kingdom = "Plantae")
 
 ```r
 taxon %<>% mutate(family = raw_family)
-```
-
-Number of unique families:
-
-
-```r
-n_distinct(taxon[["family"]])
-```
-
-```
-## [1] 152
 ```
 
 #### genus
@@ -1004,17 +939,6 @@ Keep only non-empty descriptions:
 origin %<>% filter(!is.na(description) & description != "")
 ```
 
-Number of records:
-
-
-```r
-nrow(origin)
-```
-
-```
-## [1] 2412
-```
-
 Preview data:
 
 
@@ -1171,17 +1095,6 @@ Keep only non-empty descriptions:
 native_range %<>% filter(!is.na(description) & description != "")
 ```
 
-Number of records:
-
-
-```r
-nrow(native_range)
-```
-
-```
-## [1] 3814
-```
-
 Preview data:
 
 
@@ -1273,17 +1186,6 @@ Sort on `id`:
 description_ext %<>% arrange(id)
 ```
 
-Number of records
-
-
-```r
-nrow(description_ext)
-```
-
-```
-## [1] 6226
-```
-
 Preview data:
 
 
@@ -1313,3 +1215,25 @@ Save to CSV:
 write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
 ```
 
+## Summary
+
+### Number of records
+
+* Source file: 2500
+* Taxon core: 2500
+* Distribution extension: 2496
+* Description extension: 6226
+
+### Taxon core
+
+Number of duplicates: 0 (should be 0)
+
+The following numbers are expected to be the same:
+
+* Number of records: 2500
+* Number of distinct `taxonID`: 2500
+* Number of distinct `scientificName`: 2500
+* Number of distinct `scientificNameID`: 1707 (can contain NAs)
+* Number of distinct `scientificNameID` and `NA`: 2500
+
+Number of unique families: 152
