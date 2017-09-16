@@ -910,40 +910,40 @@ write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE
 
 ## Create description extension
 
-In the description extension we want to include **species origin/status** (`raw_d_n`) and **native range** (`raw_origin`) information. We'll create a separate data frame for both and then combine these with union.
+In the description extension we want to include **origin** (`raw_d_n`) and **native range** (`raw_origin`) information. We'll create a separate data frame for both and then combine these with union.
 
 ### Pre-processing
 
-#### Species status
+#### Origin
 
-Since Darwin Core has no `origin` field yet as suggested in [ias-dwc-proposal](https://github.com/qgroom/ias-dwc-proposal/blob/master/proposal.md#origin-new-term), we'll add this information in the description extension.
+`origin` describes if a species is native in a distribution or not. Since Darwin Core has no `origin` field yet as suggested in [ias-dwc-proposal](https://github.com/qgroom/ias-dwc-proposal/blob/master/proposal.md#origin-new-term), we'll add this information in the description extension.
 
 Create new data frame:
 
 
 ```r
-species_status <- raw_data
+origin <- raw_data
 ```
 
 Create `description` from `raw_d_n`:
 
 
 ```r
-species_status %<>% mutate(description = raw_d_n)
+origin %<>% mutate(description = raw_d_n)
 ```
 
 Create a `type` field to indicate the type of description:
 
 
 ```r
-species_status %<>% mutate(type = "origin")
+origin %<>% mutate(type = "origin")
 ```
 
 Clean values:
 
 
 ```r
-species_status %<>% mutate(description = 
+origin %<>% mutate(description = 
   str_replace_all(description, "\\?", ""), # Strip ?
   description = str_trim(description) # Clean whitespace
 )
@@ -953,7 +953,7 @@ Map values using [this vocabulary](https://github.com/qgroom/ias-dwc-proposal/bl
 
 
 ```r
-species_status %<>% mutate(description = recode(description,
+origin %<>% mutate(description = recode(description,
   "Cas." = "vagrant",
   "Nat." = "introduced",
   "Ext." = "",
@@ -968,7 +968,7 @@ Show mapped values:
 
 
 ```r
-species_status %>%
+origin %>%
   select(raw_d_n, description) %>%
   group_by(raw_d_n, description) %>%
   summarize(records = n()) %>%
@@ -994,14 +994,14 @@ Keep only non-empty descriptions:
 
 
 ```r
-species_status %<>% filter(!is.na(description) & description != "")
+origin %<>% filter(!is.na(description) & description != "")
 ```
 
 Number of records:
 
 
 ```r
-nrow(species_status)
+nrow(origin)
 ```
 
 ```
@@ -1012,7 +1012,7 @@ Preview data:
 
 
 ```r
-kable(head(species_status))
+kable(head(origin))
 ```
 
 
@@ -1193,12 +1193,12 @@ kable(head(native_range))
 |      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |native range |temperate Asia |
 |      3|Acorus calamus L.    |NA                 |NA          |Acoraceae   |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1 |native range |temperate Asia |
 
-#### Union species status and native range
+#### Union origin and native range
 
 
 
 ```r
-description_ext <- union_all(species_status, native_range)
+description_ext <- union_all(origin, native_range)
 ```
 
 ### Term mapping
