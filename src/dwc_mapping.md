@@ -2,7 +2,7 @@
 
 Peter Desmet & Quentin Groom
 
-2017-08-10
+2017-09-16
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -37,7 +37,6 @@ library(stringr)   # For string manipulation
 # Other packages
 library(janitor)   # For cleaning input data
 library(knitr)     # For nicer (kable) tables
-source("functions/term_mapping.R") # For mapping values
 ```
 
 Set file paths (all paths should be relative to this script):
@@ -208,7 +207,7 @@ nrow(taxon)
 ```
 
 ```
-## [1] 2481
+## [1] 2500
 ```
 
 ```r
@@ -216,7 +215,7 @@ n_distinct(taxon[["taxonID"]], na.rm = TRUE)
 ```
 
 ```
-## [1] 2481
+## [1] 2500
 ```
 
 ```r
@@ -224,7 +223,7 @@ n_distinct(taxon[["scientificName"]], na.rm = TRUE)
 ```
 
 ```
-## [1] 2481
+## [1] 2500
 ```
 
 ```r
@@ -240,7 +239,7 @@ n_distinct(taxon[["scientificNameID"]], na.rm = TRUE) + sum(is.na(taxon[["scient
 ```
 
 ```
-## [1] 2481
+## [1] 2500
 ```
 
 #### acceptedNameUsage
@@ -355,7 +354,7 @@ Save to CSV:
 
 
 ```r
-write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE)
+write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
 ```
 
 ## Create distribution extension
@@ -618,7 +617,7 @@ distribution %>%
 
 |value           |mapped_value                 | records|
 |:---------------|:----------------------------|-------:|
-|                |                             |     540|
+|                |                             |     542|
 |agric.          |escape:agriculture           |      85|
 |bird seed       |contaminant:seed             |       1|
 |birdseed        |contaminant:seed             |      31|
@@ -627,16 +626,16 @@ distribution %>%
 |etc.            |                             |       1|
 |fish            |                             |       3|
 |food refuse     |escape:food_bait             |      21|
-|grain           |contaminant:seed             |     540|
+|grain           |contaminant:seed             |     541|
 |grain (rice)    |contaminant:seed             |       3|
 |grass seed      |contaminant:seed             |       8|
 |hay             |                             |       1|
 |hort            |escape:horticulture          |       2|
-|hort.           |escape:horticulture          |    1082|
+|hort.           |escape:horticulture          |    1094|
 |hybridization   |                             |      48|
 |military troops |                             |       9|
-|nurseries       |contaminant:nursery          |      19|
-|ore             |contaminant:habitat_material |      87|
+|nurseries       |contaminant:nursery          |      20|
+|ore             |contaminant:habitat_material |      93|
 |pines           |contaminant:on_plants        |       4|
 |rice            |                             |       1|
 |salt            |                             |       2|
@@ -906,7 +905,7 @@ Save to CSV:
 
 
 ```r
-write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE)
+write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
 ```
 
 ## Create description extension
@@ -981,14 +980,14 @@ species_status %>%
 
 |raw_d_n   |description | records|
 |:---------|:-----------|-------:|
-|Cas.      |vagrant     |    1795|
-|Cas.?     |vagrant     |      51|
+|Cas.      |vagrant     |    1808|
+|Cas.?     |vagrant     |      50|
 |Ext.      |            |      15|
 |Ext.?     |            |       4|
 |Ext./Cas. |            |       4|
 |Inv.      |            |      64|
-|Nat.      |introduced  |     447|
-|Nat.?     |introduced  |     100|
+|Nat.      |introduced  |     453|
+|Nat.?     |introduced  |     101|
 |NA        |            |       1|
 
 Keep only non-empty descriptions:
@@ -1006,7 +1005,7 @@ nrow(species_status)
 ```
 
 ```
-## [1] 2393
+## [1] 2412
 ```
 
 Preview data:
@@ -1136,16 +1135,17 @@ native_range %>%
 
 |value |mapped_value      | records|
 |:-----|:-----------------|-------:|
-|AF    |Africa            |     630|
-|AM    |pan-American      |      92|
+|      |                  |       1|
+|AF    |Africa            |     636|
+|AM    |pan-American      |      93|
 |AS    |Asia              |      71|
-|AS-Te |temperate Asia    |    1044|
+|AS-Te |temperate Asia    |    1050|
 |AS-Tr |tropical Asia     |      12|
 |AUS   |Australasia       |     117|
-|Cult. |cultivated origin |      88|
-|E     |Europe            |    1111|
+|Cult. |cultivated origin |      90|
+|E     |Europe            |    1122|
 |Hybr. |hybrid origin     |      67|
-|NAM   |Northern America  |     360|
+|NAM   |Northern America  |     362|
 |SAM   |Southern America  |     157|
 |Trop. |Pantropical       |      37|
 
@@ -1172,7 +1172,7 @@ nrow(native_range)
 ```
 
 ```
-## [1] 3786
+## [1] 3814
 ```
 
 Preview data:
@@ -1267,7 +1267,7 @@ nrow(description_ext)
 ```
 
 ```
-## [1] 6179
+## [1] 6226
 ```
 
 Preview data:
@@ -1292,6 +1292,6 @@ Save to CSV:
 
 
 ```r
-write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE)
+write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
 ```
 
