@@ -162,7 +162,7 @@ taxon %<>% select(-one_of(raw_colnames))
 kable(head(taxon))
 
 #' Save to CSV:
-write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE)
+write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
 
 #' ## Create distribution extension
 #' 
@@ -235,7 +235,7 @@ distribution %<>% gather(
   convert = FALSE
 )
 
-#' Sort on ID to see pathways in context for each record:
+#' Sort on `id` to see pathways in context for each record:
 distribution %<>% arrange(id)
 
 #' Show unique values:
@@ -390,39 +390,42 @@ distribution %<>% select(
   -start_year, -end_year
 )
 
+#' Sort on `id`:
+distribution %<>% arrange(id)
+
 #' Preview data:
 kable(head(distribution))
 
 #' Save to CSV:
-write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE)
+write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
 
 #' ## Create description extension
 #' 
-#' In the description extension we want to include **species origin/status** (`raw_d_n`) and **native range** (`raw_origin`) information. We'll create a separate data frame for both and then combine these with union.
+#' In the description extension we want to include **origin** (`raw_d_n`) and **native range** (`raw_origin`) information. We'll create a separate data frame for both and then combine these with union.
 #' 
 #' ### Pre-processing
 #' 
-#' #### Species status
+#' #### Origin
 #' 
-#' Since Darwin Core has no `origin` field yet as suggested in [ias-dwc-proposal](https://github.com/qgroom/ias-dwc-proposal/blob/master/proposal.md#origin-new-term), we'll add this information in the description extension.
+#' `origin` describes if a species is native in a distribution or not. Since Darwin Core has no `origin` field yet as suggested in [ias-dwc-proposal](https://github.com/qgroom/ias-dwc-proposal/blob/master/proposal.md#origin-new-term), we'll add this information in the description extension.
 #' 
 #' Create new data frame:
-species_status <- raw_data
+origin <- raw_data
 
 #' Create `description` from `raw_d_n`:
-species_status %<>% mutate(description = raw_d_n)
+origin %<>% mutate(description = raw_d_n)
 
 #' Create a `type` field to indicate the type of description:
-species_status %<>% mutate(type = "origin")
+origin %<>% mutate(type = "origin")
 
 #' Clean values:
-species_status %<>% mutate(description = 
+origin %<>% mutate(description = 
   str_replace_all(description, "\\?", ""), # Strip ?
   description = str_trim(description) # Clean whitespace
 )
 
 #' Map values using [this vocabulary](https://github.com/qgroom/ias-dwc-proposal/blob/master/vocabulary/origin.tsv):
-species_status %<>% mutate(description = recode(description,
+origin %<>% mutate(description = recode(description,
   "Cas." = "vagrant",
   "Nat." = "introduced",
   "Ext." = "",
@@ -433,7 +436,7 @@ species_status %<>% mutate(description = recode(description,
 ))
 
 #' Show mapped values:
-species_status %>%
+origin %>%
   select(raw_d_n, description) %>%
   group_by(raw_d_n, description) %>%
   summarize(records = n()) %>%
@@ -441,13 +444,13 @@ species_status %>%
   kable()
 
 #' Keep only non-empty descriptions:
-species_status %<>% filter(!is.na(description) & description != "")
+origin %<>% filter(!is.na(description) & description != "")
 
 #' Number of records:
-nrow(species_status)
+nrow(origin)
 
 #' Preview data:
-kable(head(species_status))
+kable(head(origin))
 
 #' #### Native range
 #' 
@@ -531,9 +534,9 @@ nrow(native_range)
 #' Preview data:
 kable(head(native_range))
 
-#' #### Union species status and native range
+#' #### Union origin and native range
 #' 
-description_ext <- union_all(species_status, native_range)
+description_ext <- union_all(origin, native_range)
 
 #' ### Term mapping
 #' 
@@ -570,11 +573,14 @@ description_ext %<>% select(
 #' Move `id` to the first position:
 description_ext %<>% select(id, everything())
 
+#' Sort on `id`:
+description_ext %<>% arrange(id)
+
 #' Number of records
 nrow(description_ext)
 
 #' Preview data:
-kable(head(description_ext))
+kable(head(description_ext, 10))
 
 #' Save to CSV:
-write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE)
+write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
