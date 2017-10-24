@@ -1,8 +1,8 @@
 # Darwin Core mapping
 
-Peter Desmet & Quentin Groom
+Peter Desmet, Quentin Groom, Lien Reyserhove
 
-2017-09-16
+2017-10-24
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -597,6 +597,15 @@ Convert empty values to `NA` (important to be able to remove them after paste):
 distribution %<>% mutate(mapped_value = na_if(mapped_value, ""))
 ```
 
+Since our pathway controlled vocabulary is not allowed by GBIF in `establishmentMeans` (see <https://github.com/trias-project/alien-plants-belgium/issues/35>), we'll also add it to the Description extension. Rather than cleaning it all over again there, we save it here:
+
+
+```r
+pathway <- distribution %>% select(
+    one_of(raw_colnames), # Add raw columns
+    mapped_value)
+```
+
 Spread values back to columns:
 
 
@@ -975,13 +984,6 @@ Create `description` from `raw_d_n`:
 native_range %<>% mutate(description = raw_origin)
 ```
 
-Create a `type` field to indicate the type of description:
-
-
-```r
-native_range %<>% mutate(type = "native range")
-```
-
 Separate `description` on space in 4 columns:
 
 
@@ -1095,6 +1097,13 @@ Keep only non-empty descriptions:
 native_range %<>% filter(!is.na(description) & description != "")
 ```
 
+Create a `type` field to indicate the type of description:
+
+
+```r
+native_range %<>% mutate(type = "native range")
+```
+
 Preview data:
 
 
@@ -1104,21 +1113,72 @@ kable(head(native_range))
 
 
 
-| raw_id|raw_taxon            |raw_hybrid_formula |raw_synonym |raw_family  |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i |raw_taxonrank |raw_scientificnameid                            |type         |description    |
-|------:|:--------------------|:------------------|:-----------|:-----------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-------|:-------------|:-----------------------------------------------|:------------|:--------------|
-|      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |native range |Europe         |
-|      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |native range |Africa         |
-|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |native range |Europe         |
-|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |native range |Africa         |
-|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |native range |temperate Asia |
-|      3|Acorus calamus L.    |NA                 |NA          |Acoraceae   |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1 |native range |temperate Asia |
+| raw_id|raw_taxon            |raw_hybrid_formula |raw_synonym |raw_family  |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i |raw_taxonrank |raw_scientificnameid                            |description    |type         |
+|------:|:--------------------|:------------------|:-----------|:-----------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-------|:-------------|:-----------------------------------------------|:--------------|:------------|
+|      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |Europe         |native range |
+|      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |Africa         |native range |
+|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |Europe         |native range |
+|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |Africa         |native range |
+|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |temperate Asia |native range |
+|      3|Acorus calamus L.    |NA                 |NA          |Acoraceae   |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1 |temperate Asia |native range |
 
-#### Union origin and native range
+#### Pathway (pathway of introduction) 
 
+Pathway information was already generated for `establishmentMeans` in the Distribution extension and saved in a dataframe `pathway`. It contains one record per pathway (with potentially more than one pathway per taxon).
+Change column name `mapped_value` to `description`:
 
 
 ```r
-description_ext <- union_all(origin, native_range)
+pathway %<>%  rename(description = mapped_value)
+```
+
+Create a `type` field to indicate the type of description:
+
+
+```r
+pathway %<>% mutate (type = "pathway")
+```
+
+Show pathway descriptions:
+
+
+```r
+pathway %>% 
+  select(description) %>% 
+  group_by(description) %>% 
+  summarize(records = n()) %>% 
+  kable()
+```
+
+
+
+|description                  | records|
+|:----------------------------|-------:|
+|contaminant:habitat_material |      93|
+|contaminant:nursery          |      20|
+|contaminant:on_animals       |     580|
+|contaminant:on_plants        |       4|
+|contaminant:seed             |     649|
+|contaminant:timber           |      10|
+|escape:agriculture           |      85|
+|escape:food_bait             |      21|
+|escape:horticulture          |    1096|
+|stowaway                     |      10|
+|stowaway:people_luggage      |      10|
+|NA                           |     612|
+
+Keep only non-empty descriptions:
+
+
+```r
+pathway %<>% filter(!is.na(description) & description != "")
+```
+
+#### Union origin, native range and pathway:
+
+
+```r
+description_ext <- bind_rows(origin, native_range, pathway)
 ```
 
 ### Term mapping
@@ -1195,18 +1255,18 @@ kable(head(description_ext, 10))
 
 
 
-| id|description    |type         |language |
-|--:|:--------------|:------------|:--------|
-|  1|vagrant        |origin       |en       |
-|  1|Europe         |native range |en       |
-|  1|Africa         |native range |en       |
-|  2|vagrant        |origin       |en       |
-|  2|Europe         |native range |en       |
-|  2|Africa         |native range |en       |
-|  2|temperate Asia |native range |en       |
-|  3|introduced     |origin       |en       |
-|  3|temperate Asia |native range |en       |
-|  4|vagrant        |origin       |en       |
+| id|description         |type         |language |
+|--:|:-------------------|:------------|:--------|
+|  1|vagrant             |origin       |en       |
+|  1|Europe              |native range |en       |
+|  1|Africa              |native range |en       |
+|  1|escape:horticulture |pathway      |en       |
+|  2|vagrant             |origin       |en       |
+|  2|Europe              |native range |en       |
+|  2|Africa              |native range |en       |
+|  2|temperate Asia      |native range |en       |
+|  2|escape:horticulture |pathway      |en       |
+|  3|introduced          |origin       |en       |
 
 Save to CSV:
 
@@ -1222,7 +1282,7 @@ write.csv(description_ext, file = dwc_description_file, na = "", row.names = FAL
 * Source file: 2500
 * Taxon core: 2500
 * Distribution extension: 2496
-* Description extension: 6226
+* Description extension: 8804
 
 ### Taxon core
 
