@@ -1,6 +1,6 @@
 #' # Darwin Core mapping
 #' 
-#' Peter Desmet & Quentin Groom
+#' Peter Desmet, Quentin Groom, Lien Reyserhove
 #' 
 #' `r Sys.Date()`
 #'
@@ -287,9 +287,10 @@ distribution %<>% select(-value)
 #' Convert empty values to `NA` (important to be able to remove them after paste):
 distribution %<>% mutate(mapped_value = na_if(mapped_value, ""))
 
-#' Create 'pathway' variable based on 'mapped_value column', to integrate this information into the description extension file  (see distribution:invalid error on gbfif)
+#'Since our pathway controlled vocabulary is not allowed by GBIF in `establishmentMeans` (see <https://github.com/trias-project/alien-plants-belgium/issues/35>), we'll also add it to the Description extension. Rather than cleaning it all over again there, we save it here:
+
 pathway <- distribution %>% select(
-    one_of(raw_colnames),
+    one_of(raw_colnames), # Add raw columns
     mapped_value)
 
 #' Spread values back to columns:
@@ -522,9 +523,9 @@ kable(head(native_range))
 
 #' #### Pathway (pathway of introduction) 
 #' 
-#' The dataframe `pathway`contains this information. This is the same information as in establishmentMeans in the distribution extension
+#' Pathway information was already generated for `establishmentMeans` in the Distribution extension and saved in a dataframe `pathway`. It contains one record per pathway (with potentially more than one pathway per taxon).
 
-#' Change column name 'mapped_value" to `description`:
+#' Change column name `mapped_value` to `description`:
 pathway %<>%  rename(description = mapped_value)
 
 #' Create a `type` field to indicate the type of description:
@@ -532,16 +533,16 @@ pathway %<>% mutate (type = "pathway")
 
 #' Show pathway descriptions:
 pathway %>% 
-  select (description) %>% 
+  select(description) %>% 
   group_by(description) %>% 
-  summarize (records = n()) %>% 
-  kable ()
+  summarize(records = n()) %>% 
+  kable()
 
-#' Remove "NA"
-pathway %<>% filter (!is.na(description))
+#' Keep only non-empty descriptions:
+pathway %<>% filter(!is.na(description) & description != "")
 
-#' #### Union origin, native range and pathway
-description_ext <- rbind(origin, native_range, pathway)
+#' #### Union origin, native range and pathway:
+description_ext <- bind_rows(origin, native_range, pathway)
 
 #' ### Term mapping
 #' 
