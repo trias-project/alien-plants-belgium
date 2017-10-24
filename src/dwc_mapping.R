@@ -287,6 +287,11 @@ distribution %<>% select(-value)
 #' Convert empty values to `NA` (important to be able to remove them after paste):
 distribution %<>% mutate(mapped_value = na_if(mapped_value, ""))
 
+#' Create 'pathway' variable based on 'mapped_value column', to integrate this information into the description extension file  (see distribution:invalid error on gbfif)
+pathway <- distribution %>% select(
+    one_of(raw_colnames),
+    mapped_value)
+
 #' Spread values back to columns:
 distribution %<>% spread(key, mapped_value)
 
@@ -446,9 +451,6 @@ native_range <- raw_data
 #' Create `description` from `raw_d_n`:
 native_range %<>% mutate(description = raw_origin)
 
-#' Create a `type` field to indicate the type of description:
-native_range %<>% mutate(type = "native range")
-
 #' Separate `description` on space in 4 columns:
 # In case there are more than 4 values, these will be merged in native_range_4. 
 # The dataset currently contains no more than 4 values per record.
@@ -512,12 +514,34 @@ native_range %<>% rename(description = mapped_value)
 #' Keep only non-empty descriptions:
 native_range %<>% filter(!is.na(description) & description != "")
 
+#' Create a `type` field to indicate the type of description:
+native_range %<>% mutate(type = "native range")
+
 #' Preview data:
 kable(head(native_range))
 
-#' #### Union origin and native range
+#' #### Pathway (pathway of introduction) 
 #' 
-description_ext <- union_all(origin, native_range)
+#' The dataframe `pathway`contains this information. This is the same information as in establishmentMeans in the distribution extension
+
+#' Change column name 'mapped_value" to `description`:
+pathway %<>%  rename(description = mapped_value)
+
+#' Create a `type` field to indicate the type of description:
+pathway %<>% mutate (type = "pathway")
+
+#' Show pathway descriptions:
+pathway %>% 
+  select (description) %>% 
+  group_by(description) %>% 
+  summarize (records = n()) %>% 
+  kable ()
+
+#' Remove "NA"
+pathway %<>% filter (!is.na(description))
+
+#' #### Union origin, native range and pathway
+description_ext <- rbind(origin, native_range, pathway)
 
 #' ### Term mapping
 #' 
