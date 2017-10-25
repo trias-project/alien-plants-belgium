@@ -2,7 +2,7 @@
 
 Peter Desmet, Quentin Groom, Lien Reyserhove
 
-2017-10-24
+2017-10-25
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -16,11 +16,11 @@ Set locale (so we use UTF-8 character encoding):
 
 ```r
 # This works on Mac OS X, might not work on other OS
-Sys.setlocale("LC_ALL", 'en_US.UTF-8')
+Sys.setlocale("LC_CTYPE", 'English_United States.1252')
 ```
 
 ```
-## [1] "en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/C"
+## [1] "English_United States.1252"
 ```
 
 Load libraries:
@@ -424,7 +424,7 @@ distribution %>%
 |:----------------|
 |                 |
 |...              |
-|â€¦                |
+|…                |
 |agric.           |
 |birdseed         |
 |etc.             |
@@ -442,9 +442,9 @@ distribution %>%
 |tourists         |
 |urban weed       |
 |wool             |
-|?                |
 |...              |
-|â€¦                |
+|?                |
+|…                |
 |Agric.           |
 |Bird seed        |
 |Birdseed         |
@@ -552,7 +552,8 @@ distribution %>%
 
 |value           |mapped_value                 | records|
 |:---------------|:----------------------------|-------:|
-|                |                             |     542|
+|                |                             |     163|
+|…               |                             |     379|
 |agric.          |escape:agriculture           |      85|
 |bird seed       |contaminant:seed             |       1|
 |birdseed        |contaminant:seed             |      31|
@@ -934,8 +935,8 @@ origin %>%
 |Cas.      |vagrant     |    1808|
 |Cas.?     |vagrant     |      50|
 |Ext.      |            |      15|
-|Ext.?     |            |       4|
 |Ext./Cas. |            |       4|
+|Ext.?     |            |       4|
 |Inv.      |            |      64|
 |Nat.      |introduced  |     453|
 |Nat.?     |introduced  |     101|

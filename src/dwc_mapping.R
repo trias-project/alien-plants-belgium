@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 #' Set locale (so we use UTF-8 character encoding):
 # This works on Mac OS X, might not work on other OS
-Sys.setlocale("LC_ALL", 'en_US.UTF-8')
+Sys.setlocale("LC_CTYPE", 'English_United States.1252')
 
 #' Load libraries:
 library(tidyverse) # For data transformations
