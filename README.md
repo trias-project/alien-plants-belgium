@@ -13,7 +13,7 @@ This repository contains the functionality to standardize the [Manual of the Ali
 
 ## Repo structure
 
-The repository structure is based on [cookiecutter-data-science](https://github.com/drivendata/cookiecutter-data-science). Files indicated with `GENERATED` should not be edited manually.
+The repository structure is based on [Cookiecutter Data Science](http://drivendata.github.io/cookiecutter-data-science/). Files indicated with `GENERATED` should not be edited manually.
 
 ```
 ├── README.md         : Top-level description of the project and how to run it
@@ -49,7 +49,7 @@ The repository structure is based on [cookiecutter-data-science](https://github.
 
 ## Contributors
 
-[List of contributors](https://github.com/trias-project/alienplantsbelgium/contributors)
+[List of contributors](https://github.com/trias-project/alien-plants-belgium/contributors)
 
 ## License
 
