@@ -2,7 +2,7 @@
 
 ## Rationale
 
-This repository contains the functionality to standardize the [Manual of the Alien Plants of Belgium](http://alienplantsbelgium.be/) to a [Darwin Core checklist](http://www.gbif.org/publishing-data/summary#datasetclasses) that can be harvested by [GBIF](http://www.gbif.org). It was developed for the [TrIAS project](http://trias-project.be).
+This repository contains the functionality to standardize the [Manual of the Alien Plants of Belgium](http://alienplantsbelgium.be/) to a [Darwin Core checklist](https://www.gbif.org/dataset-classes) that can be harvested by [GBIF](http://www.gbif.org). It was developed for the [TrIAS project](http://trias-project.be).
 
 ## Results
 
