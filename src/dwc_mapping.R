@@ -174,7 +174,7 @@ distribution %<>% mutate(presence_be =
 distribution %<>% mutate(id = raw_id)
 
 #' #### locationID
-distribution %<>% mutate(locationID = "ISO3166-2:BE")
+distribution %<>% mutate(locationID = "ISO_3166-2:BE")
 
 #' #### locality
 distribution %<>% mutate(locality = "Belgium")
