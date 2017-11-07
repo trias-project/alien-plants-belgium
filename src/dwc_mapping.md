@@ -105,6 +105,8 @@ kable(head(raw_data))
 
 ## Create taxon core
 
+### Pre-processing
+
 
 ```r
 taxon <- raw_data

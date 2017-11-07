@@ -57,6 +57,8 @@ raw_colnames <- colnames(raw_data)
 kable(head(raw_data))
 
 #' ## Create taxon core
+#' 
+#' ### Pre-processing
 taxon <- raw_data
 
 #' ### Term mapping
