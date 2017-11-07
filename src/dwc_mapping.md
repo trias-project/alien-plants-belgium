@@ -2,7 +2,7 @@
 
 Peter Desmet, Quentin Groom, Lien Reyserhove
 
-2017-10-25
+2017-11-07
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -16,11 +16,11 @@ Set locale (so we use UTF-8 character encoding):
 
 ```r
 # This works on Mac OS X, might not work on other OS
-Sys.setlocale("LC_CTYPE", 'English_United States.1252')
+Sys.setlocale("LC_CTYPE", "en_US.UTF-8")
 ```
 
 ```
-## [1] "English_United States.1252"
+## [1] "en_US.UTF-8"
 ```
 
 Load libraries:
@@ -113,13 +113,6 @@ taxon <- raw_data
 ### Term mapping
 
 Map the source data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml):
-
-#### id
-
-
-```r
-taxon %<>% mutate(id = raw_id)
-```
 
 #### modified
 #### language
@@ -276,14 +269,14 @@ kable(head(taxon))
 
 
 
-| id|language |license                                           |rightsHolder         |datasetID |datasetName                           | taxonID|scientificNameID                                 |scientificName                                             |kingdom |family        |taxonRank |nomenclaturalCode |
-|--:|:--------|:-------------------------------------------------|:--------------------|:---------|:-------------------------------------|-------:|:------------------------------------------------|:----------------------------------------------------------|:-------|:-------------|:---------|:-----------------|
-|  1|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       1|http://ipni.org/urn:lsid:ipni.org:names:44892-1  |Acanthus mollis L.                                         |Plantae |Acanthaceae   |species   |ICBN              |
-|  2|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       2|http://ipni.org/urn:lsid:ipni.org:names:44920-1  |Acanthus spinosus L.                                       |Plantae |Acanthaceae   |species   |ICBN              |
-|  3|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       3|http://ipni.org/urn:lsid:ipni.org:names:84009-1  |Acorus calamus L.                                          |Plantae |Acoraceae     |species   |ICBN              |
-|  4|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       4|http://ipni.org/urn:lsid:ipni.org:names:913605-1 |Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |Plantae |Actinidiaceae |species   |ICBN              |
-|  5|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       5|http://ipni.org/urn:lsid:ipni.org:names:321978-2 |Sambucus canadensis L.                                     |Plantae |Adoxaceae     |species   |ICBN              |
-|  6|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       6|http://ipni.org/urn:lsid:ipni.org:names:149642-1 |Viburnum davidii Franch.                                   |Plantae |Adoxaceae     |species   |ICBN              |
+|language |license                                           |rightsHolder         |datasetID |datasetName                           | taxonID|scientificNameID                                 |scientificName                                             |kingdom |family        |taxonRank |nomenclaturalCode |
+|:--------|:-------------------------------------------------|:--------------------|:---------|:-------------------------------------|-------:|:------------------------------------------------|:----------------------------------------------------------|:-------|:-------------|:---------|:-----------------|
+|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       1|http://ipni.org/urn:lsid:ipni.org:names:44892-1  |Acanthus mollis L.                                         |Plantae |Acanthaceae   |species   |ICBN              |
+|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       2|http://ipni.org/urn:lsid:ipni.org:names:44920-1  |Acanthus spinosus L.                                       |Plantae |Acanthaceae   |species   |ICBN              |
+|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       3|http://ipni.org/urn:lsid:ipni.org:names:84009-1  |Acorus calamus L.                                          |Plantae |Acoraceae     |species   |ICBN              |
+|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       4|http://ipni.org/urn:lsid:ipni.org:names:913605-1 |Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |Plantae |Actinidiaceae |species   |ICBN              |
+|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       5|http://ipni.org/urn:lsid:ipni.org:names:321978-2 |Sambucus canadensis L.                                     |Plantae |Adoxaceae     |species   |ICBN              |
+|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       6|http://ipni.org/urn:lsid:ipni.org:names:149642-1 |Viburnum davidii Franch.                                   |Plantae |Adoxaceae     |species   |ICBN              |
 
 Save to CSV:
 
@@ -328,7 +321,7 @@ distribution %<>% mutate(id = raw_id)
 
 
 ```r
-distribution %<>% mutate(locationID = "ISO3166-2:BE")
+distribution %<>% mutate(locationID = "ISO_3166-2:BE")
 ```
 
 #### locality
@@ -424,7 +417,7 @@ distribution %>%
 |:----------------|
 |                 |
 |...              |
-|…                |
+|Ore              |
 |agric.           |
 |birdseed         |
 |etc.             |
@@ -434,7 +427,6 @@ distribution %>%
 |hort.?           |
 |nurseries        |
 |ore              |
-|Ore              |
 |ore?             |
 |salt             |
 |seeds            |
@@ -442,9 +434,9 @@ distribution %>%
 |tourists         |
 |urban weed       |
 |wool             |
+|â€¦                |
 |...              |
 |?                |
-|…                |
 |Agric.           |
 |Bird seed        |
 |Birdseed         |
@@ -461,7 +453,6 @@ distribution %>%
 |Grass seed?      |
 |Hay?             |
 |Hort             |
-|hort.            |
 |Hort.            |
 |Hort.?           |
 |Hybridization    |
@@ -485,6 +476,8 @@ distribution %>%
 |Wool             |
 |Wool alien       |
 |Wool?            |
+|hort.            |
+|â€¦                |
 
 Clean values:
 
@@ -552,8 +545,7 @@ distribution %>%
 
 |value           |mapped_value                 | records|
 |:---------------|:----------------------------|-------:|
-|                |                             |     163|
-|…               |                             |     379|
+|                |                             |     542|
 |agric.          |escape:agriculture           |      85|
 |bird seed       |contaminant:seed             |       1|
 |birdseed        |contaminant:seed             |      31|
@@ -700,7 +692,32 @@ distribution %>%
 
 |raw_year  |formatted_year |
 |:---------|:--------------|
-|?         |               |
+|1813?     |1813           |
+|1817?     |1817           |
+|1860?     |1860           |
+|1866?     |1866           |
+|1886?     |1886           |
+|1893?     |1893           |
+|1911?     |1911           |
+|1912?     |1912           |
+|1931?     |1931           |
+|1947?     |1947           |
+|1955?     |1955           |
+|1959?     |1959           |
+|1960?     |1960           |
+|1963?     |1963           |
+|1965?     |1965           |
+|1972?     |1972           |
+|1975?     |1975           |
+|1976?     |1976           |
+|1979?     |1979           |
+|1985?     |1985           |
+|1998?     |1998           |
+|2000?     |2000           |
+|2002?     |2002           |
+|2004?     |2004           |
+|2006?     |2006           |
+|2010?     |2010           |
 |<1800     |1800           |
 |<1812     |1812           |
 |<1824     |1824           |
@@ -743,37 +760,12 @@ distribution %>%
 |<2012     |2012           |
 |>1940     |1940           |
 |>1972     |1972           |
-|1813?     |1813           |
-|1817?     |1817           |
-|1860?     |1860           |
-|1866?     |1866           |
-|1886?     |1886           |
-|1893?     |1893           |
-|1911?     |1911           |
-|1912?     |1912           |
-|1931?     |1931           |
-|1947?     |1947           |
-|1955?     |1955           |
-|1959?     |1959           |
-|1960?     |1960           |
-|1963?     |1963           |
-|1965?     |1965           |
-|1972?     |1972           |
-|1975?     |1975           |
-|1976?     |1976           |
-|1979?     |1979           |
-|1985?     |1985           |
-|1998?     |1998           |
-|2000?     |2000           |
-|2002?     |2002           |
-|2004?     |2004           |
-|2006?     |2006           |
-|2010?     |2010           |
+|?         |               |
+|N         |2017           |
+|N?        |2017           |
 |ca. 1975  |1975           |
 |ca. 1985? |1985           |
 |ca. 1996  |1996           |
-|N         |2017           |
-|N?        |2017           |
 
 Check if any `start_year` fall after `end_year` (expected to be none):
 
@@ -844,14 +836,14 @@ kable(head(distribution))
 
 
 
-| id|locationID   |locality |countryCode |occurrenceStatus |establishmentMeans  |eventDate |
-|--:|:------------|:--------|:-----------|:----------------|:-------------------|:---------|
-|  1|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1998/2016 |
-|  2|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2016      |
-|  3|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1680/2017 |
-|  4|ISO3166-2:BE |Belgium  |BE          |present          |escape:food_bait    |2000/2017 |
-|  5|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1972/2015 |
-|  6|ISO3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2014/2015 |
+| id|locationID    |locality |countryCode |occurrenceStatus |establishmentMeans  |eventDate |
+|--:|:-------------|:--------|:-----------|:----------------|:-------------------|:---------|
+|  1|ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1998/2016 |
+|  2|ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2016      |
+|  3|ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1680/2017 |
+|  4|ISO_3166-2:BE |Belgium  |BE          |present          |escape:food_bait    |2000/2017 |
+|  5|ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1972/2015 |
+|  6|ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2014/2015 |
 
 Save to CSV:
 

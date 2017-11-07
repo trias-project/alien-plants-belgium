@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 
 #' Set locale (so we use UTF-8 character encoding):
 # This works on Mac OS X, might not work on other OS
-Sys.setlocale("LC_CTYPE", 'English_United States.1252')
+Sys.setlocale("LC_CTYPE", "en_US.UTF-8")
 
 #' Load libraries:
 library(tidyverse) # For data transformations
@@ -63,9 +63,6 @@ taxon <- raw_data
 #' 
 #' Map the source data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml):
 #' 
-#' #### id
-taxon %<>% mutate(id = raw_id)
-
 #' #### modified
 #' #### language
 taxon %<>% mutate(language = "en")
@@ -599,7 +596,7 @@ write.csv(description_ext, file = dwc_description_file, na = "", row.names = FAL
 #'
 #' ### Taxon core
 #' 
-#' Number of duplicates: `r anyDuplicated(taxon[["id"]])` (should be 0)
+#' Number of duplicates: `r anyDuplicated(taxon[["taxonID"]])` (should be 0)
 #' 
 #' The following numbers are expected to be the same:
 #' 
