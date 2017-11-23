@@ -448,7 +448,7 @@ kable(head(origin))
 #' Create new data frame:
 native_range <- raw_data
 
-#' Create `description` from `raw_d_n`:
+#' Create `description` from `raw_origin`:
 native_range %<>% mutate(description = raw_origin)
 
 #' Separate `description` on space in 4 columns:

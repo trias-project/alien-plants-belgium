@@ -2,7 +2,7 @@
 
 Peter Desmet, Quentin Groom, Lien Reyserhove
 
-2017-11-07
+2017-11-23
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -20,7 +20,7 @@ Sys.setlocale("LC_CTYPE", "en_US.UTF-8")
 ```
 
 ```
-## [1] "en_US.UTF-8"
+## [1] ""
 ```
 
 Load libraries:
@@ -419,7 +419,7 @@ distribution %>%
 |:----------------|
 |                 |
 |...              |
-|Ore              |
+|…                |
 |agric.           |
 |birdseed         |
 |etc.             |
@@ -429,6 +429,7 @@ distribution %>%
 |hort.?           |
 |nurseries        |
 |ore              |
+|Ore              |
 |ore?             |
 |salt             |
 |seeds            |
@@ -436,9 +437,9 @@ distribution %>%
 |tourists         |
 |urban weed       |
 |wool             |
-|â€¦                |
 |...              |
 |?                |
+|…                |
 |Agric.           |
 |Bird seed        |
 |Birdseed         |
@@ -455,6 +456,7 @@ distribution %>%
 |Grass seed?      |
 |Hay?             |
 |Hort             |
+|hort.            |
 |Hort.            |
 |Hort.?           |
 |Hybridization    |
@@ -478,8 +480,6 @@ distribution %>%
 |Wool             |
 |Wool alien       |
 |Wool?            |
-|hort.            |
-|â€¦                |
 
 Clean values:
 
@@ -547,7 +547,8 @@ distribution %>%
 
 |value           |mapped_value                 | records|
 |:---------------|:----------------------------|-------:|
-|                |                             |     542|
+|                |                             |     163|
+|…               |                             |     379|
 |agric.          |escape:agriculture           |      85|
 |bird seed       |contaminant:seed             |       1|
 |birdseed        |contaminant:seed             |      31|
@@ -694,32 +695,7 @@ distribution %>%
 
 |raw_year  |formatted_year |
 |:---------|:--------------|
-|1813?     |1813           |
-|1817?     |1817           |
-|1860?     |1860           |
-|1866?     |1866           |
-|1886?     |1886           |
-|1893?     |1893           |
-|1911?     |1911           |
-|1912?     |1912           |
-|1931?     |1931           |
-|1947?     |1947           |
-|1955?     |1955           |
-|1959?     |1959           |
-|1960?     |1960           |
-|1963?     |1963           |
-|1965?     |1965           |
-|1972?     |1972           |
-|1975?     |1975           |
-|1976?     |1976           |
-|1979?     |1979           |
-|1985?     |1985           |
-|1998?     |1998           |
-|2000?     |2000           |
-|2002?     |2002           |
-|2004?     |2004           |
-|2006?     |2006           |
-|2010?     |2010           |
+|?         |               |
 |<1800     |1800           |
 |<1812     |1812           |
 |<1824     |1824           |
@@ -762,12 +738,37 @@ distribution %>%
 |<2012     |2012           |
 |>1940     |1940           |
 |>1972     |1972           |
-|?         |               |
-|N         |2017           |
-|N?        |2017           |
+|1813?     |1813           |
+|1817?     |1817           |
+|1860?     |1860           |
+|1866?     |1866           |
+|1886?     |1886           |
+|1893?     |1893           |
+|1911?     |1911           |
+|1912?     |1912           |
+|1931?     |1931           |
+|1947?     |1947           |
+|1955?     |1955           |
+|1959?     |1959           |
+|1960?     |1960           |
+|1963?     |1963           |
+|1965?     |1965           |
+|1972?     |1972           |
+|1975?     |1975           |
+|1976?     |1976           |
+|1979?     |1979           |
+|1985?     |1985           |
+|1998?     |1998           |
+|2000?     |2000           |
+|2002?     |2002           |
+|2004?     |2004           |
+|2006?     |2006           |
+|2010?     |2010           |
 |ca. 1975  |1975           |
 |ca. 1985? |1985           |
 |ca. 1996  |1996           |
+|N         |2017           |
+|N?        |2017           |
 
 Check if any `start_year` fall after `end_year` (expected to be none):
 
@@ -972,7 +973,7 @@ Create new data frame:
 native_range <- raw_data
 ```
 
-Create `description` from `raw_d_n`:
+Create `description` from `raw_origin`:
 
 
 ```r
