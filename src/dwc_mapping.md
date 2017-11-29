@@ -2,7 +2,7 @@
 
 Peter Desmet, Quentin Groom, Lien Reyserhove
 
-2017-11-23
+2017-11-29
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -433,6 +433,7 @@ distribution %>%
 |ore?             |
 |salt             |
 |seeds            |
+|seeds?           |
 |timber?          |
 |tourists         |
 |urban weed       |
@@ -549,23 +550,23 @@ distribution %>%
 |:---------------|:----------------------------|-------:|
 |                |                             |     163|
 |…               |                             |     379|
-|agric.          |escape:agriculture           |      85|
+|agric.          |escape:agriculture           |      86|
 |bird seed       |contaminant:seed             |       1|
 |birdseed        |contaminant:seed             |      31|
 |bulbs           |                             |       1|
 |coconut mats    |contaminant:seed             |       1|
 |etc.            |                             |       1|
 |fish            |                             |       3|
-|food refuse     |escape:food_bait             |      21|
-|grain           |contaminant:seed             |     541|
+|food refuse     |escape:food_bait             |      22|
+|grain           |contaminant:seed             |     542|
 |grain (rice)    |contaminant:seed             |       3|
 |grass seed      |contaminant:seed             |       8|
 |hay             |                             |       1|
 |hort            |escape:horticulture          |       2|
-|hort.           |escape:horticulture          |    1094|
+|hort.           |escape:horticulture          |    1099|
 |hybridization   |                             |      48|
 |military troops |                             |       9|
-|nurseries       |contaminant:nursery          |      20|
+|nurseries       |contaminant:nursery          |      21|
 |ore             |contaminant:habitat_material |      93|
 |pines           |contaminant:on_plants        |       4|
 |rice            |                             |       1|
@@ -576,7 +577,7 @@ distribution %>%
 |traffic         |                             |       4|
 |urban weed      |stowaway                     |      10|
 |waterfowl       |contaminant:on_animals       |      14|
-|wool            |contaminant:on_animals       |     565|
+|wool            |contaminant:on_animals       |     566|
 |wool alien      |contaminant:on_animals       |       1|
 
 Drop `value` column:
@@ -927,7 +928,7 @@ origin %>%
 
 |raw_d_n   |description | records|
 |:---------|:-----------|-------:|
-|Cas.      |vagrant     |    1808|
+|Cas.      |vagrant     |    1815|
 |Cas.?     |vagrant     |      50|
 |Ext.      |            |      15|
 |Ext./Cas. |            |       4|
@@ -1065,17 +1066,17 @@ native_range %>%
 |value |mapped_value      | records|
 |:-----|:-----------------|-------:|
 |      |                  |       1|
-|AF    |Africa            |     636|
-|AM    |pan-American      |      93|
+|AF    |Africa            |     637|
+|AM    |pan-American      |      94|
 |AS    |Asia              |      71|
-|AS-Te |temperate Asia    |    1050|
+|AS-Te |temperate Asia    |    1051|
 |AS-Tr |tropical Asia     |      12|
 |AUS   |Australasia       |     117|
-|Cult. |cultivated origin |      90|
+|Cult. |cultivated origin |      92|
 |E     |Europe            |    1122|
 |Hybr. |hybrid origin     |      67|
-|NAM   |Northern America  |     362|
-|SAM   |Southern America  |     157|
+|NAM   |Northern America  |     363|
+|SAM   |Southern America  |     158|
 |Trop. |Pantropical       |      37|
 
 Drop `key` and `value` column and rename `mapped value`:
@@ -1151,14 +1152,14 @@ pathway %>%
 |description                  | records|
 |:----------------------------|-------:|
 |contaminant:habitat_material |      93|
-|contaminant:nursery          |      20|
-|contaminant:on_animals       |     580|
+|contaminant:nursery          |      21|
+|contaminant:on_animals       |     581|
 |contaminant:on_plants        |       4|
-|contaminant:seed             |     649|
+|contaminant:seed             |     650|
 |contaminant:timber           |      10|
-|escape:agriculture           |      85|
-|escape:food_bait             |      21|
-|escape:horticulture          |    1096|
+|escape:agriculture           |      86|
+|escape:food_bait             |      22|
+|escape:horticulture          |    1101|
 |stowaway                     |      10|
 |stowaway:people_luggage      |      10|
 |NA                           |     612|
@@ -1275,10 +1276,10 @@ write.csv(description_ext, file = dwc_description_file, na = "", row.names = FAL
 
 ### Number of records
 
-* Source file: 2500
-* Taxon core: 2500
-* Distribution extension: 2496
-* Description extension: 8804
+* Source file: 2507
+* Taxon core: 2507
+* Distribution extension: 2503
+* Description extension: 8828
 
 ### Taxon core
 
@@ -1286,10 +1287,10 @@ Number of duplicates: 0 (should be 0)
 
 The following numbers are expected to be the same:
 
-* Number of records: 2500
-* Number of distinct `taxonID`: 2500
-* Number of distinct `scientificName`: 2500
+* Number of records: 2507
+* Number of distinct `taxonID`: 2507
+* Number of distinct `scientificName`: 2507
 * Number of distinct `scientificNameID`: 1707 (can contain NAs)
-* Number of distinct `scientificNameID` and `NA`: 2500
+* Number of distinct `scientificNameID` and `NA`: 2507
 
 Number of unique families: 152
