@@ -359,7 +359,7 @@ distribution %<>% mutate(
 
 #' Only populate `establishmentMeans` when `presence` = `X` for `location`= `Belgium`, OR when `presence` = `S` for the regions.
 distribution %<>% mutate (establishmentMeans = case_when(
-  presence == "X" & location == "belgium" ~ pathway,
+  presence == "X" & location == "Belgium" ~ pathway,
   presence == "S" ~ pathway,
   TRUE ~ ""))
 
