@@ -155,15 +155,50 @@ write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE, fileEncoding
 #' ### Pre-processing
 distribution <- raw_data
 
-#' The checklist contains minimal presence information (`X` or `?`) for the three regions in Belgium (Flanders, Wallonia and the Brussels-Capital Region). Information regarding pathway, status, first and last recorded observation however apply to the distribution in Belgium as a whole. Since it is impossible to extrapolate that information for the regions, we decided to only provide distribution information for Belgium.
+#' The checklist contains minimal presence information (`X`,`?` or `NA`) for the three regions in Belgium (Flanders, Wallonia and the Brussels-Capital Region).
+#' Both national and regional information is required in the checklist. In the `distribution.csv`, we first provide the information on a national level for pathway, status and dates; followed by specific information for the regions. 
+#' However, information regarding pathway, status, first and last recorded observation applies to the distribution in Belgium as a whole.
+#' It is impossible to extrapolate this information for the regions, unless the species is present in only one region.
+#' In this case, we can assume pathway, status and date relate to that region and so we can keep lines for Belgium and for the specific region populated for all DwC terms (see #45)
+#' When a species is present in more than one region, we decided to only provide occurrenceStatus for the regional information, and specify all other information regarding pathway and dates only for Belgium
 
-#' Create a `presence_be` column, which contains `X` if any of the regions has `X` or else `?` if any of the regions has `?`:
-distribution %<>% mutate(presence_be =
-  case_when(
+#' Thus, we need to specify when a species is present in only one of the regions.
+#' We generate 4 new columns: `Flanders`, `Brussels`,`Wallonia` and `Belgium`. 
+#' The content of these columns refers to the specific occurrence of a species on a regional or national level.
+#' `X` if present, `?` if presence unknown, `NA` if absent and `S` if **exclusively present in that specific region**
+distribution %<>% 
+  mutate(Flanders = case_when(
+    raw_presence_fl == "X" & (is.na(raw_presence_br) | raw_presence_br == "?") & (is.na(raw_presence_wa) | raw_presence_wa == "?") ~ "S",
+    TRUE ~ raw_presence_fl)) %>%
+  mutate(Brussels = case_when(
+    (is.na(raw_presence_fl) | raw_presence_fl == "?") & raw_presence_br == "X" & (is.na(raw_presence_wa) | raw_presence_wa == "?") ~ "S",
+    TRUE ~ raw_presence_br)) %>%
+  mutate(Wallonia = case_when(
+    (is.na(raw_presence_fl) | raw_presence_fl == "?") & (is.na(raw_presence_br) | raw_presence_br == "?") & raw_presence_wa == "X" ~ "S",
+    TRUE ~ raw_presence_wa))%<>%
+  mutate(Belgium = case_when(
     raw_presence_fl == "X" | raw_presence_br == "X" | raw_presence_wa == "X" ~ "X", # One is "X"
     raw_presence_fl == "?" | raw_presence_br == "?" | raw_presence_wa == "?" ~ "?" # One is "?"
-  )
-)
+  ))
+
+#' Summary of the previous action:
+distribution %>% select (raw_presence_fl, raw_presence_br, raw_presence_wa, Flanders, Wallonia, Brussels, Belgium) %>%
+  group_by_all() %>%
+  summarize(records = n()) %>%
+  arrange(Flanders, Wallonia, Brussels) %>%
+  kable()
+
+#' From wide to long table (i.e. create a `key` and `value` column)
+distribution %<>% gather(
+  key, value,
+  Flanders, Wallonia, Brussels, Belgium,
+  na.rm = TRUE, # Also removes records for which there is no pathway_1
+  convert = FALSE
+) 
+
+#' Rename `key` and `value`
+distribution %<>% rename ("location" = "key", "presence" = "value")
+
 
 #' ### Term mapping
 #' 
@@ -173,10 +208,18 @@ distribution %<>% mutate(presence_be =
 distribution %<>% mutate(id = raw_id)
 
 #' #### locationID
-distribution %<>% mutate(locationID = "ISO_3166-2:BE")
+distribution %<>% mutate(locationID = case_when (
+  location == "Belgium" ~ "ISO_3166-2:BE",
+  location == "Flanders" ~ "ISO_3166-2:BE-VLG",
+  location == "Wallonia" ~ "ISO_3166-2:BE-WAL",
+  location == "Brussels" ~ "ISO_3166-2:BE-BRU"))
 
 #' #### locality
-distribution %<>% mutate(locality = "Belgium")
+distribution %<>% mutate(locality = case_when (
+  location == "Belgium" ~ "Belgium",
+  location == "Flanders" ~ "Flemish Region",
+  location == "Wallonia" ~ "Walloon Region",
+  location == "Brussels" ~ "Brussels-Capital Region"))
 
 #' #### countryCode
 distribution %<>% mutate(countryCode = "BE")
@@ -185,12 +228,20 @@ distribution %<>% mutate(countryCode = "BE")
 #' #### occurrenceStatus
 #' 
 #' Map values using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
-distribution %<>% mutate(occurrenceStatus = recode(presence_be,
-  "X" = "present",
-  "?" = "presence uncertain",
-  .default = "",
-  .missing = "absent"
+distribution %<>% mutate(occurrenceStatus = recode(presence,
+                                                   "X" = "present",
+                                                   "S" = "present",
+                                                   "?" = "unknown",
+                                                   .default = "",
+                                                   .missing = "absent"
 ))
+
+
+#' overview of `occurrenceStatus` for each location x presence combination
+distribution %>% select (location, presence, occurrenceStatus) %>%
+  group_by_all() %>%
+  summarize(records = n()) %>% 
+  kable()
 
 #' #### threatStatus
 #' #### establishmentMeans
@@ -295,16 +346,28 @@ pathway <- distribution %>% select(
 #' Spread values back to columns:
 distribution %<>% spread(key, mapped_value)
 
-#' Create `establishmentMeans` columns where these values are concatentated with ` | `:
-distribution %<>% mutate(establishmentMeans = 
-  paste(pathway_1, pathway_2, pathway_3, pathway_4, sep = " | ")              
+#' Create `pathway` columns where these values are concatentated with ` | `:
+distribution %<>% mutate(pathway = 
+                           paste(pathway_1, pathway_2, pathway_3, pathway_4, sep = " | ")              
 )
 
 #' Annoyingly the `paste()` function does not provide an `rm.na` parameter, so `NA` values will be included as ` | NA`. We can strip those out like this:
 distribution %<>% mutate(
-  establishmentMeans = str_replace_all(establishmentMeans, " \\| NA", ""), # Remove ' | NA'
-  establishmentMeans = recode(establishmentMeans, "NA" = "") # Remove NA at start of string
+  pathway = str_replace_all(pathway, " \\| NA", ""), # Remove ' | NA'
+  pathway = recode(pathway, "NA" = "") # Remove NA at start of string
 )
+
+#' Only populate `establishmentMeans` when `presence` = `X` for `location`= `Belgium`, OR when `presence` = `S` for the regions.
+distribution %<>% mutate (establishmentMeans = case_when(
+  presence == "X" & location == "belgium" ~ pathway,
+  presence == "S" ~ pathway,
+  TRUE ~ ""))
+
+#' Show mapping of `establishmentMeans`
+distribution %>% select (location, presence, establishmentMeans) %>%
+  group_by_all() %>%
+  summarize(records = n()) %>%
+  kable()
 
 #' #### appendixCITES
 #' #### eventDate
@@ -355,16 +418,23 @@ distribution %>%
   filter(start_year > end_year) %>%
   kable()
 
-#' Combine `start_year` and `end_year` in an ranged `eventDate` (ISO 8601 format). If any those two dates is empty or the same, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
-distribution %<>% mutate(eventDate = 
-  case_when(
-    start_year == "" & end_year == "" ~ "",
-    start_year == ""                  ~ end_year,
-    end_year == ""                    ~ start_year,
-    start_year == end_year            ~ start_year,
-    TRUE                              ~ paste(start_year, end_year, sep = "/")
-  )
+#' Combine `start_year` and `end_year` in an ranged `Date` (ISO 8601 format). If any those two dates is empty or the same, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
+distribution %<>% mutate(Date = 
+                           case_when(
+                             start_year == "" & end_year == "" ~ "",
+                             start_year == ""                  ~ end_year,
+                             end_year == ""                    ~ start_year,
+                             start_year == end_year            ~ start_year,
+                             TRUE                              ~ paste(start_year, end_year, sep = "/")
+                           )
 )
+
+#' Populate `eventDate` only when `presence` = `X` for `location`= `Belgium`, OR when `presence` = `S` for the regions.
+distribution %<>% mutate (eventDate = case_when(
+  presence == "X" & location == "Belgium" ~ Date,
+  presence == "S" ~ Date,
+  TRUE ~ ""))
+
 
 #' #### startDayOfYear
 #' #### endDayOfYear
@@ -377,9 +447,9 @@ distribution %<>% mutate(eventDate =
 #' Remove the original columns:
 distribution %<>% select(
   -one_of(raw_colnames),
-  -presence_be,
-  -pathway_1, -pathway_2, -pathway_3, -pathway_4,
-  -start_year, -end_year
+  -location,-presence,
+  -pathway_1, -pathway_2, -pathway_3, -pathway_4, -pathway,
+  -start_year, -end_year, - Date
 )
 
 #' Sort on `id`:
