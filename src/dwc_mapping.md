@@ -320,7 +320,7 @@ kable(matrix (c("X", NA, NA, "S", NA, NA, "S",
         "X", "?", NA, "S", "?", NA, "S",
         "X", NA, "?", "S", NA, "?", "S",
         "X", "X", "?", "M", "M", "?", "S"),
-        ncol = 7,
+        ncol = 7, byrow = TRUE,
         dimnames = list (c(1:10), c("raw_presence_fl",
                                     "raw_presence_br", 
                                     "raw_presence_wa", 
@@ -334,16 +334,16 @@ kable(matrix (c("X", NA, NA, "S", NA, NA, "S",
 
 |raw_presence_fl |raw_presence_br |raw_presence_wa |Flanders |Brussels |Wallonia |Belgium |
 |:---------------|:---------------|:---------------|:--------|:--------|:--------|:-------|
-|X               |NA              |S               |X        |M        |?        |NA      |
-|NA              |S               |X               |M        |S        |NA       |?       |
-|NA              |NA              |X               |NA       |NA       |S        |S       |
-|S               |S               |NA              |M        |NA       |?        |X       |
-|NA              |NA              |M               |S        |NA       |NA       |X       |
-|NA              |NA              |M               |NA       |NA       |S        |?       |
-|S               |x               |NA              |X        |NA       |X        |M       |
-|NA              |NA              |S               |X        |NA       |NA       |M       |
-|X               |NA              |X               |NA       |NA       |?        |?       |
-|NA              |S               |NA              |M        |X        |S        |S       |
+|X               |NA              |NA              |S        |NA       |NA       |S       |
+|NA              |X               |NA              |NA       |S        |NA       |S       |
+|NA              |NA              |x               |NA       |NA       |S        |S       |
+|X               |X               |NA              |M        |M        |NA       |S       |
+|X               |NA              |X               |M        |NA       |M        |S       |
+|NA              |X               |X               |NA       |M        |M        |S       |
+|NA              |NA              |NA              |NA       |NA       |NA       |NA      |
+|X               |?               |NA              |S        |?        |NA       |S       |
+|X               |NA              |?               |S        |NA       |?        |S       |
+|X               |X               |?               |M        |M        |?        |S       |
 
 We translate this to the distribution extension:
 
