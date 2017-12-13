@@ -208,13 +208,6 @@ distribution %<>%
     raw_presence_fl == "?" | raw_presence_br == "?" | raw_presence_wa == "?" ~ "?" # One is "?"
   ))
 
-#' remove species for which we lack presence information (i.e. `raw_presence_xxx` = NA)
-View(distribution %>% 
-  filter (
-    !is.na(raw_presence_fl) &
-    !is.na(raw_presence_wa) & 
-    !is.na(raw_presence_br)
-  ))
 
 #' remove species for which we lack presence information (i.e. `Belgium` = `NA``)
 distribution %<>% filter (!is.na(Belgium))
