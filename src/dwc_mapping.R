@@ -349,10 +349,7 @@ distribution %<>% select(-value)
 distribution %<>% mutate(mapped_value = na_if(mapped_value, ""))
 
 #'Since our pathway controlled vocabulary is not allowed by GBIF in `establishmentMeans` (see <https://github.com/trias-project/alien-plants-belgium/issues/35>), we'll also add it to the Description extension. Rather than cleaning it all over again there, we save it here:
-
-pathway <- distribution %>% select(
-    one_of(raw_colnames), # Add raw columns
-    mapped_value)
+pathway <- distribution %>% filter (location == "Belgium") %>% select(one_of(raw_colnames), mapped_value) 
 
 #' Spread values back to columns:
 distribution %<>% spread(key, mapped_value)
