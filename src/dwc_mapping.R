@@ -190,15 +190,21 @@ kable(matrix (c("X", NA, NA, "S", NA, NA, "S",
 distribution %<>% 
   mutate(Flanders = case_when(
     raw_presence_fl == "X" & (is.na(raw_presence_br) | raw_presence_br == "?") & (is.na(raw_presence_wa) | raw_presence_wa == "?") ~ "S",
-    TRUE ~ raw_presence_fl)) %>%
+    raw_presence_fl == "?" ~ "?",
+    is.na(raw_presence_fl) ~ "NA",
+    TRUE ~ "M")) %>%
   mutate(Brussels = case_when(
     (is.na(raw_presence_fl) | raw_presence_fl == "?") & raw_presence_br == "X" & (is.na(raw_presence_wa) | raw_presence_wa == "?") ~ "S",
-    TRUE ~ raw_presence_br)) %>%
+    raw_presence_br == "?" ~ "?",
+    is.na(raw_presence_br) ~ "NA",
+    TRUE ~ "M")) %>%
   mutate(Wallonia = case_when(
     (is.na(raw_presence_fl) | raw_presence_fl == "?") & (is.na(raw_presence_br) | raw_presence_br == "?") & raw_presence_wa == "X" ~ "S",
-    TRUE ~ raw_presence_wa))%<>%
+    raw_presence_wa == "?" ~ "?",
+    is.na(raw_presence_wa) ~ "NA",
+    TRUE ~ "M")) %>%
   mutate(Belgium = case_when(
-    raw_presence_fl == "X" | raw_presence_br == "X" | raw_presence_wa == "X" ~ "X", # One is "X"
+    raw_presence_fl == "X" | raw_presence_br == "X" | raw_presence_wa == "X" ~ "S", # One is "X"
     raw_presence_fl == "?" | raw_presence_br == "?" | raw_presence_wa == "?" ~ "?" # One is "?"
   ))
 
@@ -258,9 +264,10 @@ distribution %<>% mutate(countryCode = "BE")
 #' 
 #' Map values using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
 distribution %<>% mutate(occurrenceStatus = recode(presence,
-                                                   "X" = "present",
                                                    "S" = "present",
-                                                   "?" = "unknown",
+                                                   "M" = "present",
+                                                   "?" = "presence uncertain",
+                                                   "NA" = "absent",
                                                    .default = "",
                                                    .missing = "absent"
 ))
@@ -386,9 +393,8 @@ distribution %<>% mutate(
   pathway = recode(pathway, "NA" = "") # Remove NA at start of string
 )
 
-#' Only populate `establishmentMeans` when `presence` = `X` for `location`= `Belgium`, OR when `presence` = `S` for the regions.
+#' Only populate `establishmentMeans` when `presence` = `S`.
 distribution %<>% mutate (establishmentMeans = case_when(
-  presence == "X" & location == "Belgium" ~ pathway,
   presence == "S" ~ pathway,
   TRUE ~ ""))
 
@@ -458,9 +464,8 @@ distribution %<>% mutate(Date =
                            )
 )
 
-#' Populate `eventDate` only when `presence` = `X` for `location`= `Belgium`, OR when `presence` = `S` for the regions.
+#' Populate `eventDate` only when `presence` = `S`.
 distribution %<>% mutate (eventDate = case_when(
-  presence == "X" & location == "Belgium" ~ Date,
   presence == "S" ~ Date,
   TRUE ~ ""))
 
