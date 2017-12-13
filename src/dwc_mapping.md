@@ -2,7 +2,7 @@
 
 Peter Desmet, Quentin Groom, Lien Reyserhove
 
-2017-12-11
+2017-12-13
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -305,24 +305,77 @@ When a species is present in more than one region, we decided to only provide oc
 Thus, we need to specify when a species is present in only one of the regions.
 We generate 4 new columns: `Flanders`, `Brussels`,`Wallonia` and `Belgium`. 
 The content of these columns refers to the specific occurrence of a species on a regional or national level.
-`X` if present, `?` if presence unknown, `NA` if absent and `S` if **exclusively present in that specific region**
+`S` if present in a single region or in Belgium, `?` if presence uncertain, `NA` if absent and `M` if present in multiple regions.
+This should look like this:
+
+
+```r
+kable(matrix (c("X", NA, NA, "S", NA, NA, "S",
+          NA, "X", NA, NA, "S", NA, "S", 
+        NA, NA, "x", NA, NA, "S", "S",
+        "X", "X", NA, "M", "M", NA, "S",
+        "X", NA, "X", "M", NA, "M", "S",
+        NA, "X", "X", NA, "M", "M", "S",
+        NA, NA, NA, NA, NA, NA, NA,
+        "X", "?", NA, "S", "?", NA, "S",
+        "X", NA, "?", "S", NA, "?", "S",
+        "X", "X", "?", "M", "M", "?", "S"),
+        ncol = 7,
+        dimnames = list (c(1:10), c("raw_presence_fl",
+                                    "raw_presence_br", 
+                                    "raw_presence_wa", 
+                                    "Flanders", 
+                                    "Brussels", 
+                                    "Wallonia",
+                                    "Belgium"))))
+```
+
+
+
+|raw_presence_fl |raw_presence_br |raw_presence_wa |Flanders |Brussels |Wallonia |Belgium |
+|:---------------|:---------------|:---------------|:--------|:--------|:--------|:-------|
+|X               |NA              |S               |X        |M        |?        |NA      |
+|NA              |S               |X               |M        |S        |NA       |?       |
+|NA              |NA              |X               |NA       |NA       |S        |S       |
+|S               |S               |NA              |M        |NA       |?        |X       |
+|NA              |NA              |M               |S        |NA       |NA       |X       |
+|NA              |NA              |M               |NA       |NA       |S        |?       |
+|S               |x               |NA              |X        |NA       |X        |M       |
+|NA              |NA              |S               |X        |NA       |NA       |M       |
+|X               |NA              |X               |NA       |NA       |?        |?       |
+|NA              |S               |NA              |M        |X        |S        |S       |
+
+We translate this to the distribution extension:
 
 
 ```r
 distribution %<>% 
   mutate(Flanders = case_when(
     raw_presence_fl == "X" & (is.na(raw_presence_br) | raw_presence_br == "?") & (is.na(raw_presence_wa) | raw_presence_wa == "?") ~ "S",
-    TRUE ~ raw_presence_fl)) %>%
+    raw_presence_fl == "?" ~ "?",
+    is.na(raw_presence_fl) ~ "NA",
+    TRUE ~ "M")) %>%
   mutate(Brussels = case_when(
     (is.na(raw_presence_fl) | raw_presence_fl == "?") & raw_presence_br == "X" & (is.na(raw_presence_wa) | raw_presence_wa == "?") ~ "S",
-    TRUE ~ raw_presence_br)) %>%
+    raw_presence_br == "?" ~ "?",
+    is.na(raw_presence_br) ~ "NA",
+    TRUE ~ "M")) %>%
   mutate(Wallonia = case_when(
     (is.na(raw_presence_fl) | raw_presence_fl == "?") & (is.na(raw_presence_br) | raw_presence_br == "?") & raw_presence_wa == "X" ~ "S",
-    TRUE ~ raw_presence_wa))%<>%
+    raw_presence_wa == "?" ~ "?",
+    is.na(raw_presence_wa) ~ "NA",
+    TRUE ~ "M")) %>%
   mutate(Belgium = case_when(
-    raw_presence_fl == "X" | raw_presence_br == "X" | raw_presence_wa == "X" ~ "X", # One is "X"
+    raw_presence_fl == "X" | raw_presence_br == "X" | raw_presence_wa == "X" ~ "S", # One is "X"
     raw_presence_fl == "?" | raw_presence_br == "?" | raw_presence_wa == "?" ~ "?" # One is "?"
   ))
+```
+
+remove species for which we lack presence information (i.e. `Belgium` = `NA``)
+
+
+```r
+distribution %<>% filter (!is.na(Belgium))
 ```
 
 Summary of the previous action:
@@ -341,18 +394,17 @@ distribution %>% select (raw_presence_fl, raw_presence_br, raw_presence_wa, Flan
 |raw_presence_fl |raw_presence_br |raw_presence_wa |Flanders |Wallonia |Brussels |Belgium | records|
 |:---------------|:---------------|:---------------|:--------|:--------|:--------|:-------|-------:|
 |?               |?               |?               |?        |?        |?        |?       |      22|
-|?               |X               |?               |?        |?        |S        |X       |       1|
-|X               |?               |?               |S        |?        |?        |X       |       2|
-|X               |NA              |?               |S        |?        |NA       |X       |       1|
-|X               |NA              |NA              |S        |NA       |NA       |X       |     767|
-|X               |?               |X               |X        |X        |?        |X       |       5|
-|X               |X               |X               |X        |X        |X        |X       |     486|
-|X               |NA              |X               |X        |X        |NA       |X       |     616|
-|X               |X               |NA              |X        |NA       |X        |X       |      69|
-|NA              |NA              |X               |NA       |S        |NA       |X       |     469|
-|NA              |X               |X               |NA       |X        |X        |X       |      24|
-|NA              |X               |NA              |NA       |NA       |S        |X       |      36|
-|NA              |NA              |NA              |NA       |NA       |NA       |NA      |       2|
+|?               |X               |?               |?        |?        |S        |S       |       1|
+|X               |?               |X               |M        |M        |?        |S       |       5|
+|X               |X               |X               |M        |M        |M        |S       |     486|
+|X               |NA              |X               |M        |M        |NA       |S       |     616|
+|X               |X               |NA              |M        |NA       |M        |S       |      69|
+|NA              |X               |X               |NA       |M        |M        |S       |      24|
+|NA              |X               |NA              |NA       |NA       |S        |S       |      36|
+|NA              |NA              |X               |NA       |S        |NA       |S       |     469|
+|X               |?               |?               |S        |?        |?        |S       |       2|
+|X               |NA              |?               |S        |?        |NA       |S       |       1|
+|X               |NA              |NA              |S        |NA       |NA       |S       |     767|
 
 From wide to long table (i.e. create a `key` and `value` column)
 
@@ -361,7 +413,6 @@ From wide to long table (i.e. create a `key` and `value` column)
 distribution %<>% gather(
   key, value,
   Flanders, Wallonia, Brussels, Belgium,
-  na.rm = TRUE, # Also removes records for which there is no pathway_1
   convert = FALSE
 ) 
 ```
@@ -420,12 +471,20 @@ Map values using [IUCN definitions](http://www.iucnredlist.org/technical-documen
 
 ```r
 distribution %<>% mutate(occurrenceStatus = recode(presence,
-                                                   "X" = "present",
                                                    "S" = "present",
-                                                   "?" = "unknown",
+                                                   "M" = "present",
+                                                   "?" = "presence uncertain",
+                                                   "NA" = "absent",
                                                    .default = "",
                                                    .missing = "absent"
 ))
+```
+
+remove records with `absent`:
+
+
+```r
+distribution %<>% filter (!occurrenceStatus == "absent")
 ```
 
 overview of `occurrenceStatus` for each location x presence combination
@@ -440,19 +499,19 @@ distribution %>% select (location, presence, occurrenceStatus) %>%
 
 
 
-|location |presence |occurrenceStatus | records|
-|:--------|:--------|:----------------|-------:|
-|Belgium  |?        |unknown          |      22|
-|Belgium  |X        |present          |    2476|
-|Brussels |?        |unknown          |      29|
-|Brussels |S        |present          |      37|
-|Brussels |X        |present          |     579|
-|Flanders |?        |unknown          |      23|
-|Flanders |S        |present          |     770|
-|Flanders |X        |present          |    1176|
-|Wallonia |?        |unknown          |      26|
-|Wallonia |S        |present          |     469|
-|Wallonia |X        |present          |    1131|
+|location |presence |occurrenceStatus   | records|
+|:--------|:--------|:------------------|-------:|
+|Belgium  |?        |presence uncertain |      22|
+|Belgium  |S        |present            |    2476|
+|Brussels |?        |presence uncertain |      29|
+|Brussels |M        |present            |     579|
+|Brussels |S        |present            |      37|
+|Flanders |?        |presence uncertain |      23|
+|Flanders |M        |present            |    1176|
+|Flanders |S        |present            |     770|
+|Wallonia |?        |presence uncertain |      26|
+|Wallonia |M        |present            |    1131|
+|Wallonia |S        |present            |     469|
 
 #### threatStatus
 #### establishmentMeans
@@ -696,9 +755,7 @@ Since our pathway controlled vocabulary is not allowed by GBIF in `establishment
 
 
 ```r
-pathway <- distribution %>% select(
-    one_of(raw_colnames), # Add raw columns
-    mapped_value)
+pathway <- distribution %>% filter (location == "Belgium") %>% select(one_of(raw_colnames), mapped_value) 
 ```
 
 Spread values back to columns:
@@ -727,12 +784,11 @@ distribution %<>% mutate(
 )
 ```
 
-Only populate `establishmentMeans` when `presence` = `X` for `location`= `Belgium`, OR when `presence` = `S` for the regions.
+Only populate `establishmentMeans` when `presence` = `S`.
 
 
 ```r
 distribution %<>% mutate (establishmentMeans = case_when(
-  presence == "X" & location == "Belgium" ~ pathway,
   presence == "S" ~ pathway,
   TRUE ~ ""))
 ```
@@ -752,60 +808,61 @@ distribution %>% select (location, presence, establishmentMeans) %>%
 |location |presence |establishmentMeans                                                                 | records|
 |:--------|:--------|:----------------------------------------------------------------------------------|-------:|
 |Belgium  |?        |                                                                                   |      22|
-|Belgium  |X        |                                                                                   |     201|
-|Belgium  |X        |contaminant:habitat_material                                                       |      69|
-|Belgium  |X        |contaminant:habitat_material &#124; contaminant:on_animals                         |       4|
-|Belgium  |X        |contaminant:habitat_material &#124; contaminant:seed                               |       2|
-|Belgium  |X        |contaminant:habitat_material &#124; contaminant:seed &#124; contaminant:on_animals |       2|
-|Belgium  |X        |contaminant:habitat_material &#124; escape:horticulture                            |       2|
-|Belgium  |X        |contaminant:nursery                                                                |      19|
-|Belgium  |X        |contaminant:on_animals                                                             |     345|
-|Belgium  |X        |contaminant:on_animals &#124; contaminant:habitat_material                         |       4|
-|Belgium  |X        |contaminant:on_animals &#124; contaminant:on_animals                               |       1|
-|Belgium  |X        |contaminant:on_animals &#124; contaminant:seed                                     |      51|
-|Belgium  |X        |contaminant:on_animals &#124; escape:horticulture                                  |       2|
-|Belgium  |X        |contaminant:on_animals &#124; stowaway                                             |       1|
-|Belgium  |X        |contaminant:on_animals &#124; stowaway:people_luggage                              |       1|
-|Belgium  |X        |contaminant:on_plants                                                              |       4|
-|Belgium  |X        |contaminant:seed                                                                   |     379|
-|Belgium  |X        |contaminant:seed &#124; contaminant:habitat_material                               |       4|
-|Belgium  |X        |contaminant:seed &#124; contaminant:habitat_material &#124; contaminant:on_animals |       1|
-|Belgium  |X        |contaminant:seed &#124; contaminant:on_animals                                     |     146|
-|Belgium  |X        |contaminant:seed &#124; contaminant:on_animals &#124; contaminant:habitat_material |       2|
-|Belgium  |X        |contaminant:seed &#124; contaminant:on_animals &#124; contaminant:seed             |       2|
-|Belgium  |X        |contaminant:seed &#124; contaminant:on_animals &#124; escape:horticulture          |       1|
-|Belgium  |X        |contaminant:seed &#124; contaminant:seed                                           |      16|
-|Belgium  |X        |contaminant:seed &#124; contaminant:seed &#124; contaminant:habitat_material       |       1|
-|Belgium  |X        |contaminant:seed &#124; contaminant:seed &#124; contaminant:on_animals             |       1|
-|Belgium  |X        |contaminant:seed &#124; escape:horticulture                                        |       8|
-|Belgium  |X        |contaminant:seed &#124; stowaway:people_luggage                                    |       1|
-|Belgium  |X        |contaminant:timber                                                                 |       9|
-|Belgium  |X        |escape:agriculture                                                                 |      77|
-|Belgium  |X        |escape:agriculture &#124; contaminant:on_animals                                   |       2|
-|Belgium  |X        |escape:agriculture &#124; contaminant:seed                                         |       1|
-|Belgium  |X        |escape:agriculture &#124; escape:horticulture                                      |       1|
-|Belgium  |X        |escape:food_bait                                                                   |      20|
-|Belgium  |X        |escape:food_bait &#124; contaminant:on_animals                                     |       1|
-|Belgium  |X        |escape:horticulture                                                                |    1054|
-|Belgium  |X        |escape:horticulture &#124; contaminant:habitat_material                            |       2|
-|Belgium  |X        |escape:horticulture &#124; contaminant:on_animals                                  |       4|
-|Belgium  |X        |escape:horticulture &#124; contaminant:on_animals &#124; contaminant:seed          |       2|
-|Belgium  |X        |escape:horticulture &#124; contaminant:seed                                        |       7|
-|Belgium  |X        |escape:horticulture &#124; contaminant:seed &#124; contaminant:on_animals          |       2|
-|Belgium  |X        |escape:horticulture &#124; contaminant:timber                                      |       1|
-|Belgium  |X        |escape:horticulture &#124; escape:agriculture                                      |       3|
-|Belgium  |X        |stowaway                                                                           |       7|
-|Belgium  |X        |stowaway &#124; contaminant:nursery                                                |       1|
-|Belgium  |X        |stowaway &#124; contaminant:on_animals                                             |       1|
-|Belgium  |X        |stowaway:people_luggage                                                            |       6|
-|Belgium  |X        |stowaway:people_luggage &#124; contaminant:on_animals                              |       2|
+|Belgium  |S        |                                                                                   |     201|
+|Belgium  |S        |contaminant:habitat_material                                                       |      69|
+|Belgium  |S        |contaminant:habitat_material &#124; contaminant:on_animals                         |       4|
+|Belgium  |S        |contaminant:habitat_material &#124; contaminant:seed                               |       2|
+|Belgium  |S        |contaminant:habitat_material &#124; contaminant:seed &#124; contaminant:on_animals |       2|
+|Belgium  |S        |contaminant:habitat_material &#124; escape:horticulture                            |       2|
+|Belgium  |S        |contaminant:nursery                                                                |      19|
+|Belgium  |S        |contaminant:on_animals                                                             |     345|
+|Belgium  |S        |contaminant:on_animals &#124; contaminant:habitat_material                         |       4|
+|Belgium  |S        |contaminant:on_animals &#124; contaminant:on_animals                               |       1|
+|Belgium  |S        |contaminant:on_animals &#124; contaminant:seed                                     |      51|
+|Belgium  |S        |contaminant:on_animals &#124; escape:horticulture                                  |       2|
+|Belgium  |S        |contaminant:on_animals &#124; stowaway                                             |       1|
+|Belgium  |S        |contaminant:on_animals &#124; stowaway:people_luggage                              |       1|
+|Belgium  |S        |contaminant:on_plants                                                              |       4|
+|Belgium  |S        |contaminant:seed                                                                   |     379|
+|Belgium  |S        |contaminant:seed &#124; contaminant:habitat_material                               |       4|
+|Belgium  |S        |contaminant:seed &#124; contaminant:habitat_material &#124; contaminant:on_animals |       1|
+|Belgium  |S        |contaminant:seed &#124; contaminant:on_animals                                     |     146|
+|Belgium  |S        |contaminant:seed &#124; contaminant:on_animals &#124; contaminant:habitat_material |       2|
+|Belgium  |S        |contaminant:seed &#124; contaminant:on_animals &#124; contaminant:seed             |       2|
+|Belgium  |S        |contaminant:seed &#124; contaminant:on_animals &#124; escape:horticulture          |       1|
+|Belgium  |S        |contaminant:seed &#124; contaminant:seed                                           |      16|
+|Belgium  |S        |contaminant:seed &#124; contaminant:seed &#124; contaminant:habitat_material       |       1|
+|Belgium  |S        |contaminant:seed &#124; contaminant:seed &#124; contaminant:on_animals             |       1|
+|Belgium  |S        |contaminant:seed &#124; escape:horticulture                                        |       8|
+|Belgium  |S        |contaminant:seed &#124; stowaway:people_luggage                                    |       1|
+|Belgium  |S        |contaminant:timber                                                                 |       9|
+|Belgium  |S        |escape:agriculture                                                                 |      77|
+|Belgium  |S        |escape:agriculture &#124; contaminant:on_animals                                   |       2|
+|Belgium  |S        |escape:agriculture &#124; contaminant:seed                                         |       1|
+|Belgium  |S        |escape:agriculture &#124; escape:horticulture                                      |       1|
+|Belgium  |S        |escape:food_bait                                                                   |      20|
+|Belgium  |S        |escape:food_bait &#124; contaminant:on_animals                                     |       1|
+|Belgium  |S        |escape:horticulture                                                                |    1054|
+|Belgium  |S        |escape:horticulture &#124; contaminant:habitat_material                            |       2|
+|Belgium  |S        |escape:horticulture &#124; contaminant:on_animals                                  |       4|
+|Belgium  |S        |escape:horticulture &#124; contaminant:on_animals &#124; contaminant:seed          |       2|
+|Belgium  |S        |escape:horticulture &#124; contaminant:seed                                        |       7|
+|Belgium  |S        |escape:horticulture &#124; contaminant:seed &#124; contaminant:on_animals          |       2|
+|Belgium  |S        |escape:horticulture &#124; contaminant:timber                                      |       1|
+|Belgium  |S        |escape:horticulture &#124; escape:agriculture                                      |       3|
+|Belgium  |S        |stowaway                                                                           |       7|
+|Belgium  |S        |stowaway &#124; contaminant:nursery                                                |       1|
+|Belgium  |S        |stowaway &#124; contaminant:on_animals                                             |       1|
+|Belgium  |S        |stowaway:people_luggage                                                            |       6|
+|Belgium  |S        |stowaway:people_luggage &#124; contaminant:on_animals                              |       2|
 |Brussels |?        |                                                                                   |      29|
+|Brussels |M        |                                                                                   |     579|
 |Brussels |S        |                                                                                   |      14|
 |Brussels |S        |contaminant:seed                                                                   |       3|
 |Brussels |S        |escape:agriculture                                                                 |       1|
 |Brussels |S        |escape:horticulture                                                                |      19|
-|Brussels |X        |                                                                                   |     579|
 |Flanders |?        |                                                                                   |      23|
+|Flanders |M        |                                                                                   |    1175|
 |Flanders |S        |                                                                                   |      82|
 |Flanders |S        |contaminant:habitat_material                                                       |      19|
 |Flanders |S        |contaminant:nursery                                                                |      10|
@@ -822,8 +879,8 @@ distribution %>% select (location, presence, establishmentMeans) %>%
 |Flanders |S        |escape:horticulture &#124; contaminant:seed                                        |       1|
 |Flanders |S        |stowaway                                                                           |       3|
 |Flanders |S        |stowaway:people_luggage                                                            |       6|
-|Flanders |X        |                                                                                   |    1175|
 |Wallonia |?        |                                                                                   |      26|
+|Wallonia |M        |                                                                                   |    1130|
 |Wallonia |S        |                                                                                   |      52|
 |Wallonia |S        |contaminant:habitat_material                                                       |      11|
 |Wallonia |S        |contaminant:on_animals                                                             |     254|
@@ -836,7 +893,6 @@ distribution %>% select (location, presence, establishmentMeans) %>%
 |Wallonia |S        |escape:food_bait                                                                   |       1|
 |Wallonia |S        |escape:horticulture                                                                |     108|
 |Wallonia |S        |escape:horticulture &#124; contaminant:seed                                        |       1|
-|Wallonia |X        |                                                                                   |    1130|
 
 #### appendixCITES
 #### eventDate
@@ -1014,12 +1070,11 @@ distribution %<>% mutate(Date =
 )
 ```
 
-Populate `eventDate` only when `presence` = `X` for `location`= `Belgium`, OR when `presence` = `S` for the regions.
+Populate `eventDate` only when `presence` = `S`.
 
 
 ```r
 distribution %<>% mutate (eventDate = case_when(
-  presence == "X" & location == "Belgium" ~ Date,
   presence == "S" ~ Date,
   TRUE ~ ""))
 ```
@@ -1370,18 +1425,18 @@ pathway %>%
 
 |description                  | records|
 |:----------------------------|-------:|
-|contaminant:habitat_material |     282|
-|contaminant:nursery          |      54|
-|contaminant:on_animals       |    1596|
-|contaminant:on_plants        |      11|
-|contaminant:seed             |    1894|
-|contaminant:timber           |      29|
-|escape:agriculture           |     300|
-|escape:food_bait             |      59|
-|escape:horticulture          |    2947|
-|stowaway                     |      30|
-|stowaway:people_luggage      |      24|
-|NA                           |    1842|
+|contaminant:habitat_material |      93|
+|contaminant:nursery          |      20|
+|contaminant:on_animals       |     579|
+|contaminant:on_plants        |       4|
+|contaminant:seed             |     649|
+|contaminant:timber           |      10|
+|escape:agriculture           |      85|
+|escape:food_bait             |      21|
+|escape:horticulture          |    1096|
+|stowaway                     |      10|
+|stowaway:people_luggage      |      10|
+|NA                           |     612|
 
 Keep only non-empty descriptions:
 
@@ -1477,12 +1532,12 @@ kable(head(description_ext, 10))
 |  1|Europe              |native range |en       |
 |  1|Africa              |native range |en       |
 |  1|escape:horticulture |pathway      |en       |
-|  1|escape:horticulture |pathway      |en       |
-|  1|escape:horticulture |pathway      |en       |
 |  2|vagrant             |origin       |en       |
 |  2|Europe              |native range |en       |
 |  2|Africa              |native range |en       |
 |  2|temperate Asia      |native range |en       |
+|  2|escape:horticulture |pathway      |en       |
+|  3|introduced          |origin       |en       |
 
 Save to CSV:
 
@@ -1498,7 +1553,7 @@ write.csv(description_ext, file = dwc_description_file, na = "", row.names = FAL
 * Source file: 2500
 * Taxon core: 2500
 * Distribution extension: 6731
-* Description extension: 13452
+* Description extension: 8803
 
 ### Taxon core
 
