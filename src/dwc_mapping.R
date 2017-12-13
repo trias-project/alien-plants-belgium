@@ -165,7 +165,28 @@ distribution <- raw_data
 #' Thus, we need to specify when a species is present in only one of the regions.
 #' We generate 4 new columns: `Flanders`, `Brussels`,`Wallonia` and `Belgium`. 
 #' The content of these columns refers to the specific occurrence of a species on a regional or national level.
-#' `X` if present, `?` if presence unknown, `NA` if absent and `S` if **exclusively present in that specific region**
+#' `S` if present in a single region or in Belgium, `?` if presence uncertain, `NA` if absent and `M` if present in multiple regions.
+#' This should look like this:
+kable(matrix (c("X", NA, NA, "S", NA, NA, "S",
+          NA, "X", NA, NA, "S", NA, "S", 
+        NA, NA, "x", NA, NA, "S", "S",
+        "X", "X", NA, "M", "M", NA, "S",
+        "X", NA, "X", "M", NA, "M", "S",
+        NA, "X", "X", NA, "M", "M", "S",
+        NA, NA, NA, NA, NA, NA, NA,
+        "X", "?", NA, "S", "?", NA, "S",
+        "X", NA, "?", "S", NA, "?", "S",
+        "X", "X", "?", "M", "M", "?", "S"),
+        ncol = 7,
+        dimnames = list (c(1:10), c("raw_presence_fl",
+                                    "raw_presence_br", 
+                                    "raw_presence_wa", 
+                                    "Flanders", 
+                                    "Brussels", 
+                                    "Wallonia",
+                                    "Belgium"))))
+
+#' We translate this to the distribution extension:
 distribution %<>% 
   mutate(Flanders = case_when(
     raw_presence_fl == "X" & (is.na(raw_presence_br) | raw_presence_br == "?") & (is.na(raw_presence_wa) | raw_presence_wa == "?") ~ "S",
