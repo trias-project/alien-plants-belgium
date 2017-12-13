@@ -216,6 +216,8 @@ View(distribution %>%
     !is.na(raw_presence_br)
   ))
 
+#' remove species for which we lack presence information (i.e. `Belgium` = `NA``)
+distribution %<>% filter (!is.na(Belgium))
 
 #' Summary of the previous action:
 distribution %>% select (raw_presence_fl, raw_presence_br, raw_presence_wa, Flanders, Wallonia, Brussels, Belgium) %>%
@@ -273,8 +275,8 @@ distribution %<>% mutate(occurrenceStatus = recode(presence,
 ))
 
 
-#' remove records with `absence`:
-distribution %<>% filter (presence != "absence")
+#' remove records with `absent`:
+distribution %<>% filter (!occurrenceStatus == "absent")
 
 #' overview of `occurrenceStatus` for each location x presence combination
 distribution %>% select (location, presence, occurrenceStatus) %>%
