@@ -181,6 +181,15 @@ distribution %<>%
     raw_presence_fl == "?" | raw_presence_br == "?" | raw_presence_wa == "?" ~ "?" # One is "?"
   ))
 
+#' remove species for which we lack presence information (i.e. `raw_presence_xxx` = NA)
+View(distribution %>% 
+  filter (
+    !is.na(raw_presence_fl) &
+    !is.na(raw_presence_wa) & 
+    !is.na(raw_presence_br)
+  ))
+
+
 #' Summary of the previous action:
 distribution %>% select (raw_presence_fl, raw_presence_br, raw_presence_wa, Flanders, Wallonia, Brussels, Belgium) %>%
   group_by_all() %>%
@@ -192,7 +201,6 @@ distribution %>% select (raw_presence_fl, raw_presence_br, raw_presence_wa, Flan
 distribution %<>% gather(
   key, value,
   Flanders, Wallonia, Brussels, Belgium,
-  na.rm = TRUE, # Also removes records for which there is no pathway_1
   convert = FALSE
 ) 
 
@@ -236,6 +244,9 @@ distribution %<>% mutate(occurrenceStatus = recode(presence,
                                                    .missing = "absent"
 ))
 
+
+#' remove records with `absence`:
+distribution %<>% filter (presence != "absence")
 
 #' overview of `occurrenceStatus` for each location x presence combination
 distribution %>% select (location, presence, occurrenceStatus) %>%
