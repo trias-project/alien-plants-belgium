@@ -2,7 +2,7 @@
 
 Peter Desmet, Quentin Groom, Lien Reyserhove
 
-2017-11-29
+2017-12-18
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -37,6 +37,7 @@ library(stringr)   # For string manipulation
 # Other packages
 library(janitor)   # For cleaning input data
 library(knitr)     # For nicer (kable) tables
+library(digest)    # to generate hashes
 ```
 
 Set file paths (all paths should be relative to this script):
@@ -71,6 +72,22 @@ raw_data %<>%
   clean_names()
 ```
 
+We need to integrate the DwC term `taxonID` in each of the generated files (Taxon Core and Extensions).
+For this reason, it is easier to generate `taxonID` in the raw file. 
+First, we vectorize the digest function (The digest() function isn't vectorized. So if you pass in a vector, you get one value for the whole vector rather than a digest for each element of the vector):
+
+
+```r
+vdigest <- Vectorize(digest)
+```
+
+Generate taxonID:
+
+
+```r
+raw_data %<>% mutate(taxonID = paste("alien-plants-belgium:taxon:", vdigest (taxon, algo="md5"), sep=""))
+```
+
 Add prefix `raw_` to all column names to avoid name clashes with Darwin Core terms:
 
 
@@ -94,14 +111,14 @@ kable(head(raw_data))
 
 
 
-| raw_id|raw_taxon                                                  |raw_hybrid_formula |raw_synonym |raw_family    |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i     |raw_taxonrank |raw_scientificnameid                             |
-|------:|:----------------------------------------------------------|:------------------|:-----------|:-------------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-----------|:-------------|:------------------------------------------------|
-|      1|Acanthus mollis L.                                         |NA                 |NA          |Acanthaceae   |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1  |
-|      2|Acanthus spinosus L.                                       |NA                 |NA          |Acanthaceae   |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1  |
-|      3|Acorus calamus L.                                          |NA                 |NA          |Acoraceae     |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1  |
-|      4|Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |NA                 |NA          |Actinidiaceae |D       |2000   |Ann.    |AS-Te      |X               |NA              |X               |Cas.    |Food refuse |species       |http://ipni.org/urn:lsid:ipni.org:names:913605-1 |
-|      5|Sambucus canadensis L.                                     |NA                 |NA          |Adoxaceae     |D       |1972   |2015    |NAM        |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:321978-2 |
-|      6|Viburnum davidii Franch.                                   |NA                 |NA          |Adoxaceae     |D       |2014   |2015    |AS-Te      |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:149642-1 |
+| raw_id|raw_taxon                                                  |raw_hybrid_formula |raw_synonym |raw_family    |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i     |raw_taxonrank |raw_scientificnameid                             |raw_taxonID                                                 |
+|------:|:----------------------------------------------------------|:------------------|:-----------|:-------------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-----------|:-------------|:------------------------------------------------|:-----------------------------------------------------------|
+|      1|Acanthus mollis L.                                         |NA                 |NA          |Acanthaceae   |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1  |alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c |
+|      2|Acanthus spinosus L.                                       |NA                 |NA          |Acanthaceae   |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1  |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |
+|      3|Acorus calamus L.                                          |NA                 |NA          |Acoraceae     |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1  |alien-plants-belgium:taxon:574eaf931730ba162e0226a425247660 |
+|      4|Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |NA                 |NA          |Actinidiaceae |D       |2000   |Ann.    |AS-Te      |X               |NA              |X               |Cas.    |Food refuse |species       |http://ipni.org/urn:lsid:ipni.org:names:913605-1 |alien-plants-belgium:taxon:5c33253debbe5777c0499b5c4d76b6e4 |
+|      5|Sambucus canadensis L.                                     |NA                 |NA          |Adoxaceae     |D       |1972   |2015    |NAM        |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:321978-2 |alien-plants-belgium:taxon:03206f4a769c6649658ab96839e8a016 |
+|      6|Viburnum davidii Franch.                                   |NA                 |NA          |Adoxaceae     |D       |2014   |2015    |AS-Te      |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:149642-1 |alien-plants-belgium:taxon:12212e50c4f6c9b79616e9d7f95a1cfb |
 
 ## Create taxon core
 
@@ -160,7 +177,7 @@ taxon %<>% mutate(datasetName = "Manual of the Alien Plants of Belgium")
 
 
 ```r
-taxon %<>% mutate(taxonID = raw_id)
+taxon %<>% mutate(taxonID = raw_taxonID)
 ```
 
 #### scientificNameID
@@ -271,14 +288,14 @@ kable(head(taxon))
 
 
 
-|language |license                                           |rightsHolder         |datasetID |datasetName                           | taxonID|scientificNameID                                 |scientificName                                             |kingdom |family        |taxonRank |nomenclaturalCode |
-|:--------|:-------------------------------------------------|:--------------------|:---------|:-------------------------------------|-------:|:------------------------------------------------|:----------------------------------------------------------|:-------|:-------------|:---------|:-----------------|
-|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       1|http://ipni.org/urn:lsid:ipni.org:names:44892-1  |Acanthus mollis L.                                         |Plantae |Acanthaceae   |species   |ICBN              |
-|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       2|http://ipni.org/urn:lsid:ipni.org:names:44920-1  |Acanthus spinosus L.                                       |Plantae |Acanthaceae   |species   |ICBN              |
-|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       3|http://ipni.org/urn:lsid:ipni.org:names:84009-1  |Acorus calamus L.                                          |Plantae |Acoraceae     |species   |ICBN              |
-|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       4|http://ipni.org/urn:lsid:ipni.org:names:913605-1 |Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |Plantae |Actinidiaceae |species   |ICBN              |
-|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       5|http://ipni.org/urn:lsid:ipni.org:names:321978-2 |Sambucus canadensis L.                                     |Plantae |Adoxaceae     |species   |ICBN              |
-|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |       6|http://ipni.org/urn:lsid:ipni.org:names:149642-1 |Viburnum davidii Franch.                                   |Plantae |Adoxaceae     |species   |ICBN              |
+|language |license                                           |rightsHolder         |datasetID |datasetName                           |taxonID                                                     |scientificNameID                                 |scientificName                                             |kingdom |family        |taxonRank |nomenclaturalCode |
+|:--------|:-------------------------------------------------|:--------------------|:---------|:-------------------------------------|:-----------------------------------------------------------|:------------------------------------------------|:----------------------------------------------------------|:-------|:-------------|:---------|:-----------------|
+|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c |http://ipni.org/urn:lsid:ipni.org:names:44892-1  |Acanthus mollis L.                                         |Plantae |Acanthaceae   |species   |ICBN              |
+|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |http://ipni.org/urn:lsid:ipni.org:names:44920-1  |Acanthus spinosus L.                                       |Plantae |Acanthaceae   |species   |ICBN              |
+|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |alien-plants-belgium:taxon:574eaf931730ba162e0226a425247660 |http://ipni.org/urn:lsid:ipni.org:names:84009-1  |Acorus calamus L.                                          |Plantae |Acoraceae     |species   |ICBN              |
+|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |alien-plants-belgium:taxon:5c33253debbe5777c0499b5c4d76b6e4 |http://ipni.org/urn:lsid:ipni.org:names:913605-1 |Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |Plantae |Actinidiaceae |species   |ICBN              |
+|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |alien-plants-belgium:taxon:03206f4a769c6649658ab96839e8a016 |http://ipni.org/urn:lsid:ipni.org:names:321978-2 |Sambucus canadensis L.                                     |Plantae |Adoxaceae     |species   |ICBN              |
+|en       |http://creativecommons.org/publicdomain/zero/1.0/ |Botanic Garden Meise |          |Manual of the Alien Plants of Belgium |alien-plants-belgium:taxon:12212e50c4f6c9b79616e9d7f95a1cfb |http://ipni.org/urn:lsid:ipni.org:names:149642-1 |Viburnum davidii Franch.                                   |Plantae |Adoxaceae     |species   |ICBN              |
 
 Save to CSV:
 
@@ -312,11 +329,11 @@ distribution %<>% mutate(presence_be =
 ### Term mapping
 
 Map the source data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
-#### id
+#### taxonID
 
 
 ```r
-distribution %<>% mutate(id = raw_id)
+distribution %<>% mutate(taxonID = raw_taxonID)
 ```
 
 #### locationID
@@ -396,11 +413,11 @@ distribution %<>% gather(
 )
 ```
 
-Sort on `id` to see pathways in context for each record:
+Sort on `taxonID` to see pathways in context for each record:
 
 
 ```r
-distribution %<>% arrange(id)
+distribution %<>% arrange(taxonID)
 ```
 
 Show unique values:
@@ -824,11 +841,11 @@ distribution %<>% select(
 )
 ```
 
-Sort on `id`:
+Sort on `taxonID`:
 
 
 ```r
-distribution %<>% arrange(id)
+distribution %<>% arrange(taxonID)
 ```
 
 Preview data:
@@ -840,14 +857,14 @@ kable(head(distribution))
 
 
 
-| id|locationID    |locality |countryCode |occurrenceStatus |establishmentMeans  |eventDate |
-|--:|:-------------|:--------|:-----------|:----------------|:-------------------|:---------|
-|  1|ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1998/2016 |
-|  2|ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2016      |
-|  3|ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1680/2017 |
-|  4|ISO_3166-2:BE |Belgium  |BE          |present          |escape:food_bait    |2000/2017 |
-|  5|ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1972/2015 |
-|  6|ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2014/2015 |
+|taxonID                                                     |locationID    |locality |countryCode |occurrenceStatus |establishmentMeans  |eventDate |
+|:-----------------------------------------------------------|:-------------|:--------|:-----------|:----------------|:-------------------|:---------|
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1944/2016 |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2010      |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2000/2012 |
+|alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148 |ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1990/2017 |
+|alien-plants-belgium:taxon:0063fb918750e3db0f1bb551cd9587c5 |ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2004      |
+|alien-plants-belgium:taxon:0068d529c19ee42ce7ea09fc427d82e4 |ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1998/2017 |
 
 Save to CSV:
 
@@ -954,14 +971,14 @@ kable(head(origin))
 
 
 
-| raw_id|raw_taxon                                                  |raw_hybrid_formula |raw_synonym |raw_family    |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i     |raw_taxonrank |raw_scientificnameid                             |description |type   |
-|------:|:----------------------------------------------------------|:------------------|:-----------|:-------------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-----------|:-------------|:------------------------------------------------|:-----------|:------|
-|      1|Acanthus mollis L.                                         |NA                 |NA          |Acanthaceae   |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1  |vagrant     |origin |
-|      2|Acanthus spinosus L.                                       |NA                 |NA          |Acanthaceae   |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1  |vagrant     |origin |
-|      3|Acorus calamus L.                                          |NA                 |NA          |Acoraceae     |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1  |introduced  |origin |
-|      4|Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |NA                 |NA          |Actinidiaceae |D       |2000   |Ann.    |AS-Te      |X               |NA              |X               |Cas.    |Food refuse |species       |http://ipni.org/urn:lsid:ipni.org:names:913605-1 |vagrant     |origin |
-|      5|Sambucus canadensis L.                                     |NA                 |NA          |Adoxaceae     |D       |1972   |2015    |NAM        |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:321978-2 |vagrant     |origin |
-|      6|Viburnum davidii Franch.                                   |NA                 |NA          |Adoxaceae     |D       |2014   |2015    |AS-Te      |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:149642-1 |vagrant     |origin |
+| raw_id|raw_taxon                                                  |raw_hybrid_formula |raw_synonym |raw_family    |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i     |raw_taxonrank |raw_scientificnameid                             |raw_taxonID                                                 |description |type   |
+|------:|:----------------------------------------------------------|:------------------|:-----------|:-------------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-----------|:-------------|:------------------------------------------------|:-----------------------------------------------------------|:-----------|:------|
+|      1|Acanthus mollis L.                                         |NA                 |NA          |Acanthaceae   |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1  |alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c |vagrant     |origin |
+|      2|Acanthus spinosus L.                                       |NA                 |NA          |Acanthaceae   |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1  |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |vagrant     |origin |
+|      3|Acorus calamus L.                                          |NA                 |NA          |Acoraceae     |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1  |alien-plants-belgium:taxon:574eaf931730ba162e0226a425247660 |introduced  |origin |
+|      4|Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |NA                 |NA          |Actinidiaceae |D       |2000   |Ann.    |AS-Te      |X               |NA              |X               |Cas.    |Food refuse |species       |http://ipni.org/urn:lsid:ipni.org:names:913605-1 |alien-plants-belgium:taxon:5c33253debbe5777c0499b5c4d76b6e4 |vagrant     |origin |
+|      5|Sambucus canadensis L.                                     |NA                 |NA          |Adoxaceae     |D       |1972   |2015    |NAM        |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:321978-2 |alien-plants-belgium:taxon:03206f4a769c6649658ab96839e8a016 |vagrant     |origin |
+|      6|Viburnum davidii Franch.                                   |NA                 |NA          |Adoxaceae     |D       |2014   |2015    |AS-Te      |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:149642-1 |alien-plants-belgium:taxon:12212e50c4f6c9b79616e9d7f95a1cfb |vagrant     |origin |
 
 #### Native range
 
@@ -1010,11 +1027,11 @@ native_range %<>% gather(
 )
 ```
 
-Sort on ID to see pathways in context for each record:
+Sort on taxonID to see pathways in context for each record:
 
 
 ```r
-native_range %<>% arrange(raw_id)
+native_range %<>% arrange(raw_taxonID)
 ```
 
 Clean values:
@@ -1110,14 +1127,14 @@ kable(head(native_range))
 
 
 
-| raw_id|raw_taxon            |raw_hybrid_formula |raw_synonym |raw_family  |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i |raw_taxonrank |raw_scientificnameid                            |description    |type         |
-|------:|:--------------------|:------------------|:-----------|:-----------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-------|:-------------|:-----------------------------------------------|:--------------|:------------|
-|      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |Europe         |native range |
-|      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |Africa         |native range |
-|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |Europe         |native range |
-|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |Africa         |native range |
-|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |temperate Asia |native range |
-|      3|Acorus calamus L.    |NA                 |NA          |Acoraceae   |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1 |temperate Asia |native range |
+| raw_id|raw_taxon                                                   |raw_hybrid_formula |raw_synonym |raw_family     |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i |raw_taxonrank |raw_scientificnameid                             |raw_taxonID                                                 |description      |type         |
+|------:|:-----------------------------------------------------------|:------------------|:-----------|:--------------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-------|:-------------|:------------------------------------------------|:-----------------------------------------------------------|:----------------|:------------|
+|    269|Achillea filipendulina Lam.                                 |NA                 |NA          |Asteraceae     |D       |1944   |2016    |AS-Te      |X               |X               |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:173972-1 |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |temperate Asia   |native range |
+|   2192|Cotoneaster coriaceus Franch. (incl. C. lacteus W.W. Smith) |NA                 |NA          |Rosaceae       |D       |2010   |2010    |AS-Te      |X               |NA              |X               |Cas.    |Hort.   |species       |NA                                               |alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |temperate Asia   |native range |
+|   1631|Collinsia heterophylla Buist ex Graham                      |NA                 |NA          |Plantaginaceae |D       |2000   |2012    |NAM        |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:801630-1 |alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |Northern America |native range |
+|    775|Campanula portenschlagiana Schult.                          |NA                 |NA          |Campanulaceae  |D       |1990   |N       |E          |X               |X               |X               |Nat.    |Hort.   |species       |NA                                               |alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148 |Europe           |native range |
+|    520|Sinacalia tangutica (Maxim.) R. Nordenstam                  |NA                 |NA          |Asteraceae     |D       |2004   |2004?   |AS-Te      |X               |NA              |NA              |Cas.?   |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:249267-1 |alien-plants-belgium:taxon:0063fb918750e3db0f1bb551cd9587c5 |temperate Asia   |native range |
+|    945|Chamaecyparis lawsoniana (A.Murray) Parl.                   |NA                 |NA          |Cupressaceae   |D       |1998   |Ann.    |NAM        |X               |X               |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:261839-1 |alien-plants-belgium:taxon:0068d529c19ee42ce7ea09fc427d82e4 |Northern America |native range |
 
 #### Pathway (pathway of introduction) 
 
@@ -1182,11 +1199,11 @@ description_ext <- bind_rows(origin, native_range, pathway)
 
 Map the source data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml):
 
-#### id
+#### taxonID
 
 
 ```r
-description_ext %<>% mutate(id = raw_id)
+description_ext %<>% mutate(taxonID = raw_taxonID)
 ```
 
 #### description
@@ -1229,18 +1246,18 @@ description_ext %<>% select(
 )
 ```
 
-Move `id` to the first position:
+Move `taxonID` to the first position:
 
 
 ```r
-description_ext %<>% select(id, everything())
+description_ext %<>% select(taxonID, everything())
 ```
 
-Sort on `id`:
+Sort on `taxonID`:
 
 
 ```r
-description_ext %<>% arrange(id)
+description_ext %<>% arrange(taxonID)
 ```
 
 Preview data:
@@ -1252,18 +1269,18 @@ kable(head(description_ext, 10))
 
 
 
-| id|description         |type         |language |
-|--:|:-------------------|:------------|:--------|
-|  1|vagrant             |origin       |en       |
-|  1|Europe              |native range |en       |
-|  1|Africa              |native range |en       |
-|  1|escape:horticulture |pathway      |en       |
-|  2|vagrant             |origin       |en       |
-|  2|Europe              |native range |en       |
-|  2|Africa              |native range |en       |
-|  2|temperate Asia      |native range |en       |
-|  2|escape:horticulture |pathway      |en       |
-|  3|introduced          |origin       |en       |
+|taxonID                                                     |description         |type         |language |
+|:-----------------------------------------------------------|:-------------------|:------------|:--------|
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |vagrant             |origin       |en       |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |temperate Asia      |native range |en       |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |escape:horticulture |pathway      |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |vagrant             |origin       |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |temperate Asia      |native range |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |escape:horticulture |pathway      |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |vagrant             |origin       |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |Northern America    |native range |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |escape:horticulture |pathway      |en       |
+|alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148 |introduced          |origin       |en       |
 
 Save to CSV:
 

@@ -26,6 +26,7 @@ library(stringr)   # For string manipulation
 # Other packages
 library(janitor)   # For cleaning input data
 library(knitr)     # For nicer (kable) tables
+library(digest)    # to generate hashes
 
 #' Set file paths (all paths should be relative to this script):
 raw_data_file = "../data/raw/Checklist2.xlsx"
@@ -46,6 +47,15 @@ raw_data %<>%
   remove_empty_rows() %>%
   # Have sensible (lowercase) column names
   clean_names()
+
+#' We need to integrate the DwC term `taxonID` in each of the generated files (Taxon Core and Extensions).
+#' For this reason, it is easier to generate `taxonID` in the raw file. 
+#' First, we vectorize the digest function (The digest() function isn't vectorized. So if you pass in a vector, you get one value for the whole vector rather than a digest for each element of the vector):
+vdigest <- Vectorize(digest)
+
+#' Generate taxonID:
+raw_data %<>% mutate(taxonID = paste("alien-plants-belgium:taxon:", vdigest (taxon, algo="md5"), sep=""))
+
 
 #' Add prefix `raw_` to all column names to avoid name clashes with Darwin Core terms:
 colnames(raw_data) <- paste0("raw_", colnames(raw_data))
@@ -86,7 +96,7 @@ taxon %<>% mutate(datasetName = "Manual of the Alien Plants of Belgium")
 
 #' #### references
 #' #### taxonID
-taxon %<>% mutate(taxonID = raw_id)
+taxon %<>% mutate(taxonID = raw_taxonID)
 
 #' #### scientificNameID
 taxon %<>% mutate(scientificNameID = raw_scientificnameid)
@@ -169,8 +179,8 @@ distribution %<>% mutate(presence_be =
 #' 
 #' Map the source data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
 
-#' #### id
-distribution %<>% mutate(id = raw_id)
+#' #### taxonID
+distribution %<>% mutate(taxonID = raw_taxonID)
 
 #' #### locationID
 distribution %<>% mutate(locationID = "ISO_3166-2:BE")
@@ -221,8 +231,8 @@ distribution %<>% gather(
   convert = FALSE
 )
 
-#' Sort on `id` to see pathways in context for each record:
-distribution %<>% arrange(id)
+#' Sort on `taxonID` to see pathways in context for each record:
+distribution %<>% arrange(taxonID)
 
 #' Show unique values:
 distribution %>%
@@ -382,8 +392,8 @@ distribution %<>% select(
   -start_year, -end_year
 )
 
-#' Sort on `id`:
-distribution %<>% arrange(id)
+#' Sort on `taxonID`:
+distribution %<>% arrange(taxonID)
 
 #' Preview data:
 kable(head(distribution))
@@ -472,8 +482,8 @@ native_range %<>% gather(
   convert = FALSE
 )
 
-#' Sort on ID to see pathways in context for each record:
-native_range %<>% arrange(raw_id)
+#' Sort on taxonID to see pathways in context for each record:
+native_range %<>% arrange(raw_taxonID)
 
 #' Clean values:
 native_range %<>% mutate(
@@ -547,8 +557,8 @@ description_ext <- bind_rows(origin, native_range, pathway)
 #' 
 #' Map the source data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml):
 #' 
-#' #### id
-description_ext %<>% mutate(id = raw_id)
+#' #### taxonID
+description_ext %<>% mutate(taxonID = raw_taxonID)
 
 #' #### description
 description_ext %<>% mutate(description = description)
@@ -575,11 +585,11 @@ description_ext %<>% select(
   -one_of(raw_colnames)
 )
 
-#' Move `id` to the first position:
-description_ext %<>% select(id, everything())
+#' Move `taxonID` to the first position:
+description_ext %<>% select(taxonID, everything())
 
-#' Sort on `id`:
-description_ext %<>% arrange(id)
+#' Sort on `taxonID`:
+description_ext %<>% arrange(taxonID)
 
 #' Preview data:
 kable(head(description_ext, 10))
