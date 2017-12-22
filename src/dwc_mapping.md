@@ -2,7 +2,7 @@
 
 Peter Desmet, Quentin Groom, Lien Reyserhove
 
-2017-12-18
+2017-12-22
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -20,7 +20,7 @@ Sys.setlocale("LC_CTYPE", "en_US.UTF-8")
 ```
 
 ```
-## [1] ""
+## [1] "en_US.UTF-8"
 ```
 
 Load libraries:
@@ -86,7 +86,7 @@ Generate `taxonID`:
 
 
 ```r
-raw_data %<>% mutate(taxonID = paste("alien-plants-belgium:taxon:", vdigest (taxon, algo="md5"), sep=""))
+raw_data %<>% mutate(taxonID = paste("alien-plants-belgium", "taxon", vdigest (taxon, algo="md5"), sep=":"))
 ```
 
 Add prefix `raw_` to all column names to avoid name clashes with Darwin Core terms:
@@ -415,14 +415,14 @@ distribution %>% select (raw_presence_fl, raw_presence_br, raw_presence_wa, Flan
 |?               |X               |?               |?        |?        |S        |S       |       1|
 |X               |?               |X               |M        |M        |?        |S       |       5|
 |X               |X               |X               |M        |M        |M        |S       |     486|
-|X               |NA              |X               |M        |M        |NA       |S       |     616|
-|X               |X               |NA              |M        |NA       |M        |S       |      69|
+|X               |NA              |X               |M        |M        |NA       |S       |     620|
+|X               |X               |NA              |M        |NA       |M        |S       |      70|
 |NA              |X               |X               |NA       |M        |M        |S       |      24|
-|NA              |X               |NA              |NA       |NA       |S        |S       |      36|
-|NA              |NA              |X               |NA       |S        |NA       |S       |     469|
+|NA              |X               |NA              |NA       |NA       |S        |S       |      37|
+|NA              |NA              |X               |NA       |S        |NA       |S       |     468|
 |X               |?               |?               |S        |?        |?        |S       |       2|
 |X               |NA              |?               |S        |?        |NA       |S       |       1|
-|X               |NA              |NA              |S        |NA       |NA       |S       |     767|
+|X               |NA              |NA              |S        |NA       |NA       |S       |     769|
 
 From wide to long table (i.e. create a `key` and `value` column)
 
@@ -520,16 +520,16 @@ distribution %>% select (location, presence, occurrenceStatus) %>%
 |location |presence |occurrenceStatus   | records|
 |:--------|:--------|:------------------|-------:|
 |Belgium  |?        |presence uncertain |      22|
-|Belgium  |S        |present            |    2476|
+|Belgium  |S        |present            |    2483|
 |Brussels |?        |presence uncertain |      29|
-|Brussels |M        |present            |     579|
-|Brussels |S        |present            |      37|
+|Brussels |M        |present            |     580|
+|Brussels |S        |present            |      38|
 |Flanders |?        |presence uncertain |      23|
-|Flanders |M        |present            |    1176|
-|Flanders |S        |present            |     770|
+|Flanders |M        |present            |    1181|
+|Flanders |S        |present            |     772|
 |Wallonia |?        |presence uncertain |      26|
-|Wallonia |M        |present            |    1131|
-|Wallonia |S        |present            |     469|
+|Wallonia |M        |present            |    1135|
+|Wallonia |S        |present            |     468|
 
 #### threatStatus
 #### establishmentMeans
@@ -595,7 +595,7 @@ distribution %>%
 |:----------------|
 |                 |
 |...              |
-|                |
+|Ore              |
 |agric.           |
 |birdseed         |
 |etc.             |
@@ -605,7 +605,6 @@ distribution %>%
 |hort.?           |
 |nurseries        |
 |ore              |
-|Ore              |
 |ore?             |
 |salt             |
 |seeds            |
@@ -614,9 +613,9 @@ distribution %>%
 |tourists         |
 |urban weed       |
 |wool             |
+|…                |
 |...              |
 |?                |
-|                |
 |Agric.           |
 |Bird seed        |
 |Birdseed         |
@@ -633,7 +632,6 @@ distribution %>%
 |Grass seed?      |
 |Hay?             |
 |Hort             |
-|hort.            |
 |Hort.            |
 |Hort.?           |
 |Hybridization    |
@@ -657,13 +655,15 @@ distribution %>%
 |Wool             |
 |Wool alien       |
 |Wool?            |
+|hort.            |
+|…                |
 
 Clean values:
 
 
 ```r
 distribution %<>% mutate(
-  value = str_replace_all(value, "\\?|â¦|\\.{3}", ""), # Strip ?, â¦, ...
+  value = str_replace_all(value, "\\?|…|\\.{3}", ""), # Strip ?, …, ...
   value = str_to_lower(value), # Convert to lowercase
   value = str_trim(value) # Clean whitespace
 )
@@ -724,37 +724,36 @@ distribution %>%
 
 |value           |mapped_value                 | records|
 |:---------------|:----------------------------|-------:|
-|                |                             |     163|
-|               |                             |     379|
-|agric.          |escape:agriculture           |      86|
-|bird seed       |contaminant:seed             |       1|
-|birdseed        |contaminant:seed             |      31|
-|bulbs           |                             |       1|
-|coconut mats    |contaminant:seed             |       1|
-|etc.            |                             |       1|
-|fish            |                             |       3|
-|food refuse     |escape:food_bait             |      22|
-|grain           |contaminant:seed             |     542|
-|grain (rice)    |contaminant:seed             |       3|
-|grass seed      |contaminant:seed             |       8|
-|hay             |                             |       1|
-|hort            |escape:horticulture          |       2|
-|hort.           |escape:horticulture          |    1099|
-|hybridization   |                             |      48|
-|military troops |                             |       9|
-|nurseries       |contaminant:nursery          |      21|
-|ore             |contaminant:habitat_material |      93|
-|pines           |contaminant:on_plants        |       4|
-|rice            |                             |       1|
-|salt            |                             |       2|
-|seeds           |contaminant:seed             |      64|
-|timber          |contaminant:timber           |      10|
-|tourists        |stowaway:people_luggage      |      10|
-|traffic         |                             |       4|
-|urban weed      |stowaway                     |      10|
-|waterfowl       |contaminant:on_animals       |      14|
-|wool            |contaminant:on_animals       |     566|
-|wool alien      |contaminant:on_animals       |       1|
+|                |                             |    1661|
+|agric.          |escape:agriculture           |     303|
+|bird seed       |contaminant:seed             |       2|
+|birdseed        |contaminant:seed             |      90|
+|bulbs           |                             |       2|
+|coconut mats    |contaminant:seed             |       2|
+|etc.            |                             |       3|
+|fish            |                             |       6|
+|food refuse     |escape:food_bait             |      61|
+|grain           |contaminant:seed             |    1592|
+|grain (rice)    |contaminant:seed             |       7|
+|grass seed      |contaminant:seed             |      19|
+|hay             |                             |       4|
+|hort            |escape:horticulture          |       6|
+|hort.           |escape:horticulture          |    2952|
+|hybridization   |                             |     125|
+|military troops |                             |      22|
+|nurseries       |contaminant:nursery          |      57|
+|ore             |contaminant:habitat_material |     283|
+|pines           |contaminant:on_plants        |      11|
+|rice            |                             |       2|
+|salt            |                             |       6|
+|seeds           |contaminant:seed             |     185|
+|timber          |contaminant:timber           |      29|
+|tourists        |stowaway:people_luggage      |      24|
+|traffic         |                             |      12|
+|urban weed      |stowaway                     |      30|
+|waterfowl       |contaminant:on_animals       |      44|
+|wool            |contaminant:on_animals       |    1554|
+|wool alien      |contaminant:on_animals       |       2|
 
 Drop `value` column:
 
@@ -828,40 +827,41 @@ distribution %>% select (location, presence, establishmentMeans) %>%
 |:--------|:--------|:----------------------------------------------------------------------------------|-------:|
 |Belgium  |?        |                                                                                   |      22|
 |Belgium  |S        |                                                                                   |     201|
-|Belgium  |S        |contaminant:habitat_material                                                       |      69|
+|Belgium  |S        |contaminant:habitat_material                                                       |      68|
 |Belgium  |S        |contaminant:habitat_material &#124; contaminant:on_animals                         |       4|
 |Belgium  |S        |contaminant:habitat_material &#124; contaminant:seed                               |       2|
 |Belgium  |S        |contaminant:habitat_material &#124; contaminant:seed &#124; contaminant:on_animals |       2|
 |Belgium  |S        |contaminant:habitat_material &#124; escape:horticulture                            |       2|
 |Belgium  |S        |contaminant:nursery                                                                |      19|
-|Belgium  |S        |contaminant:on_animals                                                             |     345|
-|Belgium  |S        |contaminant:on_animals &#124; contaminant:habitat_material                         |       4|
+|Belgium  |S        |contaminant:nursery &#124; contaminant:on_animals                                  |       1|
+|Belgium  |S        |contaminant:on_animals                                                             |     344|
+|Belgium  |S        |contaminant:on_animals &#124; contaminant:habitat_material                         |       5|
 |Belgium  |S        |contaminant:on_animals &#124; contaminant:on_animals                               |       1|
 |Belgium  |S        |contaminant:on_animals &#124; contaminant:seed                                     |      51|
 |Belgium  |S        |contaminant:on_animals &#124; escape:horticulture                                  |       2|
 |Belgium  |S        |contaminant:on_animals &#124; stowaway                                             |       1|
 |Belgium  |S        |contaminant:on_animals &#124; stowaway:people_luggage                              |       1|
 |Belgium  |S        |contaminant:on_plants                                                              |       4|
-|Belgium  |S        |contaminant:seed                                                                   |     379|
+|Belgium  |S        |contaminant:seed                                                                   |     378|
 |Belgium  |S        |contaminant:seed &#124; contaminant:habitat_material                               |       4|
 |Belgium  |S        |contaminant:seed &#124; contaminant:habitat_material &#124; contaminant:on_animals |       1|
 |Belgium  |S        |contaminant:seed &#124; contaminant:on_animals                                     |     146|
 |Belgium  |S        |contaminant:seed &#124; contaminant:on_animals &#124; contaminant:habitat_material |       2|
 |Belgium  |S        |contaminant:seed &#124; contaminant:on_animals &#124; contaminant:seed             |       2|
 |Belgium  |S        |contaminant:seed &#124; contaminant:on_animals &#124; escape:horticulture          |       1|
-|Belgium  |S        |contaminant:seed &#124; contaminant:seed                                           |      16|
+|Belgium  |S        |contaminant:seed &#124; contaminant:seed                                           |      17|
 |Belgium  |S        |contaminant:seed &#124; contaminant:seed &#124; contaminant:habitat_material       |       1|
 |Belgium  |S        |contaminant:seed &#124; contaminant:seed &#124; contaminant:on_animals             |       1|
 |Belgium  |S        |contaminant:seed &#124; escape:horticulture                                        |       8|
 |Belgium  |S        |contaminant:seed &#124; stowaway:people_luggage                                    |       1|
 |Belgium  |S        |contaminant:timber                                                                 |       9|
-|Belgium  |S        |escape:agriculture                                                                 |      77|
+|Belgium  |S        |escape:agriculture                                                                 |      78|
 |Belgium  |S        |escape:agriculture &#124; contaminant:on_animals                                   |       2|
 |Belgium  |S        |escape:agriculture &#124; contaminant:seed                                         |       1|
 |Belgium  |S        |escape:agriculture &#124; escape:horticulture                                      |       1|
-|Belgium  |S        |escape:food_bait                                                                   |      20|
+|Belgium  |S        |escape:food_bait                                                                   |      21|
 |Belgium  |S        |escape:food_bait &#124; contaminant:on_animals                                     |       1|
-|Belgium  |S        |escape:horticulture                                                                |    1054|
+|Belgium  |S        |escape:horticulture                                                                |    1059|
 |Belgium  |S        |escape:horticulture &#124; contaminant:habitat_material                            |       2|
 |Belgium  |S        |escape:horticulture &#124; contaminant:on_animals                                  |       4|
 |Belgium  |S        |escape:horticulture &#124; contaminant:on_animals &#124; contaminant:seed          |       2|
@@ -875,34 +875,34 @@ distribution %>% select (location, presence, establishmentMeans) %>%
 |Belgium  |S        |stowaway:people_luggage                                                            |       6|
 |Belgium  |S        |stowaway:people_luggage &#124; contaminant:on_animals                              |       2|
 |Brussels |?        |                                                                                   |      29|
-|Brussels |M        |                                                                                   |     579|
+|Brussels |M        |                                                                                   |     580|
 |Brussels |S        |                                                                                   |      14|
 |Brussels |S        |contaminant:seed                                                                   |       3|
 |Brussels |S        |escape:agriculture                                                                 |       1|
-|Brussels |S        |escape:horticulture                                                                |      19|
+|Brussels |S        |escape:horticulture                                                                |      20|
 |Flanders |?        |                                                                                   |      23|
-|Flanders |M        |                                                                                   |    1175|
+|Flanders |M        |                                                                                   |    1180|
 |Flanders |S        |                                                                                   |      82|
-|Flanders |S        |contaminant:habitat_material                                                       |      19|
+|Flanders |S        |contaminant:habitat_material                                                       |      18|
 |Flanders |S        |contaminant:nursery                                                                |      10|
 |Flanders |S        |contaminant:on_animals                                                             |       8|
 |Flanders |S        |contaminant:on_plants                                                              |       1|
-|Flanders |S        |contaminant:seed                                                                   |     194|
-|Flanders |S        |contaminant:seed &#124; contaminant:seed                                           |       2|
+|Flanders |S        |contaminant:seed                                                                   |     192|
+|Flanders |S        |contaminant:seed &#124; contaminant:seed                                           |       3|
 |Flanders |S        |contaminant:seed &#124; stowaway:people_luggage                                    |       1|
 |Flanders |S        |contaminant:timber                                                                 |       2|
 |Flanders |S        |escape:agriculture                                                                 |       6|
-|Flanders |S        |escape:food_bait                                                                   |       9|
-|Flanders |S        |escape:horticulture                                                                |     423|
+|Flanders |S        |escape:food_bait                                                                   |      10|
+|Flanders |S        |escape:horticulture                                                                |     426|
 |Flanders |S        |escape:horticulture &#124; contaminant:habitat_material                            |       1|
 |Flanders |S        |escape:horticulture &#124; contaminant:seed                                        |       1|
 |Flanders |S        |stowaway                                                                           |       3|
 |Flanders |S        |stowaway:people_luggage                                                            |       6|
 |Wallonia |?        |                                                                                   |      26|
-|Wallonia |M        |                                                                                   |    1130|
+|Wallonia |M        |                                                                                   |    1134|
 |Wallonia |S        |                                                                                   |      52|
 |Wallonia |S        |contaminant:habitat_material                                                       |      11|
-|Wallonia |S        |contaminant:on_animals                                                             |     254|
+|Wallonia |S        |contaminant:on_animals                                                             |     253|
 |Wallonia |S        |contaminant:on_animals &#124; contaminant:seed                                     |       4|
 |Wallonia |S        |contaminant:on_animals &#124; escape:horticulture                                  |       1|
 |Wallonia |S        |contaminant:seed                                                                   |      32|
@@ -980,7 +980,32 @@ distribution %>%
 
 |raw_year  |formatted_year |
 |:---------|:--------------|
-|?         |               |
+|1813?     |1813           |
+|1817?     |1817           |
+|1860?     |1860           |
+|1866?     |1866           |
+|1886?     |1886           |
+|1893?     |1893           |
+|1911?     |1911           |
+|1912?     |1912           |
+|1931?     |1931           |
+|1947?     |1947           |
+|1955?     |1955           |
+|1959?     |1959           |
+|1960?     |1960           |
+|1963?     |1963           |
+|1965?     |1965           |
+|1972?     |1972           |
+|1975?     |1975           |
+|1976?     |1976           |
+|1979?     |1979           |
+|1985?     |1985           |
+|1998?     |1998           |
+|2000?     |2000           |
+|2002?     |2002           |
+|2004?     |2004           |
+|2006?     |2006           |
+|2010?     |2010           |
 |<1800     |1800           |
 |<1812     |1812           |
 |<1824     |1824           |
@@ -1023,37 +1048,12 @@ distribution %>%
 |<2012     |2012           |
 |>1940     |1940           |
 |>1972     |1972           |
-|1813?     |1813           |
-|1817?     |1817           |
-|1860?     |1860           |
-|1866?     |1866           |
-|1886?     |1886           |
-|1893?     |1893           |
-|1911?     |1911           |
-|1912?     |1912           |
-|1931?     |1931           |
-|1947?     |1947           |
-|1955?     |1955           |
-|1959?     |1959           |
-|1960?     |1960           |
-|1963?     |1963           |
-|1965?     |1965           |
-|1972?     |1972           |
-|1975?     |1975           |
-|1976?     |1976           |
-|1979?     |1979           |
-|1985?     |1985           |
-|1998?     |1998           |
-|2000?     |2000           |
-|2002?     |2002           |
-|2004?     |2004           |
-|2006?     |2006           |
-|2010?     |2010           |
+|?         |               |
+|N         |2017           |
+|N?        |2017           |
 |ca. 1975  |1975           |
 |ca. 1985? |1985           |
 |ca. 1996  |1996           |
-|N         |2017           |
-|N?        |2017           |
 
 Check if any `start_year` fall after `end_year` (expected to be none):
 
@@ -1133,14 +1133,14 @@ kable(head(distribution))
 
 
 
-|taxonID                                                     |locationID    |locality |countryCode |occurrenceStatus |establishmentMeans  |eventDate |
-|:-----------------------------------------------------------|:-------------|:--------|:-----------|:----------------|:-------------------|:---------|
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1944/2016 |
-|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2010      |
-|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2000/2012 |
-|alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148 |ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1990/2017 |
-|alien-plants-belgium:taxon:0063fb918750e3db0f1bb551cd9587c5 |ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |2004      |
-|alien-plants-belgium:taxon:0068d529c19ee42ce7ea09fc427d82e4 |ISO_3166-2:BE |Belgium  |BE          |present          |escape:horticulture |1998/2017 |
+|taxonID                                                     |locationID        |locality                |countryCode |occurrenceStatus |establishmentMeans  |eventDate |
+|:-----------------------------------------------------------|:-----------------|:-----------------------|:-----------|:----------------|:-------------------|:---------|
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-VLG |Flemish Region          |BE          |present          |                    |          |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-WAL |Walloon Region          |BE          |present          |                    |          |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-BRU |Brussels-Capital Region |BE          |present          |                    |          |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE     |Belgium                 |BE          |present          |escape:horticulture |1944/2016 |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE-VLG |Flemish Region          |BE          |present          |                    |          |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE-WAL |Walloon Region          |BE          |present          |                    |          |
 
 Save to CSV:
 
@@ -1325,17 +1325,17 @@ Map values:
 
 ```r
 native_range %<>% mutate(mapped_value = recode(value,
-  "AF" = "Africa",
+  "AF" = "Africa (WGSRPD:2)",
   "AM" = "pan-American",
   "AS" = "Asia",
-  "AS-Te" = "temperate Asia",
-  "AS-Tr" = "tropical Asia",
-  "AUS" = "Australasia",
+  "AS-Te" = "temperate Asia (WGSRPD:3)",
+  "AS-Tr" = "tropical Asia (WGSRPD:4)",
+  "AUS" = "Australasia (WGSRPD:5)",
   "Cult." = "cultivated origin",
-  "E" = "Europe",
+  "E" = "Europe (WGSRPD:1)",
   "Hybr." = "hybrid origin",
-  "NAM" = "Northern America",
-  "SAM" = "Southern America",
+  "NAM" = "Northern America (WGSRPD:7)",
+  "SAM" = "Southern America (WGSRPD:8)",
   "Trop." = "Pantropical",
   .default = "",
   .missing = "" # As result of stripping, records with no native range already removed by gather()
@@ -1356,21 +1356,21 @@ native_range %>%
 
 
 
-|value |mapped_value      | records|
-|:-----|:-----------------|-------:|
-|      |                  |       1|
-|AF    |Africa            |     637|
-|AM    |pan-American      |      94|
-|AS    |Asia              |      71|
-|AS-Te |temperate Asia    |    1051|
-|AS-Tr |tropical Asia     |      12|
-|AUS   |Australasia       |     117|
-|Cult. |cultivated origin |      92|
-|E     |Europe            |    1122|
-|Hybr. |hybrid origin     |      67|
-|NAM   |Northern America  |     363|
-|SAM   |Southern America  |     158|
-|Trop. |Pantropical       |      37|
+|value |mapped_value                | records|
+|:-----|:---------------------------|-------:|
+|      |                            |       1|
+|AF    |Africa (WGSRPD:2)           |     637|
+|AM    |pan-American                |      94|
+|AS    |Asia                        |      71|
+|AS-Te |temperate Asia (WGSRPD:3)   |    1051|
+|AS-Tr |tropical Asia (WGSRPD:4)    |      12|
+|AUS   |Australasia (WGSRPD:5)      |     117|
+|Cult. |cultivated origin           |      92|
+|E     |Europe (WGSRPD:1)           |    1122|
+|Hybr. |hybrid origin               |      67|
+|NAM   |Northern America (WGSRPD:7) |     363|
+|SAM   |Southern America (WGSRPD:8) |     158|
+|Trop. |Pantropical                 |      37|
 
 Drop `key` and `value` column and rename `mapped value`:
 
@@ -1403,14 +1403,14 @@ kable(head(native_range))
 
 
 
-| raw_id|raw_taxon            |raw_hybrid_formula |raw_synonym |raw_family  |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i |raw_taxonrank |raw_scientificnameid                            |raw_taxonID                                                 |description    |type         |
-|------:|:--------------------|:------------------|:-----------|:-----------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-------|:-------------|:-----------------------------------------------|:-----------------------------------------------------------|:--------------|:------------|
-|      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c |Europe         |native range |
-|      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c |Africa         |native range |
-|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |Europe         |native range |
-|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |Africa         |native range |
-|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |temperate Asia |native range |
-|      3|Acorus calamus L.    |NA                 |NA          |Acoraceae   |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1 |alien-plants-belgium:taxon:574eaf931730ba162e0226a425247660 |temperate Asia |native range |
+| raw_id|raw_taxon            |raw_hybrid_formula |raw_synonym |raw_family  |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i |raw_taxonrank |raw_scientificnameid                            |raw_taxonID                                                 |description               |type         |
+|------:|:--------------------|:------------------|:-----------|:-----------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-------|:-------------|:-----------------------------------------------|:-----------------------------------------------------------|:-------------------------|:------------|
+|      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c |Europe (WGSRPD:1)         |native range |
+|      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c |Africa (WGSRPD:2)         |native range |
+|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |Europe (WGSRPD:1)         |native range |
+|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |Africa (WGSRPD:2)         |native range |
+|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |temperate Asia (WGSRPD:3) |native range |
+|      3|Acorus calamus L.    |NA                 |NA          |Acoraceae   |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1 |alien-plants-belgium:taxon:574eaf931730ba162e0226a425247660 |temperate Asia (WGSRPD:3) |native range |
 
 #### Pathway (pathway of introduction) 
 
@@ -1446,7 +1446,7 @@ pathway %>%
 |:----------------------------|-------:|
 |contaminant:habitat_material |      93|
 |contaminant:nursery          |      21|
-|contaminant:on_animals       |     581|
+|contaminant:on_animals       |     580|
 |contaminant:on_plants        |       4|
 |contaminant:seed             |     650|
 |contaminant:timber           |      10|
@@ -1545,18 +1545,18 @@ kable(head(description_ext, 10))
 
 
 
-|taxonID                                                     |description         |type         |language |
-|:-----------------------------------------------------------|:-------------------|:------------|:--------|
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |vagrant             |origin       |en       |
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |temperate Asia      |native range |en       |
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |escape:horticulture |pathway      |en       |
-|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |vagrant             |origin       |en       |
-|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |temperate Asia      |native range |en       |
-|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |escape:horticulture |pathway      |en       |
-|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |vagrant             |origin       |en       |
-|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |Northern America    |native range |en       |
-|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |escape:horticulture |pathway      |en       |
-|alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148 |introduced          |origin       |en       |
+|taxonID                                                     |description                 |type         |language |
+|:-----------------------------------------------------------|:---------------------------|:------------|:--------|
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |vagrant                     |origin       |en       |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |temperate Asia (WGSRPD:3)   |native range |en       |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |escape:horticulture         |pathway      |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |vagrant                     |origin       |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |temperate Asia (WGSRPD:3)   |native range |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |escape:horticulture         |pathway      |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |vagrant                     |origin       |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |Northern America (WGSRPD:7) |native range |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |escape:horticulture         |pathway      |en       |
+|alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148 |introduced                  |origin       |en       |
 
 Save to CSV:
 
@@ -1571,8 +1571,8 @@ write.csv(description_ext, file = dwc_description_file, na = "", row.names = FAL
 
 * Source file: 2507
 * Taxon core: 2507
-* Distribution extension: 2503
-* Description extension: 8828
+* Distribution extension: 6750
+* Description extension: 8827
 
 ### Taxon core
 
