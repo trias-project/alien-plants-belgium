@@ -178,24 +178,31 @@ distribution <- raw_data
 #' The content of these columns refers to the specific occurrence of a species on a regional or national level.
 #' `S` if present in a single region or in Belgium, `?` if presence uncertain, `NA` if absent and `M` if present in multiple regions.
 #' This should look like this:
-kable(matrix (c("X", NA, NA, "S", NA, NA, "S",
-          NA, "X", NA, NA, "S", NA, "S", 
-        NA, NA, "x", NA, NA, "S", "S",
-        "X", "X", NA, "M", "M", NA, "S",
-        "X", NA, "X", "M", NA, "M", "S",
-        NA, "X", "X", NA, "M", "M", "S",
-        NA, NA, NA, NA, NA, NA, NA,
-        "X", "?", NA, "S", "?", NA, "S",
-        "X", NA, "?", "S", NA, "?", "S",
-        "X", "X", "?", "M", "M", "?", "S"),
-        ncol = 7, byrow = TRUE,
-        dimnames = list (c(1:10), c("raw_presence_fl",
-                                    "raw_presence_br", 
-                                    "raw_presence_wa", 
-                                    "Flanders", 
-                                    "Brussels", 
-                                    "Wallonia",
-                                    "Belgium"))))
+kable(matrix(
+  c(
+    "X", NA, NA, "S", NA, NA, "S",
+    NA, "X", NA, NA, "S", NA, "S", 
+    NA, NA, "x", NA, NA, "S", "S",
+    "X", "X", NA, "M", "M", NA, "S",
+    "X", NA, "X", "M", NA, "M", "S",
+    NA, "X", "X", NA, "M", "M", "S",
+    NA, NA, NA, NA, NA, NA, NA,
+    "X", "?", NA, "S", "?", NA, "S",
+    "X", NA, "?", "S", NA, "?", "S",
+    "X", "X", "?", "M", "M", "?", "S"
+  ),
+  ncol = 7,
+  byrow = TRUE,
+  dimnames = list(c(1:10), c(
+    "raw_presence_fl",
+    "raw_presence_br", 
+    "raw_presence_wa", 
+    "Flanders", 
+    "Brussels", 
+    "Wallonia",
+    "Belgium"
+  ))
+))
 
 #' We translate this to the distribution extension:
 distribution %<>% 
@@ -270,12 +277,12 @@ distribution %<>% mutate(countryCode = "BE")
 #' 
 #' Map values using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
 distribution %<>% mutate(occurrenceStatus = recode(presence,
-                                                   "S" = "present",
-                                                   "M" = "present",
-                                                   "?" = "presence uncertain",
-                                                   "NA" = "absent",
-                                                   .default = "",
-                                                   .missing = "absent"
+  "S" = "present",
+  "M" = "present",
+  "?" = "presence uncertain",
+  "NA" = "absent",
+  .default = "",
+  .missing = "absent"
 ))
 
 
@@ -390,7 +397,7 @@ distribution %<>% spread(key, mapped_value)
 
 #' Create `pathway` columns where these values are concatentated with ` | `:
 distribution %<>% mutate(pathway = 
-                           paste(pathway_1, pathway_2, pathway_3, pathway_4, sep = " | ")              
+  paste(pathway_1, pathway_2, pathway_3, pathway_4, sep = " | ")              
 )
 
 #' Annoyingly the `paste()` function does not provide an `rm.na` parameter, so `NA` values will be included as ` | NA`. We can strip those out like this:
@@ -461,13 +468,13 @@ distribution %>%
 
 #' Combine `start_year` and `end_year` in an ranged `Date` (ISO 8601 format). If any those two dates is empty or the same, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
 distribution %<>% mutate(Date = 
-                           case_when(
-                             start_year == "" & end_year == "" ~ "",
-                             start_year == ""                  ~ end_year,
-                             end_year == ""                    ~ start_year,
-                             start_year == end_year            ~ start_year,
-                             TRUE                              ~ paste(start_year, end_year, sep = "/")
-                           )
+  case_when(
+    start_year == "" & end_year == "" ~ "",
+    start_year == ""                  ~ end_year,
+    end_year == ""                    ~ start_year,
+    start_year == end_year            ~ start_year,
+    TRUE                              ~ paste(start_year, end_year, sep = "/")
+  )
 )
 
 #' Populate `eventDate` only when `presence` = `S`.
