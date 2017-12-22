@@ -55,7 +55,7 @@ raw_data %<>%
 vdigest <- Vectorize(digest)
 
 #' Generate `taxonID`:
-raw_data %<>% mutate(taxonID = paste("alien-plants-belgium:taxon:", vdigest (taxon, algo="md5"), sep=""))
+raw_data %<>% mutate(taxonID = paste("alien-plants-belgium", "taxon", vdigest (taxon, algo="md5"), sep=":"))
 
 
 #' Add prefix `raw_` to all column names to avoid name clashes with Darwin Core terms:
