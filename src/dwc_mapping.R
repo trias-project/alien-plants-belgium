@@ -297,125 +297,7 @@ distribution %>% select (location, presence, occurrenceStatus) %>%
 
 #' #### threatStatus
 #' #### establishmentMeans
-#'
-#' `establishmentMeans` is based on `raw_v_i`, which contains a list of introductions pathways (e.g. `Agric., wool`). We'll separate, clean, map and combine these values.
-#' 
-#' Create `pathway` from `raw_v_i`:
-distribution %<>% mutate(pathway = raw_v_i)
-
-#' Separate `pathway` on `,` in 4 columns:
-# In case there are more than 4 values, these will be merged in pathway_4. 
-# The dataset currently contains no more than 3 values per record.
-distribution %<>% separate(
-  pathway,
-  into = c("pathway_1", "pathway_2", "pathway_3", "pathway_4"),
-  sep = ",",
-  remove = TRUE,
-  convert = FALSE,
-  extra = "merge",
-  fill = "right"
-)
-
-#' Gather pathways in a key and value column:
-distribution %<>% gather(
-  key, value,
-  pathway_1, pathway_2, pathway_3, pathway_4,
-  na.rm = TRUE, # Also removes records for which there is no pathway_1
-  convert = FALSE
-)
-
-#' Sort on `taxonID` to see pathways in context for each record:
-distribution %<>% arrange(taxonID)
-
-#' Show unique values:
-distribution %>%
-  distinct(value) %>%
-  arrange(value) %>%
-  kable()
-
-#' Clean values:
-distribution %<>% mutate(
-  value = str_replace_all(value, "\\?|…|\\.{3}", ""), # Strip ?, …, ...
-  value = str_to_lower(value), # Convert to lowercase
-  value = str_trim(value) # Clean whitespace
-)
-
-#' Map values:
-distribution %<>% mutate(mapped_value = recode(value, 
-  "agric." = "escape:agriculture",
-  "bird seed" = "contaminant:seed",
-  "birdseed" = "contaminant:seed",
-  "bulbs" = "",
-  "coconut mats" = "contaminant:seed",
-  "fish" = "",
-  "food refuse" = "escape:food_bait",
-  "grain" = "contaminant:seed",
-  "grain (rice)" = "contaminant:seed",
-  "grass seed" = "contaminant:seed",
-  "hay" = "",
-  "hort" = "escape:horticulture",
-  "hort." = "escape:horticulture",
-  "hybridization" = "",
-  "military troops" = "",
-  "nurseries" = "contaminant:nursery",
-  "ore" = "contaminant:habitat_material",
-  "pines" = "contaminant:on_plants",
-  "rice" = "",
-  "salt" = "",
-  "seeds" = "contaminant:seed",
-  "timber" = "contaminant:timber",
-  "tourists" = "stowaway:people_luggage",
-  "traffic" = "",
-  "unknown" = "unknown",
-  "urban weed" = "stowaway",
-  "waterfowl" = "contaminant:on_animals",
-  "wool" = "contaminant:on_animals",
-  "wool alien" = "contaminant:on_animals",
-  .default = "",
-  .missing = "" # As result of stripping, records with no pathway already removed by gather()
-))
-
-#' Show mapped values:
-distribution %>%
-  select(value, mapped_value) %>%
-  group_by(value, mapped_value) %>%
-  summarize(records = n()) %>%
-  arrange(value) %>%
-  kable()
-
-#' Drop `value` column:
-distribution %<>% select(-value)
-
-#' Convert empty values to `NA` (important to be able to remove them after paste):
-distribution %<>% mutate(mapped_value = na_if(mapped_value, ""))
-
-#'Since our pathway controlled vocabulary is not allowed by GBIF in `establishmentMeans` (see <https://github.com/trias-project/alien-plants-belgium/issues/35>), we'll also add it to the Description extension. Rather than cleaning it all over again there, we save it here:
-pathway <- distribution %>% filter (location == "Belgium") %>% select(one_of(raw_colnames), mapped_value) 
-
-#' Spread values back to columns:
-distribution %<>% spread(key, mapped_value)
-
-#' Create `pathway` columns where these values are concatentated with ` | `:
-distribution %<>% mutate(pathway = 
-  paste(pathway_1, pathway_2, pathway_3, pathway_4, sep = " | ")              
-)
-
-#' Annoyingly the `paste()` function does not provide an `rm.na` parameter, so `NA` values will be included as ` | NA`. We can strip those out like this:
-distribution %<>% mutate(
-  pathway = str_replace_all(pathway, " \\| NA", ""), # Remove ' | NA'
-  pathway = recode(pathway, "NA" = "") # Remove NA at start of string
-)
-
-#' Only populate `establishmentMeans` when `presence` = `S`.
-distribution %<>% mutate (establishmentMeans = case_when(
-  presence == "S" ~ pathway,
-  TRUE ~ ""))
-
-#' Show mapping of `establishmentMeans`
-distribution %>% select (location, presence, establishmentMeans) %>%
-  group_by_all() %>%
-  summarize(records = n()) %>%
-  kable()
+distribution %<>% mutate (establishmentMeans = "introduced")
 
 #' #### appendixCITES
 #' #### eventDate
@@ -510,7 +392,7 @@ write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE
 
 #' ## Create description extension
 #' 
-#' In the description extension we want to include **origin** (`raw_d_n`) and **native range** (`raw_origin`) information. We'll create a separate data frame for both and then combine these with union.
+#' In the description extension we want to include **origin** (`raw_d_n`), **native range** (`raw_origin`) and **pathway** (`raw_v_i``) information. We'll create a separate data frame for all and then combine these with union.
 #' 
 #' ### Pre-processing
 #' 
@@ -638,27 +520,114 @@ native_range %<>% mutate(type = "native range")
 kable(head(native_range))
 
 #' #### Pathway (pathway of introduction) 
+pathway_desc <- raw_data
+
+#' `pathway_desc` (pathway description) information is based on `raw_v_i`, which contains a list of introduction pathways (e.g. `Agric., wool`). We'll separate, clean, map and combine these values.
 #' 
-#' Pathway information was already generated for `establishmentMeans` in the Distribution extension and saved in a dataframe `pathway`. It contains one record per pathway (with potentially more than one pathway per taxon).
+#' Create `pathway` from `raw_v_i`:
+pathway_desc %<>% mutate(pathway = raw_v_i)
+
+#' Separate `pathway` on `,` in 4 columns:
+# In case there are more than 4 values, these will be merged in pathway_4. 
+# The dataset currently contains no more than 3 values per record.
+pathway_desc %<>% separate(
+  pathway,
+  into = c("pathway_1", "pathway_2", "pathway_3", "pathway_4"),
+  sep = ",",
+  remove = TRUE,
+  convert = FALSE,
+  extra = "merge",
+  fill = "right"
+)
+
+#' Gather pathways in a key and value column:
+pathway_desc %<>% gather(
+  key, value,
+  pathway_1, pathway_2, pathway_3, pathway_4,
+  na.rm = TRUE, # Also removes records for which there is no pathway_1
+  convert = FALSE
+)
+
+#' Sort on `taxonID` to see pathways in context for each record:
+pathway_desc %<>% arrange(raw_taxonID)
+
+#' Show unique values:
+pathway_desc %>%
+  distinct(value) %>%
+  arrange(value) %>%
+  kable()
+
+#' Clean values:
+pathway_desc %<>% mutate(
+  value = str_replace_all(value, "\\?|…|\\.{3}", ""), # Strip ?, …, ...
+  value = str_to_lower(value), # Convert to lowercase
+  value = str_trim(value) # Clean whitespace
+)
+
+#' Map values:
+pathway_desc %<>% mutate(mapped_value = recode(value, 
+                                               "agric." = "escape:agriculture",
+                                               "bird seed" = "contaminant:seed",
+                                               "birdseed" = "contaminant:seed",
+                                               "bulbs" = "",
+                                               "coconut mats" = "contaminant:seed",
+                                               "fish" = "",
+                                               "food refuse" = "escape:food_bait",
+                                               "grain" = "contaminant:seed",
+                                               "grain (rice)" = "contaminant:seed",
+                                               "grass seed" = "contaminant:seed",
+                                               "hay" = "",
+                                               "hort" = "escape:horticulture",
+                                               "hort." = "escape:horticulture",
+                                               "hybridization" = "",
+                                               "military troops" = "",
+                                               "nurseries" = "contaminant:nursery",
+                                               "ore" = "contaminant:habitat_material",
+                                               "pines" = "contaminant:on_plants",
+                                               "rice" = "",
+                                               "salt" = "",
+                                               "seeds" = "contaminant:seed",
+                                               "timber" = "contaminant:timber",
+                                               "tourists" = "stowaway:people_luggage",
+                                               "traffic" = "",
+                                               "unknown" = "unknown",
+                                               "urban weed" = "stowaway",
+                                               "waterfowl" = "contaminant:on_animals",
+                                               "wool" = "contaminant:on_animals",
+                                               "wool alien" = "contaminant:on_animals",
+                                               .default = "",
+                                               .missing = "" # As result of stripping, records with no pathway already removed by gather()
+))
+
+#' Show mapped values:
+pathway_desc %>%
+  select(value, mapped_value) %>%
+  group_by(value, mapped_value) %>%
+  summarize(records = n()) %>%
+  arrange(value) %>%
+  kable()
+
+#' Drop `key`and `value` column:
+pathway_desc %<>% select(-key, -value)
 
 #' Change column name `mapped_value` to `description`:
-pathway %<>%  rename(description = mapped_value)
+pathway_desc %<>%  rename(description = mapped_value)
 
 #' Create a `type` field to indicate the type of description:
-pathway %<>% mutate (type = "pathway")
+pathway_desc %<>% mutate (type = "pathway")
 
 #' Show pathway descriptions:
-pathway %>% 
+pathway_desc %>% 
   select(description) %>% 
   group_by(description) %>% 
   summarize(records = n()) %>% 
   kable()
 
 #' Keep only non-empty descriptions:
-pathway %<>% filter(!is.na(description) & description != "")
+pathway_desc %<>% filter(!is.na(description) & description != "")
 
 #' #### Union origin, native range and pathway:
-description_ext <- bind_rows(origin, native_range, pathway)
+description_ext <- bind_rows(origin, native_range, pathway_desc)
 
 #' ### Term mapping
 #' 
