@@ -1196,35 +1196,35 @@ Map values:
 
 ```r
 pathway_desc %<>% mutate(mapped_value = recode(value, 
-                                               "agric." = "escape:agriculture",
-                                               "bird seed" = "contaminant:seed",
-                                               "birdseed" = "contaminant:seed",
+                                               "agric." = "cbd_2014_pathway:escape_agriculture",
+                                               "bird seed" = "cbd_2014_pathway:contaminant_seed",
+                                               "birdseed" = "cbd_2014_pathway:contaminant_seed",
                                                "bulbs" = "",
-                                               "coconut mats" = "contaminant:seed",
+                                               "coconut mats" = "cbd_2014_pathway:contaminant_seed",
                                                "fish" = "",
-                                               "food refuse" = "escape:food_bait",
-                                               "grain" = "contaminant:seed",
-                                               "grain (rice)" = "contaminant:seed",
-                                               "grass seed" = "contaminant:seed",
+                                               "food refuse" = "cbd_2014_pathway:escape_food_bait",
+                                               "grain" = "cbd_2014_pathway:contaminant_seed",
+                                               "grain (rice)" = "cbd_2014_pathway:contaminant_seed",
+                                               "grass seed" = "cbd_2014_pathway:contaminant_seed",
                                                "hay" = "",
-                                               "hort" = "escape:horticulture",
-                                               "hort." = "escape:horticulture",
+                                               "hort" = "cbd_2014_pathway:escape_horticulture",
+                                               "hort." = "cbd_2014_pathway:escape_horticulture",
                                                "hybridization" = "",
                                                "military troops" = "",
-                                               "nurseries" = "contaminant:nursery",
-                                               "ore" = "contaminant:habitat_material",
-                                               "pines" = "contaminant:on_plants",
+                                               "nurseries" = "cbd_2014_pathway:contaminant_nursery",
+                                               "ore" = "cbd_2014_pathway:contaminant_habitat_material",
+                                               "pines" = "cbd_2014_pathway:contaminant_on_plants",
                                                "rice" = "",
                                                "salt" = "",
-                                               "seeds" = "contaminant:seed",
-                                               "timber" = "contaminant:timber",
-                                               "tourists" = "stowaway:people_luggage",
+                                               "seeds" = "cbd_2014_pathway:contaminant_seed",
+                                               "timber" = "cbd_2014_pathway:contaminant_timber",
+                                               "tourists" = "cbd_2014_pathway:stowaway_people_luggage",
                                                "traffic" = "",
                                                "unknown" = "unknown",
-                                               "urban weed" = "stowaway",
-                                               "waterfowl" = "contaminant:on_animals",
-                                               "wool" = "contaminant:on_animals",
-                                               "wool alien" = "contaminant:on_animals",
+                                               "urban weed" = "cbd_2014_pathway:stowaway",
+                                               "waterfowl" = "cbd_2014_pathway:contaminant_on_animals",
+                                               "wool" = "cbd_2014_pathway:contaminant_on_animals",
+                                               "wool alien" = "cbd_2014_pathway:contaminant_on_animals",
                                                .default = "",
                                                .missing = "" # As result of stripping, records with no pathway already removed by gather()
 ))
@@ -1244,39 +1244,39 @@ pathway_desc %>%
 
 
 
-|value           |mapped_value                 | records|
-|:---------------|:----------------------------|-------:|
-|                |                             |     163|
-|…               |                             |     379|
-|agric.          |escape:agriculture           |      86|
-|bird seed       |contaminant:seed             |       1|
-|birdseed        |contaminant:seed             |      31|
-|bulbs           |                             |       1|
-|coconut mats    |contaminant:seed             |       1|
-|etc.            |                             |       1|
-|fish            |                             |       3|
-|food refuse     |escape:food_bait             |      22|
-|grain           |contaminant:seed             |     542|
-|grain (rice)    |contaminant:seed             |       3|
-|grass seed      |contaminant:seed             |       8|
-|hay             |                             |       1|
-|hort            |escape:horticulture          |       2|
-|hort.           |escape:horticulture          |    1099|
-|hybridization   |                             |      48|
-|military troops |                             |       9|
-|nurseries       |contaminant:nursery          |      21|
-|ore             |contaminant:habitat_material |      93|
-|pines           |contaminant:on_plants        |       4|
-|rice            |                             |       1|
-|salt            |                             |       2|
-|seeds           |contaminant:seed             |      64|
-|timber          |contaminant:timber           |      10|
-|tourists        |stowaway:people_luggage      |      10|
-|traffic         |                             |       4|
-|urban weed      |stowaway                     |      10|
-|waterfowl       |contaminant:on_animals       |      14|
-|wool            |contaminant:on_animals       |     566|
-|wool alien      |contaminant:on_animals       |       1|
+|value           |mapped_value                                  | records|
+|:---------------|:---------------------------------------------|-------:|
+|                |                                              |     163|
+|…               |                                              |     379|
+|agric.          |cbd_2014_pathway:escape_agriculture           |      86|
+|bird seed       |cbd_2014_pathway:contaminant_seed             |       1|
+|birdseed        |cbd_2014_pathway:contaminant_seed             |      31|
+|bulbs           |                                              |       1|
+|coconut mats    |cbd_2014_pathway:contaminant_seed             |       1|
+|etc.            |                                              |       1|
+|fish            |                                              |       3|
+|food refuse     |cbd_2014_pathway:escape_food_bait             |      22|
+|grain           |cbd_2014_pathway:contaminant_seed             |     542|
+|grain (rice)    |cbd_2014_pathway:contaminant_seed             |       3|
+|grass seed      |cbd_2014_pathway:contaminant_seed             |       8|
+|hay             |                                              |       1|
+|hort            |cbd_2014_pathway:escape_horticulture          |       2|
+|hort.           |cbd_2014_pathway:escape_horticulture          |    1099|
+|hybridization   |                                              |      48|
+|military troops |                                              |       9|
+|nurseries       |cbd_2014_pathway:contaminant_nursery          |      21|
+|ore             |cbd_2014_pathway:contaminant_habitat_material |      93|
+|pines           |cbd_2014_pathway:contaminant_on_plants        |       4|
+|rice            |                                              |       1|
+|salt            |                                              |       2|
+|seeds           |cbd_2014_pathway:contaminant_seed             |      64|
+|timber          |cbd_2014_pathway:contaminant_timber           |      10|
+|tourists        |cbd_2014_pathway:stowaway_people_luggage      |      10|
+|traffic         |                                              |       4|
+|urban weed      |cbd_2014_pathway:stowaway                     |      10|
+|waterfowl       |cbd_2014_pathway:contaminant_on_animals       |      14|
+|wool            |cbd_2014_pathway:contaminant_on_animals       |     566|
+|wool alien      |cbd_2014_pathway:contaminant_on_animals       |       1|
 
 Drop `key`and `value` column:
 
@@ -1312,20 +1312,20 @@ pathway_desc %>%
 
 
 
-|description                  | records|
-|:----------------------------|-------:|
-|                             |     612|
-|contaminant:habitat_material |      93|
-|contaminant:nursery          |      21|
-|contaminant:on_animals       |     581|
-|contaminant:on_plants        |       4|
-|contaminant:seed             |     650|
-|contaminant:timber           |      10|
-|escape:agriculture           |      86|
-|escape:food_bait             |      22|
-|escape:horticulture          |    1101|
-|stowaway                     |      10|
-|stowaway:people_luggage      |      10|
+|description                                   | records|
+|:---------------------------------------------|-------:|
+|                                              |     612|
+|cbd_2014_pathway:contaminant_habitat_material |      93|
+|cbd_2014_pathway:contaminant_nursery          |      21|
+|cbd_2014_pathway:contaminant_on_animals       |     581|
+|cbd_2014_pathway:contaminant_on_plants        |       4|
+|cbd_2014_pathway:contaminant_seed             |     650|
+|cbd_2014_pathway:contaminant_timber           |      10|
+|cbd_2014_pathway:escape_agriculture           |      86|
+|cbd_2014_pathway:escape_food_bait             |      22|
+|cbd_2014_pathway:escape_horticulture          |    1101|
+|cbd_2014_pathway:stowaway                     |      10|
+|cbd_2014_pathway:stowaway_people_luggage      |      10|
 
 Keep only non-empty descriptions:
 
@@ -1415,18 +1415,18 @@ kable(head(description_ext, 10))
 
 
 
-|taxonID                                                     |description                 |type         |language |
-|:-----------------------------------------------------------|:---------------------------|:------------|:--------|
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |vagrant                     |origin       |en       |
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |temperate Asia (WGSRPD:3)   |native range |en       |
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |escape:horticulture         |pathway      |en       |
-|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |vagrant                     |origin       |en       |
-|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |temperate Asia (WGSRPD:3)   |native range |en       |
-|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |escape:horticulture         |pathway      |en       |
-|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |vagrant                     |origin       |en       |
-|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |Northern America (WGSRPD:7) |native range |en       |
-|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |escape:horticulture         |pathway      |en       |
-|alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148 |introduced                  |origin       |en       |
+|taxonID                                                     |description                          |type         |language |
+|:-----------------------------------------------------------|:------------------------------------|:------------|:--------|
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |vagrant                              |origin       |en       |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |temperate Asia (WGSRPD:3)            |native range |en       |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |cbd_2014_pathway:escape_horticulture |pathway      |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |vagrant                              |origin       |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |temperate Asia (WGSRPD:3)            |native range |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |cbd_2014_pathway:escape_horticulture |pathway      |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |vagrant                              |origin       |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |Northern America (WGSRPD:7)          |native range |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |cbd_2014_pathway:escape_horticulture |pathway      |en       |
+|alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148 |introduced                           |origin       |en       |
 
 Save to CSV:
 
