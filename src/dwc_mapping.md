@@ -2,7 +2,7 @@
 
 Peter Desmet, Quentin Groom, Lien Reyserhove
 
-2018-01-02
+2018-01-05
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -56,9 +56,7 @@ Read the source data:
 
 
 ```r
-raw_data <- read_excel(
-  path = raw_data_file
-) 
+raw_data <- read_excel(path = raw_data_file) 
 ```
 
 Clean data somewhat:
@@ -1191,43 +1189,52 @@ pathway_desc %<>% mutate(
 )
 ```
 
-Map values:
+Map values to the CBD standard::
 
 
 ```r
-pathway_desc %<>% mutate(mapped_value = recode(value, 
-                                               "agric." = "cbd_2014_pathway:escape_agriculture",
-                                               "bird seed" = "cbd_2014_pathway:contaminant_seed",
-                                               "birdseed" = "cbd_2014_pathway:contaminant_seed",
+pathway_desc %<>% mutate(cbd_stand = recode(value, 
+                                               "agric." = "escape_agriculture",
+                                               "bird seed" = "contaminant_seed",
+                                               "birdseed" = "contaminant_seed",
                                                "bulbs" = "",
-                                               "coconut mats" = "cbd_2014_pathway:contaminant_seed",
+                                               "coconut mats" = "contaminant_seed",
                                                "fish" = "",
-                                               "food refuse" = "cbd_2014_pathway:escape_food_bait",
-                                               "grain" = "cbd_2014_pathway:contaminant_seed",
-                                               "grain (rice)" = "cbd_2014_pathway:contaminant_seed",
-                                               "grass seed" = "cbd_2014_pathway:contaminant_seed",
+                                               "food refuse" = "escape_food_bait",
+                                               "grain" = "contaminant_seed",
+                                               "grain (rice)" = "contaminant_seed",
+                                               "grass seed" = "contaminant_seed",
                                                "hay" = "",
-                                               "hort" = "cbd_2014_pathway:escape_horticulture",
-                                               "hort." = "cbd_2014_pathway:escape_horticulture",
+                                               "hort" = "escape_horticulture",
+                                               "hort." = "escape_horticulture",
                                                "hybridization" = "",
                                                "military troops" = "",
-                                               "nurseries" = "cbd_2014_pathway:contaminant_nursery",
-                                               "ore" = "cbd_2014_pathway:contaminant_habitat_material",
-                                               "pines" = "cbd_2014_pathway:contaminant_on_plants",
+                                               "nurseries" = "contaminant_nursery",
+                                               "ore" = "contaminant_habitat_material",
+                                               "pines" = "contaminant_on_plants",
                                                "rice" = "",
                                                "salt" = "",
-                                               "seeds" = "cbd_2014_pathway:contaminant_seed",
-                                               "timber" = "cbd_2014_pathway:contaminant_timber",
-                                               "tourists" = "cbd_2014_pathway:stowaway_people_luggage",
+                                               "seeds" = "contaminant_seed",
+                                               "timber" = "contaminant_timber",
+                                               "tourists" = "stowaway_people_luggage",
                                                "traffic" = "",
                                                "unknown" = "unknown",
-                                               "urban weed" = "cbd_2014_pathway:stowaway",
-                                               "waterfowl" = "cbd_2014_pathway:contaminant_on_animals",
-                                               "wool" = "cbd_2014_pathway:contaminant_on_animals",
-                                               "wool alien" = "cbd_2014_pathway:contaminant_on_animals",
+                                               "urban weed" = "stowaway",
+                                               "waterfowl" = "contaminant_on_animals",
+                                               "wool" = "contaminant_on_animals",
+                                               "wool alien" = "contaminant_on_animals",
                                                .default = "",
                                                .missing = "" # As result of stripping, records with no pathway already removed by gather()
 ))
+```
+
+Add prefix `cbd_2014_pathway` in case there is a match with the CBD standard:
+
+
+```r
+pathway_desc %<>% mutate(mapped_value = case_when(
+  cbd_stand != "" ~ paste ("cbd_2014_pathway", cbd_stand, sep = ":"),
+  TRUE ~ ""))
 ```
 
 Show mapped values:
@@ -1415,18 +1422,18 @@ kable(head(description_ext, 10))
 
 
 
-|taxonID                                                     |description                          |type         |language |
-|:-----------------------------------------------------------|:------------------------------------|:------------|:--------|
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |vagrant                              |origin       |en       |
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |temperate Asia (WGSRPD:3)            |native range |en       |
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |cbd_2014_pathway:escape_horticulture |pathway      |en       |
-|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |vagrant                              |origin       |en       |
-|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |temperate Asia (WGSRPD:3)            |native range |en       |
-|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |cbd_2014_pathway:escape_horticulture |pathway      |en       |
-|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |vagrant                              |origin       |en       |
-|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |Northern America (WGSRPD:7)          |native range |en       |
-|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |cbd_2014_pathway:escape_horticulture |pathway      |en       |
-|alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148 |introduced                           |origin       |en       |
+|taxonID                                                     |description                          |type         |cbd_stand           |language |
+|:-----------------------------------------------------------|:------------------------------------|:------------|:-------------------|:--------|
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |vagrant                              |origin       |NA                  |en       |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |temperate Asia (WGSRPD:3)            |native range |NA                  |en       |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |cbd_2014_pathway:escape_horticulture |pathway      |escape_horticulture |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |vagrant                              |origin       |NA                  |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |temperate Asia (WGSRPD:3)            |native range |NA                  |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |cbd_2014_pathway:escape_horticulture |pathway      |escape_horticulture |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |vagrant                              |origin       |NA                  |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |Northern America (WGSRPD:7)          |native range |NA                  |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |cbd_2014_pathway:escape_horticulture |pathway      |escape_horticulture |en       |
+|alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148 |introduced                           |origin       |NA                  |en       |
 
 Save to CSV:
 
