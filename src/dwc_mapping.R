@@ -37,9 +37,7 @@ dwc_description_file = "../data/processed/description.csv"
 #' ## Read data
 #' 
 #' Read the source data:
-raw_data <- read_excel(
-  path = raw_data_file
-) 
+raw_data <- read_excel(path = raw_data_file) 
 
 #' Clean data somewhat:
 raw_data %<>%
