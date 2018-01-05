@@ -610,8 +610,8 @@ pathway_desc %>%
   arrange(value) %>%
   kable()
 
-#' Drop `key`and `value` column:
-pathway_desc %<>% select(-key, -value)
+#' Drop `key`,`value` and `cbd_stand` column:
+pathway_desc %<>% select(-key, -value, -cbd_stand)
 
 #' Change column name `mapped_value` to `description`:
 pathway_desc %<>%  rename(description = mapped_value)
