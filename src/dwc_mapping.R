@@ -37,9 +37,7 @@ dwc_description_file = "../data/processed/description.csv"
 #' ## Read data
 #' 
 #' Read the source data:
-raw_data <- read_excel(
-  path = raw_data_file
-) 
+raw_data <- read_excel(path = raw_data_file) 
 
 #' Clean data somewhat:
 raw_data %<>%
@@ -377,7 +375,6 @@ distribution %<>% mutate (eventDate = case_when(
 distribution %<>% select(
   -one_of(raw_colnames),
   -location,-presence,
-  -pathway_1, -pathway_2, -pathway_3, -pathway_4, -pathway,
   -start_year, -end_year, - Date
 )
 
@@ -564,40 +561,45 @@ pathway_desc %<>% mutate(
   value = str_trim(value) # Clean whitespace
 )
 
-#' Map values:
-pathway_desc %<>% mutate(mapped_value = recode(value, 
-                                               "agric." = "escape:agriculture",
-                                               "bird seed" = "contaminant:seed",
-                                               "birdseed" = "contaminant:seed",
+#' Map values to the CBD standard::
+pathway_desc %<>% mutate(cbd_stand = recode(value, 
+                                               "agric." = "escape_agriculture",
+                                               "bird seed" = "contaminant_seed",
+                                               "birdseed" = "contaminant_seed",
                                                "bulbs" = "",
-                                               "coconut mats" = "contaminant:seed",
+                                               "coconut mats" = "contaminant_seed",
                                                "fish" = "",
-                                               "food refuse" = "escape:food_bait",
-                                               "grain" = "contaminant:seed",
-                                               "grain (rice)" = "contaminant:seed",
-                                               "grass seed" = "contaminant:seed",
+                                               "food refuse" = "escape_food_bait",
+                                               "grain" = "contaminant_seed",
+                                               "grain (rice)" = "contaminant_seed",
+                                               "grass seed" = "contaminant_seed",
                                                "hay" = "",
-                                               "hort" = "escape:horticulture",
-                                               "hort." = "escape:horticulture",
+                                               "hort" = "escape_horticulture",
+                                               "hort." = "escape_horticulture",
                                                "hybridization" = "",
                                                "military troops" = "",
-                                               "nurseries" = "contaminant:nursery",
-                                               "ore" = "contaminant:habitat_material",
-                                               "pines" = "contaminant:on_plants",
+                                               "nurseries" = "contaminant_nursery",
+                                               "ore" = "contaminant_habitat_material",
+                                               "pines" = "contaminant_on_plants",
                                                "rice" = "",
                                                "salt" = "",
-                                               "seeds" = "contaminant:seed",
-                                               "timber" = "contaminant:timber",
-                                               "tourists" = "stowaway:people_luggage",
+                                               "seeds" = "contaminant_seed",
+                                               "timber" = "contaminant_timber",
+                                               "tourists" = "stowaway_people_luggage",
                                                "traffic" = "",
                                                "unknown" = "unknown",
                                                "urban weed" = "stowaway",
-                                               "waterfowl" = "contaminant:on_animals",
-                                               "wool" = "contaminant:on_animals",
-                                               "wool alien" = "contaminant:on_animals",
+                                               "waterfowl" = "contaminant_on_animals",
+                                               "wool" = "contaminant_on_animals",
+                                               "wool alien" = "contaminant_on_animals",
                                                .default = "",
                                                .missing = "" # As result of stripping, records with no pathway already removed by gather()
 ))
+
+#' Add prefix `cbd_2014_pathway` in case there is a match with the CBD standard:
+pathway_desc %<>% mutate(mapped_value = case_when(
+  cbd_stand != "" ~ paste ("cbd_2014_pathway", cbd_stand, sep = ":"),
+  TRUE ~ ""))
 
 #' Show mapped values:
 pathway_desc %>%
@@ -607,8 +609,8 @@ pathway_desc %>%
   arrange(value) %>%
   kable()
 
-#' Drop `key`and `value` column:
-pathway_desc %<>% select(-key, -value)
+#' Drop `key`,`value` and `cbd_stand` column:
+pathway_desc %<>% select(-key, -value, -cbd_stand)
 
 #' Change column name `mapped_value` to `description`:
 pathway_desc %<>%  rename(description = mapped_value)

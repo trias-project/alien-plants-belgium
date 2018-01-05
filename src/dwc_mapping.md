@@ -2,7 +2,7 @@
 
 Peter Desmet, Quentin Groom, Lien Reyserhove
 
-2018-01-02
+2018-01-05
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -20,7 +20,7 @@ Sys.setlocale("LC_CTYPE", "en_US.UTF-8")
 ```
 
 ```
-## [1] ""
+## [1] "en_US.UTF-8"
 ```
 
 Load libraries:
@@ -56,9 +56,7 @@ Read the source data:
 
 
 ```r
-raw_data <- read_excel(
-  path = raw_data_file
-) 
+raw_data <- read_excel(path = raw_data_file) 
 ```
 
 Clean data somewhat:
@@ -613,7 +611,32 @@ distribution %>%
 
 |raw_year  |formatted_year |
 |:---------|:--------------|
-|?         |               |
+|1813?     |1813           |
+|1817?     |1817           |
+|1860?     |1860           |
+|1866?     |1866           |
+|1886?     |1886           |
+|1893?     |1893           |
+|1911?     |1911           |
+|1912?     |1912           |
+|1931?     |1931           |
+|1947?     |1947           |
+|1955?     |1955           |
+|1959?     |1959           |
+|1960?     |1960           |
+|1963?     |1963           |
+|1965?     |1965           |
+|1972?     |1972           |
+|1975?     |1975           |
+|1976?     |1976           |
+|1979?     |1979           |
+|1985?     |1985           |
+|1998?     |1998           |
+|2000?     |2000           |
+|2002?     |2002           |
+|2004?     |2004           |
+|2006?     |2006           |
+|2010?     |2010           |
 |<1800     |1800           |
 |<1812     |1812           |
 |<1824     |1824           |
@@ -656,37 +679,12 @@ distribution %>%
 |<2012     |2012           |
 |>1940     |1940           |
 |>1972     |1972           |
-|1813?     |1813           |
-|1817?     |1817           |
-|1860?     |1860           |
-|1866?     |1866           |
-|1886?     |1886           |
-|1893?     |1893           |
-|1911?     |1911           |
-|1912?     |1912           |
-|1931?     |1931           |
-|1947?     |1947           |
-|1955?     |1955           |
-|1959?     |1959           |
-|1960?     |1960           |
-|1963?     |1963           |
-|1965?     |1965           |
-|1972?     |1972           |
-|1975?     |1975           |
-|1976?     |1976           |
-|1979?     |1979           |
-|1985?     |1985           |
-|1998?     |1998           |
-|2000?     |2000           |
-|2002?     |2002           |
-|2004?     |2004           |
-|2006?     |2006           |
-|2010?     |2010           |
+|?         |               |
+|N         |2018           |
+|N?        |2018           |
 |ca. 1975  |1975           |
 |ca. 1985? |1985           |
 |ca. 1996  |1996           |
-|N         |2018           |
-|N?        |2018           |
 
 Check if any `start_year` fall after `end_year` (expected to be none):
 
@@ -745,13 +743,8 @@ Remove the original columns:
 distribution %<>% select(
   -one_of(raw_colnames),
   -location,-presence,
-  -pathway_1, -pathway_2, -pathway_3, -pathway_4, -pathway,
   -start_year, -end_year, - Date
 )
-```
-
-```
-## Error in overscope_eval_next(overscope, expr): object 'pathway_1' not found
 ```
 
 Sort on `taxonID`:
@@ -770,14 +763,14 @@ kable(head(distribution))
 
 
 
-| raw_id|raw_taxon                                                   |raw_hybrid_formula |raw_synonym |raw_family |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i |raw_taxonrank |raw_scientificnameid                             |raw_taxonID                                                 |location |presence |taxonID                                                     |locationID        |locality                |countryCode |occurrenceStatus |establishmentMeans |start_year |end_year |Date      |eventDate |
-|------:|:-----------------------------------------------------------|:------------------|:-----------|:----------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-------|:-------------|:------------------------------------------------|:-----------------------------------------------------------|:--------|:--------|:-----------------------------------------------------------|:-----------------|:-----------------------|:-----------|:----------------|:------------------|:----------|:--------|:---------|:---------|
-|    269|Achillea filipendulina Lam.                                 |NA                 |NA          |Asteraceae |D       |1944   |2016    |AS-Te      |X               |X               |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:173972-1 |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |Flanders |M        |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-VLG |Flemish Region          |BE          |present          |introduced         |1944       |2016     |1944/2016 |          |
-|    269|Achillea filipendulina Lam.                                 |NA                 |NA          |Asteraceae |D       |1944   |2016    |AS-Te      |X               |X               |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:173972-1 |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |Wallonia |M        |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-WAL |Walloon Region          |BE          |present          |introduced         |1944       |2016     |1944/2016 |          |
-|    269|Achillea filipendulina Lam.                                 |NA                 |NA          |Asteraceae |D       |1944   |2016    |AS-Te      |X               |X               |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:173972-1 |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |Brussels |M        |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-BRU |Brussels-Capital Region |BE          |present          |introduced         |1944       |2016     |1944/2016 |          |
-|    269|Achillea filipendulina Lam.                                 |NA                 |NA          |Asteraceae |D       |1944   |2016    |AS-Te      |X               |X               |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:173972-1 |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |Belgium  |S        |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE     |Belgium                 |BE          |present          |introduced         |1944       |2016     |1944/2016 |1944/2016 |
-|   2192|Cotoneaster coriaceus Franch. (incl. C. lacteus W.W. Smith) |NA                 |NA          |Rosaceae   |D       |2010   |2010    |AS-Te      |X               |NA              |X               |Cas.    |Hort.   |species       |NA                                               |alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |Flanders |M        |alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE-VLG |Flemish Region          |BE          |present          |introduced         |2010       |2010     |2010      |          |
-|   2192|Cotoneaster coriaceus Franch. (incl. C. lacteus W.W. Smith) |NA                 |NA          |Rosaceae   |D       |2010   |2010    |AS-Te      |X               |NA              |X               |Cas.    |Hort.   |species       |NA                                               |alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |Wallonia |M        |alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE-WAL |Walloon Region          |BE          |present          |introduced         |2010       |2010     |2010      |          |
+|taxonID                                                     |locationID        |locality                |countryCode |occurrenceStatus |establishmentMeans |eventDate |
+|:-----------------------------------------------------------|:-----------------|:-----------------------|:-----------|:----------------|:------------------|:---------|
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-VLG |Flemish Region          |BE          |present          |introduced         |          |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-WAL |Walloon Region          |BE          |present          |introduced         |          |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-BRU |Brussels-Capital Region |BE          |present          |introduced         |          |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE     |Belgium                 |BE          |present          |introduced         |1944/2016 |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE-VLG |Flemish Region          |BE          |present          |introduced         |          |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE-WAL |Walloon Region          |BE          |present          |introduced         |          |
 
 Save to CSV:
 
@@ -1117,7 +1110,7 @@ pathway_desc %>%
 |:----------------|
 |                 |
 |...              |
-|…                |
+|Ore              |
 |agric.           |
 |birdseed         |
 |etc.             |
@@ -1127,7 +1120,6 @@ pathway_desc %>%
 |hort.?           |
 |nurseries        |
 |ore              |
-|Ore              |
 |ore?             |
 |salt             |
 |seeds            |
@@ -1136,9 +1128,9 @@ pathway_desc %>%
 |tourists         |
 |urban weed       |
 |wool             |
+|â€¦                |
 |...              |
 |?                |
-|…                |
 |Agric.           |
 |Bird seed        |
 |Birdseed         |
@@ -1155,7 +1147,6 @@ pathway_desc %>%
 |Grass seed?      |
 |Hay?             |
 |Hort             |
-|hort.            |
 |Hort.            |
 |Hort.?           |
 |Hybridization    |
@@ -1179,6 +1170,8 @@ pathway_desc %>%
 |Wool             |
 |Wool alien       |
 |Wool?            |
+|hort.            |
+|â€¦                |
 
 Clean values:
 
@@ -1191,43 +1184,52 @@ pathway_desc %<>% mutate(
 )
 ```
 
-Map values:
+Map values to the CBD standard::
 
 
 ```r
-pathway_desc %<>% mutate(mapped_value = recode(value, 
-                                               "agric." = "escape:agriculture",
-                                               "bird seed" = "contaminant:seed",
-                                               "birdseed" = "contaminant:seed",
+pathway_desc %<>% mutate(cbd_stand = recode(value, 
+                                               "agric." = "escape_agriculture",
+                                               "bird seed" = "contaminant_seed",
+                                               "birdseed" = "contaminant_seed",
                                                "bulbs" = "",
-                                               "coconut mats" = "contaminant:seed",
+                                               "coconut mats" = "contaminant_seed",
                                                "fish" = "",
-                                               "food refuse" = "escape:food_bait",
-                                               "grain" = "contaminant:seed",
-                                               "grain (rice)" = "contaminant:seed",
-                                               "grass seed" = "contaminant:seed",
+                                               "food refuse" = "escape_food_bait",
+                                               "grain" = "contaminant_seed",
+                                               "grain (rice)" = "contaminant_seed",
+                                               "grass seed" = "contaminant_seed",
                                                "hay" = "",
-                                               "hort" = "escape:horticulture",
-                                               "hort." = "escape:horticulture",
+                                               "hort" = "escape_horticulture",
+                                               "hort." = "escape_horticulture",
                                                "hybridization" = "",
                                                "military troops" = "",
-                                               "nurseries" = "contaminant:nursery",
-                                               "ore" = "contaminant:habitat_material",
-                                               "pines" = "contaminant:on_plants",
+                                               "nurseries" = "contaminant_nursery",
+                                               "ore" = "contaminant_habitat_material",
+                                               "pines" = "contaminant_on_plants",
                                                "rice" = "",
                                                "salt" = "",
-                                               "seeds" = "contaminant:seed",
-                                               "timber" = "contaminant:timber",
-                                               "tourists" = "stowaway:people_luggage",
+                                               "seeds" = "contaminant_seed",
+                                               "timber" = "contaminant_timber",
+                                               "tourists" = "stowaway_people_luggage",
                                                "traffic" = "",
                                                "unknown" = "unknown",
                                                "urban weed" = "stowaway",
-                                               "waterfowl" = "contaminant:on_animals",
-                                               "wool" = "contaminant:on_animals",
-                                               "wool alien" = "contaminant:on_animals",
+                                               "waterfowl" = "contaminant_on_animals",
+                                               "wool" = "contaminant_on_animals",
+                                               "wool alien" = "contaminant_on_animals",
                                                .default = "",
                                                .missing = "" # As result of stripping, records with no pathway already removed by gather()
 ))
+```
+
+Add prefix `cbd_2014_pathway` in case there is a match with the CBD standard:
+
+
+```r
+pathway_desc %<>% mutate(mapped_value = case_when(
+  cbd_stand != "" ~ paste ("cbd_2014_pathway", cbd_stand, sep = ":"),
+  TRUE ~ ""))
 ```
 
 Show mapped values:
@@ -1244,45 +1246,44 @@ pathway_desc %>%
 
 
 
-|value           |mapped_value                 | records|
-|:---------------|:----------------------------|-------:|
-|                |                             |     163|
-|…               |                             |     379|
-|agric.          |escape:agriculture           |      86|
-|bird seed       |contaminant:seed             |       1|
-|birdseed        |contaminant:seed             |      31|
-|bulbs           |                             |       1|
-|coconut mats    |contaminant:seed             |       1|
-|etc.            |                             |       1|
-|fish            |                             |       3|
-|food refuse     |escape:food_bait             |      22|
-|grain           |contaminant:seed             |     542|
-|grain (rice)    |contaminant:seed             |       3|
-|grass seed      |contaminant:seed             |       8|
-|hay             |                             |       1|
-|hort            |escape:horticulture          |       2|
-|hort.           |escape:horticulture          |    1099|
-|hybridization   |                             |      48|
-|military troops |                             |       9|
-|nurseries       |contaminant:nursery          |      21|
-|ore             |contaminant:habitat_material |      93|
-|pines           |contaminant:on_plants        |       4|
-|rice            |                             |       1|
-|salt            |                             |       2|
-|seeds           |contaminant:seed             |      64|
-|timber          |contaminant:timber           |      10|
-|tourists        |stowaway:people_luggage      |      10|
-|traffic         |                             |       4|
-|urban weed      |stowaway                     |      10|
-|waterfowl       |contaminant:on_animals       |      14|
-|wool            |contaminant:on_animals       |     566|
-|wool alien      |contaminant:on_animals       |       1|
+|value           |mapped_value                                  | records|
+|:---------------|:---------------------------------------------|-------:|
+|                |                                              |     542|
+|agric.          |cbd_2014_pathway:escape_agriculture           |      86|
+|bird seed       |cbd_2014_pathway:contaminant_seed             |       1|
+|birdseed        |cbd_2014_pathway:contaminant_seed             |      31|
+|bulbs           |                                              |       1|
+|coconut mats    |cbd_2014_pathway:contaminant_seed             |       1|
+|etc.            |                                              |       1|
+|fish            |                                              |       3|
+|food refuse     |cbd_2014_pathway:escape_food_bait             |      22|
+|grain           |cbd_2014_pathway:contaminant_seed             |     542|
+|grain (rice)    |cbd_2014_pathway:contaminant_seed             |       3|
+|grass seed      |cbd_2014_pathway:contaminant_seed             |       8|
+|hay             |                                              |       1|
+|hort            |cbd_2014_pathway:escape_horticulture          |       2|
+|hort.           |cbd_2014_pathway:escape_horticulture          |    1099|
+|hybridization   |                                              |      48|
+|military troops |                                              |       9|
+|nurseries       |cbd_2014_pathway:contaminant_nursery          |      21|
+|ore             |cbd_2014_pathway:contaminant_habitat_material |      93|
+|pines           |cbd_2014_pathway:contaminant_on_plants        |       4|
+|rice            |                                              |       1|
+|salt            |                                              |       2|
+|seeds           |cbd_2014_pathway:contaminant_seed             |      64|
+|timber          |cbd_2014_pathway:contaminant_timber           |      10|
+|tourists        |cbd_2014_pathway:stowaway_people_luggage      |      10|
+|traffic         |                                              |       4|
+|urban weed      |cbd_2014_pathway:stowaway                     |      10|
+|waterfowl       |cbd_2014_pathway:contaminant_on_animals       |      14|
+|wool            |cbd_2014_pathway:contaminant_on_animals       |     566|
+|wool alien      |cbd_2014_pathway:contaminant_on_animals       |       1|
 
-Drop `key`and `value` column:
+Drop `key`,`value` and `cbd_stand` column:
 
 
 ```r
-pathway_desc %<>% select(-key, -value)
+pathway_desc %<>% select(-key, -value, -cbd_stand)
 ```
 
 Change column name `mapped_value` to `description`:
@@ -1312,20 +1313,20 @@ pathway_desc %>%
 
 
 
-|description                  | records|
-|:----------------------------|-------:|
-|                             |     612|
-|contaminant:habitat_material |      93|
-|contaminant:nursery          |      21|
-|contaminant:on_animals       |     581|
-|contaminant:on_plants        |       4|
-|contaminant:seed             |     650|
-|contaminant:timber           |      10|
-|escape:agriculture           |      86|
-|escape:food_bait             |      22|
-|escape:horticulture          |    1101|
-|stowaway                     |      10|
-|stowaway:people_luggage      |      10|
+|description                                   | records|
+|:---------------------------------------------|-------:|
+|                                              |     612|
+|cbd_2014_pathway:contaminant_habitat_material |      93|
+|cbd_2014_pathway:contaminant_nursery          |      21|
+|cbd_2014_pathway:contaminant_on_animals       |     581|
+|cbd_2014_pathway:contaminant_on_plants        |       4|
+|cbd_2014_pathway:contaminant_seed             |     650|
+|cbd_2014_pathway:contaminant_timber           |      10|
+|cbd_2014_pathway:escape_agriculture           |      86|
+|cbd_2014_pathway:escape_food_bait             |      22|
+|cbd_2014_pathway:escape_horticulture          |    1101|
+|cbd_2014_pathway:stowaway                     |      10|
+|cbd_2014_pathway:stowaway_people_luggage      |      10|
 
 Keep only non-empty descriptions:
 
@@ -1415,18 +1416,18 @@ kable(head(description_ext, 10))
 
 
 
-|taxonID                                                     |description                 |type         |language |
-|:-----------------------------------------------------------|:---------------------------|:------------|:--------|
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |vagrant                     |origin       |en       |
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |temperate Asia (WGSRPD:3)   |native range |en       |
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |escape:horticulture         |pathway      |en       |
-|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |vagrant                     |origin       |en       |
-|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |temperate Asia (WGSRPD:3)   |native range |en       |
-|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |escape:horticulture         |pathway      |en       |
-|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |vagrant                     |origin       |en       |
-|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |Northern America (WGSRPD:7) |native range |en       |
-|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |escape:horticulture         |pathway      |en       |
-|alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148 |introduced                  |origin       |en       |
+|taxonID                                                     |description                          |type         |language |
+|:-----------------------------------------------------------|:------------------------------------|:------------|:--------|
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |vagrant                              |origin       |en       |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |temperate Asia (WGSRPD:3)            |native range |en       |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |cbd_2014_pathway:escape_horticulture |pathway      |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |vagrant                              |origin       |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |temperate Asia (WGSRPD:3)            |native range |en       |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |cbd_2014_pathway:escape_horticulture |pathway      |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |vagrant                              |origin       |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |Northern America (WGSRPD:7)          |native range |en       |
+|alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98 |cbd_2014_pathway:escape_horticulture |pathway      |en       |
+|alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148 |introduced                           |origin       |en       |
 
 Save to CSV:
 
