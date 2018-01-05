@@ -599,6 +599,11 @@ pathway_desc %<>% mutate(cbd_stand = recode(value,
                                                .missing = "" # As result of stripping, records with no pathway already removed by gather()
 ))
 
+#' Add prefix `cbd_2014_pathway` in case there is a match with the CBD standard:
+pathway_desc %<>% mutate(mapped_value = case_when(
+  cbd_stand != "" ~ paste ("cbd_2014_pathway", cbd_stand, sep = ":"),
+  TRUE ~ ""))
+
 #' Show mapped values:
 pathway_desc %>%
   select(value, mapped_value) %>%
