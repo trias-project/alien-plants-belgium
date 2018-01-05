@@ -743,13 +743,8 @@ Remove the original columns:
 distribution %<>% select(
   -one_of(raw_colnames),
   -location,-presence,
-  -pathway_1, -pathway_2, -pathway_3, -pathway_4, -pathway,
   -start_year, -end_year, - Date
 )
-```
-
-```
-## Error in overscope_eval_next(overscope, expr): object 'pathway_1' not found
 ```
 
 Sort on `taxonID`:
@@ -768,14 +763,14 @@ kable(head(distribution))
 
 
 
-| raw_id|raw_taxon                                                   |raw_hybrid_formula |raw_synonym |raw_family |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i |raw_taxonrank |raw_scientificnameid                             |raw_taxonID                                                 |location |presence |taxonID                                                     |locationID        |locality                |countryCode |occurrenceStatus |establishmentMeans |start_year |end_year |Date      |eventDate |
-|------:|:-----------------------------------------------------------|:------------------|:-----------|:----------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-------|:-------------|:------------------------------------------------|:-----------------------------------------------------------|:--------|:--------|:-----------------------------------------------------------|:-----------------|:-----------------------|:-----------|:----------------|:------------------|:----------|:--------|:---------|:---------|
-|    269|Achillea filipendulina Lam.                                 |NA                 |NA          |Asteraceae |D       |1944   |2016    |AS-Te      |X               |X               |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:173972-1 |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |Flanders |M        |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-VLG |Flemish Region          |BE          |present          |introduced         |1944       |2016     |1944/2016 |          |
-|    269|Achillea filipendulina Lam.                                 |NA                 |NA          |Asteraceae |D       |1944   |2016    |AS-Te      |X               |X               |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:173972-1 |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |Wallonia |M        |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-WAL |Walloon Region          |BE          |present          |introduced         |1944       |2016     |1944/2016 |          |
-|    269|Achillea filipendulina Lam.                                 |NA                 |NA          |Asteraceae |D       |1944   |2016    |AS-Te      |X               |X               |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:173972-1 |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |Brussels |M        |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-BRU |Brussels-Capital Region |BE          |present          |introduced         |1944       |2016     |1944/2016 |          |
-|    269|Achillea filipendulina Lam.                                 |NA                 |NA          |Asteraceae |D       |1944   |2016    |AS-Te      |X               |X               |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:173972-1 |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |Belgium  |S        |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE     |Belgium                 |BE          |present          |introduced         |1944       |2016     |1944/2016 |1944/2016 |
-|   2192|Cotoneaster coriaceus Franch. (incl. C. lacteus W.W. Smith) |NA                 |NA          |Rosaceae   |D       |2010   |2010    |AS-Te      |X               |NA              |X               |Cas.    |Hort.   |species       |NA                                               |alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |Flanders |M        |alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE-VLG |Flemish Region          |BE          |present          |introduced         |2010       |2010     |2010      |          |
-|   2192|Cotoneaster coriaceus Franch. (incl. C. lacteus W.W. Smith) |NA                 |NA          |Rosaceae   |D       |2010   |2010    |AS-Te      |X               |NA              |X               |Cas.    |Hort.   |species       |NA                                               |alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |Wallonia |M        |alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE-WAL |Walloon Region          |BE          |present          |introduced         |2010       |2010     |2010      |          |
+|taxonID                                                     |locationID        |locality                |countryCode |occurrenceStatus |establishmentMeans |eventDate |
+|:-----------------------------------------------------------|:-----------------|:-----------------------|:-----------|:----------------|:------------------|:---------|
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-VLG |Flemish Region          |BE          |present          |introduced         |          |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-WAL |Walloon Region          |BE          |present          |introduced         |          |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-BRU |Brussels-Capital Region |BE          |present          |introduced         |          |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE     |Belgium                 |BE          |present          |introduced         |1944/2016 |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE-VLG |Flemish Region          |BE          |present          |introduced         |          |
+|alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE-WAL |Walloon Region          |BE          |present          |introduced         |          |
 
 Save to CSV:
 

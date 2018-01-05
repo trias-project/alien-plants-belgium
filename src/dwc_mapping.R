@@ -375,7 +375,6 @@ distribution %<>% mutate (eventDate = case_when(
 distribution %<>% select(
   -one_of(raw_colnames),
   -location,-presence,
-  -pathway_1, -pathway_2, -pathway_3, -pathway_4, -pathway,
   -start_year, -end_year, - Date
 )
 
