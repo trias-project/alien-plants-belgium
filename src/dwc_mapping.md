@@ -2,7 +2,7 @@
 
 Peter Desmet, Quentin Groom, Lien Reyserhove
 
-2018-01-05
+2018-01-29
 
 This document describes how we map the checklist data to Darwin Core.
 
@@ -20,7 +20,7 @@ Sys.setlocale("LC_CTYPE", "en_US.UTF-8")
 ```
 
 ```
-## [1] "en_US.UTF-8"
+## [1] ""
 ```
 
 Load libraries:
@@ -394,7 +394,7 @@ distribution %<>%
   ))
 ```
 
-remove species for which we lack presence information (i.e. `Belgium` = `NA``)
+Remove species for which we lack presence information (i.e. `Belgium` = `NA``)
 
 
 ```r
@@ -503,14 +503,14 @@ distribution %<>% mutate(occurrenceStatus = recode(presence,
 ))
 ```
 
-remove records with `absent`:
+Remove records with `absent`:
 
 
 ```r
 distribution %<>% filter (!occurrenceStatus == "absent")
 ```
 
-overview of `occurrenceStatus` for each location x presence combination
+Overview of `occurrenceStatus` for each location x presence combination
 
 
 ```r
@@ -611,32 +611,7 @@ distribution %>%
 
 |raw_year  |formatted_year |
 |:---------|:--------------|
-|1813?     |1813           |
-|1817?     |1817           |
-|1860?     |1860           |
-|1866?     |1866           |
-|1886?     |1886           |
-|1893?     |1893           |
-|1911?     |1911           |
-|1912?     |1912           |
-|1931?     |1931           |
-|1947?     |1947           |
-|1955?     |1955           |
-|1959?     |1959           |
-|1960?     |1960           |
-|1963?     |1963           |
-|1965?     |1965           |
-|1972?     |1972           |
-|1975?     |1975           |
-|1976?     |1976           |
-|1979?     |1979           |
-|1985?     |1985           |
-|1998?     |1998           |
-|2000?     |2000           |
-|2002?     |2002           |
-|2004?     |2004           |
-|2006?     |2006           |
-|2010?     |2010           |
+|?         |               |
 |<1800     |1800           |
 |<1812     |1812           |
 |<1824     |1824           |
@@ -679,12 +654,37 @@ distribution %>%
 |<2012     |2012           |
 |>1940     |1940           |
 |>1972     |1972           |
-|?         |               |
-|N         |2018           |
-|N?        |2018           |
+|1813?     |1813           |
+|1817?     |1817           |
+|1860?     |1860           |
+|1866?     |1866           |
+|1886?     |1886           |
+|1893?     |1893           |
+|1911?     |1911           |
+|1912?     |1912           |
+|1931?     |1931           |
+|1947?     |1947           |
+|1955?     |1955           |
+|1959?     |1959           |
+|1960?     |1960           |
+|1963?     |1963           |
+|1965?     |1965           |
+|1972?     |1972           |
+|1975?     |1975           |
+|1976?     |1976           |
+|1979?     |1979           |
+|1985?     |1985           |
+|1998?     |1998           |
+|2000?     |2000           |
+|2002?     |2002           |
+|2004?     |2004           |
+|2006?     |2006           |
+|2010?     |2010           |
 |ca. 1975  |1975           |
 |ca. 1985? |1985           |
 |ca. 1996  |1996           |
+|N         |2018           |
+|N?        |2018           |
 
 Check if any `start_year` fall after `end_year` (expected to be none):
 
