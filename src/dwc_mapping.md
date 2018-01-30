@@ -113,10 +113,10 @@ kable(head(raw_data))
 | raw_id|raw_taxon                                                  |raw_hybrid_formula |raw_synonym |raw_family    |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i     |raw_taxonrank |raw_scientificnameid                             |raw_taxonID                                                 |
 |------:|:----------------------------------------------------------|:------------------|:-----------|:-------------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-----------|:-------------|:------------------------------------------------|:-----------------------------------------------------------|
 |      1|Acanthus mollis L.                                         |NA                 |NA          |Acanthaceae   |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1  |alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c |
-|      2|Acanthus spinosus L.                                       |NA                 |NA          |Acanthaceae   |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1  |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |
+|      2|Acanthus spinosus L.                                       |NA                 |NA          |Acanthaceae   |D       |2016   |2017    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1  |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |
 |      3|Acorus calamus L.                                          |NA                 |NA          |Acoraceae     |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1  |alien-plants-belgium:taxon:574eaf931730ba162e0226a425247660 |
 |      4|Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |NA                 |NA          |Actinidiaceae |D       |2000   |Ann.    |AS-Te      |X               |NA              |X               |Cas.    |Food refuse |species       |http://ipni.org/urn:lsid:ipni.org:names:913605-1 |alien-plants-belgium:taxon:5c33253debbe5777c0499b5c4d76b6e4 |
-|      5|Sambucus canadensis L.                                     |NA                 |NA          |Adoxaceae     |D       |1972   |2015    |NAM        |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:321978-2 |alien-plants-belgium:taxon:03206f4a769c6649658ab96839e8a016 |
+|      5|Sambucus canadensis L.                                     |NA                 |NA          |Adoxaceae     |D       |1972   |2017    |NAM        |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:321978-2 |alien-plants-belgium:taxon:03206f4a769c6649658ab96839e8a016 |
 |      6|Viburnum davidii Franch.                                   |NA                 |NA          |Adoxaceae     |D       |2014   |2015    |AS-Te      |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:149642-1 |alien-plants-belgium:taxon:12212e50c4f6c9b79616e9d7f95a1cfb |
 
 ## Create taxon core
@@ -416,18 +416,18 @@ distribution %>% select (raw_presence_fl, raw_presence_br, raw_presence_wa, Flan
 
 |raw_presence_fl |raw_presence_br |raw_presence_wa |Flanders |Wallonia |Brussels |Belgium | records|
 |:---------------|:---------------|:---------------|:--------|:--------|:--------|:-------|-------:|
-|?               |?               |?               |?        |?        |?        |?       |      22|
+|?               |?               |?               |?        |?        |?        |?       |      21|
 |?               |X               |?               |?        |?        |S        |S       |       1|
 |X               |?               |X               |M        |M        |?        |S       |       5|
-|X               |X               |X               |M        |M        |M        |S       |     486|
-|X               |NA              |X               |M        |M        |NA       |S       |     620|
-|X               |X               |NA              |M        |NA       |M        |S       |      70|
+|X               |X               |X               |M        |M        |M        |S       |     496|
+|X               |NA              |X               |M        |M        |NA       |S       |     627|
+|X               |X               |NA              |M        |NA       |M        |S       |      72|
 |NA              |X               |X               |NA       |M        |M        |S       |      24|
-|NA              |X               |NA              |NA       |NA       |S        |S       |      37|
-|NA              |NA              |X               |NA       |S        |NA       |S       |     468|
-|X               |?               |?               |S        |?        |?        |S       |       2|
+|NA              |X               |NA              |NA       |NA       |S        |S       |      36|
+|NA              |NA              |X               |NA       |S        |NA       |S       |     461|
+|X               |?               |?               |S        |?        |?        |S       |       3|
 |X               |NA              |?               |S        |?        |NA       |S       |       1|
-|X               |NA              |NA              |S        |NA       |NA       |S       |     769|
+|X               |NA              |NA              |S        |NA       |NA       |S       |     773|
 
 From wide to long table (i.e. create a `key` and `value` column)
 
@@ -524,17 +524,17 @@ distribution %>% select (location, presence, occurrenceStatus) %>%
 
 |location |presence |occurrenceStatus   | records|
 |:--------|:--------|:------------------|-------:|
-|Belgium  |?        |presence uncertain |      22|
-|Belgium  |S        |present            |    2483|
+|Belgium  |?        |presence uncertain |      21|
+|Belgium  |S        |present            |    2499|
 |Brussels |?        |presence uncertain |      29|
-|Brussels |M        |present            |     580|
-|Brussels |S        |present            |      38|
-|Flanders |?        |presence uncertain |      23|
-|Flanders |M        |present            |    1181|
-|Flanders |S        |present            |     772|
+|Brussels |M        |present            |     592|
+|Brussels |S        |present            |      37|
+|Flanders |?        |presence uncertain |      22|
+|Flanders |M        |present            |    1200|
+|Flanders |S        |present            |     777|
 |Wallonia |?        |presence uncertain |      26|
-|Wallonia |M        |present            |    1135|
-|Wallonia |S        |present            |     468|
+|Wallonia |M        |present            |    1152|
+|Wallonia |S        |present            |     461|
 
 #### threatStatus
 #### establishmentMeans
@@ -768,7 +768,7 @@ kable(head(distribution))
 |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-VLG |Flemish Region          |BE          |present          |introduced         |          |
 |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-WAL |Walloon Region          |BE          |present          |introduced         |          |
 |alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE-BRU |Brussels-Capital Region |BE          |present          |introduced         |          |
-|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE     |Belgium                 |BE          |present          |introduced         |1944/2016 |
+|alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520 |ISO_3166-2:BE     |Belgium                 |BE          |present          |introduced         |1944/2017 |
 |alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE-VLG |Flemish Region          |BE          |present          |introduced         |          |
 |alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9 |ISO_3166-2:BE-WAL |Walloon Region          |BE          |present          |introduced         |          |
 
@@ -851,14 +851,14 @@ origin %>%
 
 |raw_d_n   |description | records|
 |:---------|:-----------|-------:|
-|Cas.      |vagrant     |    1815|
+|Cas.      |vagrant     |    1825|
 |Cas.?     |vagrant     |      50|
 |Ext.      |            |      15|
 |Ext./Cas. |            |       4|
 |Ext.?     |            |       4|
 |Inv.      |            |      64|
-|Nat.      |introduced  |     453|
-|Nat.?     |introduced  |     101|
+|Nat.      |introduced  |     460|
+|Nat.?     |introduced  |      99|
 |NA        |            |       1|
 
 Keep only non-empty descriptions:
@@ -880,10 +880,10 @@ kable(head(origin))
 | raw_id|raw_taxon                                                  |raw_hybrid_formula |raw_synonym |raw_family    |raw_m_i |raw_fr |raw_mrr |raw_origin |raw_presence_fl |raw_presence_br |raw_presence_wa |raw_d_n |raw_v_i     |raw_taxonrank |raw_scientificnameid                             |raw_taxonID                                                 |description |type   |
 |------:|:----------------------------------------------------------|:------------------|:-----------|:-------------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-----------|:-------------|:------------------------------------------------|:-----------------------------------------------------------|:-----------|:------|
 |      1|Acanthus mollis L.                                         |NA                 |NA          |Acanthaceae   |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1  |alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c |vagrant     |origin |
-|      2|Acanthus spinosus L.                                       |NA                 |NA          |Acanthaceae   |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1  |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |vagrant     |origin |
+|      2|Acanthus spinosus L.                                       |NA                 |NA          |Acanthaceae   |D       |2016   |2017    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1  |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |vagrant     |origin |
 |      3|Acorus calamus L.                                          |NA                 |NA          |Acoraceae     |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1  |alien-plants-belgium:taxon:574eaf931730ba162e0226a425247660 |introduced  |origin |
 |      4|Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson |NA                 |NA          |Actinidiaceae |D       |2000   |Ann.    |AS-Te      |X               |NA              |X               |Cas.    |Food refuse |species       |http://ipni.org/urn:lsid:ipni.org:names:913605-1 |alien-plants-belgium:taxon:5c33253debbe5777c0499b5c4d76b6e4 |vagrant     |origin |
-|      5|Sambucus canadensis L.                                     |NA                 |NA          |Adoxaceae     |D       |1972   |2015    |NAM        |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:321978-2 |alien-plants-belgium:taxon:03206f4a769c6649658ab96839e8a016 |vagrant     |origin |
+|      5|Sambucus canadensis L.                                     |NA                 |NA          |Adoxaceae     |D       |1972   |2017    |NAM        |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:321978-2 |alien-plants-belgium:taxon:03206f4a769c6649658ab96839e8a016 |vagrant     |origin |
 |      6|Viburnum davidii Franch.                                   |NA                 |NA          |Adoxaceae     |D       |2014   |2015    |AS-Te      |X               |NA              |NA              |Cas.    |Hort.       |species       |http://ipni.org/urn:lsid:ipni.org:names:149642-1 |alien-plants-belgium:taxon:12212e50c4f6c9b79616e9d7f95a1cfb |vagrant     |origin |
 
 #### Native range
@@ -989,16 +989,16 @@ native_range %>%
 |value |mapped_value                | records|
 |:-----|:---------------------------|-------:|
 |      |                            |       1|
-|AF    |Africa (WGSRPD:2)           |     637|
+|AF    |Africa (WGSRPD:2)           |     641|
 |AM    |pan-American                |      94|
 |AS    |Asia                        |      71|
-|AS-Te |temperate Asia (WGSRPD:3)   |    1051|
+|AS-Te |temperate Asia (WGSRPD:3)   |    1057|
 |AS-Tr |tropical Asia (WGSRPD:4)    |      12|
 |AUS   |Australasia (WGSRPD:5)      |     117|
-|Cult. |cultivated origin           |      92|
-|E     |Europe (WGSRPD:1)           |    1122|
-|Hybr. |hybrid origin               |      67|
-|NAM   |Northern America (WGSRPD:7) |     363|
+|Cult. |cultivated origin           |      93|
+|E     |Europe (WGSRPD:1)           |    1124|
+|Hybr. |hybrid origin               |      69|
+|NAM   |Northern America (WGSRPD:7) |     366|
 |SAM   |Southern America (WGSRPD:8) |     158|
 |Trop. |Pantropical                 |      37|
 
@@ -1037,9 +1037,9 @@ kable(head(native_range))
 |------:|:--------------------|:------------------|:-----------|:-----------|:-------|:------|:-------|:----------|:---------------|:---------------|:---------------|:-------|:-------|:-------------|:-----------------------------------------------|:-----------------------------------------------------------|:-------------------------|:------------|
 |      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c |Europe (WGSRPD:1)         |native range |
 |      1|Acanthus mollis L.   |NA                 |NA          |Acanthaceae |D       |1998   |2016    |E AF       |X               |NA              |X               |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44892-1 |alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c |Africa (WGSRPD:2)         |native range |
-|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |Europe (WGSRPD:1)         |native range |
-|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |Africa (WGSRPD:2)         |native range |
-|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2016    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |temperate Asia (WGSRPD:3) |native range |
+|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2017    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |Europe (WGSRPD:1)         |native range |
+|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2017    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |Africa (WGSRPD:2)         |native range |
+|      2|Acanthus spinosus L. |NA                 |NA          |Acanthaceae |D       |2016   |2017    |E AF AS-Te |X               |NA              |NA              |Cas.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:44920-1 |alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9 |temperate Asia (WGSRPD:3) |native range |
 |      3|Acorus calamus L.    |NA                 |NA          |Acoraceae   |D       |1680   |N       |AS-Te      |X               |X               |X               |Nat.    |Hort.   |species       |http://ipni.org/urn:lsid:ipni.org:names:84009-1 |alien-plants-belgium:taxon:574eaf931730ba162e0226a425247660 |temperate Asia (WGSRPD:3) |native range |
 
 #### Pathway (pathway of introduction) 
@@ -1110,7 +1110,7 @@ pathway_desc %>%
 |:----------------|
 |                 |
 |...              |
-|Ore              |
+|…                |
 |agric.           |
 |birdseed         |
 |etc.             |
@@ -1120,6 +1120,7 @@ pathway_desc %>%
 |hort.?           |
 |nurseries        |
 |ore              |
+|Ore              |
 |ore?             |
 |salt             |
 |seeds            |
@@ -1128,9 +1129,9 @@ pathway_desc %>%
 |tourists         |
 |urban weed       |
 |wool             |
-|â€¦                |
 |...              |
 |?                |
+|…                |
 |Agric.           |
 |Bird seed        |
 |Birdseed         |
@@ -1147,6 +1148,7 @@ pathway_desc %>%
 |Grass seed?      |
 |Hay?             |
 |Hort             |
+|hort.            |
 |Hort.            |
 |Hort.?           |
 |Hybridization    |
@@ -1170,8 +1172,6 @@ pathway_desc %>%
 |Wool             |
 |Wool alien       |
 |Wool?            |
-|hort.            |
-|â€¦                |
 
 Clean values:
 
@@ -1248,7 +1248,8 @@ pathway_desc %>%
 
 |value           |mapped_value                                  | records|
 |:---------------|:---------------------------------------------|-------:|
-|                |                                              |     542|
+|                |                                              |     165|
+|…               |                                              |     380|
 |agric.          |cbd_2014_pathway:escape_agriculture           |      86|
 |bird seed       |cbd_2014_pathway:contaminant_seed             |       1|
 |birdseed        |cbd_2014_pathway:contaminant_seed             |      31|
@@ -1256,17 +1257,17 @@ pathway_desc %>%
 |coconut mats    |cbd_2014_pathway:contaminant_seed             |       1|
 |etc.            |                                              |       1|
 |fish            |                                              |       3|
-|food refuse     |cbd_2014_pathway:escape_food_bait             |      22|
-|grain           |cbd_2014_pathway:contaminant_seed             |     542|
+|food refuse     |cbd_2014_pathway:escape_food_bait             |      23|
+|grain           |cbd_2014_pathway:contaminant_seed             |     543|
 |grain (rice)    |cbd_2014_pathway:contaminant_seed             |       3|
 |grass seed      |cbd_2014_pathway:contaminant_seed             |       8|
 |hay             |                                              |       1|
 |hort            |cbd_2014_pathway:escape_horticulture          |       2|
-|hort.           |cbd_2014_pathway:escape_horticulture          |    1099|
-|hybridization   |                                              |      48|
+|hort.           |cbd_2014_pathway:escape_horticulture          |    1106|
+|hybridization   |                                              |      50|
 |military troops |                                              |       9|
 |nurseries       |cbd_2014_pathway:contaminant_nursery          |      21|
-|ore             |cbd_2014_pathway:contaminant_habitat_material |      93|
+|ore             |cbd_2014_pathway:contaminant_habitat_material |      94|
 |pines           |cbd_2014_pathway:contaminant_on_plants        |       4|
 |rice            |                                              |       1|
 |salt            |                                              |       2|
@@ -1315,16 +1316,16 @@ pathway_desc %>%
 
 |description                                   | records|
 |:---------------------------------------------|-------:|
-|                                              |     612|
-|cbd_2014_pathway:contaminant_habitat_material |      93|
+|                                              |     617|
+|cbd_2014_pathway:contaminant_habitat_material |      94|
 |cbd_2014_pathway:contaminant_nursery          |      21|
 |cbd_2014_pathway:contaminant_on_animals       |     581|
 |cbd_2014_pathway:contaminant_on_plants        |       4|
-|cbd_2014_pathway:contaminant_seed             |     650|
+|cbd_2014_pathway:contaminant_seed             |     651|
 |cbd_2014_pathway:contaminant_timber           |      10|
 |cbd_2014_pathway:escape_agriculture           |      86|
-|cbd_2014_pathway:escape_food_bait             |      22|
-|cbd_2014_pathway:escape_horticulture          |    1101|
+|cbd_2014_pathway:escape_food_bait             |      23|
+|cbd_2014_pathway:escape_horticulture          |    1108|
 |cbd_2014_pathway:stowaway                     |      10|
 |cbd_2014_pathway:stowaway_people_luggage      |      10|
 
@@ -1440,10 +1441,10 @@ write.csv(description_ext, file = dwc_description_file, na = "", row.names = FAL
 
 ### Number of records
 
-* Source file: 2507
-* Taxon core: 2507
-* Distribution extension: 6757
-* Description extension: 8828
+* Source file: 2522
+* Taxon core: 2522
+* Distribution extension: 6816
+* Description extension: 8871
 
 ### Taxon core
 
@@ -1451,10 +1452,10 @@ Number of duplicates: 0 (should be 0)
 
 The following numbers are expected to be the same:
 
-* Number of records: 2507
-* Number of distinct `taxonID`: 2507
-* Number of distinct `scientificName`: 2507
+* Number of records: 2522
+* Number of distinct `taxonID`: 2522
+* Number of distinct `scientificName`: 2522
 * Number of distinct `scientificNameID`: 1707 (can contain NAs)
-* Number of distinct `scientificNameID` and `NA`: 2507
+* Number of distinct `scientificNameID` and `NA`: 2522
 
-Number of unique families: 152
+Number of unique families: 154
