@@ -88,7 +88,7 @@ taxon %<>% mutate(rightsHolder = "Botanic Garden Meise")
 #' #### bibliographicCitation
 #' #### informationWithheld
 #' #### datasetID
-taxon %<>% mutate(datasetID = "") # Should become dataset DOI
+taxon %<>% mutate(datasetID = "https://doi.org/10.15468/wtda1m")
 
 #' #### datasetName
 taxon %<>% mutate(datasetName = "Manual of the Alien Plants of Belgium")
