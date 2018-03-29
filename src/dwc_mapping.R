@@ -235,7 +235,7 @@ distribution %>% select (raw_presence_fl, raw_presence_br, raw_presence_wa, Flan
   kable()
 
 #' One line should represent the presence information of a species in one region or Belgium. We need to transform `raw_data` from a wide to a long table (i.e. create a `key` and `value` column)
-raw_data %<>% gather(
+distribution %<>% gather(
   key, value,
   Flanders, Wallonia, Brussels, Belgium,
   convert = FALSE
@@ -243,28 +243,30 @@ raw_data %<>% gather(
 
 #' Rename `key` and `value`
 distribution %<>% rename ("location" = "key", "presence" = "value")
+
 #' Remove species for which we lack presence information (i.e. `presence` = `NA``)
-raw_data %<>% filter (!presence == "NA")
+distribution %<>% filter (!presence == "NA")
 
 #' Map values using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
-raw_data %<>% mutate(raw_occurrenceStatus = recode(presence,
-                                                   "S" = "present",
-                                                   "M" = "present",
-                                                   "?" = "presence uncertain",
-                                                   "NA" = "absent",
-                                                   .default = "",
-                                                   .missing = "absent"
-))
+distribution %<>% mutate(raw_occurrenceStatus = recode(presence,
+  "S" = "present",
+  "M" = "present",
+  "?" = "presence uncertain",
+  "NA" = "absent",
+  .default = "",
+  .missing = "absent"))
 
 
 #' Remove records with `absent`:
-raw_data %<>% filter (!raw_occurrenceStatus == "absent")
+distribution %<>% filter (!raw_occurrenceStatus == "absent")
 
 #' Overview of `raw_occurrenceStatus` for each location x presence combination
-raw_data %>% select (location, presence, raw_occurrenceStatus) %>%
+distribution %>% select (location, presence, raw_occurrenceStatus) %>%
   group_by_all() %>%
   summarize(records = n()) %>% 
   kable()
+
+
 #' ### Term mapping
 #' 
 #' Map the source data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
