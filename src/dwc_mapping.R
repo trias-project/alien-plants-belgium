@@ -328,10 +328,39 @@ distribution %<>% mutate(Date =
   )
 )
 
+#' ### Generate `occurrenceStatus_ALO`
+occurrenceStatus_ALO <- distribution %>% filter(raw_d_n == "Ext." | raw_d_n == "Ext./Cas.")
+
+#' ### Map occurrenceStatus and eventDate for `distribution`:
+
+#' Map `occurrenceStaus` using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
+distribution %<>% mutate(occurrenceStatus = recode(presence,
+                                                       "S" = "present",
+                                                       "M" = "present",
+                                                       "?" = "presence uncertain",
+                                                       .default = ""))
+
+#' Overview of `occurrenceStatus` for each location x presence combination
+distribution %>% select (location, presence, occurrenceStatus) %>%
+  group_by_all() %>%
+  summarize(records = n()) %>% 
+  kable()
+
 #' Populate `eventDate` only when `presence` = `S`.
 distribution %<>% mutate (eventDate = case_when(
   presence == "S" ~ Date,
   TRUE ~ ""))
+
+#' ### Map `occurrenceStatus` and `eventDate` for `occurrenceStatus_ALO`:
+occurrenceStatus_ALO %<>% mutate(occurrenceStatus = case_when(
+  raw_d_n == "Ext." ~ "absent",
+  raw_d_n == "Ext./Cas." ~ "present"))
+
+occurrenceStatus_ALO %<>% mutate(eventDate = case_when(
+  presence = "S" ~ paste(end_year, current_year, sep = "/"))
+
+#' ### Bind `occurrenceStatus_ALO` and `distribution` by rows:
+distribution %<>% bind_rows(occurrenceStatus_ALO)
 
 #' ### Term mapping
 #' 
