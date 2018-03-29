@@ -177,12 +177,12 @@ distribution <- raw_data
 #' For these species, we include the occurrenceStatus **within** the specified time frame (`eventDate` = first - most recent observation) and **after** the last observation (`eventDate` = most recent observation - current date).
 
 #' The easiest way to do this is by:
-#' 1. Cleaning presence information and date information in `raw_data`
-#' 1. Creating a separate dataframe `occurrenceStatus_ALO` (ALO = after last observation)
-#' 2. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `distribution` (for `eventDate` = first - most recent observation)
-#' 3. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `occurrenceStatus_ALO` (for `eventDate` = most recent observation - current date)
-#' 4. Bind both dataframes by row.
-#' 5. Map the other Darwin Core terms in the distribution extension
+#' 1. Cleaning presence information and date information in `distribution`
+#' 2. Creating a separate dataframe `occurrenceStatus_ALO` (ALO = after last observation)
+#' 3. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `distribution` (for `eventDate` = first - most recent observation)
+#' 4. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `occurrenceStatus_ALO` (for `eventDate` = most recent observation - current date)
+#' 5. Bind both dataframes by row.
+#' 6. Map the other Darwin Core terms in the distribution extension
 #' 
 #' ### Clean presence information: occurrenceStatus for regions and Belgium
 
@@ -439,7 +439,7 @@ invasion_stage %>%
   kable()
 
 #'  Clean the data:
-invasion_stage %<>% mutate(invasion_stage = recode(raw_d_n,
+invasion_stage %<>% mutate(description = recode(raw_d_n,
   "Ext.?" = "Ext.",
   "Cas.?" = "Cas.",
   "Nat.?" = "Nat.",
@@ -449,7 +449,7 @@ invasion_stage %<>% mutate(invasion_stage = recode(raw_d_n,
 #' `casual`, `naturalized` and `invasive` are terms included in this framework. However, we decided to discard the terms `naturalized` and `invasive` listed in Blackburn et al. (see trias-project/alien-fishes-checklist#6 (comment)). 
 #' So, `naturalized` and `invasive` are replaced by `established`.
 #' For extinct (introduced taxa that once were naturalized but that have not been confirmed in recent times) and extinct/casual species (taxa are no longer considered as naturalized but still occur as casuals), we map the most recent invasion stage (i.e. "extinct" and "casual" respectively):
-invasion_stage %<>% mutate(description = recode(invasion_stage,
+invasion_stage %<>% mutate(description = recode(description,
   "Cas." = "casual",
   "Inv." = "established",
   "Nat." = "established",
@@ -458,7 +458,7 @@ invasion_stage %<>% mutate(description = recode(invasion_stage,
 
 #' Show mapped values:
 invasion_stage %>%
-  select(raw_d_n, invasion_stage) %>%
+  select(raw_d_n, description) %>%
   group_by_all() %>%
   summarize(records = n()) %>%
   kable()
@@ -658,7 +658,7 @@ pathway_desc %>%
 pathway_desc %<>% filter(!is.na(description) & description != "")
 
 #' #### Union invasion stage, native range and pathway:
-description_ext <- bind_rows(invasion stage, native_range, pathway_desc)
+description_ext <- bind_rows(invasion_stage, native_range, pathway_desc)
 
 #' ### Term mapping
 #' 

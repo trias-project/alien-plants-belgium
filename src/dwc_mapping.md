@@ -323,12 +323,12 @@ This is because:
 
 For these species, we include the occurrenceStatus **within** the specified time frame (`eventDate` = first - most recent observation) and **after** the last observation (`eventDate` = most recent observation - current date).
 The easiest way to do this is by:
-1. Cleaning presence information and date information in `raw_data`
-1. Creating a separate dataframe `occurrenceStatus_ALO` (ALO = after last observation)
-2. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `distribution` (for `eventDate` = first - most recent observation)
-3. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `occurrenceStatus_ALO` (for `eventDate` = most recent observation - current date)
-4. Bind both dataframes by row.
-5. Map the other Darwin Core terms in the distribution extension
+1. Cleaning presence information and date information in `distribution`
+2. Creating a separate dataframe `occurrenceStatus_ALO` (ALO = after last observation)
+3. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `distribution` (for `eventDate` = first - most recent observation)
+4. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `occurrenceStatus_ALO` (for `eventDate` = most recent observation - current date)
+5. Bind both dataframes by row.
+6. Map the other Darwin Core terms in the distribution extension
 
 ### Clean presence information: occurrenceStatus for regions and Belgium
 The checklist contains minimal presence information (`X`,`?` or `NA`) for the three regions in Belgium: Flanders, Wallonia and the Brussels-Capital Region, contained in `raw_presence_fl`, `raw_presence_wa` and `raw_presence_br` respectively.
@@ -867,7 +867,7 @@ invasion_stage %>%
 
 
 ```r
-invasion_stage %<>% mutate(invasion_stage = recode(raw_d_n,
+invasion_stage %<>% mutate(description = recode(raw_d_n,
   "Ext.?" = "Ext.",
   "Cas.?" = "Cas.",
   "Nat.?" = "Nat.",
@@ -881,7 +881,7 @@ For extinct (introduced taxa that once were naturalized but that have not been c
 
 
 ```r
-invasion_stage %<>% mutate(description = recode(invasion_stage,
+invasion_stage %<>% mutate(description = recode(description,
   "Cas." = "casual",
   "Inv." = "established",
   "Nat." = "established",
@@ -894,7 +894,7 @@ Show mapped values:
 
 ```r
 invasion_stage %>%
-  select(raw_d_n, invasion_stage) %>%
+  select(raw_d_n, description) %>%
   group_by_all() %>%
   summarize(records = n()) %>%
   kable()
@@ -902,17 +902,17 @@ invasion_stage %>%
 
 
 
-|raw_d_n   |invasion_stage | records|
-|:---------|:--------------|-------:|
-|Cas.      |Cas.           |    1825|
-|Cas.?     |Cas.           |      50|
-|Ext.      |Ext.           |      15|
-|Ext./Cas. |Ext./Cas.      |       4|
-|Ext.?     |Ext.           |       4|
-|Inv.      |Inv.           |      64|
-|Nat.      |Nat.           |     460|
-|Nat.?     |Nat.           |      99|
-|NA        |               |       1|
+|raw_d_n   |description | records|
+|:---------|:-----------|-------:|
+|Cas.      |casual      |    1825|
+|Cas.?     |casual      |      50|
+|Ext.      |extinct     |      15|
+|Ext./Cas. |casual      |       4|
+|Ext.?     |extinct     |       4|
+|Inv.      |established |      64|
+|Nat.      |established |     460|
+|Nat.?     |established |      99|
+|NA        |            |       1|
 
 Create a `type` field to indicate the type of description:
 
@@ -1375,13 +1375,7 @@ pathway_desc %<>% filter(!is.na(description) & description != "")
 
 
 ```r
-description_ext <- bind_rows(invasion stage, native_range, pathway_desc)
-```
-
-```
-## Error: <text>:1:39: unexpected symbol
-## 1: description_ext <- bind_rows(invasion stage
-##                                           ^
+description_ext <- bind_rows(invasion_stage, native_range, pathway_desc)
 ```
 
 ### Term mapping
@@ -1393,10 +1387,6 @@ Map the source data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0
 
 ```r
 description_ext %<>% mutate(taxonID = raw_taxonID)
-```
-
-```
-## Error in mutate_impl(.data, dots): Binding not found: raw_taxonID.
 ```
 
 #### description
