@@ -269,52 +269,7 @@ distribution %<>% rename ("location" = "key", "presence" = "value")
 #' Remove species for which we lack presence information (i.e. `presence` = `NA``)
 distribution %<>% filter (!presence == "NA")
 
-#' Map values using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
-distribution %<>% mutate(raw_occurrenceStatus = recode(presence,
-  "S" = "present",
-  "M" = "present",
-  "?" = "presence uncertain",
-  "NA" = "absent",
-  .default = "",
-  .missing = "absent"))
 
-
-#' Remove records with `absent`:
-distribution %<>% filter (!raw_occurrenceStatus == "absent")
-
-#' Overview of `raw_occurrenceStatus` for each location x presence combination
-distribution %>% select (location, presence, raw_occurrenceStatus) %>%
-  group_by_all() %>%
-  summarize(records = n()) %>% 
-  kable()
-
-
-#' #### occurrenceStatus
-#' 
-#' Map values using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
-distribution %<>% mutate(occurrenceStatus = recode(presence,
-  "S" = "present",
-  "M" = "present",
-  "?" = "presence uncertain",
-  "NA" = "absent",
-  .default = "",
-  .missing = "absent"
-))
-
-
-#' Remove records with `absent`:
-distribution %<>% filter (!occurrenceStatus == "absent")
-
-#' Overview of `occurrenceStatus` for each location x presence combination
-distribution %>% select (location, presence, occurrenceStatus) %>%
-  group_by_all() %>%
-  summarize(records = n()) %>% 
-  kable()
-
-#' #### appendixCITES
-#' #### eventDate
-#' 
-#' Create `start_year` from `raw_fr` (first record):
 distribution %<>% mutate(start_year = raw_fr)
 
 #' Clean values:
