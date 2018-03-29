@@ -403,10 +403,13 @@ distribution %<>% mutate (establishmentMeans = "introduced")
 #' 
 #' Remove the original columns:
 distribution %<>% select(
-  -one_of(raw_colnames),
+  -starts_with("raw_"),
   -location,-presence,
   -start_year, -end_year, - Date
 )
+
+#' Rearrange columns (order as specified in [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml))
+distribution %<>% select(taxonID, locationID, locality, countryCode, occurrenceStatus, establishmentMeans, eventDate)
 
 #' Sort on `taxonID`:
 distribution %<>% arrange(taxonID)
