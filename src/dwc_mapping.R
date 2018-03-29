@@ -164,6 +164,28 @@ write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE, fileEncoding
 #' ### Pre-processing
 distribution <- raw_data
 
+#' Before we start mapping the distribution extensions, we focus on two terms: `occurrenceStatus` and  `eventDate`:
+#' 
+#' This is because:
+#' 
+#' 1. Information on the occurrences is given for the **regions**, while date information is given for **Belgium** as a whole. Some transformations and clarifications are needed.
+#' 2. Some species have two values for `occurrenceStatus` and `eventDate`, i.e. species with the degree of naturalisation (`raw_d_n`) of extinct (`Ext.`) or extinct/casual (`Ext./Cas.`).
+
+#' - Extinct: introduced taxa that once were naturalized (usually rather locally) but that have not been confirmed in recent times in their known localities. Only taxa that are certainly extinct are indicated as such.   
+#' - Extinct/casual: Some of these extinct taxa are no longer considered as naturalized but still occur as casuals; such taxa are indicated as “Ext./Cas.” (for instance _Tragopogon porrifolius_).
+#' 
+#' For these species, we include the occurrenceStatus **within** the specified time frame (`eventDate` = first - most recent observation) and **after** the last observation (`eventDate` = most recent observation - current date).
+
+#' The easiest way to do this is by:
+#' 1. Cleaning presence information and date information in `raw_data`
+#' 1. Creating a separate dataframe `occurrenceStatus_ALO` (ALO = after last observation)
+#' 2. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `distribution` (for `eventDate` = first - most recent observation)
+#' 3. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `occurrenceStatus_ALO` (for `eventDate` = most recent observation - current date)
+#' 4. Bind both dataframes by row.
+#' 5. Map the other Darwin Core terms in the distribution extension
+#' 
+#' ### Clean presence information: occurrenceStatus for regions and Belgium
+
 #' The checklist contains minimal presence information (`X`,`?` or `NA`) for the three regions in Belgium: Flanders, Wallonia and the Brussels-Capital Region, contained in `raw_presence_fl`, `raw_presence_wa` and `raw_presence_br` respectively.
 #' Information regarding the first/last recorded observation applies to the distribution in Belgium as a whole.
 #' Both national and regional information is required in the checklist. In the `distribution.csv`, we will first provide `occurrenceStatus` and `eventDate`` on a **national level**, followed by specific information for the **regions**. 
