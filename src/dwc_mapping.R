@@ -176,9 +176,9 @@ distribution <- raw_data
 #' 
 #' For these species, we include the occurrenceStatus **within** the specified time frame (`eventDate` = first - most recent observation) and **after** the last observation (`eventDate` = most recent observation - current date).
 
-#' The easiest way to do this is by:
-#' 1. Cleaning presence information and date information in `distribution`
-#' 2. Creating a separate dataframe `occurrenceStatus_ALO` (ALO = after last observation)
+#' The easiest way to do use a stepwize approach:
+#' 1. Clean presence information and date information in `distribution`
+#' 2. Create a separate dataframe `occurrenceStatus_ALO` (ALO = after last observation) for extinct and extinct/casual species
 #' 3. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `distribution` (for `eventDate` = first - most recent observation)
 #' 4. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `occurrenceStatus_ALO` (for `eventDate` = most recent observation - current date)
 #' 5. Bind both dataframes by row.
