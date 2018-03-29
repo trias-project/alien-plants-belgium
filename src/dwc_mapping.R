@@ -422,53 +422,49 @@ write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE
 
 #' ## Create description extension
 #' 
-#' In the description extension we want to include **origin** (`raw_d_n`), **native range** (`raw_origin`) and **pathway** (`raw_v_i``) information. We'll create a separate data frame for all and then combine these with union.
+#' In the description extension we want to include **invasion stage** (`raw_d_n`), **native range** (`raw_origin`) and **pathway** (`raw_v_i``) information. We'll create a separate data frame for all and then combine these with union.
 #' 
 #' ### Pre-processing
 #' 
-#' #### Origin
-#' 
-#' `origin` describes if a species is native in a distribution or not. Since Darwin Core has no `origin` field yet as suggested in [ias-dwc-proposal](https://github.com/qgroom/ias-dwc-proposal/blob/master/proposal.md#origin-new-term), we'll add this information in the description extension.
-#' 
+#' #### Invasion stage
+#'
 #' Create new data frame:
-origin <- raw_data
+invasion_stage <- raw_data
 
-#' Create `description` from `raw_d_n`:
-origin %<>% mutate(description = raw_d_n)
-
-#' Create a `type` field to indicate the type of description:
-origin %<>% mutate(type = "origin")
-
-#' Clean values:
-origin %<>% mutate(description = 
-  str_replace_all(description, "\\?", ""), # Strip ?
-  description = str_trim(description) # Clean whitespace
-)
-
-#' Map values using [this vocabulary](https://github.com/qgroom/ias-dwc-proposal/blob/master/vocabulary/origin.tsv):
-origin %<>% mutate(description = recode(description,
-  "Cas." = "vagrant",
-  "Nat." = "introduced",
-  "Ext." = "",
-  "Inv." = "",
-  "Ext./Cas." = "",
-  .default = "",
-  .missing = ""
-))
-
-#' Show mapped values:
-origin %>%
-  select(raw_d_n, description) %>%
-  group_by(raw_d_n, description) %>%
+#' The information for invasion stage is contained in `raw_d_n`:
+invasion_stage %>%
+  select(raw_d_n) %>%
+  group_by_all() %>%
   summarize(records = n()) %>%
-  arrange(raw_d_n) %>%
   kable()
 
-#' Keep only non-empty descriptions:
-origin %<>% filter(!is.na(description) & description != "")
+#'  Clean the data:
+invasion_stage %<>% mutate(invasion_stage = recode(raw_d_n,
+  "Ext.?" = "Ext.",
+  "Cas.?" = "Cas.",
+  "Nat.?" = "Nat.",
+  .missing = ""))
 
-#' Preview data:
-kable(head(origin))
+#' We decided to use the unified framework for biological invasions of [Blackburn et al. 2011](http://doc.rero.ch/record/24725/files/bach_puf.pdf) for `invasion stage`.
+#' `casual`, `naturalized` and `invasive` are terms included in this framework. However, we decided to discard the terms `naturalized` and `invasive` listed in Blackburn et al. (see trias-project/alien-fishes-checklist#6 (comment)). 
+#' So, `naturalized` and `invasive` are replaced by `established`.
+#' For extinct (introduced taxa that once were naturalized but that have not been confirmed in recent times) and extinct/casual species (taxa are no longer considered as naturalized but still occur as casuals), we map the most recent invasion stage (i.e. "extinct" and "casual" respectively):
+invasion_stage %<>% mutate(description = recode(invasion_stage,
+  "Cas." = "casual",
+  "Inv." = "established",
+  "Nat." = "established",
+  "Ext." = "extinct",
+  "Ext./Cas." = "casual"))
+
+#' Show mapped values:
+invasion_stage %>%
+  select(raw_d_n, invasion_stage) %>%
+  group_by_all() %>%
+  summarize(records = n()) %>%
+  kable()
+
+#' Create a `type` field to indicate the type of description:
+invasion_stage %<>% mutate(type = "invasion stage")
 
 #' #### Native range
 #' 
@@ -661,8 +657,8 @@ pathway_desc %>%
 #' Keep only non-empty descriptions:
 pathway_desc %<>% filter(!is.na(description) & description != "")
 
-#' #### Union origin, native range and pathway:
-description_ext <- bind_rows(origin, native_range, pathway_desc)
+#' #### Union invasion stage, native range and pathway:
+description_ext <- bind_rows(invasion stage, native_range, pathway_desc)
 
 #' ### Term mapping
 #' 
