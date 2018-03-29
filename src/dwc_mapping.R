@@ -269,7 +269,9 @@ distribution %<>% rename ("location" = "key", "presence" = "value")
 #' Remove species for which we lack presence information (i.e. `presence` = `NA``)
 distribution %<>% filter (!presence == "NA")
 
+#' ### Clean date information
 
+#' Create `start_year` from `raw_fr` 
 distribution %<>% mutate(start_year = raw_fr)
 
 #' Clean values:
