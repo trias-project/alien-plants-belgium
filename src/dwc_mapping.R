@@ -164,16 +164,19 @@ write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE, fileEncoding
 #' ### Pre-processing
 distribution <- raw_data
 
-#' The checklist contains minimal presence information (`X`,`?` or `NA`) for the three regions in Belgium (Flanders, Wallonia and the Brussels-Capital Region).
-#' Both national and regional information is required in the checklist. In the `distribution.csv`, we first provide the information on a national level for pathway, status and dates; followed by specific information for the regions. 
-#' However, information regarding pathway, status, first and last recorded observation applies to the distribution in Belgium as a whole.
-#' It is impossible to extrapolate this information for the regions, unless the species is present in only one region.
-#' In this case, we can assume pathway, status and date relate to that region and so we can keep lines for Belgium and for the specific region populated for all DwC terms (see #45)
-#' When a species is present in more than one region, we decided to only provide occurrenceStatus for the regional information, and specify all other information regarding pathway and dates only for Belgium
+#' The checklist contains minimal presence information (`X`,`?` or `NA`) for the three regions in Belgium: Flanders, Wallonia and the Brussels-Capital Region, contained in `raw_presence_fl`, `raw_presence_wa` and `raw_presence_br` respectively.
+#' Information regarding the first/last recorded observation applies to the distribution in Belgium as a whole.
+#' Both national and regional information is required in the checklist. In the `distribution.csv`, we will first provide `occurrenceStatus` and `eventDate`` on a **national level**, followed by specific information for the **regions**. 
+#' 
+#' For this, we use the following principles:
+#' 
+#' 1. When a species is present in _only one region_, we can assume `eventDate` relates to that specific region. In this case, we can keep lines for Belgium and for the specific region populated with these variables (see #45).
+#' 2. When a species is present in _more than one_ region, it is impossible to extrapolate the date information for the regions. In this case, we decided to provide `occurrenceStatus` for the regional information, and specify dates only for Belgium.  
 
 #' Thus, we need to specify when a species is present in only one of the regions.
+#' 
 #' We generate 4 new columns: `Flanders`, `Brussels`,`Wallonia` and `Belgium`. 
-#' The content of these columns refers to the specific occurrence of a species on a regional or national level.
+#' The content of these columns refers to the specific presence status of a species on a regional or national level.
 #' `S` if present in a single region or in Belgium, `?` if presence uncertain, `NA` if absent and `M` if present in multiple regions.
 #' This should look like this:
 kable(matrix(
@@ -224,10 +227,6 @@ distribution %<>%
     raw_presence_fl == "?" | raw_presence_br == "?" | raw_presence_wa == "?" ~ "?" # One is "?"
   ))
 
-
-#' Remove species for which we lack presence information (i.e. `Belgium` = `NA``)
-distribution %<>% filter (!is.na(Belgium))
-
 #' Summary of the previous action:
 distribution %>% select (raw_presence_fl, raw_presence_br, raw_presence_wa, Flanders, Wallonia, Brussels, Belgium) %>%
   group_by_all() %>%
@@ -235,8 +234,8 @@ distribution %>% select (raw_presence_fl, raw_presence_br, raw_presence_wa, Flan
   arrange(Flanders, Wallonia, Brussels) %>%
   kable()
 
-#' From wide to long table (i.e. create a `key` and `value` column)
-distribution %<>% gather(
+#' One line should represent the presence information of a species in one region or Belgium. We need to transform `raw_data` from a wide to a long table (i.e. create a `key` and `value` column)
+raw_data %<>% gather(
   key, value,
   Flanders, Wallonia, Brussels, Belgium,
   convert = FALSE
@@ -244,8 +243,28 @@ distribution %<>% gather(
 
 #' Rename `key` and `value`
 distribution %<>% rename ("location" = "key", "presence" = "value")
+#' Remove species for which we lack presence information (i.e. `presence` = `NA``)
+raw_data %<>% filter (!presence == "NA")
+
+#' Map values using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
+raw_data %<>% mutate(raw_occurrenceStatus = recode(presence,
+                                                   "S" = "present",
+                                                   "M" = "present",
+                                                   "?" = "presence uncertain",
+                                                   "NA" = "absent",
+                                                   .default = "",
+                                                   .missing = "absent"
+))
 
 
+#' Remove records with `absent`:
+raw_data %<>% filter (!raw_occurrenceStatus == "absent")
+
+#' Overview of `raw_occurrenceStatus` for each location x presence combination
+raw_data %>% select (location, presence, raw_occurrenceStatus) %>%
+  group_by_all() %>%
+  summarize(records = n()) %>% 
+  kable()
 #' ### Term mapping
 #' 
 #' Map the source data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
