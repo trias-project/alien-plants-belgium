@@ -289,31 +289,6 @@ distribution %>% select (location, presence, raw_occurrenceStatus) %>%
   kable()
 
 
-#' ### Term mapping
-#' 
-#' Map the source data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
-
-#' #### taxonID
-distribution %<>% mutate(taxonID = raw_taxonID)
-
-#' #### locationID
-distribution %<>% mutate(locationID = case_when (
-  location == "Belgium" ~ "ISO_3166-2:BE",
-  location == "Flanders" ~ "ISO_3166-2:BE-VLG",
-  location == "Wallonia" ~ "ISO_3166-2:BE-WAL",
-  location == "Brussels" ~ "ISO_3166-2:BE-BRU"))
-
-#' #### locality
-distribution %<>% mutate(locality = case_when (
-  location == "Belgium" ~ "Belgium",
-  location == "Flanders" ~ "Flemish Region",
-  location == "Wallonia" ~ "Walloon Region",
-  location == "Brussels" ~ "Brussels-Capital Region"))
-
-#' #### countryCode
-distribution %<>% mutate(countryCode = "BE")
-
-#' #### lifeStage
 #' #### occurrenceStatus
 #' 
 #' Map values using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
@@ -335,10 +310,6 @@ distribution %>% select (location, presence, occurrenceStatus) %>%
   group_by_all() %>%
   summarize(records = n()) %>% 
   kable()
-
-#' #### threatStatus
-#' #### establishmentMeans
-distribution %<>% mutate (establishmentMeans = "introduced")
 
 #' #### appendixCITES
 #' #### eventDate
@@ -405,7 +376,37 @@ distribution %<>% mutate (eventDate = case_when(
   presence == "S" ~ Date,
   TRUE ~ ""))
 
+#' ### Term mapping
+#' 
+#' Map the source data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
 
+#' #### taxonID
+distribution %<>% mutate(taxonID = raw_taxonID)
+
+#' #### locationID
+distribution %<>% mutate(locationID = case_when (
+  location == "Belgium" ~ "ISO_3166-2:BE",
+  location == "Flanders" ~ "ISO_3166-2:BE-VLG",
+  location == "Wallonia" ~ "ISO_3166-2:BE-WAL",
+  location == "Brussels" ~ "ISO_3166-2:BE-BRU"))
+
+#' #### locality
+distribution %<>% mutate(locality = case_when (
+  location == "Belgium" ~ "Belgium",
+  location == "Flanders" ~ "Flemish Region",
+  location == "Wallonia" ~ "Walloon Region",
+  location == "Brussels" ~ "Brussels-Capital Region"))
+
+#' #### countryCode
+distribution %<>% mutate(countryCode = "BE")
+
+#' #### lifeStage
+
+#' #### threatStatus
+#' #### establishmentMeans
+distribution %<>% mutate (establishmentMeans = "introduced")
+
+#' #### appendixCITES
 #' #### startDayOfYear
 #' #### endDayOfYear
 #' #### source
