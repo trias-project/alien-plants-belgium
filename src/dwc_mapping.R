@@ -357,7 +357,7 @@ occurrenceStatus_ALO %<>% mutate(occurrenceStatus = case_when(
   raw_d_n == "Ext./Cas." ~ "present"))
 
 occurrenceStatus_ALO %<>% mutate(eventDate = case_when(
-  presence = "S" ~ paste(end_year, current_year, sep = "/")))
+  presence == "S" ~ paste(end_year, current_year, sep = "/")))
 
 #' ### Bind `occurrenceStatus_ALO` and `distribution` by rows:
 distribution %<>% bind_rows(occurrenceStatus_ALO)
