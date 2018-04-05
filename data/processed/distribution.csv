@@ -1528,6 +1528,9 @@
 "alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3","ISO_3166-2:BE","Belgium","BE","present","introduced","1861/1939"
+"alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3","ISO_3166-2:BE-VLG","Flemish Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3","ISO_3166-2:BE-WAL","Walloon Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3","ISO_3166-2:BE","Belgium","BE","absent","introduced","1939/2018"
 "alien-plants-belgium:taxon:382f2895e511631136433ea77cc33696","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:382f2895e511631136433ea77cc33696","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:382f2895e511631136433ea77cc33696","ISO_3166-2:BE","Belgium","BE","present","introduced","1892/2018"
@@ -2163,6 +2166,10 @@
 "alien-plants-belgium:taxon:4e6b823cec45898074b099761d3b498e","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:4e6b823cec45898074b099761d3b498e","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:4e6b823cec45898074b099761d3b498e","ISO_3166-2:BE","Belgium","BE","present","introduced","1813/2017"
+"alien-plants-belgium:taxon:4e6b823cec45898074b099761d3b498e","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",
+"alien-plants-belgium:taxon:4e6b823cec45898074b099761d3b498e","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",
+"alien-plants-belgium:taxon:4e6b823cec45898074b099761d3b498e","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","present","introduced",
+"alien-plants-belgium:taxon:4e6b823cec45898074b099761d3b498e","ISO_3166-2:BE","Belgium","BE","present","introduced","2017/2018"
 "alien-plants-belgium:taxon:4e700fb463e60040dff2cf72ab42f96c","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:4e700fb463e60040dff2cf72ab42f96c","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:4e700fb463e60040dff2cf72ab42f96c","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","present","introduced",""
@@ -3355,6 +3362,8 @@
 "alien-plants-belgium:taxon:7838d40464ae3bc7a86bd684f4e7611e","ISO_3166-2:BE","Belgium","BE","present","introduced","1946/2017"
 "alien-plants-belgium:taxon:78434a047de1de055575280416a9829d","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","present","introduced","1960/1969"
 "alien-plants-belgium:taxon:78434a047de1de055575280416a9829d","ISO_3166-2:BE","Belgium","BE","present","introduced","1960/1969"
+"alien-plants-belgium:taxon:78434a047de1de055575280416a9829d","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","absent","introduced","1969/2018"
+"alien-plants-belgium:taxon:78434a047de1de055575280416a9829d","ISO_3166-2:BE","Belgium","BE","absent","introduced","1969/2018"
 "alien-plants-belgium:taxon:7859d73d4f50f5c314276535b753553c","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","2011/2013"
 "alien-plants-belgium:taxon:7859d73d4f50f5c314276535b753553c","ISO_3166-2:BE","Belgium","BE","present","introduced","2011/2013"
 "alien-plants-belgium:taxon:786ad30792023653fd9c7e63901faa3f","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
@@ -3424,6 +3433,8 @@
 "alien-plants-belgium:taxon:7b39e3286b4fa41f5f599b4df8e4e193","ISO_3166-2:BE","Belgium","BE","present","introduced","1970"
 "alien-plants-belgium:taxon:7b48e979502c3079ce3eb37f00c21fbf","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","1860/1884"
 "alien-plants-belgium:taxon:7b48e979502c3079ce3eb37f00c21fbf","ISO_3166-2:BE","Belgium","BE","present","introduced","1860/1884"
+"alien-plants-belgium:taxon:7b48e979502c3079ce3eb37f00c21fbf","ISO_3166-2:BE-VLG","Flemish Region","BE","absent","introduced","1884/2018"
+"alien-plants-belgium:taxon:7b48e979502c3079ce3eb37f00c21fbf","ISO_3166-2:BE","Belgium","BE","absent","introduced","1884/2018"
 "alien-plants-belgium:taxon:7bf201f08df0d8c6d0ba2638d0ffcf5f","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced","1887/1920"
 "alien-plants-belgium:taxon:7bf201f08df0d8c6d0ba2638d0ffcf5f","ISO_3166-2:BE","Belgium","BE","present","introduced","1887/1920"
 "alien-plants-belgium:taxon:7c09764802ec24bc9e8ff3665c65b097","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","2012/2016"
@@ -3561,6 +3572,8 @@
 "alien-plants-belgium:taxon:81c6a4cd927f7f422c8d6d06abd60534","ISO_3166-2:BE","Belgium","BE","present","introduced","1815/1952"
 "alien-plants-belgium:taxon:81d0d3390592317b14d837d25acfef82","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","1858/1880"
 "alien-plants-belgium:taxon:81d0d3390592317b14d837d25acfef82","ISO_3166-2:BE","Belgium","BE","present","introduced","1858/1880"
+"alien-plants-belgium:taxon:81d0d3390592317b14d837d25acfef82","ISO_3166-2:BE-VLG","Flemish Region","BE","absent","introduced","1880/2018"
+"alien-plants-belgium:taxon:81d0d3390592317b14d837d25acfef82","ISO_3166-2:BE","Belgium","BE","absent","introduced","1880/2018"
 "alien-plants-belgium:taxon:81d201652154e88c5b2394a48271d646","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced","1893"
 "alien-plants-belgium:taxon:81d201652154e88c5b2394a48271d646","ISO_3166-2:BE","Belgium","BE","present","introduced","1893"
 "alien-plants-belgium:taxon:82158abb8bb149553eae77a58fad79a4","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
@@ -3913,6 +3926,8 @@
 "alien-plants-belgium:taxon:8f79d5a23dd4fccf9ab0dc8f230dcf30","ISO_3166-2:BE","Belgium","BE","present","introduced","1850/2017"
 "alien-plants-belgium:taxon:8fa3e26a32c3a238e01bcaab2ff337c3","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","1835/1889"
 "alien-plants-belgium:taxon:8fa3e26a32c3a238e01bcaab2ff337c3","ISO_3166-2:BE","Belgium","BE","present","introduced","1835/1889"
+"alien-plants-belgium:taxon:8fa3e26a32c3a238e01bcaab2ff337c3","ISO_3166-2:BE-VLG","Flemish Region","BE","absent","introduced","1889/2018"
+"alien-plants-belgium:taxon:8fa3e26a32c3a238e01bcaab2ff337c3","ISO_3166-2:BE","Belgium","BE","absent","introduced","1889/2018"
 "alien-plants-belgium:taxon:8fb3bd83ff482341ef184c8ef9fbc8e5","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","1998/2015"
 "alien-plants-belgium:taxon:8fb3bd83ff482341ef184c8ef9fbc8e5","ISO_3166-2:BE","Belgium","BE","present","introduced","1998/2015"
 "alien-plants-belgium:taxon:8fd960a005f3593c49fb04c3cb9a1a23","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
@@ -4045,6 +4060,9 @@
 "alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857","ISO_3166-2:BE","Belgium","BE","present","introduced","1944/1957"
+"alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857","ISO_3166-2:BE-VLG","Flemish Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857","ISO_3166-2:BE-WAL","Walloon Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857","ISO_3166-2:BE","Belgium","BE","absent","introduced","1957/2018"
 "alien-plants-belgium:taxon:94907cda2944b2d015f16dcc843677a0","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","2007/2016"
 "alien-plants-belgium:taxon:94907cda2944b2d015f16dcc843677a0","ISO_3166-2:BE","Belgium","BE","present","introduced","2007/2016"
 "alien-plants-belgium:taxon:9495b1e7dc471eb9ea13088444ba26aa","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
@@ -4577,6 +4595,9 @@
 "alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de","ISO_3166-2:BE","Belgium","BE","present","introduced","1827/1911"
+"alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de","ISO_3166-2:BE-VLG","Flemish Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de","ISO_3166-2:BE-WAL","Walloon Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de","ISO_3166-2:BE","Belgium","BE","absent","introduced","1911/2018"
 "alien-plants-belgium:taxon:a710afb5eb87f1360ca04bc3db0ee263","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","1949"
 "alien-plants-belgium:taxon:a710afb5eb87f1360ca04bc3db0ee263","ISO_3166-2:BE","Belgium","BE","present","introduced","1949"
 "alien-plants-belgium:taxon:a71d7d83cb17eb501b4564c935ede35c","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
@@ -4598,6 +4619,8 @@
 "alien-plants-belgium:taxon:a80ba3871188e18b9f4d0b1a30245f7b","ISO_3166-2:BE","Belgium","BE","present","introduced","1977"
 "alien-plants-belgium:taxon:a84c6cce3263d281d4b9f20a075bef91","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced","1830/1884"
 "alien-plants-belgium:taxon:a84c6cce3263d281d4b9f20a075bef91","ISO_3166-2:BE","Belgium","BE","present","introduced","1830/1884"
+"alien-plants-belgium:taxon:a84c6cce3263d281d4b9f20a075bef91","ISO_3166-2:BE-WAL","Walloon Region","BE","absent","introduced","1884/2018"
+"alien-plants-belgium:taxon:a84c6cce3263d281d4b9f20a075bef91","ISO_3166-2:BE","Belgium","BE","absent","introduced","1884/2018"
 "alien-plants-belgium:taxon:a86ddb904454647d14227d19aece6435","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced","1887/1947"
 "alien-plants-belgium:taxon:a86ddb904454647d14227d19aece6435","ISO_3166-2:BE","Belgium","BE","present","introduced","1887/1947"
 "alien-plants-belgium:taxon:a8bd72057e4025512f756e17572e11ff","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
@@ -4918,6 +4941,10 @@
 "alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b","ISO_3166-2:BE","Belgium","BE","present","introduced","1835/2013"
+"alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b","ISO_3166-2:BE-VLG","Flemish Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b","ISO_3166-2:BE-WAL","Walloon Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b","ISO_3166-2:BE","Belgium","BE","absent","introduced","2013/2018"
 "alien-plants-belgium:taxon:b7b9ed2f6c29e75dbc2f35d40dbf0273","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","2013/2014"
 "alien-plants-belgium:taxon:b7b9ed2f6c29e75dbc2f35d40dbf0273","ISO_3166-2:BE","Belgium","BE","present","introduced","2013/2014"
 "alien-plants-belgium:taxon:b7fb3ad71d118420ff60b7884b637208","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","present","introduced","2009"
@@ -4994,6 +5021,9 @@
 "alien-plants-belgium:taxon:b9e038ce3b38ffb5a2462faa3d7c7805","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:b9e038ce3b38ffb5a2462faa3d7c7805","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:b9e038ce3b38ffb5a2462faa3d7c7805","ISO_3166-2:BE","Belgium","BE","present","introduced","1864/2010"
+"alien-plants-belgium:taxon:b9e038ce3b38ffb5a2462faa3d7c7805","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",
+"alien-plants-belgium:taxon:b9e038ce3b38ffb5a2462faa3d7c7805","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",
+"alien-plants-belgium:taxon:b9e038ce3b38ffb5a2462faa3d7c7805","ISO_3166-2:BE","Belgium","BE","present","introduced","2010/2018"
 "alien-plants-belgium:taxon:ba048a2cbe2d340f9459e931d515b20a","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:ba048a2cbe2d340f9459e931d515b20a","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:ba048a2cbe2d340f9459e931d515b20a","ISO_3166-2:BE","Belgium","BE","present","introduced","1864/1948"
@@ -5030,6 +5060,10 @@
 "alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0","ISO_3166-2:BE","Belgium","BE","present","introduced","1836/1935"
+"alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0","ISO_3166-2:BE-VLG","Flemish Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0","ISO_3166-2:BE-WAL","Walloon Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0","ISO_3166-2:BE","Belgium","BE","absent","introduced","1935/2018"
 "alien-plants-belgium:taxon:bbb0020f26b1359111b9585ca1390dcc","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:bbb0020f26b1359111b9585ca1390dcc","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:bbb0020f26b1359111b9585ca1390dcc","ISO_3166-2:BE","Belgium","BE","present","introduced","1881/1909"
@@ -5379,6 +5413,9 @@
 "alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53","ISO_3166-2:BE","Belgium","BE","present","introduced","1823/1956"
+"alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53","ISO_3166-2:BE-VLG","Flemish Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53","ISO_3166-2:BE-WAL","Walloon Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53","ISO_3166-2:BE","Belgium","BE","absent","introduced","1956/2018"
 "alien-plants-belgium:taxon:c93aca5bc5d7b3df31338aacce44814f","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","2011/2013"
 "alien-plants-belgium:taxon:c93aca5bc5d7b3df31338aacce44814f","ISO_3166-2:BE","Belgium","BE","present","introduced","2011/2013"
 "alien-plants-belgium:taxon:c94279c3e761142327dcee108c303899","ISO_3166-2:BE-VLG","Flemish Region","BE","presence uncertain","introduced",""
@@ -5672,6 +5709,9 @@
 "alien-plants-belgium:taxon:d44ac0393587a6dbb68bf46f700a741c","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:d44ac0393587a6dbb68bf46f700a741c","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:d44ac0393587a6dbb68bf46f700a741c","ISO_3166-2:BE","Belgium","BE","present","introduced","1846/2016"
+"alien-plants-belgium:taxon:d44ac0393587a6dbb68bf46f700a741c","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",
+"alien-plants-belgium:taxon:d44ac0393587a6dbb68bf46f700a741c","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",
+"alien-plants-belgium:taxon:d44ac0393587a6dbb68bf46f700a741c","ISO_3166-2:BE","Belgium","BE","present","introduced","2016/2018"
 "alien-plants-belgium:taxon:d45091050be964542dba49d0c31ae346","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","1976/2016"
 "alien-plants-belgium:taxon:d45091050be964542dba49d0c31ae346","ISO_3166-2:BE","Belgium","BE","present","introduced","1976/2016"
 "alien-plants-belgium:taxon:d4a1d02bae63cf8f8e1f9c8155a9da06","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","2004/2018"
@@ -6361,6 +6401,8 @@
 "alien-plants-belgium:taxon:ee77c0d013bb46d9802ea9946168a873","ISO_3166-2:BE","Belgium","BE","present","introduced","1947"
 "alien-plants-belgium:taxon:ee85feb384f3128b7feb03ea24310a79","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","1792/1888"
 "alien-plants-belgium:taxon:ee85feb384f3128b7feb03ea24310a79","ISO_3166-2:BE","Belgium","BE","present","introduced","1792/1888"
+"alien-plants-belgium:taxon:ee85feb384f3128b7feb03ea24310a79","ISO_3166-2:BE-VLG","Flemish Region","BE","absent","introduced","1888/2018"
+"alien-plants-belgium:taxon:ee85feb384f3128b7feb03ea24310a79","ISO_3166-2:BE","Belgium","BE","absent","introduced","1888/2018"
 "alien-plants-belgium:taxon:eebefecdfb86d52487e7dcb13757f617","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:eebefecdfb86d52487e7dcb13757f617","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:eebefecdfb86d52487e7dcb13757f617","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","present","introduced",""
@@ -6454,6 +6496,9 @@
 "alien-plants-belgium:taxon:f1bb180bd27c2a387f5a8b0ebe797ab9","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:f1bb180bd27c2a387f5a8b0ebe797ab9","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:f1bb180bd27c2a387f5a8b0ebe797ab9","ISO_3166-2:BE","Belgium","BE","present","introduced","1813/2017"
+"alien-plants-belgium:taxon:f1bb180bd27c2a387f5a8b0ebe797ab9","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",
+"alien-plants-belgium:taxon:f1bb180bd27c2a387f5a8b0ebe797ab9","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",
+"alien-plants-belgium:taxon:f1bb180bd27c2a387f5a8b0ebe797ab9","ISO_3166-2:BE","Belgium","BE","present","introduced","2017/2018"
 "alien-plants-belgium:taxon:f1c07813bc6195f80fdc3b2e27ba522a","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:f1c07813bc6195f80fdc3b2e27ba522a","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:f1c07813bc6195f80fdc3b2e27ba522a","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","present","introduced",""
@@ -6501,6 +6546,9 @@
 "alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2","ISO_3166-2:BE","Belgium","BE","present","introduced","1861/1924"
+"alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2","ISO_3166-2:BE-VLG","Flemish Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2","ISO_3166-2:BE","Belgium","BE","absent","introduced","1924/2018"
 "alien-plants-belgium:taxon:f360418bbb9ef5d94dd6dc4f39ca1ad5","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced","2009/2016"
 "alien-plants-belgium:taxon:f360418bbb9ef5d94dd6dc4f39ca1ad5","ISO_3166-2:BE","Belgium","BE","present","introduced","2009/2016"
 "alien-plants-belgium:taxon:f3611a65691d8b76edea9d31154ef0c6","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
@@ -6675,6 +6723,8 @@
 "alien-plants-belgium:taxon:fa206c4f55ba50cc268b984099132702","ISO_3166-2:BE","Belgium","BE","present","introduced","1972"
 "alien-plants-belgium:taxon:fa2265e30e94d78492d88afcee963a8d","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced","1850/1920"
 "alien-plants-belgium:taxon:fa2265e30e94d78492d88afcee963a8d","ISO_3166-2:BE","Belgium","BE","present","introduced","1850/1920"
+"alien-plants-belgium:taxon:fa2265e30e94d78492d88afcee963a8d","ISO_3166-2:BE-WAL","Walloon Region","BE","absent","introduced","1920/2018"
+"alien-plants-belgium:taxon:fa2265e30e94d78492d88afcee963a8d","ISO_3166-2:BE","Belgium","BE","absent","introduced","1920/2018"
 "alien-plants-belgium:taxon:fa4f96281402a26072705b73f02950d3","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:fa4f96281402a26072705b73f02950d3","ISO_3166-2:BE-BRU","Brussels-Capital Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:fa4f96281402a26072705b73f02950d3","ISO_3166-2:BE","Belgium","BE","present","introduced","1950/1956"
@@ -6771,6 +6821,9 @@
 "alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb","ISO_3166-2:BE","Belgium","BE","present","introduced","1813/1916"
+"alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb","ISO_3166-2:BE-VLG","Flemish Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb","ISO_3166-2:BE-WAL","Walloon Region","BE","absent","introduced",
+"alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb","ISO_3166-2:BE","Belgium","BE","absent","introduced","1916/2018"
 "alien-plants-belgium:taxon:fe5991761f326f4f32bbcdf65aabbf53","ISO_3166-2:BE-VLG","Flemish Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:fe5991761f326f4f32bbcdf65aabbf53","ISO_3166-2:BE-WAL","Walloon Region","BE","present","introduced",""
 "alien-plants-belgium:taxon:fe5991761f326f4f32bbcdf65aabbf53","ISO_3166-2:BE","Belgium","BE","present","introduced","1887/2013"
