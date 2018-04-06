@@ -903,3 +903,20 @@ Move `taxonID` to the first position:
 description_ext %<>% select(taxonID, everything())
 ```
 
+Sort on `taxonID` to group description information per taxon:
+
+```{r}
+description_ext %<>% arrange(taxonID)
+```
+
+Preview data:
+
+```{r}
+description_ext %>% head(10)
+```
+
+Save to CSV:
+
+```{r}
+write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+```
