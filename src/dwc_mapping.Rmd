@@ -532,3 +532,119 @@ Save to CSV:
 write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
 ```
 
+# Create description extension
+
+In the description extension we want to include several important characteristics (hereafter refered to as descriptors) about the species:
+
+- Native range
+- Pathway of introduction
+- Invasion stage
+
+A single taxon can have multiple descriptions of the same type (e.g. multiple native ranges), expressed as multiple rows in the description extension.
+
+For each descriptor, we create a separate dataframe to process the specific information. We always specify _which descriptor_ we map (`type` column) and its _specific content_ (`description` column). After the mapping of these Darwin Core terms `type` and `value`, we merge the dataframes to generate one single description extension. We then continue the mapping process by adding the other Darwin Core terms (which content is independent of the type of descriptor, such as `language`).
+
+## Native range
+ 
+`raw_origin` contains native range information (e.g. `E AS-Te NAM`). We'll separate, clean, map and combine these values.
+
+Create separate dataframe:
+
+```{r start_native_range}
+native_range <- raw_data
+```
+
+Create `description` from `raw_origin`:
+
+```{r}
+native_range %<>% mutate(description = raw_origin)
+```
+
+Separate `description` on space in 4 columns:
+In case there are more than 4 values, these will be merged in native_range_4. 
+The dataset currently contains no more than 4 values per record.
+
+```{r}
+native_range %<>% separate(
+  description,
+  into = c("native_range_1", "native_range_2", "native_range_3", "native_range_4"),
+  sep = " ",
+  remove = TRUE,
+  convert = FALSE,
+  extra = "merge",
+  fill = "right")
+```
+
+Gather native ranges in a key and value column:
+
+```{r}
+native_range %<>% gather(
+  key, value,
+  native_range_1, native_range_2, native_range_3, native_range_4,
+  na.rm = TRUE, # Also removes records for which there is no native_range_1
+  convert = FALSE)
+```
+
+Sort on ID to see pathways in context for each record:
+
+```{r}
+native_range %<>% arrange(raw_id)
+```
+
+Clean values:
+
+```{r}
+native_range %<>% mutate(
+  value = str_replace_all(value, "\\?", ""), # Strip ?
+  value = str_trim(value) # Clean whitespace)
+```
+
+Map values:
+
+```{r}
+native_range %<>% mutate(mapped_value = recode(value,
+  "AF" = "Africa (WGSRPD:2)",
+  "AM" = "pan-American",
+  "AS" = "Asia",
+  "AS-Te" = "temperate Asia (WGSRPD:3)",
+  "AS-Tr" = "tropical Asia (WGSRPD:4)",
+  "AUS" = "Australasia (WGSRPD:5)",
+  "Cult." = "cultivated origin",
+  "E" = "Europe (WGSRPD:1)",
+  "Hybr." = "hybrid origin",
+  "NAM" = "Northern America (WGSRPD:7)",
+  "SAM" = "Southern America (WGSRPD:8)",
+  "Trop." = "Pantropical",
+  .default = "",
+  .missing = "")) # As result of stripping, records with no native range already removed by gather()
+```
+
+Show mapped values:
+
+```{r}
+native_range %>%
+  select(value, mapped_value) %>%
+  group_by(value, mapped_value) %>%
+  summarize(records = n()) %>%
+  arrange(value)
+```
+
+Drop `key` and `value` column and rename `mapped value`:
+
+```{r}
+native_range %<>% select(-key, -value)
+native_range %<>% rename(description = mapped_value)
+```
+
+Keep only non-empty descriptions:
+
+```{r}
+native_range %<>% filter(!is.na(description) & description != "")
+```
+
+Create a `type` field to indicate the type of description:
+
+```{r}
+native_range %<>% mutate(type = "native range")
+```
+
