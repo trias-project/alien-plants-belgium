@@ -648,3 +648,156 @@ Create a `type` field to indicate the type of description:
 native_range %<>% mutate(type = "native range")
 ```
 
+## Pathway of introduction
+
+pathway_desc` (pathway description) information is based on `raw_v_i`, which contains a list of introduction pathways (e.g. `Agric., wool`). We'll separate, clean, map and combine these values.
+
+Create separate dataframe:
+
+```{r start_pathway}
+pathway <- raw_data
+```
+
+Create `pathway` from `raw_v_i`:
+
+```{r}
+pathway_desc %<>% mutate(pathway = raw_v_i)
+```
+
+Separate `pathway` on `,` in 4 columns:
+In case there are more than 4 values, these will be merged in pathway_4. 
+The dataset currently contains no more than 3 values per record.
+
+```{r}
+pathway_desc %<>% separate(
+  pathway,
+  into = c("pathway_1", "pathway_2", "pathway_3", "pathway_4"),
+  sep = ",",
+  remove = TRUE,
+  convert = FALSE,
+  extra = "merge",
+  fill = "right")
+```
+
+Gather pathways in a key and value column:
+
+```{r}
+pathway_desc %<>% gather(
+  key, value,
+  pathway_1, pathway_2, pathway_3, pathway_4,
+  na.rm = TRUE, # Also removes records for which there is no pathway_1
+  convert = FALSE)
+```
+
+Sort on `taxonID` to see pathways in context for each record:
+
+```{r}
+pathway_desc %<>% arrange(raw_taxonID)
+```
+
+Show unique values:
+
+```{r}
+pathway_desc %>%
+  distinct(value) %>%
+  arrange(value) 
+```
+
+Clean values:
+
+```{r}
+pathway_desc %<>% mutate(
+  value = str_replace_all(value, "\\?|…|\\.{3}", ""), # Strip ?, …, ...
+  value = str_to_lower(value), # Convert to lowercase
+  value = str_trim(value) # Clean whitespace)
+```
+
+Map values to the CBD standard::
+
+```{r}
+pathway_desc %<>% mutate(cbd_stand = recode(value, 
+    "agric." = "escape_agriculture",
+    "bird seed" = "contaminant_seed",
+    "birdseed" = "contaminant_seed",
+    "bulbs" = "",
+    "coconut mats" = "contaminant_seed",
+    "fish" = "",
+    "food refuse" = "escape_food_bait",
+    "grain" = "contaminant_seed",
+    "grain (rice)" = "contaminant_seed",
+    "grass seed" = "contaminant_seed",
+    "hay" = "",
+    "hort" = "escape_horticulture",
+    "hort." = "escape_horticulture",
+    "hybridization" = "",
+    "military troops" = "",
+    "nurseries" = "contaminant_nursery",
+    "ore" = "contaminant_habitat_material",
+    "pines" = "contaminant_on_plants",
+    "rice" = "",
+    "salt" = "",
+    "seeds" = "contaminant_seed",
+    "timber" = "contaminant_timber",
+    "tourists" = "stowaway_people_luggage",
+    "traffic" = "",
+    "unknown" = "unknown",
+    "urban weed" = "stowaway",
+    "waterfowl" = "contaminant_on_animals",
+    "wool" = "contaminant_on_animals",
+    "wool alien" = "contaminant_on_animals",
+    .default = "",
+    .missing = "")) # As result of stripping, records with no pathway already removed by gather()
+```
+
+Add prefix `cbd_2014_pathway` in case there is a match with the CBD standard:
+
+```{r}
+```{r}
+pathway_desc %<>% mutate(mapped_value = case_when(
+  cbd_stand != "" ~ paste ("cbd_2014_pathway", cbd_stand, sep = ":"),
+  TRUE ~ ""))
+```
+
+Show mapped values:
+
+```{r}
+pathway_desc %>%
+  select(value, mapped_value) %>%
+  group_by(value, mapped_value) %>%
+  summarize(records = n()) %>%
+  arrange(value) 
+```
+
+Drop `key`,`value` and `cbd_stand` column:
+
+```{r}
+pathway_desc %<>% select(-key, -value, -cbd_stand)
+```
+
+Change column name `mapped_value` to `description`:
+
+```{r}
+pathway_desc %<>%  rename(description = mapped_value)
+```
+
+Create a `type` field to indicate the type of description:
+
+```{r}
+pathway_desc %<>% mutate (type = "pathway")
+```
+
+Show pathway descriptions:
+
+```{r}
+pathway_desc %>% 
+  select(description) %>% 
+  group_by(description) %>% 
+  summarize(records = n())
+```
+
+Keep only non-empty descriptions:
+
+```{r}
+pathway_desc %<>% filter(!is.na(description) & description != "")
+```
+
