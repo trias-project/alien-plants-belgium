@@ -865,3 +865,41 @@ description_ext <- bind_rows(native_range, pathway_desc, invasion_stage)
 
 Map the data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml).
 
+### taxonID
+
+```{r}
+description_ext %<>% mutate(taxonID = raw_taxonID)
+```
+
+### description
+
+```{r}
+description_ext %<>% mutate(description = description)
+```
+
+### type
+
+```{r}
+description_ext %<>% mutate(type = type)
+```
+
+### language
+
+```{r}
+description_ext %<>% mutate(language = "en")
+```
+
+## Post-processing
+
+Remove the original columns:
+
+```{r}
+description_ext %<>% select(-starts_with("raw_"))
+```
+
+Move `taxonID` to the first position:
+
+```{r}
+description_ext %<>% select(taxonID, everything())
+```
+
