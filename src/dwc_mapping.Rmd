@@ -196,13 +196,13 @@ Save to CSV:
 write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
 ```
 
-## Term mapping
-
-Map the data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml).
+# Create distribution extension
 
 ```{r start_distribution}
 distribution <- raw_data
 ```
+
+## Pre-processing
 
 Before we start mapping the distribution extensions, we focus on two terms: `occurrenceStatus` and  `eventDate`:
 
@@ -458,3 +458,8 @@ occurrenceStatus_ALO %<>% mutate(eventDate = case_when(
 distribution %<>% bind_rows(occurrenceStatus_ALO)
 ```
 
+## Term mapping
+
+Map the data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml).
+
+### taxonID
