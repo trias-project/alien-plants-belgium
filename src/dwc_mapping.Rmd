@@ -801,3 +801,68 @@ Keep only non-empty descriptions:
 pathway_desc %<>% filter(!is.na(description) & description != "")
 ```
 
+## Invasion stage
+
+Create separate dataframe:
+
+```{r start_invasion_stage}
+invasion_stage <- raw_data
+```
+
+The information for invasion stage is contained in `raw_d_n`:
+
+```{r}
+invasion_stage %>%
+  select(raw_d_n) %>%
+  group_by_all() %>%
+  summarize(records = n()) 
+```
+
+Clean the data:
+
+```{r}
+invasion_stage %<>% mutate(description = recode(raw_d_n,
+  "Ext.?" = "Ext.",
+  "Cas.?" = "Cas.",
+  "Nat.?" = "Nat.",
+  .missing = ""))
+```
+
+We decided to use the unified framework for biological invasions of [Blackburn et al. 2011](http://doc.rero.ch/record/24725/files/bach_puf.pdf) for `invasion stage`. `casual`, `naturalized` and `invasive` are terms included in this framework. However, we decided to discard the terms `naturalized` and `invasive` listed in Blackburn et al. (see trias-project/alien-fishes-checklist#6 (comment)). So, `naturalized` and `invasive` are replaced by `established`. For `extinct` (introduced taxa that once were naturalized but that have not been confirmed in recent times) and `extinct/casual` species (taxa are no longer considered as naturalized but still occur as casuals), we map the most recent invasion stage (i.e. `extinct` and `casual` respectively):
+
+```{r}
+invasion_stage %<>% mutate(description = recode(description,
+  "Cas." = "casual",
+  "Inv." = "established",
+  "Nat." = "established",
+  "Ext." = "extinct",
+  "Ext./Cas." = "casual"))
+```
+
+Show mapped values:
+
+```{r}
+invasion_stage %>%
+  select(raw_d_n, description) %>%
+  group_by_all() %>%
+  summarize(records = n())
+```
+
+Create a `type` field to indicate the type of description:
+
+```{r}
+invasion_stage %<>% mutate(type = "invasion stage")
+```
+
+## Union descriptions
+
+Union native range, pathway of introduction and invasion stage:
+
+```{r start_description_ext}
+description_ext <- bind_rows(native_range, pathway_desc, invasion_stage)
+```
+
+## Term mapping
+
+Map the data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml).
+
