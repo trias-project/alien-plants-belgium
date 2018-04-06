@@ -596,7 +596,7 @@ Clean values:
 ```{r}
 native_range %<>% mutate(
   value = str_replace_all(value, "\\?", ""), # Strip ?
-  value = str_trim(value) # Clean whitespace)
+  value = str_trim(value)) # Clean whitespace)
 ```
 
 Map values:
@@ -655,7 +655,7 @@ pathway_desc` (pathway description) information is based on `raw_v_i`, which con
 Create separate dataframe:
 
 ```{r start_pathway}
-pathway <- raw_data
+pathway_desc <- raw_data
 ```
 
 Create `pathway` from `raw_v_i`:
@@ -709,7 +709,7 @@ Clean values:
 pathway_desc %<>% mutate(
   value = str_replace_all(value, "\\?|…|\\.{3}", ""), # Strip ?, …, ...
   value = str_to_lower(value), # Convert to lowercase
-  value = str_trim(value) # Clean whitespace)
+  value = str_trim(value)) # Clean whitespace)
 ```
 
 Map values to the CBD standard::
@@ -751,7 +751,6 @@ pathway_desc %<>% mutate(cbd_stand = recode(value,
 
 Add prefix `cbd_2014_pathway` in case there is a match with the CBD standard:
 
-```{r}
 ```{r}
 pathway_desc %<>% mutate(mapped_value = case_when(
   cbd_stand != "" ~ paste ("cbd_2014_pathway", cbd_stand, sep = ":"),
