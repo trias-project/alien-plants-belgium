@@ -15,12 +15,12 @@ This repository contains the functionality to standardize the [Manual of the Ali
 
 ## Repo structure
 
-The repository structure is based on [Cookiecutter Data Science](http://drivendata.github.io/cookiecutter-data-science/). Files indicated with `GENERATED` should not be edited manually.
+The repository structure is based on [Cookiecutter Data Science](http://drivendata.github.io/cookiecutter-data-science/). Files and directories indicated with `GENERATED` should not be edited manually.
 
 ```
 ├── README.md         : Description of this repository
 ├── LICENSE           : Repository license
-├── .gitignore        : Files and folders to be ignored by git
+├── .gitignore        : Files and directories to be ignored by git
 │
 ├── data
 │   ├── raw           : Source data, input for mapping script
@@ -29,8 +29,8 @@ The repository structure is based on [Cookiecutter Data Science](http://drivenda
 ├── docs              : Repository website GENERATED
 │
 └── src
-    ├── dwc_mapping.R : Darwin Core mapping script, core functionality of this repository
-    └── src.Rproj     : RStudio project file
+    ├── dwc_mapping.Rmd : Darwin Core mapping script, core functionality of this repository
+    └── src.Rproj       : RStudio project file
 ```
 
 ## Installation

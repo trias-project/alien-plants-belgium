@@ -224,10 +224,10 @@ $(document).ready(function () {
 </div>
 <div id="repo-structure" class="section level2">
 <h2>Repo structure</h2>
-<p>The repository structure is based on <a href="http://drivendata.github.io/cookiecutter-data-science/">Cookiecutter Data Science</a>. Files indicated with <code>GENERATED</code> should not be edited manually.</p>
+<p>The repository structure is based on <a href="http://drivendata.github.io/cookiecutter-data-science/">Cookiecutter Data Science</a>. Files and directories indicated with <code>GENERATED</code> should not be edited manually.</p>
 <pre><code>├── README.md         : Description of this repository
 ├── LICENSE           : Repository license
-├── .gitignore        : Files and folders to be ignored by git
+├── .gitignore        : Files and directories to be ignored by git
 │
 ├── data
 │   ├── raw           : Source data, input for mapping script
@@ -236,8 +236,8 @@ $(document).ready(function () {
 ├── docs              : Repository website GENERATED
 │
 └── src
-    ├── dwc_mapping.R : Darwin Core mapping script, core functionality of this repository
-    └── src.Rproj     : RStudio project file</code></pre>
+    ├── dwc_mapping.Rmd : Darwin Core mapping script, core functionality of this repository
+    └── src.Rproj       : RStudio project file</code></pre>
 </div>
 <div id="installation" class="section level2">
 <h2>Installation</h2>
