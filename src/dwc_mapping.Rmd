@@ -64,7 +64,7 @@ Clean the data somewhat:
 
 ```{r}
 raw_data %<>%
-  remove_empty_rows() %>%        # Remove empty rows
+  remove_empty("rows") %>%       # Remove empty rows
   clean_names()                  # Have sensible (lowercase) column names
 ```
 
@@ -143,7 +143,7 @@ taxon %<>% mutate(taxonID = raw_taxonID)
 ### scientificNameID
 
 ```{r}
-taxon %<>% mutate(scientificNameID = raw_scientificnameid)
+taxon %<>% mutate(scientificNameID = raw_scientific_name_id)
 ```
 
 ### scientificName
@@ -167,7 +167,7 @@ taxon %<>% mutate(family = raw_family)
 ### taxonRank
 
 ```{r}
-taxon %<>% mutate(taxonRank = raw_taxonrank)
+taxon %<>% mutate(taxonRank = raw_taxon_rank)
 ```
 
 ### nomenclaturalCode
