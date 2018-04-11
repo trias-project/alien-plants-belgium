@@ -1,0 +1,922 @@
+---
+title: "Darwin Core mapping"
+subtitle: "For: Manual of the Alien Plants of Belgium"
+author:
+- Lien Reyserhove
+- Peter Desmet
+- Quentin Groom
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    number_sections: true
+---
+
+This document describes how we map the checklist data to Darwin Core. The source file for this document can be found [here](https://github.com/trias-project/alien-plants-belgium/tree/master/data/raw).
+
+# Setup
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+Set locale (so we use UTF-8 character encoding):
+
+```{r}
+# This works on Mac OS X, might not work on other OS
+Sys.setlocale("LC_CTYPE", "en_US.UTF-8")
+```
+
+Load libraries:
+
+```{r}
+library(tidyverse) # To transform data
+library(magrittr)  # For %<>% pipes
+library(janitor)   # To clean input data
+library(readxl)    # To read Excel files
+library(stringr)   # To perform string operations
+library(digest)    # To generate hashes
+```
+
+Set file paths (all paths should be relative to this script):
+ 
+```{r}
+# Raw files:
+raw_data_file = "../data/raw/Checklist2.xlsx"
+
+# Processed files:
+dwc_taxon_file = "../data/processed/taxon.csv"
+dwc_distribution_file = "../data/processed/distribution.csv"
+dwc_description_file = "../data/processed/description.csv"
+```
+
+# Read and pre-process raw data
+
+Create a data frame `raw_data` from the source data:
+
+```{r}
+raw_data <- read_excel(path = raw_data_file) 
+```
+
+Clean the data somewhat:
+
+```{r}
+raw_data %<>%
+  remove_empty("rows") %>%       # Remove empty rows
+  clean_names()                  # Have sensible (lowercase) column names
+```
+
+## Generate taxonID
+
+To uniquely identify a taxon in the taxon core and reference taxa in the extensions, we need a `taxonID`. Since we need it in all generated files, we generate it here in the raw data frame. It is a combination of `dataset-shortname:taxon:` and a hash based on the scientific name. As long as the scientific name doesn't change, the ID will be stable:
+
+```{r}
+# Vectorize the digest function (The digest() function isn't vectorized. So if you pass in a vector, you get one value for the whole vector rather than a digest for each element of the vector):
+vdigest <- Vectorize(digest)
+
+# Generate taxonID:
+raw_data %<>% mutate(taxonID = paste("alien-plants-belgium", "taxon", vdigest (taxon, algo="md5"), sep=":"))
+```
+
+## Further pre-processing:
+
+Add prefix `raw_` to all column names to avoid name clashes with Darwin Core terms:
+
+```{r}
+colnames(raw_data) <- paste0("raw_", colnames(raw_data))
+```
+
+Preview data:
+
+```{r}
+raw_data %>% head()
+```
+
+# Create taxon core
+
+```{r start_taxon}
+taxon <- raw_data
+```
+
+## Term mapping
+ 
+Map the data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml).
+ 
+### language
+
+```{r}
+taxon %<>% mutate(language = "en")
+```
+
+### license
+
+```{r}
+taxon %<>% mutate(license = "http://creativecommons.org/publicdomain/zero/1.0/")
+```
+
+### rightsHolder
+
+```{r}
+taxon %<>% mutate(rightsHolder = "Botanic Garden Meise")
+```
+
+### datasetID
+
+```{r}
+taxon %<>% mutate(datasetID = "https://doi.org/10.15468/wtda1m")
+```
+
+### datasetName
+
+```{r}
+taxon %<>% mutate(datasetName = "Manual of the Alien Plants of Belgium")
+```
+
+### taxonID
+
+```{r}
+taxon %<>% mutate(taxonID = raw_taxonID)
+```
+
+### scientificNameID
+
+```{r}
+taxon %<>% mutate(scientificNameID = raw_scientific_name_id)
+```
+
+### scientificName
+
+```{r}
+taxon %<>% mutate(scientificName = raw_taxon)
+```
+
+### kingdom
+
+```{r}
+taxon %<>% mutate(kingdom = "Plantae")
+```
+
+### family
+
+```{r}
+taxon %<>% mutate(family = raw_family)
+```
+
+### taxonRank
+
+```{r}
+taxon %<>% mutate(taxonRank = raw_taxon_rank)
+```
+
+### nomenclaturalCode
+
+```{r}
+taxon %<>% mutate(nomenclaturalCode = "ICBN")
+```
+
+## Post-processing
+
+Remove the original columns:
+
+```{r}
+taxon %<>% select(-starts_with("raw_"))
+```
+
+Preview data:
+
+```{r}
+taxon %>% head()
+```
+
+Save to CSV:
+
+```{r}
+write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+```
+
+# Create distribution extension
+
+```{r start_distribution}
+distribution <- raw_data
+```
+
+## Pre-processing
+
+Before we start mapping the distribution extensions, we focus on two terms: `occurrenceStatus` and  `eventDate`:
+
+This is because:
+
+1. Information on the occurrences is given for the **regions**, while date information is given for **Belgium** as a whole. Some transformations and clarifications are needed.
+
+2. Some species have two values for `occurrenceStatus` and `eventDate`, i.e. species with the degree of naturalisation (`raw_d_n`) of extinct (`Ext.`) or extinct/casual (`Ext./Cas.`).
+
+ > Extinct: introduced taxa that once were naturalized (usually rather locally) but that have not been confirmed in recent times in their known localities. Only taxa that are certainly extinct are indicated as such.   
+ > Extinct/casual: Some of these extinct taxa are no longer considered as naturalized but still occur as casuals; such taxa are indicated as “Ext./Cas.” (for instance _Tragopogon porrifolius_).
+ 
+For these species, we include the occurrenceStatus **within** the specified time frame (`eventDate` = first - most recent observation) and **after** the last observation (`eventDate` = most recent observation - current date).
+
+The easiest way to do use a stepwize approach:
+1. Clean presence information and date information in `distribution`
+2. Create a separate dataframe `occurrenceStatus_ALO` (ALO = after last observation) for extinct and extinct/casual species
+3. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `distribution` (for `eventDate` = first - most recent observation)
+4. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `occurrenceStatus_ALO` (for `eventDate` = most recent observation - current date)
+5. Bind both dataframes by row.
+6. Map the other Darwin Core terms in the distribution extension
+
+### Clean presence information: occurrenceStatus for regions and Belgium
+
+The checklist contains minimal presence information (`X`,`?` or `NA`) for the three regions in Belgium: Flanders, Wallonia and the Brussels-Capital Region, contained in `raw_presence_fl`, `raw_presence_wa` and `raw_presence_br` respectively. Information regarding the first/last recorded observation applies to the distribution in Belgium as a whole. Both national and regional information is required in the checklist. In the `distribution.csv`, we will first provide `occurrenceStatus` and `eventDate`` on a **national level**, followed by specific information for the **regions**. 
+
+For this, we use the following principles:
+
+1. When a species is present in _only one region_, we can assume `eventDate` relates to that specific region. In this case, we can keep lines for Belgium and for the specific region populated with these variables (see #45).
+
+2. When a species is present in _more than one_ region, it is impossible to extrapolate the date information for the regions. In this case, we decided to provide `occurrenceStatus` for the regional information, and specify dates only for Belgium.  
+
+Thus, we need to specify when a species is present in only one of the regions.
+
+We generate 4 new columns: `Flanders`, `Brussels`,`Wallonia` and `Belgium`. 
+The content of these columns refers to the specific presence status of a species on a regional or national level.
+`S` if present in a single region or in Belgium, `?` if presence uncertain, `NA` if absent and `M` if present in multiple regions.
+
+This should look like this:
+```{r echo=FALSE}
+as.data.frame(matrix(
+  c(
+    "X", NA, NA, "S", NA, NA, "S",
+    NA, "X", NA, NA, "S", NA, "S", 
+    NA, NA, "x", NA, NA, "S", "S",
+    "X", "X", NA, "M", "M", NA, "S",
+    "X", NA, "X", "M", NA, "M", "S",
+    NA, "X", "X", NA, "M", "M", "S",
+    NA, NA, NA, NA, NA, NA, NA,
+    "X", "?", NA, "S", "?", NA, "S",
+    "X", NA, "?", "S", NA, "?", "S",
+    "X", "X", "?", "M", "M", "?", "S"
+  ),
+  ncol = 7,
+  byrow = TRUE,
+  dimnames = list(c(1:10), c(
+    "raw_presence_fl",
+    "raw_presence_br", 
+    "raw_presence_wa", 
+    "Flanders", 
+    "Brussels", 
+    "Wallonia",
+    "Belgium"
+  ))
+))
+```
+
+We translate this to the distribution extension:
+
+```{r}
+distribution %<>% 
+  mutate(Flanders = case_when(
+    raw_presence_fl == "X" & (is.na(raw_presence_br) | raw_presence_br == "?") & (is.na(raw_presence_wa) | raw_presence_wa == "?") ~ "S",
+    raw_presence_fl == "?" ~ "?",
+    is.na(raw_presence_fl) ~ "NA",
+    TRUE ~ "M")) %>%
+  mutate(Brussels = case_when(
+    (is.na(raw_presence_fl) | raw_presence_fl == "?") & raw_presence_br == "X" & (is.na(raw_presence_wa) | raw_presence_wa == "?") ~ "S",
+    raw_presence_br == "?" ~ "?",
+    is.na(raw_presence_br) ~ "NA",
+    TRUE ~ "M")) %>%
+  mutate(Wallonia = case_when(
+    (is.na(raw_presence_fl) | raw_presence_fl == "?") & (is.na(raw_presence_br) | raw_presence_br == "?") & raw_presence_wa == "X" ~ "S",
+    raw_presence_wa == "?" ~ "?",
+    is.na(raw_presence_wa) ~ "NA",
+    TRUE ~ "M")) %>%
+  mutate(Belgium = case_when(
+    raw_presence_fl == "X" | raw_presence_br == "X" | raw_presence_wa == "X" ~ "S", # One is "X"
+    raw_presence_fl == "?" | raw_presence_br == "?" | raw_presence_wa == "?" ~ "?" # One is "?"
+  ))
+```
+
+Summary of the previous action:
+
+```{r}
+distribution %>% select (raw_presence_fl, raw_presence_br, raw_presence_wa, Flanders, Wallonia, Brussels, Belgium) %>%
+  group_by_all() %>%
+  summarize(records = n()) %>%
+  arrange(Flanders, Wallonia, Brussels)
+```
+
+One line should represent the presence information of a species in one region or Belgium. We need to transform `raw_data` from a wide to a long table (i.e. create a `key` and `value` column):
+
+```{r}
+distribution %<>% gather(
+  key, value,
+  Flanders, Wallonia, Brussels, Belgium,
+  convert = FALSE
+) 
+```
+
+Rename `key` and `value`:
+
+```{r}
+distribution %<>% rename ("location" = "key", "presence" = "value")
+```
+
+Remove species for which we lack presence information (i.e. `presence` = `NA``):
+
+```{r}
+distribution %<>% filter (!presence == "NA")
+```
+
+### Clean date information
+
+Create `start_year` from `raw_fr`: 
+
+```{r}
+distribution %<>% mutate(start_year = raw_fr)
+```
+
+Clean values:
+
+```{r}
+distribution %<>% mutate(start_year = 
+  str_replace_all(start_year, "(\\?|ca. |<|>)", "") # Strip ?, ca., < and >
+)
+```
+
+Create `end_year` from `raw_mrr` (most recent record):
+
+```{r}
+distribution %<>% mutate(end_year = raw_mrr)
+```
+
+Clean values:
+
+```{r}
+distribution %<>% mutate(end_year = 
+  str_replace_all(end_year, "(\\?|ca. |<|>)", "") # Strip ?, ca., < and >
+)
+```
+
+If `end_year` is `Ann.` or `N` use current year:
+
+```{r}
+current_year = format(Sys.Date(), "%Y")
+distribution %<>% mutate(end_year = recode(end_year,
+  "Ann." = current_year,
+  "N" = current_year)
+)
+```
+
+Show reformatted values for both `raw_fr` and `raw_mrr`:
+
+```{r}
+distribution %>%
+  select(raw_fr, start_year) %>%
+  rename(raw_year = raw_fr, formatted_year = start_year) %>%
+  union( # Union with raw_mrr. Will also remove duplicates
+    distribution %>%
+      select(raw_mrr, end_year) %>%
+      rename(raw_year = raw_mrr, formatted_year = end_year)
+  ) %>%
+  filter(nchar(raw_year) != 4) %>% # Don't show raw values that were already YYYY
+  arrange(raw_year)
+```
+
+Check if any `start_year` fall after `end_year` (expected to be none):
+
+```{r}
+distribution %>%
+  select(start_year, end_year) %>%
+  mutate(start_year = as.numeric(start_year)) %>%
+  mutate(end_year = as.numeric(end_year)) %>%
+  group_by(start_year, end_year) %>%
+  summarize(records = n()) %>%
+  filter(start_year > end_year) 
+```
+
+Combine `start_year` and `end_year` in an ranged `Date` (ISO 8601 format). If any those two dates is empty or the same, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
+
+```{r}
+distribution %<>% mutate(Date = 
+  case_when(
+    start_year == "" & end_year == "" ~ "",
+    start_year == ""                  ~ end_year,
+    end_year == ""                    ~ start_year,
+    start_year == end_year            ~ start_year,
+    TRUE                              ~ paste(start_year, end_year, sep = "/")
+  )
+)
+```
+
+### Generate `occurrenceStatus_ALO`
+
+```{r}
+occurrenceStatus_ALO <- distribution %>% filter(raw_d_n == "Ext." | raw_d_n == "Ext./Cas.")
+```
+
+### Map occurrenceStatus and eventDate for `distribution`:
+
+Map `occurrenceStaus` using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
+
+```{r}
+distribution %<>% mutate(occurrenceStatus = recode(presence,
+                                                       "S" = "present",
+                                                       "M" = "present",
+                                                       "?" = "presence uncertain",
+                                                       .default = ""))
+```
+
+Overview of `occurrenceStatus` for each location x presence combination:
+
+```{r}
+distribution %>% select (location, presence, occurrenceStatus) %>%
+  group_by_all() %>%
+  summarize(records = n()) 
+```
+
+Populate `eventDate` only when `presence` = `S`:
+
+```{r}
+distribution %<>% mutate (eventDate = case_when(
+  presence == "S" ~ Date,
+  TRUE ~ ""))
+```
+
+### Map `occurrenceStatus` and `eventDate` for `occurrenceStatus_ALO`:
+
+```{r}
+occurrenceStatus_ALO %<>% mutate(occurrenceStatus = case_when(
+  raw_d_n == "Ext." ~ "absent",
+  raw_d_n == "Ext./Cas." ~ "present"))
+
+occurrenceStatus_ALO %<>% mutate(eventDate = case_when(
+  presence == "S" ~ paste(end_year, current_year, sep = "/")))
+```
+
+### Bind `occurrenceStatus_ALO` and `distribution` by rows:
+
+```{r}
+distribution %<>% bind_rows(occurrenceStatus_ALO)
+```
+
+## Term mapping
+
+Map the data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml).
+
+### taxonID
+
+```{r}
+distribution %<>% mutate(taxonID = raw_taxonID)
+```
+
+### locationID
+
+```{r}
+distribution %<>% mutate(locationID = case_when (
+  location == "Belgium" ~ "ISO_3166-2:BE",
+  location == "Flanders" ~ "ISO_3166-2:BE-VLG",
+  location == "Wallonia" ~ "ISO_3166-2:BE-WAL",
+  location == "Brussels" ~ "ISO_3166-2:BE-BRU"))
+```
+
+### locality
+
+```{r}
+distribution %<>% mutate(locality = case_when (
+  location == "Belgium" ~ "Belgium",
+  location == "Flanders" ~ "Flemish Region",
+  location == "Wallonia" ~ "Walloon Region",
+  location == "Brussels" ~ "Brussels-Capital Region"))
+```
+
+### countryCode
+
+```{r}
+distribution %<>% mutate(countryCode = "BE")
+```
+
+### establishmentMeans
+
+```{r}
+distribution %<>% mutate (establishmentMeans = "introduced")
+```
+
+## Post-processing
+
+Remove the original columns:
+
+```{r}
+distribution %<>% select(-starts_with("raw_"), -location,-presence, -start_year, -end_year, -Date)
+```
+
+Rearrange columns (order as specified in [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml))
+
+```{r}
+distribution %<>% select(taxonID, locationID, locality, countryCode, occurrenceStatus, establishmentMeans, eventDate)
+```
+
+Sort on `taxonID`:
+
+```{r}
+distribution %<>% arrange(taxonID)
+```
+
+Preview data:
+
+```{r}
+distribution %>% head()
+```
+
+Save to CSV:
+
+```{r}
+write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+```
+
+# Create description extension
+
+In the description extension we want to include several important characteristics (hereafter refered to as descriptors) about the species:
+
+- Native range
+- Pathway of introduction
+- Invasion stage
+
+A single taxon can have multiple descriptions of the same type (e.g. multiple native ranges), expressed as multiple rows in the description extension.
+
+For each descriptor, we create a separate dataframe to process the specific information. We always specify _which descriptor_ we map (`type` column) and its _specific content_ (`description` column). After the mapping of these Darwin Core terms `type` and `value`, we merge the dataframes to generate one single description extension. We then continue the mapping process by adding the other Darwin Core terms (which content is independent of the type of descriptor, such as `language`).
+
+## Native range
+ 
+`raw_origin` contains native range information (e.g. `E AS-Te NAM`). We'll separate, clean, map and combine these values.
+
+Create separate dataframe:
+
+```{r start_native_range}
+native_range <- raw_data
+```
+
+Create `description` from `raw_origin`:
+
+```{r}
+native_range %<>% mutate(description = raw_origin)
+```
+
+Separate `description` on space in 4 columns:
+In case there are more than 4 values, these will be merged in native_range_4. 
+The dataset currently contains no more than 4 values per record.
+
+```{r}
+native_range %<>% separate(
+  description,
+  into = c("native_range_1", "native_range_2", "native_range_3", "native_range_4"),
+  sep = " ",
+  remove = TRUE,
+  convert = FALSE,
+  extra = "merge",
+  fill = "right")
+```
+
+Gather native ranges in a key and value column:
+
+```{r}
+native_range %<>% gather(
+  key, value,
+  native_range_1, native_range_2, native_range_3, native_range_4,
+  na.rm = TRUE, # Also removes records for which there is no native_range_1
+  convert = FALSE)
+```
+
+Sort on ID to see pathways in context for each record:
+
+```{r}
+native_range %<>% arrange(raw_id)
+```
+
+Clean values:
+
+```{r}
+native_range %<>% mutate(
+  value = str_replace_all(value, "\\?", ""), # Strip ?
+  value = str_trim(value)) # Clean whitespace)
+```
+
+Map values:
+
+```{r}
+native_range %<>% mutate(mapped_value = recode(value,
+  "AF" = "Africa (WGSRPD:2)",
+  "AM" = "pan-American",
+  "AS" = "Asia",
+  "AS-Te" = "temperate Asia (WGSRPD:3)",
+  "AS-Tr" = "tropical Asia (WGSRPD:4)",
+  "AUS" = "Australasia (WGSRPD:5)",
+  "Cult." = "cultivated origin",
+  "E" = "Europe (WGSRPD:1)",
+  "Hybr." = "hybrid origin",
+  "NAM" = "Northern America (WGSRPD:7)",
+  "SAM" = "Southern America (WGSRPD:8)",
+  "Trop." = "Pantropical",
+  .default = "",
+  .missing = "")) # As result of stripping, records with no native range already removed by gather()
+```
+
+Show mapped values:
+
+```{r}
+native_range %>%
+  select(value, mapped_value) %>%
+  group_by(value, mapped_value) %>%
+  summarize(records = n()) %>%
+  arrange(value)
+```
+
+Drop `key` and `value` column and rename `mapped value`:
+
+```{r}
+native_range %<>% select(-key, -value)
+native_range %<>% rename(description = mapped_value)
+```
+
+Keep only non-empty descriptions:
+
+```{r}
+native_range %<>% filter(!is.na(description) & description != "")
+```
+
+Create a `type` field to indicate the type of description:
+
+```{r}
+native_range %<>% mutate(type = "native range")
+```
+
+## Pathway of introduction
+
+pathway_desc` (pathway description) information is based on `raw_v_i`, which contains a list of introduction pathways (e.g. `Agric., wool`). We'll separate, clean, map and combine these values.
+
+Create separate dataframe:
+
+```{r start_pathway}
+pathway_desc <- raw_data
+```
+
+Create `pathway` from `raw_v_i`:
+
+```{r}
+pathway_desc %<>% mutate(pathway = raw_v_i)
+```
+
+Separate `pathway` on `,` in 4 columns:
+In case there are more than 4 values, these will be merged in pathway_4. 
+The dataset currently contains no more than 3 values per record.
+
+```{r}
+pathway_desc %<>% separate(
+  pathway,
+  into = c("pathway_1", "pathway_2", "pathway_3", "pathway_4"),
+  sep = ",",
+  remove = TRUE,
+  convert = FALSE,
+  extra = "merge",
+  fill = "right")
+```
+
+Gather pathways in a key and value column:
+
+```{r}
+pathway_desc %<>% gather(
+  key, value,
+  pathway_1, pathway_2, pathway_3, pathway_4,
+  na.rm = TRUE, # Also removes records for which there is no pathway_1
+  convert = FALSE)
+```
+
+Sort on `taxonID` to see pathways in context for each record:
+
+```{r}
+pathway_desc %<>% arrange(raw_taxonID)
+```
+
+Show unique values:
+
+```{r}
+pathway_desc %>%
+  distinct(value) %>%
+  arrange(value) 
+```
+
+Clean values:
+
+```{r}
+pathway_desc %<>% mutate(
+  value = str_replace_all(value, "\\?|…|\\.{3}", ""), # Strip ?, …, ...
+  value = str_to_lower(value), # Convert to lowercase
+  value = str_trim(value)) # Clean whitespace)
+```
+
+Map values to the CBD standard::
+
+```{r}
+pathway_desc %<>% mutate(cbd_stand = recode(value, 
+    "agric." = "escape_agriculture",
+    "bird seed" = "contaminant_seed",
+    "birdseed" = "contaminant_seed",
+    "bulbs" = "",
+    "coconut mats" = "contaminant_seed",
+    "fish" = "",
+    "food refuse" = "escape_food_bait",
+    "grain" = "contaminant_seed",
+    "grain (rice)" = "contaminant_seed",
+    "grass seed" = "contaminant_seed",
+    "hay" = "",
+    "hort" = "escape_horticulture",
+    "hort." = "escape_horticulture",
+    "hybridization" = "",
+    "military troops" = "",
+    "nurseries" = "contaminant_nursery",
+    "ore" = "contaminant_habitat_material",
+    "pines" = "contaminant_on_plants",
+    "rice" = "",
+    "salt" = "",
+    "seeds" = "contaminant_seed",
+    "timber" = "contaminant_timber",
+    "tourists" = "stowaway_people_luggage",
+    "traffic" = "",
+    "unknown" = "unknown",
+    "urban weed" = "stowaway",
+    "waterfowl" = "contaminant_on_animals",
+    "wool" = "contaminant_on_animals",
+    "wool alien" = "contaminant_on_animals",
+    .default = "",
+    .missing = "")) # As result of stripping, records with no pathway already removed by gather()
+```
+
+Add prefix `cbd_2014_pathway` in case there is a match with the CBD standard:
+
+```{r}
+pathway_desc %<>% mutate(mapped_value = case_when(
+  cbd_stand != "" ~ paste ("cbd_2014_pathway", cbd_stand, sep = ":"),
+  TRUE ~ ""))
+```
+
+Show mapped values:
+
+```{r}
+pathway_desc %>%
+  select(value, mapped_value) %>%
+  group_by(value, mapped_value) %>%
+  summarize(records = n()) %>%
+  arrange(value) 
+```
+
+Drop `key`,`value` and `cbd_stand` column:
+
+```{r}
+pathway_desc %<>% select(-key, -value, -cbd_stand)
+```
+
+Change column name `mapped_value` to `description`:
+
+```{r}
+pathway_desc %<>%  rename(description = mapped_value)
+```
+
+Create a `type` field to indicate the type of description:
+
+```{r}
+pathway_desc %<>% mutate (type = "pathway")
+```
+
+Show pathway descriptions:
+
+```{r}
+pathway_desc %>% 
+  select(description) %>% 
+  group_by(description) %>% 
+  summarize(records = n())
+```
+
+Keep only non-empty descriptions:
+
+```{r}
+pathway_desc %<>% filter(!is.na(description) & description != "")
+```
+
+## Invasion stage
+
+Create separate dataframe:
+
+```{r start_invasion_stage}
+invasion_stage <- raw_data
+```
+
+The information for invasion stage is contained in `raw_d_n`:
+
+```{r}
+invasion_stage %>%
+  select(raw_d_n) %>%
+  group_by_all() %>%
+  summarize(records = n()) 
+```
+
+Clean the data:
+
+```{r}
+invasion_stage %<>% mutate(description = recode(raw_d_n,
+  "Ext.?" = "Ext.",
+  "Cas.?" = "Cas.",
+  "Nat.?" = "Nat.",
+  .missing = ""))
+```
+
+We decided to use the unified framework for biological invasions of [Blackburn et al. 2011](http://doc.rero.ch/record/24725/files/bach_puf.pdf) for `invasion stage`. `casual`, `naturalized` and `invasive` are terms included in this framework. However, we decided to discard the terms `naturalized` and `invasive` listed in Blackburn et al. (see trias-project/alien-fishes-checklist#6 (comment)). So, `naturalized` and `invasive` are replaced by `established`. For `extinct` (introduced taxa that once were naturalized but that have not been confirmed in recent times) and `extinct/casual` species (taxa are no longer considered as naturalized but still occur as casuals), we map the most recent invasion stage (i.e. `extinct` and `casual` respectively):
+
+```{r}
+invasion_stage %<>% mutate(description = recode(description,
+  "Cas." = "casual",
+  "Inv." = "established",
+  "Nat." = "established",
+  "Ext." = "extinct",
+  "Ext./Cas." = "casual"))
+```
+
+Show mapped values:
+
+```{r}
+invasion_stage %>%
+  select(raw_d_n, description) %>%
+  group_by_all() %>%
+  summarize(records = n())
+```
+
+Create a `type` field to indicate the type of description:
+
+```{r}
+invasion_stage %<>% mutate(type = "invasion stage")
+```
+
+## Union descriptions
+
+Union native range, pathway of introduction and invasion stage:
+
+```{r start_description_ext}
+description_ext <- bind_rows(native_range, pathway_desc, invasion_stage)
+```
+
+## Term mapping
+
+Map the data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml).
+
+### taxonID
+
+```{r}
+description_ext %<>% mutate(taxonID = raw_taxonID)
+```
+
+### description
+
+```{r}
+description_ext %<>% mutate(description = description)
+```
+
+### type
+
+```{r}
+description_ext %<>% mutate(type = type)
+```
+
+### language
+
+```{r}
+description_ext %<>% mutate(language = "en")
+```
+
+## Post-processing
+
+Remove the original columns:
+
+```{r}
+description_ext %<>% select(-starts_with("raw_"))
+```
+
+Move `taxonID` to the first position:
+
+```{r}
+description_ext %<>% select(taxonID, everything())
+```
+
+Sort on `taxonID` to group description information per taxon:
+
+```{r}
+description_ext %<>% arrange(taxonID)
+```
+
+Preview data:
+
+```{r}
+description_ext %>% head(10)
+```
+
+Save to CSV:
+
+```{r}
+write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+```

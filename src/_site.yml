@@ -1,0 +1,16 @@
+name: "Manual of the Alien Plants of Belgium"
+output_dir: "../docs"
+include: ["static/"]
+navbar:
+  title: "alien-plants-belgium"
+  left:
+    - text: "Darwin Core mapping"
+      href: dwc_mapping.html
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/trias-project/alien-plants-belgium
+output:
+  html_document:
+    theme: yeti
+    df_print: paged
+    css: "static/css/trias.css"
