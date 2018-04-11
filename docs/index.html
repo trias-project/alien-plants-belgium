@@ -20,8 +20,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -33,10 +33,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -69,7 +71,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="static\css\trias.css" type="text/css" />
+<link rel="stylesheet" href="static/css/trias.css" type="text/css" />
 
 </head>
 
@@ -245,7 +247,7 @@ $(document).ready(function () {
 <li>Open the <code>dwc_mapping.Rmd</code> <a href="https://rmarkdown.rstudio.com/">R Markdown file</a> in RStudio</li>
 <li>Install any required packages</li>
 <li>Click <code>Run &gt; Run All</code> to generate the processed data</li>
-<li>Alternatively, click <code>Build &gt; Build website</code> to generated the processed data and build the website in <code>/docs</code></li>
+<li>Alternatively, click <code>Build &gt; Build website</code> to generate the processed data and build the website in <code>/docs</code></li>
 </ol>
 </div>
 <div id="contributors" class="section level2">
