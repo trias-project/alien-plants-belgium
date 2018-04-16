@@ -49,6 +49,7 @@ raw_data_file = "../data/raw/Checklist2.xlsx"
 # Processed files:
 dwc_taxon_file = "../data/processed/taxon.csv"
 dwc_distribution_file = "../data/processed/distribution.csv"
+dwc_profile_file = "../data/processed/speciesprofile.csv"
 dwc_description_file = "../data/processed/description.csv"
 ```
 
@@ -530,6 +531,95 @@ Save to CSV:
 
 ```{r}
 write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+```
+
+# Create species profile extension
+
+In this extension will express broad habitat characteristics (e.g. `isTerrestrial`) of the species.
+
+```{r start_species_profile}
+species_profile <- raw_data
+```
+
+Habitat information can be found in `raw_habitat`, which describes whether a species is found in freshwater, terrestrial or both (terrestrial/freshwater) habitats.
+
+Show unique values:
+
+```{r}
+species_profile %>%
+  distinct(raw_habitat) %>%
+  arrange(raw_habitat)
+```
+
+We map this information respectively to `isFreshwater`, `isTerrestrial` or both terms in the species profile extension.
+
+## Term mapping
+
+Map the data to [Species Profile](http://rs.gbif.org/extension/gbif/1.0/speciesprofile.xml).
+
+### taxonID
+
+```{r}
+species_profile %<>% mutate(taxonID = raw_taxonID)
+```
+
+### isMarine
+
+```{r}
+species_profile %<>% mutate(isMarine = "FALSE")
+```
+
+### isFreshwater
+
+```{r}
+species_profile %<>% mutate(isFreshwater = case_when(
+  raw_habitat == "Fresh water" | raw_habitat == "Terrestrial/Fresh water" ~ "TRUE",
+  TRUE ~"FALSE"
+))
+```
+
+### isTerrestrial
+
+```{r}
+species_profile %<>% mutate(isTerrestrial = case_when(
+  raw_habitat == "Terrestrial" | raw_habitat == "Terrestrial/Fresh water" ~ "TRUE",
+  TRUE ~"FALSE"
+))
+```
+
+Show mapped values:
+
+```{r}
+species_profile %>%
+  select(raw_habitat, isMarine, isFreshwater, isTerrestrial) %>%
+  group_by_all() %>%
+  summarize(records = n())
+```
+
+## Post-processing
+
+Remove the original columns:
+
+```{r}
+species_profile %<>% select(-starts_with("raw_"))
+```
+
+Sort on `taxonID`:
+
+```{r}
+species_profile %<>% arrange(taxonID)
+```
+
+Preview data:
+
+```{r}
+species_profile %>% head()
+```
+
+Save to CSV:
+
+```{r}
+write.csv(species_profile, file = dwc_profile_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
 ```
 
 # Create description extension
