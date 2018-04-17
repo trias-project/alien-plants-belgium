@@ -13,7 +13,7 @@
 <meta name="author" content="Peter Desmet" />
 <meta name="author" content="Quentin Groom" />
 
-<meta name="date" content="2018-04-11" />
+<meta name="date" content="2018-04-17" />
 
 <title>Darwin Core mapping</title>
 
@@ -308,7 +308,7 @@ div.tocify {
 <h4 class="author"><em>Lien Reyserhove</em></h4>
 <h4 class="author"><em>Peter Desmet</em></h4>
 <h4 class="author"><em>Quentin Groom</em></h4>
-<h4 class="date"><em>2018-04-11</em></h4>
+<h4 class="date"><em>2018-04-17</em></h4>
 
 </div>
 
@@ -334,6 +334,7 @@ raw_data_file = &quot;../data/raw/Checklist2.xlsx&quot;
 # Processed files:
 dwc_taxon_file = &quot;../data/processed/taxon.csv&quot;
 dwc_distribution_file = &quot;../data/processed/distribution.csv&quot;
+dwc_profile_file = &quot;../data/processed/speciesprofile.csv&quot;
 dwc_description_file = &quot;../data/processed/description.csv&quot;</code></pre>
 </div>
 <div id="read-and-pre-process-raw-data" class="section level1">
@@ -361,7 +362,7 @@ raw_data %&lt;&gt;% mutate(taxonID = paste(&quot;alien-plants-belgium&quot;, &qu
 <pre class="r"><code>raw_data %&gt;% head()</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["raw_id"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["raw_taxon"],"name":[2],"type":["chr"],"align":["left"]},{"label":["raw_hybrid_formula"],"name":[3],"type":["chr"],"align":["left"]},{"label":["raw_synonym"],"name":[4],"type":["chr"],"align":["left"]},{"label":["raw_family"],"name":[5],"type":["chr"],"align":["left"]},{"label":["raw_m_i"],"name":[6],"type":["chr"],"align":["left"]},{"label":["raw_fr"],"name":[7],"type":["chr"],"align":["left"]},{"label":["raw_mrr"],"name":[8],"type":["chr"],"align":["left"]},{"label":["raw_origin"],"name":[9],"type":["chr"],"align":["left"]},{"label":["raw_presence_fl"],"name":[10],"type":["chr"],"align":["left"]},{"label":["raw_presence_br"],"name":[11],"type":["chr"],"align":["left"]},{"label":["raw_presence_wa"],"name":[12],"type":["chr"],"align":["left"]},{"label":["raw_d_n"],"name":[13],"type":["chr"],"align":["left"]},{"label":["raw_v_i"],"name":[14],"type":["chr"],"align":["left"]},{"label":["raw_taxon_rank"],"name":[15],"type":["chr"],"align":["left"]},{"label":["raw_scientific_name_id"],"name":[16],"type":["chr"],"align":["left"]},{"label":["raw_taxonID"],"name":[17],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"Acanthus mollis L.","3":"NA","4":"NA","5":"Acanthaceae","6":"D","7":"1998","8":"2016","9":"E AF","10":"X","11":"NA","12":"X","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:44892-1","17":"alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c"},{"1":"2","2":"Acanthus spinosus L.","3":"NA","4":"NA","5":"Acanthaceae","6":"D","7":"2016","8":"2017","9":"E AF AS-Te","10":"X","11":"NA","12":"NA","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:44920-1","17":"alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9"},{"1":"3","2":"Acorus calamus L.","3":"NA","4":"NA","5":"Acoraceae","6":"D","7":"1680","8":"N","9":"AS-Te","10":"X","11":"X","12":"X","13":"Nat.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:84009-1","17":"alien-plants-belgium:taxon:574eaf931730ba162e0226a425247660"},{"1":"4","2":"Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson","3":"NA","4":"NA","5":"Actinidiaceae","6":"D","7":"2000","8":"Ann.","9":"AS-Te","10":"X","11":"NA","12":"X","13":"Cas.","14":"Food refuse","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:913605-1","17":"alien-plants-belgium:taxon:5c33253debbe5777c0499b5c4d76b6e4"},{"1":"5","2":"Sambucus canadensis L.","3":"NA","4":"NA","5":"Adoxaceae","6":"D","7":"1972","8":"2017","9":"NAM","10":"X","11":"NA","12":"NA","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:321978-2","17":"alien-plants-belgium:taxon:03206f4a769c6649658ab96839e8a016"},{"1":"6","2":"Viburnum davidii Franch.","3":"NA","4":"NA","5":"Adoxaceae","6":"D","7":"2014","8":"2015","9":"AS-Te","10":"X","11":"NA","12":"NA","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:149642-1","17":"alien-plants-belgium:taxon:12212e50c4f6c9b79616e9d7f95a1cfb"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["raw_id"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["raw_taxon"],"name":[2],"type":["chr"],"align":["left"]},{"label":["raw_hybrid_formula"],"name":[3],"type":["chr"],"align":["left"]},{"label":["raw_synonym"],"name":[4],"type":["chr"],"align":["left"]},{"label":["raw_family"],"name":[5],"type":["chr"],"align":["left"]},{"label":["raw_m_i"],"name":[6],"type":["chr"],"align":["left"]},{"label":["raw_fr"],"name":[7],"type":["chr"],"align":["left"]},{"label":["raw_mrr"],"name":[8],"type":["chr"],"align":["left"]},{"label":["raw_origin"],"name":[9],"type":["chr"],"align":["left"]},{"label":["raw_presence_fl"],"name":[10],"type":["chr"],"align":["left"]},{"label":["raw_presence_br"],"name":[11],"type":["chr"],"align":["left"]},{"label":["raw_presence_wa"],"name":[12],"type":["chr"],"align":["left"]},{"label":["raw_d_n"],"name":[13],"type":["chr"],"align":["left"]},{"label":["raw_v_i"],"name":[14],"type":["chr"],"align":["left"]},{"label":["raw_taxon_rank"],"name":[15],"type":["chr"],"align":["left"]},{"label":["raw_scientific_name_id"],"name":[16],"type":["chr"],"align":["left"]},{"label":["raw_habitat"],"name":[17],"type":["chr"],"align":["left"]},{"label":["raw_name_excl_author_citation"],"name":[18],"type":["chr"],"align":["left"]},{"label":["raw_taxonID"],"name":[19],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"Acanthus mollis L.","3":"NA","4":"NA","5":"Acanthaceae","6":"D","7":"1998","8":"2016","9":"E AF","10":"X","11":"NA","12":"X","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:44892-1","17":"Terrestrial","18":"Acanthus mollis","19":"alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c"},{"1":"2","2":"Acanthus spinosus L.","3":"NA","4":"NA","5":"Acanthaceae","6":"D","7":"2016","8":"2017","9":"E AF AS-Te","10":"X","11":"NA","12":"NA","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:44920-1","17":"Terrestrial","18":"Acanthus spinosus","19":"alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9"},{"1":"3","2":"Acorus calamus L.","3":"NA","4":"NA","5":"Acoraceae","6":"D","7":"1680","8":"N","9":"AS-Te","10":"X","11":"X","12":"X","13":"Nat.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:84009-1","17":"Terrestrial/Fresh water","18":"Acorus calamus","19":"alien-plants-belgium:taxon:574eaf931730ba162e0226a425247660"},{"1":"4","2":"Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson","3":"NA","4":"NA","5":"Actinidiaceae","6":"D","7":"2000","8":"Ann.","9":"AS-Te","10":"X","11":"NA","12":"X","13":"Cas.","14":"Food refuse","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:913605-1","17":"Terrestrial","18":"Actinidia deliciosa","19":"alien-plants-belgium:taxon:5c33253debbe5777c0499b5c4d76b6e4"},{"1":"5","2":"Sambucus canadensis L.","3":"NA","4":"NA","5":"Adoxaceae","6":"D","7":"1972","8":"2017","9":"NAM","10":"X","11":"NA","12":"NA","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:321978-2","17":"Terrestrial","18":"Sambucus canadensis","19":"alien-plants-belgium:taxon:03206f4a769c6649658ab96839e8a016"},{"1":"6","2":"Viburnum davidii Franch.","3":"NA","4":"NA","5":"Adoxaceae","6":"D","7":"2014","8":"2015","9":"AS-Te","10":"X","11":"NA","12":"NA","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:149642-1","17":"Terrestrial","18":"Viburnum davidii","19":"alien-plants-belgium:taxon:12212e50c4f6c9b79616e9d7f95a1cfb"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -497,7 +498,7 @@ This should look like this:
   arrange(Flanders, Wallonia, Brussels)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["raw_presence_fl"],"name":[1],"type":["chr"],"align":["left"]},{"label":["raw_presence_br"],"name":[2],"type":["chr"],"align":["left"]},{"label":["raw_presence_wa"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Flanders"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Wallonia"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Brussels"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Belgium"],"name":[7],"type":["chr"],"align":["left"]},{"label":["records"],"name":[8],"type":["int"],"align":["right"]}],"data":[{"1":"?","2":"?","3":"?","4":"?","5":"?","6":"?","7":"?","8":"21"},{"1":"?","2":"X","3":"?","4":"?","5":"?","6":"S","7":"S","8":"1"},{"1":"X","2":"?","3":"X","4":"M","5":"M","6":"?","7":"S","8":"5"},{"1":"X","2":"X","3":"X","4":"M","5":"M","6":"M","7":"S","8":"496"},{"1":"X","2":"NA","3":"X","4":"M","5":"M","6":"__NA__","7":"S","8":"627"},{"1":"X","2":"X","3":"NA","4":"M","5":"__NA__","6":"M","7":"S","8":"72"},{"1":"NA","2":"X","3":"X","4":"__NA__","5":"M","6":"M","7":"S","8":"24"},{"1":"NA","2":"NA","3":"NA","4":"__NA__","5":"__NA__","6":"__NA__","7":"NA","8":"2"},{"1":"NA","2":"X","3":"NA","4":"__NA__","5":"__NA__","6":"S","7":"S","8":"36"},{"1":"NA","2":"NA","3":"X","4":"__NA__","5":"S","6":"__NA__","7":"S","8":"461"},{"1":"X","2":"?","3":"?","4":"S","5":"?","6":"?","7":"S","8":"3"},{"1":"X","2":"NA","3":"?","4":"S","5":"?","6":"__NA__","7":"S","8":"1"},{"1":"X","2":"NA","3":"NA","4":"S","5":"__NA__","6":"__NA__","7":"S","8":"773"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["raw_presence_fl"],"name":[1],"type":["chr"],"align":["left"]},{"label":["raw_presence_br"],"name":[2],"type":["chr"],"align":["left"]},{"label":["raw_presence_wa"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Flanders"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Wallonia"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Brussels"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Belgium"],"name":[7],"type":["chr"],"align":["left"]},{"label":["records"],"name":[8],"type":["int"],"align":["right"]}],"data":[{"1":"?","2":"?","3":"?","4":"?","5":"?","6":"?","7":"?","8":"21"},{"1":"?","2":"X","3":"?","4":"?","5":"?","6":"S","7":"S","8":"1"},{"1":"X","2":"?","3":"X","4":"M","5":"M","6":"?","7":"S","8":"5"},{"1":"X","2":"X","3":"X","4":"M","5":"M","6":"M","7":"S","8":"497"},{"1":"X","2":"NA","3":"X","4":"M","5":"M","6":"__NA__","7":"S","8":"627"},{"1":"X","2":"X","3":"NA","4":"M","5":"__NA__","6":"M","7":"S","8":"74"},{"1":"NA","2":"X","3":"X","4":"__NA__","5":"M","6":"M","7":"S","8":"24"},{"1":"NA","2":"NA","3":"NA","4":"__NA__","5":"__NA__","6":"__NA__","7":"NA","8":"2"},{"1":"NA","2":"X","3":"NA","4":"__NA__","5":"__NA__","6":"S","7":"S","8":"35"},{"1":"NA","2":"NA","3":"X","4":"__NA__","5":"S","6":"__NA__","7":"S","8":"461"},{"1":"X","2":"?","3":"?","4":"S","5":"?","6":"?","7":"S","8":"3"},{"1":"X","2":"NA","3":"?","4":"S","5":"?","6":"__NA__","7":"S","8":"1"},{"1":"X","2":"NA","3":"NA","4":"S","5":"__NA__","6":"__NA__","7":"S","8":"774"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>One line should represent the presence information of a species in one region or Belgium. We need to transform <code>raw_data</code> from a wide to a long table (i.e. create a <code>key</code> and <code>value</code> column):</p>
@@ -589,7 +590,7 @@ distribution %&lt;&gt;% mutate(end_year = recode(end_year,
   summarize(records = n()) </code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["location"],"name":[1],"type":["chr"],"align":["left"]},{"label":["presence"],"name":[2],"type":["chr"],"align":["left"]},{"label":["occurrenceStatus"],"name":[3],"type":["chr"],"align":["left"]},{"label":["records"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"Belgium","2":"?","3":"presence uncertain","4":"21"},{"1":"Belgium","2":"S","3":"present","4":"2499"},{"1":"Brussels","2":"?","3":"presence uncertain","4":"29"},{"1":"Brussels","2":"M","3":"present","4":"592"},{"1":"Brussels","2":"S","3":"present","4":"37"},{"1":"Flanders","2":"?","3":"presence uncertain","4":"22"},{"1":"Flanders","2":"M","3":"present","4":"1200"},{"1":"Flanders","2":"S","3":"present","4":"777"},{"1":"Wallonia","2":"?","3":"presence uncertain","4":"26"},{"1":"Wallonia","2":"M","3":"present","4":"1152"},{"1":"Wallonia","2":"S","3":"present","4":"461"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["location"],"name":[1],"type":["chr"],"align":["left"]},{"label":["presence"],"name":[2],"type":["chr"],"align":["left"]},{"label":["occurrenceStatus"],"name":[3],"type":["chr"],"align":["left"]},{"label":["records"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"Belgium","2":"?","3":"presence uncertain","4":"21"},{"1":"Belgium","2":"S","3":"present","4":"2502"},{"1":"Brussels","2":"?","3":"presence uncertain","4":"29"},{"1":"Brussels","2":"M","3":"present","4":"595"},{"1":"Brussels","2":"S","3":"present","4":"36"},{"1":"Flanders","2":"?","3":"presence uncertain","4":"22"},{"1":"Flanders","2":"M","3":"present","4":"1203"},{"1":"Flanders","2":"S","3":"present","4":"778"},{"1":"Wallonia","2":"?","3":"presence uncertain","4":"26"},{"1":"Wallonia","2":"M","3":"present","4":"1153"},{"1":"Wallonia","2":"S","3":"present","4":"461"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Populate <code>eventDate</code> only when <code>presence</code> = <code>S</code>:</p>
@@ -662,8 +663,76 @@ occurrenceStatus_ALO %&lt;&gt;% mutate(eventDate = case_when(
 <pre class="r"><code>write.csv(distribution, file = dwc_distribution_file, na = &quot;&quot;, row.names = FALSE, fileEncoding = &quot;UTF-8&quot;)</code></pre>
 </div>
 </div>
+<div id="create-species-profile-extension" class="section level1">
+<h1><span class="header-section-number">5</span> Create species profile extension</h1>
+<p>In this extension will express broad habitat characteristics (e.g. <code>isTerrestrial</code>) of the species.</p>
+<pre class="r"><code>species_profile &lt;- raw_data</code></pre>
+<p>Habitat information can be found in <code>raw_habitat</code>, which describes whether a species is found in freshwater, terrestrial or both (terrestrial/freshwater) habitats.</p>
+<p>Show unique values:</p>
+<pre class="r"><code>species_profile %&gt;%
+  distinct(raw_habitat) %&gt;%
+  arrange(raw_habitat)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["raw_habitat"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"Fresh water"},{"1":"Terrestrial"},{"1":"Terrestrial/Fresh water"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>We map this information respectively to <code>isFreshwater</code>, <code>isTerrestrial</code> or both terms in the species profile extension.</p>
+<div id="term-mapping-2" class="section level2">
+<h2><span class="header-section-number">5.1</span> Term mapping</h2>
+<p>Map the data to <a href="http://rs.gbif.org/extension/gbif/1.0/speciesprofile.xml">Species Profile</a>.</p>
+<div id="taxonid-2" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> taxonID</h3>
+<pre class="r"><code>species_profile %&lt;&gt;% mutate(taxonID = raw_taxonID)</code></pre>
+</div>
+<div id="ismarine" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> isMarine</h3>
+<pre class="r"><code>species_profile %&lt;&gt;% mutate(isMarine = &quot;FALSE&quot;)</code></pre>
+</div>
+<div id="isfreshwater" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> isFreshwater</h3>
+<pre class="r"><code>species_profile %&lt;&gt;% mutate(isFreshwater = case_when(
+  raw_habitat == &quot;Fresh water&quot; | raw_habitat == &quot;Terrestrial/Fresh water&quot; ~ &quot;TRUE&quot;,
+  TRUE ~&quot;FALSE&quot;
+))</code></pre>
+</div>
+<div id="isterrestrial" class="section level3">
+<h3><span class="header-section-number">5.1.4</span> isTerrestrial</h3>
+<pre class="r"><code>species_profile %&lt;&gt;% mutate(isTerrestrial = case_when(
+  raw_habitat == &quot;Terrestrial&quot; | raw_habitat == &quot;Terrestrial/Fresh water&quot; ~ &quot;TRUE&quot;,
+  TRUE ~&quot;FALSE&quot;
+))</code></pre>
+<p>Show mapped values:</p>
+<pre class="r"><code>species_profile %&gt;%
+  select(raw_habitat, isMarine, isFreshwater, isTerrestrial) %&gt;%
+  group_by_all() %&gt;%
+  summarize(records = n())</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["raw_habitat"],"name":[1],"type":["chr"],"align":["left"]},{"label":["isMarine"],"name":[2],"type":["chr"],"align":["left"]},{"label":["isFreshwater"],"name":[3],"type":["chr"],"align":["left"]},{"label":["isTerrestrial"],"name":[4],"type":["chr"],"align":["left"]},{"label":["records"],"name":[5],"type":["int"],"align":["right"]}],"data":[{"1":"Fresh water","2":"FALSE","3":"TRUE","4":"FALSE","5":"29"},{"1":"Terrestrial","2":"FALSE","3":"FALSE","4":"TRUE","5":"2490"},{"1":"Terrestrial/Fresh water","2":"FALSE","3":"TRUE","4":"TRUE","5":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+</div>
+</div>
+<div id="post-processing-2" class="section level2">
+<h2><span class="header-section-number">5.2</span> Post-processing</h2>
+<p>Remove the original columns:</p>
+<pre class="r"><code>species_profile %&lt;&gt;% select(-starts_with(&quot;raw_&quot;))</code></pre>
+<p>Sort on <code>taxonID</code>:</p>
+<pre class="r"><code>species_profile %&lt;&gt;% arrange(taxonID)</code></pre>
+<p>Preview data:</p>
+<pre class="r"><code>species_profile %&gt;% head()</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["taxonID"],"name":[1],"type":["chr"],"align":["left"]},{"label":["isMarine"],"name":[2],"type":["chr"],"align":["left"]},{"label":["isFreshwater"],"name":[3],"type":["chr"],"align":["left"]},{"label":["isTerrestrial"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520","2":"FALSE","3":"FALSE","4":"TRUE"},{"1":"alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9","2":"FALSE","3":"FALSE","4":"TRUE"},{"1":"alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98","2":"FALSE","3":"FALSE","4":"TRUE"},{"1":"alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148","2":"FALSE","3":"FALSE","4":"TRUE"},{"1":"alien-plants-belgium:taxon:0063fb918750e3db0f1bb551cd9587c5","2":"FALSE","3":"FALSE","4":"TRUE"},{"1":"alien-plants-belgium:taxon:0068d529c19ee42ce7ea09fc427d82e4","2":"FALSE","3":"FALSE","4":"TRUE"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>Save to CSV:</p>
+<pre class="r"><code>write.csv(species_profile, file = dwc_profile_file, na = &quot;&quot;, row.names = FALSE, fileEncoding = &quot;UTF-8&quot;)</code></pre>
+</div>
+</div>
 <div id="create-description-extension" class="section level1">
-<h1><span class="header-section-number">5</span> Create description extension</h1>
+<h1><span class="header-section-number">6</span> Create description extension</h1>
 <p>In the description extension we want to include several important characteristics (hereafter refered to as descriptors) about the species:</p>
 <ul>
 <li>Native range</li>
@@ -673,7 +742,7 @@ occurrenceStatus_ALO %&lt;&gt;% mutate(eventDate = case_when(
 <p>A single taxon can have multiple descriptions of the same type (e.g. multiple native ranges), expressed as multiple rows in the description extension.</p>
 <p>For each descriptor, we create a separate dataframe to process the specific information. We always specify <em>which descriptor</em> we map (<code>type</code> column) and its <em>specific content</em> (<code>description</code> column). After the mapping of these Darwin Core terms <code>type</code> and <code>value</code>, we merge the dataframes to generate one single description extension. We then continue the mapping process by adding the other Darwin Core terms (which content is independent of the type of descriptor, such as <code>language</code>).</p>
 <div id="native-range" class="section level2">
-<h2><span class="header-section-number">5.1</span> Native range</h2>
+<h2><span class="header-section-number">6.1</span> Native range</h2>
 <p><code>raw_origin</code> contains native range information (e.g. <code>E AS-Te NAM</code>). We’ll separate, clean, map and combine these values.</p>
 <p>Create separate dataframe:</p>
 <pre class="r"><code>native_range &lt;- raw_data</code></pre>
@@ -724,7 +793,7 @@ occurrenceStatus_ALO %&lt;&gt;% mutate(eventDate = case_when(
   arrange(value)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["value"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mapped_value"],"name":[2],"type":["chr"],"align":["left"]},{"label":["records"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"","2":"","3":"1"},{"1":"AF","2":"Africa (WGSRPD:2)","3":"641"},{"1":"AM","2":"pan-American","3":"94"},{"1":"AS","2":"Asia","3":"71"},{"1":"AS-Te","2":"temperate Asia (WGSRPD:3)","3":"1057"},{"1":"AS-Tr","2":"tropical Asia (WGSRPD:4)","3":"12"},{"1":"AUS","2":"Australasia (WGSRPD:5)","3":"117"},{"1":"Cult.","2":"cultivated origin","3":"93"},{"1":"E","2":"Europe (WGSRPD:1)","3":"1124"},{"1":"Hybr.","2":"hybrid origin","3":"69"},{"1":"NAM","2":"Northern America (WGSRPD:7)","3":"366"},{"1":"SAM","2":"Southern America (WGSRPD:8)","3":"158"},{"1":"Trop.","2":"Pantropical","3":"37"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["value"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mapped_value"],"name":[2],"type":["chr"],"align":["left"]},{"label":["records"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"","2":"","3":"1"},{"1":"AF","2":"Africa (WGSRPD:2)","3":"641"},{"1":"AM","2":"pan-American","3":"94"},{"1":"AS","2":"Asia","3":"73"},{"1":"AS-Te","2":"temperate Asia (WGSRPD:3)","3":"1058"},{"1":"AS-Tr","2":"tropical Asia (WGSRPD:4)","3":"12"},{"1":"AUS","2":"Australasia (WGSRPD:5)","3":"117"},{"1":"Cult.","2":"cultivated origin","3":"93"},{"1":"E","2":"Europe (WGSRPD:1)","3":"1125"},{"1":"Hybr.","2":"hybrid origin","3":"69"},{"1":"NAM","2":"Northern America (WGSRPD:7)","3":"366"},{"1":"SAM","2":"Southern America (WGSRPD:8)","3":"158"},{"1":"Trop.","2":"Pantropical","3":"37"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Drop <code>key</code> and <code>value</code> column and rename <code>mapped value</code>:</p>
@@ -736,7 +805,7 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
 <pre class="r"><code>native_range %&lt;&gt;% mutate(type = &quot;native range&quot;)</code></pre>
 </div>
 <div id="pathway-of-introduction" class="section level2">
-<h2><span class="header-section-number">5.2</span> Pathway of introduction</h2>
+<h2><span class="header-section-number">6.2</span> Pathway of introduction</h2>
 <p>pathway_desc<code>(pathway description) information is based on</code>raw_v_i<code>, which contains a list of introduction pathways (e.g.</code>Agric., wool`). We’ll separate, clean, map and combine these values.</p>
 <p>Create separate dataframe:</p>
 <pre class="r"><code>pathway_desc &lt;- raw_data</code></pre>
@@ -818,7 +887,7 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   arrange(value) </code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["value"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mapped_value"],"name":[2],"type":["chr"],"align":["left"]},{"label":["records"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"","2":"","3":"545"},{"1":"agric.","2":"cbd_2014_pathway:escape_agriculture","3":"86"},{"1":"bird seed","2":"cbd_2014_pathway:contaminant_seed","3":"1"},{"1":"birdseed","2":"cbd_2014_pathway:contaminant_seed","3":"31"},{"1":"bulbs","2":"","3":"1"},{"1":"coconut mats","2":"cbd_2014_pathway:contaminant_seed","3":"1"},{"1":"etc.","2":"","3":"1"},{"1":"fish","2":"","3":"3"},{"1":"food refuse","2":"cbd_2014_pathway:escape_food_bait","3":"23"},{"1":"grain","2":"cbd_2014_pathway:contaminant_seed","3":"543"},{"1":"grain (rice)","2":"cbd_2014_pathway:contaminant_seed","3":"3"},{"1":"grass seed","2":"cbd_2014_pathway:contaminant_seed","3":"8"},{"1":"hay","2":"","3":"1"},{"1":"hort","2":"cbd_2014_pathway:escape_horticulture","3":"2"},{"1":"hort.","2":"cbd_2014_pathway:escape_horticulture","3":"1106"},{"1":"hybridization","2":"","3":"50"},{"1":"military troops","2":"","3":"9"},{"1":"nurseries","2":"cbd_2014_pathway:contaminant_nursery","3":"21"},{"1":"ore","2":"cbd_2014_pathway:contaminant_habitat_material","3":"94"},{"1":"pines","2":"cbd_2014_pathway:contaminant_on_plants","3":"4"},{"1":"rice","2":"","3":"1"},{"1":"salt","2":"","3":"2"},{"1":"seeds","2":"cbd_2014_pathway:contaminant_seed","3":"64"},{"1":"timber","2":"cbd_2014_pathway:contaminant_timber","3":"10"},{"1":"tourists","2":"cbd_2014_pathway:stowaway_people_luggage","3":"10"},{"1":"traffic","2":"","3":"4"},{"1":"urban weed","2":"cbd_2014_pathway:stowaway","3":"10"},{"1":"waterfowl","2":"cbd_2014_pathway:contaminant_on_animals","3":"14"},{"1":"wool","2":"cbd_2014_pathway:contaminant_on_animals","3":"566"},{"1":"wool alien","2":"cbd_2014_pathway:contaminant_on_animals","3":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["value"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mapped_value"],"name":[2],"type":["chr"],"align":["left"]},{"label":["records"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"","2":"","3":"545"},{"1":"agric.","2":"cbd_2014_pathway:escape_agriculture","3":"86"},{"1":"bird seed","2":"cbd_2014_pathway:contaminant_seed","3":"1"},{"1":"birdseed","2":"cbd_2014_pathway:contaminant_seed","3":"31"},{"1":"bulbs","2":"","3":"1"},{"1":"coconut mats","2":"cbd_2014_pathway:contaminant_seed","3":"1"},{"1":"etc.","2":"","3":"1"},{"1":"fish","2":"","3":"3"},{"1":"food refuse","2":"cbd_2014_pathway:escape_food_bait","3":"23"},{"1":"grain","2":"cbd_2014_pathway:contaminant_seed","3":"545"},{"1":"grain (rice)","2":"cbd_2014_pathway:contaminant_seed","3":"3"},{"1":"grass seed","2":"cbd_2014_pathway:contaminant_seed","3":"8"},{"1":"hay","2":"","3":"1"},{"1":"hort","2":"cbd_2014_pathway:escape_horticulture","3":"2"},{"1":"hort.","2":"cbd_2014_pathway:escape_horticulture","3":"1107"},{"1":"hybridization","2":"","3":"50"},{"1":"military troops","2":"","3":"9"},{"1":"nurseries","2":"cbd_2014_pathway:contaminant_nursery","3":"21"},{"1":"ore","2":"cbd_2014_pathway:contaminant_habitat_material","3":"94"},{"1":"pines","2":"cbd_2014_pathway:contaminant_on_plants","3":"4"},{"1":"rice","2":"","3":"1"},{"1":"salt","2":"","3":"2"},{"1":"seeds","2":"cbd_2014_pathway:contaminant_seed","3":"64"},{"1":"timber","2":"cbd_2014_pathway:contaminant_timber","3":"10"},{"1":"tourists","2":"cbd_2014_pathway:stowaway_people_luggage","3":"10"},{"1":"traffic","2":"","3":"4"},{"1":"urban weed","2":"cbd_2014_pathway:stowaway","3":"10"},{"1":"waterfowl","2":"cbd_2014_pathway:contaminant_on_animals","3":"14"},{"1":"wool","2":"cbd_2014_pathway:contaminant_on_animals","3":"566"},{"1":"wool alien","2":"cbd_2014_pathway:contaminant_on_animals","3":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Drop <code>key</code>,<code>value</code> and <code>cbd_stand</code> column:</p>
@@ -834,14 +903,14 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   summarize(records = n())</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["description"],"name":[1],"type":["chr"],"align":["left"]},{"label":["records"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"","2":"617"},{"1":"cbd_2014_pathway:contaminant_habitat_material","2":"94"},{"1":"cbd_2014_pathway:contaminant_nursery","2":"21"},{"1":"cbd_2014_pathway:contaminant_on_animals","2":"581"},{"1":"cbd_2014_pathway:contaminant_on_plants","2":"4"},{"1":"cbd_2014_pathway:contaminant_seed","2":"651"},{"1":"cbd_2014_pathway:contaminant_timber","2":"10"},{"1":"cbd_2014_pathway:escape_agriculture","2":"86"},{"1":"cbd_2014_pathway:escape_food_bait","2":"23"},{"1":"cbd_2014_pathway:escape_horticulture","2":"1108"},{"1":"cbd_2014_pathway:stowaway","2":"10"},{"1":"cbd_2014_pathway:stowaway_people_luggage","2":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["description"],"name":[1],"type":["chr"],"align":["left"]},{"label":["records"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"","2":"617"},{"1":"cbd_2014_pathway:contaminant_habitat_material","2":"94"},{"1":"cbd_2014_pathway:contaminant_nursery","2":"21"},{"1":"cbd_2014_pathway:contaminant_on_animals","2":"581"},{"1":"cbd_2014_pathway:contaminant_on_plants","2":"4"},{"1":"cbd_2014_pathway:contaminant_seed","2":"653"},{"1":"cbd_2014_pathway:contaminant_timber","2":"10"},{"1":"cbd_2014_pathway:escape_agriculture","2":"86"},{"1":"cbd_2014_pathway:escape_food_bait","2":"23"},{"1":"cbd_2014_pathway:escape_horticulture","2":"1109"},{"1":"cbd_2014_pathway:stowaway","2":"10"},{"1":"cbd_2014_pathway:stowaway_people_luggage","2":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Keep only non-empty descriptions:</p>
 <pre class="r"><code>pathway_desc %&lt;&gt;% filter(!is.na(description) &amp; description != &quot;&quot;)</code></pre>
 </div>
 <div id="invasion-stage" class="section level2">
-<h2><span class="header-section-number">5.3</span> Invasion stage</h2>
+<h2><span class="header-section-number">6.3</span> Invasion stage</h2>
 <p>Create separate dataframe:</p>
 <pre class="r"><code>invasion_stage &lt;- raw_data</code></pre>
 <p>The information for invasion stage is contained in <code>raw_d_n</code>:</p>
@@ -851,7 +920,7 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   summarize(records = n()) </code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["raw_d_n"],"name":[1],"type":["chr"],"align":["left"]},{"label":["records"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"Cas.","2":"1825"},{"1":"Cas.?","2":"50"},{"1":"Ext.","2":"15"},{"1":"Ext./Cas.","2":"4"},{"1":"Ext.?","2":"4"},{"1":"Inv.","2":"64"},{"1":"Nat.","2":"460"},{"1":"Nat.?","2":"99"},{"1":"NA","2":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["raw_d_n"],"name":[1],"type":["chr"],"align":["left"]},{"label":["records"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"Cas.","2":"1828"},{"1":"Cas.?","2":"50"},{"1":"Ext.","2":"15"},{"1":"Ext./Cas.","2":"4"},{"1":"Ext.?","2":"4"},{"1":"Inv.","2":"64"},{"1":"Nat.","2":"460"},{"1":"Nat.?","2":"99"},{"1":"NA","2":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Clean the data:</p>
@@ -874,39 +943,39 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   summarize(records = n())</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["raw_d_n"],"name":[1],"type":["chr"],"align":["left"]},{"label":["description"],"name":[2],"type":["chr"],"align":["left"]},{"label":["records"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"Cas.","2":"casual","3":"1825"},{"1":"Cas.?","2":"casual","3":"50"},{"1":"Ext.","2":"extinct","3":"15"},{"1":"Ext./Cas.","2":"casual","3":"4"},{"1":"Ext.?","2":"extinct","3":"4"},{"1":"Inv.","2":"established","3":"64"},{"1":"Nat.","2":"established","3":"460"},{"1":"Nat.?","2":"established","3":"99"},{"1":"NA","2":"","3":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["raw_d_n"],"name":[1],"type":["chr"],"align":["left"]},{"label":["description"],"name":[2],"type":["chr"],"align":["left"]},{"label":["records"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"Cas.","2":"casual","3":"1828"},{"1":"Cas.?","2":"casual","3":"50"},{"1":"Ext.","2":"extinct","3":"15"},{"1":"Ext./Cas.","2":"casual","3":"4"},{"1":"Ext.?","2":"extinct","3":"4"},{"1":"Inv.","2":"established","3":"64"},{"1":"Nat.","2":"established","3":"460"},{"1":"Nat.?","2":"established","3":"99"},{"1":"NA","2":"","3":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Create a <code>type</code> field to indicate the type of description:</p>
 <pre class="r"><code>invasion_stage %&lt;&gt;% mutate(type = &quot;invasion stage&quot;)</code></pre>
 </div>
 <div id="union-descriptions" class="section level2">
-<h2><span class="header-section-number">5.4</span> Union descriptions</h2>
+<h2><span class="header-section-number">6.4</span> Union descriptions</h2>
 <p>Union native range, pathway of introduction and invasion stage:</p>
 <pre class="r"><code>description_ext &lt;- bind_rows(native_range, pathway_desc, invasion_stage)</code></pre>
 </div>
-<div id="term-mapping-2" class="section level2">
-<h2><span class="header-section-number">5.5</span> Term mapping</h2>
+<div id="term-mapping-3" class="section level2">
+<h2><span class="header-section-number">6.5</span> Term mapping</h2>
 <p>Map the data to <a href="http://rs.gbif.org/extension/gbif/1.0/description.xml">Taxon Description</a>.</p>
-<div id="taxonid-2" class="section level3">
-<h3><span class="header-section-number">5.5.1</span> taxonID</h3>
+<div id="taxonid-3" class="section level3">
+<h3><span class="header-section-number">6.5.1</span> taxonID</h3>
 <pre class="r"><code>description_ext %&lt;&gt;% mutate(taxonID = raw_taxonID)</code></pre>
 </div>
 <div id="description" class="section level3">
-<h3><span class="header-section-number">5.5.2</span> description</h3>
+<h3><span class="header-section-number">6.5.2</span> description</h3>
 <pre class="r"><code>description_ext %&lt;&gt;% mutate(description = description)</code></pre>
 </div>
 <div id="type" class="section level3">
-<h3><span class="header-section-number">5.5.3</span> type</h3>
+<h3><span class="header-section-number">6.5.3</span> type</h3>
 <pre class="r"><code>description_ext %&lt;&gt;% mutate(type = type)</code></pre>
 </div>
 <div id="language-1" class="section level3">
-<h3><span class="header-section-number">5.5.4</span> language</h3>
+<h3><span class="header-section-number">6.5.4</span> language</h3>
 <pre class="r"><code>description_ext %&lt;&gt;% mutate(language = &quot;en&quot;)</code></pre>
 </div>
 </div>
-<div id="post-processing-2" class="section level2">
-<h2><span class="header-section-number">5.6</span> Post-processing</h2>
+<div id="post-processing-3" class="section level2">
+<h2><span class="header-section-number">6.6</span> Post-processing</h2>
 <p>Remove the original columns:</p>
 <pre class="r"><code>description_ext %&lt;&gt;% select(-starts_with(&quot;raw_&quot;))</code></pre>
 <p>Move <code>taxonID</code> to the first position:</p>
