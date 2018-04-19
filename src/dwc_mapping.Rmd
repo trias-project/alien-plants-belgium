@@ -14,7 +14,7 @@ output:
     number_sections: true
 ---
 
-This document describes how we map the checklist data to Darwin Core. The source file for this document can be found [here](https://github.com/trias-project/alien-plants-belgium/tree/master/data/raw).
+This document describes how we map the checklist data to Darwin Core. The source file for this document can be found [here](https://github.com/trias-project/alien-plants-belgium/blob/master/src/dwc_mapping.Rmd).
 
 # Setup
 
