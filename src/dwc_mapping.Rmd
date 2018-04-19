@@ -174,7 +174,7 @@ taxon %<>% mutate(taxonRank = raw_taxon_rank)
 ### nomenclaturalCode
 
 ```{r}
-taxon %<>% mutate(nomenclaturalCode = "ICBN")
+taxon %<>% mutate(nomenclaturalCode = "ICN")
 ```
 
 ## Post-processing
