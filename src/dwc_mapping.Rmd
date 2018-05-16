@@ -299,7 +299,7 @@ distribution %<>%
 Summary of the previous action:
 
 ```{r}
-distribution %>% select (raw_presence_fl, raw_presence_br, raw_presence_wa, Flanders, Wallonia, Brussels, Belgium) %>%
+distribution %>% select(raw_presence_fl, raw_presence_br, raw_presence_wa, Flanders, Wallonia, Brussels, Belgium) %>%
   group_by_all() %>%
   summarize(records = n()) %>%
   arrange(Flanders, Wallonia, Brussels)
@@ -318,13 +318,13 @@ distribution %<>% gather(
 Rename `key` and `value`:
 
 ```{r}
-distribution %<>% rename ("location" = "key", "presence" = "value")
+distribution %<>% rename("location" = "key", "presence" = "value")
 ```
 
 Remove species for which we lack presence information (i.e. `presence` = `NA``):
 
 ```{r}
-distribution %<>% filter (!presence == "NA")
+distribution %<>% filter(!presence == "NA")
 ```
 
 ### Clean date information
@@ -397,15 +397,13 @@ distribution %>%
 Combine `start_year` and `end_year` in an ranged `Date` (ISO 8601 format). If any those two dates is empty or the same, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
 
 ```{r}
-distribution %<>% mutate(Date = 
-  case_when(
-    start_year == "" & end_year == "" ~ "",
-    start_year == ""                  ~ end_year,
-    end_year == ""                    ~ start_year,
-    start_year == end_year            ~ start_year,
-    TRUE                              ~ paste(start_year, end_year, sep = "/")
-  )
-)
+distribution %<>% mutate(Date = case_when(
+  start_year == "" & end_year == "" ~ "",
+  start_year == ""                  ~ end_year,
+  end_year == ""                    ~ start_year,
+  start_year == end_year            ~ start_year,
+  TRUE                              ~ paste(start_year, end_year, sep = "/")
+))
 ```
 
 ### Generate `occurrenceStatus_ALO`
@@ -420,10 +418,11 @@ Map `occurrenceStaus` using [IUCN definitions](http://www.iucnredlist.org/techni
 
 ```{r}
 distribution %<>% mutate(occurrenceStatus = recode(presence,
-                                                       "S" = "present",
-                                                       "M" = "present",
-                                                       "?" = "presence uncertain",
-                                                       .default = ""))
+  "S" = "present",
+  "M" = "present",
+  "?" = "presence uncertain",
+  .default = ""
+))
 ```
 
 Overview of `occurrenceStatus` for each location x presence combination:
@@ -437,9 +436,10 @@ distribution %>% select (location, presence, occurrenceStatus) %>%
 Populate `eventDate` only when `presence` = `S`:
 
 ```{r}
-distribution %<>% mutate (eventDate = case_when(
+distribution %<>% mutate(eventDate = case_when(
   presence == "S" ~ Date,
-  TRUE ~ ""))
+  TRUE ~ ""
+))
 ```
 
 ### Map `occurrenceStatus` and `eventDate` for `occurrenceStatus_ALO`:
@@ -447,10 +447,12 @@ distribution %<>% mutate (eventDate = case_when(
 ```{r}
 occurrenceStatus_ALO %<>% mutate(occurrenceStatus = case_when(
   raw_d_n == "Ext." ~ "absent",
-  raw_d_n == "Ext./Cas." ~ "present"))
+  raw_d_n == "Ext./Cas." ~ "present"
+))
 
 occurrenceStatus_ALO %<>% mutate(eventDate = case_when(
-  presence == "S" ~ paste(end_year, current_year, sep = "/")))
+  presence == "S" ~ paste(end_year, current_year, sep = "/")
+))
 ```
 
 ### Bind `occurrenceStatus_ALO` and `distribution` by rows:
@@ -472,21 +474,23 @@ distribution %<>% mutate(taxonID = raw_taxonID)
 ### locationID
 
 ```{r}
-distribution %<>% mutate(locationID = case_when (
+distribution %<>% mutate(locationID = case_when(
   location == "Belgium" ~ "ISO_3166-2:BE",
   location == "Flanders" ~ "ISO_3166-2:BE-VLG",
   location == "Wallonia" ~ "ISO_3166-2:BE-WAL",
-  location == "Brussels" ~ "ISO_3166-2:BE-BRU"))
+  location == "Brussels" ~ "ISO_3166-2:BE-BRU"
+))
 ```
 
 ### locality
 
 ```{r}
-distribution %<>% mutate(locality = case_when (
+distribution %<>% mutate(locality = case_when(
   location == "Belgium" ~ "Belgium",
   location == "Flanders" ~ "Flemish Region",
   location == "Wallonia" ~ "Walloon Region",
-  location == "Brussels" ~ "Brussels-Capital Region"))
+  location == "Brussels" ~ "Brussels-Capital Region"
+))
 ```
 
 ### countryCode
@@ -662,7 +666,8 @@ native_range %<>% separate(
   remove = TRUE,
   convert = FALSE,
   extra = "merge",
-  fill = "right")
+  fill = "right"
+)
 ```
 
 Gather native ranges in a key and value column:
@@ -672,7 +677,8 @@ native_range %<>% gather(
   key, value,
   native_range_1, native_range_2, native_range_3, native_range_4,
   na.rm = TRUE, # Also removes records for which there is no native_range_1
-  convert = FALSE)
+  convert = FALSE
+)
 ```
 
 Sort on ID to see pathways in context for each record:
@@ -686,7 +692,8 @@ Clean values:
 ```{r}
 native_range %<>% mutate(
   value = str_replace_all(value, "\\?", ""), # Strip ?
-  value = str_trim(value)) # Clean whitespace)
+  value = str_trim(value) # Clean whitespace
+)
 ```
 
 Map values:
@@ -706,7 +713,8 @@ native_range %<>% mutate(mapped_value = recode(value,
   "SAM" = "Southern America (WGSRPD:8)",
   "Trop." = "Pantropical",
   .default = "",
-  .missing = "")) # As result of stripping, records with no native range already removed by gather()
+  .missing = "" # As result of stripping, records with no native range already removed by gather()
+))
 ```
 
 Show mapped values:
@@ -766,7 +774,8 @@ pathway_desc %<>% separate(
   remove = TRUE,
   convert = FALSE,
   extra = "merge",
-  fill = "right")
+  fill = "right"
+)
 ```
 
 Gather pathways in a key and value column:
@@ -776,7 +785,8 @@ pathway_desc %<>% gather(
   key, value,
   pathway_1, pathway_2, pathway_3, pathway_4,
   na.rm = TRUE, # Also removes records for which there is no pathway_1
-  convert = FALSE)
+  convert = FALSE
+)
 ```
 
 Sort on `taxonID` to see pathways in context for each record:
@@ -799,44 +809,46 @@ Clean values:
 pathway_desc %<>% mutate(
   value = str_replace_all(value, "\\?|…|\\.{3}", ""), # Strip ?, …, ...
   value = str_to_lower(value), # Convert to lowercase
-  value = str_trim(value)) # Clean whitespace)
+  value = str_trim(value) # Clean whitespace
+)
 ```
 
 Map values to the CBD standard::
 
 ```{r}
 pathway_desc %<>% mutate(cbd_stand = recode(value, 
-    "agric." = "escape_agriculture",
-    "bird seed" = "contaminant_seed",
-    "birdseed" = "contaminant_seed",
-    "bulbs" = "",
-    "coconut mats" = "contaminant_seed",
-    "fish" = "",
-    "food refuse" = "escape_food_bait",
-    "grain" = "contaminant_seed",
-    "grain (rice)" = "contaminant_seed",
-    "grass seed" = "contaminant_seed",
-    "hay" = "",
-    "hort" = "escape_horticulture",
-    "hort." = "escape_horticulture",
-    "hybridization" = "",
-    "military troops" = "",
-    "nurseries" = "contaminant_nursery",
-    "ore" = "contaminant_habitat_material",
-    "pines" = "contaminant_on_plants",
-    "rice" = "",
-    "salt" = "",
-    "seeds" = "contaminant_seed",
-    "timber" = "contaminant_timber",
-    "tourists" = "stowaway_people_luggage",
-    "traffic" = "",
-    "unknown" = "unknown",
-    "urban weed" = "stowaway",
-    "waterfowl" = "contaminant_on_animals",
-    "wool" = "contaminant_on_animals",
-    "wool alien" = "contaminant_on_animals",
-    .default = "",
-    .missing = "")) # As result of stripping, records with no pathway already removed by gather()
+  "agric." = "escape_agriculture",
+  "bird seed" = "contaminant_seed",
+  "birdseed" = "contaminant_seed",
+  "bulbs" = "",
+  "coconut mats" = "contaminant_seed",
+  "fish" = "",
+  "food refuse" = "escape_food_bait",
+  "grain" = "contaminant_seed",
+  "grain (rice)" = "contaminant_seed",
+  "grass seed" = "contaminant_seed",
+  "hay" = "",
+  "hort" = "escape_horticulture",
+  "hort." = "escape_horticulture",
+  "hybridization" = "",
+  "military troops" = "",
+  "nurseries" = "contaminant_nursery",
+  "ore" = "contaminant_habitat_material",
+  "pines" = "contaminant_on_plants",
+  "rice" = "",
+  "salt" = "",
+  "seeds" = "contaminant_seed",
+  "timber" = "contaminant_timber",
+  "tourists" = "stowaway_people_luggage",
+  "traffic" = "",
+  "unknown" = "unknown",
+  "urban weed" = "stowaway",
+  "waterfowl" = "contaminant_on_animals",
+  "wool" = "contaminant_on_animals",
+  "wool alien" = "contaminant_on_animals",
+  .default = "",
+  .missing = "" # As result of stripping, records with no pathway already removed by gather()
+))
 ```
 
 Add prefix `cbd_2014_pathway` in case there is a match with the CBD standard:
@@ -844,7 +856,8 @@ Add prefix `cbd_2014_pathway` in case there is a match with the CBD standard:
 ```{r}
 pathway_desc %<>% mutate(mapped_value = case_when(
   cbd_stand != "" ~ paste ("cbd_2014_pathway", cbd_stand, sep = ":"),
-  TRUE ~ ""))
+  TRUE ~ ""
+))
 ```
 
 Show mapped values:
@@ -914,7 +927,8 @@ invasion_stage %<>% mutate(description = recode(raw_d_n,
   "Ext.?" = "Ext.",
   "Cas.?" = "Cas.",
   "Nat.?" = "Nat.",
-  .missing = ""))
+  .missing = ""
+))
 ```
 
 We decided to use the unified framework for biological invasions of [Blackburn et al. 2011](http://doc.rero.ch/record/24725/files/bach_puf.pdf) for `invasion stage`. `casual`, `naturalized` and `invasive` are terms included in this framework. However, we decided to discard the terms `naturalized` and `invasive` listed in Blackburn et al. (see trias-project/alien-fishes-checklist#6 (comment)). So, `naturalized` and `invasive` are replaced by `established`. For `extinct` (introduced taxa that once were naturalized but that have not been confirmed in recent times) and `extinct/casual` species (taxa are no longer considered as naturalized but still occur as casuals), we map the most recent invasion stage (i.e. `extinct` and `casual` respectively):
@@ -925,7 +939,8 @@ invasion_stage %<>% mutate(description = recode(description,
   "Inv." = "established",
   "Nat." = "established",
   "Ext." = "extinct",
-  "Ext./Cas." = "casual"))
+  "Ext./Cas." = "casual"
+))
 ```
 
 Show mapped values:
