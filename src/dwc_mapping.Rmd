@@ -551,6 +551,12 @@ species_profile %>%
   arrange(raw_habitat)
 ```
 
+Clean content somewhat, i.e. change uppercase to lowercase
+
+```{r}
+species_profile %<>% mutate(raw_habitat = str_to_lower(raw_habitat)) 
+```
+
 We map this information respectively to `isFreshwater`, `isTerrestrial` or both terms in the species profile extension.
 
 ## Term mapping
@@ -573,7 +579,7 @@ species_profile %<>% mutate(isMarine = "FALSE")
 
 ```{r}
 species_profile %<>% mutate(isFreshwater = case_when(
-  raw_habitat == "Fresh water" | raw_habitat == "Terrestrial/fresh water" ~ "TRUE",
+  raw_habitat == "fresh water" | raw_habitat == "terrestrial/fresh water" ~ "TRUE",
   TRUE ~"FALSE"
 ))
 ```
@@ -582,7 +588,7 @@ species_profile %<>% mutate(isFreshwater = case_when(
 
 ```{r}
 species_profile %<>% mutate(isTerrestrial = case_when(
-  raw_habitat == "Terrestrial" | raw_habitat == "Terrestrial/fresh water" ~ "TRUE",
+  raw_habitat == "terrestrial" | raw_habitat == "terrestrial/fresh water" ~ "TRUE",
   TRUE ~"FALSE"
 ))
 ```
