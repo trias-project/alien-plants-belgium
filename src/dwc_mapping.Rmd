@@ -187,7 +187,7 @@ taxon %>% head()
 Save to CSV:
 
 ```{r}
-write.csv(taxon, file = dwc_taxon_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+write_csv(taxon, dwc_taxon_file, na = "")
 ```
 
 # Create distribution extension
@@ -523,7 +523,7 @@ distribution %>% head()
 Save to CSV:
 
 ```{r}
-write.csv(distribution, file = dwc_distribution_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+write_csv(distribution, dwc_distribution_file, na = "")
 ```
 
 # Create species profile extension
@@ -618,7 +618,7 @@ species_profile %>% head()
 Save to CSV:
 
 ```{r}
-write.csv(species_profile, file = dwc_profile_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+write_csv(species_profile, dwc_profile_file, na = "")
 ```
 
 # Create description extension
@@ -1007,5 +1007,5 @@ description_ext %>% head(10)
 Save to CSV:
 
 ```{r}
-write.csv(description_ext, file = dwc_description_file, na = "", row.names = FALSE, fileEncoding = "UTF-8")
+write_csv(description_ext, dwc_description_file, na = "")
 ```

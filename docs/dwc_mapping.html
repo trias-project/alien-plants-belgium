@@ -13,7 +13,7 @@
 <meta name="author" content="Peter Desmet" />
 <meta name="author" content="Quentin Groom" />
 
-<meta name="date" content="2018-08-08" />
+<meta name="date" content="2018-10-04" />
 
 <title>Darwin Core mapping</title>
 
@@ -31,7 +31,9 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -100,6 +102,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -308,7 +313,7 @@ div.tocify {
 <h4 class="author"><em>Lien Reyserhove</em></h4>
 <h4 class="author"><em>Peter Desmet</em></h4>
 <h4 class="author"><em>Quentin Groom</em></h4>
-<h4 class="date"><em>2018-08-08</em></h4>
+<h4 class="date"><em>2018-10-04</em></h4>
 
 </div>
 
@@ -317,12 +322,12 @@ div.tocify {
 <div id="setup" class="section level1">
 <h1><span class="header-section-number">1</span> Setup</h1>
 <p>Load libraries:</p>
-<pre class="r"><code>library(tidyverse) # To transform data
-library(magrittr)  # For %&lt;&gt;% pipes
-library(janitor)   # To clean input data
-library(readxl)    # To read Excel files
-library(stringr)   # To perform string operations
-library(digest)    # To generate hashes</code></pre>
+<pre class="r"><code>library(tidyverse)      # To do data science
+library(magrittr)       # To use %&lt;&gt;% pipes
+library(here)           # To find files
+library(janitor)        # To clean input data
+library(readxl)         # To read Excel files
+library(digest)         # To generate hashes</code></pre>
 <p>Set file paths (all paths should be relative to this script):</p>
 <pre class="r"><code># Raw files:
 raw_data_file = &quot;../data/raw/Checklist2.xlsx&quot;
@@ -430,7 +435,7 @@ raw_data %&lt;&gt;% mutate(taxonID = paste(&quot;alien-plants-belgium&quot;, &qu
   </script>
 </div>
 <p>Save to CSV:</p>
-<pre class="r"><code>write.csv(taxon, file = dwc_taxon_file, na = &quot;&quot;, row.names = FALSE, fileEncoding = &quot;UTF-8&quot;)</code></pre>
+<pre class="r"><code>write_csv(taxon, dwc_taxon_file, na = &quot;&quot;)</code></pre>
 </div>
 </div>
 <div id="create-distribution-extension" class="section level1">
@@ -656,7 +661,7 @@ occurrenceStatus_ALO %&lt;&gt;% mutate(eventDate = case_when(
   </script>
 </div>
 <p>Save to CSV:</p>
-<pre class="r"><code>write.csv(distribution, file = dwc_distribution_file, na = &quot;&quot;, row.names = FALSE, fileEncoding = &quot;UTF-8&quot;)</code></pre>
+<pre class="r"><code>write_csv(distribution, dwc_distribution_file, na = &quot;&quot;)</code></pre>
 </div>
 </div>
 <div id="create-species-profile-extension" class="section level1">
@@ -726,7 +731,7 @@ occurrenceStatus_ALO %&lt;&gt;% mutate(eventDate = case_when(
   </script>
 </div>
 <p>Save to CSV:</p>
-<pre class="r"><code>write.csv(species_profile, file = dwc_profile_file, na = &quot;&quot;, row.names = FALSE, fileEncoding = &quot;UTF-8&quot;)</code></pre>
+<pre class="r"><code>write_csv(species_profile, dwc_profile_file, na = &quot;&quot;)</code></pre>
 </div>
 </div>
 <div id="create-description-extension" class="section level1">
@@ -988,7 +993,7 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   </script>
 </div>
 <p>Save to CSV:</p>
-<pre class="r"><code>write.csv(description_ext, file = dwc_description_file, na = &quot;&quot;, row.names = FALSE, fileEncoding = &quot;UTF-8&quot;)</code></pre>
+<pre class="r"><code>write_csv(description_ext, dwc_description_file, na = &quot;&quot;)</code></pre>
 </div>
 </div>
 
