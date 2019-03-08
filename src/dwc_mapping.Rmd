@@ -37,7 +37,7 @@ Set file paths (all paths should be relative to this script):
  
 ```{r}
 # Raw files:
-raw_data_file = "../data/raw/Checklist2.xlsx"
+raw_data_file = "../data/raw/Checklist5.xlsx"
 
 # Processed files:
 dwc_taxon_file = "../data/processed/taxon.csv"
