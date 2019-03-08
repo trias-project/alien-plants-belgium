@@ -574,19 +574,19 @@ Map the data to [Species Profile](http://rs.gbif.org/extension/gbif/1.0/speciesp
 ### taxonID
 
 ```{r}
-species_profile %<>% mutate(taxonID = taxonID)
+species_profile %<>% mutate(dwc_taxonID = taxon_id)
 ```
 
 ### isMarine
 
 ```{r}
-species_profile %<>% mutate(isMarine = "FALSE")
+species_profile %<>% mutate(dwc_isMarine = "FALSE")
 ```
 
 ### isFreshwater
 
 ```{r}
-species_profile %<>% mutate(isFreshwater = case_when(
+species_profile %<>% mutate(dwc_isFreshwater = case_when(
   habitat == "fresh water" | habitat == "terrestrial/fresh water" ~ "TRUE",
   TRUE ~"FALSE"
 ))
@@ -595,7 +595,7 @@ species_profile %<>% mutate(isFreshwater = case_when(
 ### isTerrestrial
 
 ```{r}
-species_profile %<>% mutate(isTerrestrial = case_when(
+species_profile %<>% mutate(dwc_isTerrestrial = case_when(
   habitat == "terrestrial" | habitat == "terrestrial/fresh water" ~ "TRUE",
   TRUE ~"FALSE"
 ))
@@ -605,7 +605,7 @@ Show mapped values:
 
 ```{r}
 species_profile %>%
-  select(habitat, isMarine, isFreshwater, isTerrestrial) %>%
+  select(habitat, dwc_isMarine, dwc_isFreshwater, dwc_isTerrestrial) %>%
   group_by_all() %>%
   summarize(records = n())
 ```
@@ -615,7 +615,13 @@ species_profile %>%
 Remove the original columns:
 
 ```{r}
-species_profile %<>% select(-starts_with(""))
+species_profile %<>% select(starts_with("dwc_"))
+```
+
+Drop the `dwc_` prefix:
+
+```{r}
+colnames(species_profile) <- str_remove(colnames(species_profile), "dwc_")
 ```
 
 Sort on `taxonID`:
@@ -633,7 +639,7 @@ species_profile %>% head()
 Save to CSV:
 
 ```{r}
-write_csv(species_profile, dwc_profile_file, na = "")
+write_csv(species_profile, here("data", "processed", "speciesprofile.csv"), na = "")
 ```
 
 # Create description extension
@@ -793,10 +799,10 @@ pathway_desc %<>% gather(
   convert = FALSE)
 ```
 
-Sort on `taxonID` to see pathways in context for each record:
+Sort on `taxon_id` to see pathways in context for each record:
 
 ```{r}
-pathway_desc %<>% arrange(taxonID)
+pathway_desc %<>% arrange(taxon_id)
 ```
 
 Show unique values:
@@ -972,25 +978,25 @@ Map the data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/descri
 ### taxonID
 
 ```{r}
-description_ext %<>% mutate(taxonID = taxonID)
+description_ext %<>% mutate(dwc_taxonID = taxon_id)
 ```
 
 ### description
 
 ```{r}
-description_ext %<>% mutate(description = description)
+description_ext %<>% mutate(dwc_description = description)
 ```
 
 ### type
 
 ```{r}
-description_ext %<>% mutate(type = type)
+description_ext %<>% mutate(dwc_type = type)
 ```
 
 ### language
 
 ```{r}
-description_ext %<>% mutate(language = "en")
+description_ext %<>% mutate(dwc_language = "en")
 ```
 
 ## Post-processing
@@ -998,7 +1004,13 @@ description_ext %<>% mutate(language = "en")
 Remove the original columns:
 
 ```{r}
-description_ext %<>% select(-starts_with(""))
+description_ext %<>% select(starts_with("dwc_"))
+```
+
+Drop the `dwc_` prefix:
+
+```{r}
+colnames(description_ext) <- str_remove(colnames(description_ext), "dwc_")
 ```
 
 Move `taxonID` to the first position:
@@ -1022,5 +1034,5 @@ description_ext %>% head(10)
 Save to CSV:
 
 ```{r}
-write_csv(description_ext, dwc_description_file, na = "")
+write_csv(description_ext, here("data", "processed", "description.csv"), na = "")
 ```
