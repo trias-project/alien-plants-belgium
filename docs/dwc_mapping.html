@@ -13,7 +13,7 @@
 <meta name="author" content="Peter Desmet" />
 <meta name="author" content="Quentin Groom" />
 
-<meta name="date" content="2018-04-19" />
+<meta name="date" content="2018-10-04" />
 
 <title>Darwin Core mapping</title>
 
@@ -31,7 +31,9 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -100,6 +102,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -308,7 +313,7 @@ div.tocify {
 <h4 class="author"><em>Lien Reyserhove</em></h4>
 <h4 class="author"><em>Peter Desmet</em></h4>
 <h4 class="author"><em>Quentin Groom</em></h4>
-<h4 class="date"><em>2018-04-19</em></h4>
+<h4 class="date"><em>2018-10-04</em></h4>
 
 </div>
 
@@ -316,17 +321,13 @@ div.tocify {
 <p>This document describes how we map the checklist data to Darwin Core. The source file for this document can be found <a href="https://github.com/trias-project/alien-plants-belgium/blob/master/src/dwc_mapping.Rmd">here</a>.</p>
 <div id="setup" class="section level1">
 <h1><span class="header-section-number">1</span> Setup</h1>
-<p>Set locale (so we use UTF-8 character encoding):</p>
-<pre class="r"><code># This works on Mac OS X, might not work on other OS
-Sys.setlocale(&quot;LC_CTYPE&quot;, &quot;en_US.UTF-8&quot;)</code></pre>
-<pre><code>## [1] &quot;en_US.UTF-8&quot;</code></pre>
 <p>Load libraries:</p>
-<pre class="r"><code>library(tidyverse) # To transform data
-library(magrittr)  # For %&lt;&gt;% pipes
-library(janitor)   # To clean input data
-library(readxl)    # To read Excel files
-library(stringr)   # To perform string operations
-library(digest)    # To generate hashes</code></pre>
+<pre class="r"><code>library(tidyverse)      # To do data science
+library(magrittr)       # To use %&lt;&gt;% pipes
+library(here)           # To find files
+library(janitor)        # To clean input data
+library(readxl)         # To read Excel files
+library(digest)         # To generate hashes</code></pre>
 <p>Set file paths (all paths should be relative to this script):</p>
 <pre class="r"><code># Raw files:
 raw_data_file = &quot;../data/raw/Checklist2.xlsx&quot;
@@ -362,7 +363,7 @@ raw_data %&lt;&gt;% mutate(taxonID = paste(&quot;alien-plants-belgium&quot;, &qu
 <pre class="r"><code>raw_data %&gt;% head()</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["raw_id"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["raw_taxon"],"name":[2],"type":["chr"],"align":["left"]},{"label":["raw_hybrid_formula"],"name":[3],"type":["chr"],"align":["left"]},{"label":["raw_synonym"],"name":[4],"type":["chr"],"align":["left"]},{"label":["raw_family"],"name":[5],"type":["chr"],"align":["left"]},{"label":["raw_m_i"],"name":[6],"type":["chr"],"align":["left"]},{"label":["raw_fr"],"name":[7],"type":["chr"],"align":["left"]},{"label":["raw_mrr"],"name":[8],"type":["chr"],"align":["left"]},{"label":["raw_origin"],"name":[9],"type":["chr"],"align":["left"]},{"label":["raw_presence_fl"],"name":[10],"type":["chr"],"align":["left"]},{"label":["raw_presence_br"],"name":[11],"type":["chr"],"align":["left"]},{"label":["raw_presence_wa"],"name":[12],"type":["chr"],"align":["left"]},{"label":["raw_d_n"],"name":[13],"type":["chr"],"align":["left"]},{"label":["raw_v_i"],"name":[14],"type":["chr"],"align":["left"]},{"label":["raw_taxon_rank"],"name":[15],"type":["chr"],"align":["left"]},{"label":["raw_scientific_name_id"],"name":[16],"type":["chr"],"align":["left"]},{"label":["raw_habitat"],"name":[17],"type":["chr"],"align":["left"]},{"label":["raw_name_excl_author_citation"],"name":[18],"type":["chr"],"align":["left"]},{"label":["raw_taxonID"],"name":[19],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"Acanthus mollis L.","3":"NA","4":"NA","5":"Acanthaceae","6":"D","7":"1998","8":"2016","9":"E AF","10":"X","11":"NA","12":"X","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:44892-1","17":"Terrestrial","18":"Acanthus mollis","19":"alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c"},{"1":"2","2":"Acanthus spinosus L.","3":"NA","4":"NA","5":"Acanthaceae","6":"D","7":"2016","8":"2017","9":"E AF AS-Te","10":"X","11":"NA","12":"NA","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:44920-1","17":"Terrestrial","18":"Acanthus spinosus","19":"alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9"},{"1":"3","2":"Acorus calamus L.","3":"NA","4":"NA","5":"Acoraceae","6":"D","7":"1680","8":"N","9":"AS-Te","10":"X","11":"X","12":"X","13":"Nat.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:84009-1","17":"Terrestrial/Fresh water","18":"Acorus calamus","19":"alien-plants-belgium:taxon:574eaf931730ba162e0226a425247660"},{"1":"4","2":"Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson","3":"NA","4":"NA","5":"Actinidiaceae","6":"D","7":"2000","8":"Ann.","9":"AS-Te","10":"X","11":"NA","12":"X","13":"Cas.","14":"Food refuse","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:913605-1","17":"Terrestrial","18":"Actinidia deliciosa","19":"alien-plants-belgium:taxon:5c33253debbe5777c0499b5c4d76b6e4"},{"1":"5","2":"Sambucus canadensis L.","3":"NA","4":"NA","5":"Adoxaceae","6":"D","7":"1972","8":"2017","9":"NAM","10":"X","11":"NA","12":"NA","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:321978-2","17":"Terrestrial","18":"Sambucus canadensis","19":"alien-plants-belgium:taxon:03206f4a769c6649658ab96839e8a016"},{"1":"6","2":"Viburnum davidii Franch.","3":"NA","4":"NA","5":"Adoxaceae","6":"D","7":"2014","8":"2015","9":"AS-Te","10":"X","11":"NA","12":"NA","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:149642-1","17":"Terrestrial","18":"Viburnum davidii","19":"alien-plants-belgium:taxon:12212e50c4f6c9b79616e9d7f95a1cfb"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["raw_id"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["raw_taxon"],"name":[2],"type":["chr"],"align":["left"]},{"label":["raw_hybrid_formula"],"name":[3],"type":["chr"],"align":["left"]},{"label":["raw_synonym"],"name":[4],"type":["chr"],"align":["left"]},{"label":["raw_family"],"name":[5],"type":["chr"],"align":["left"]},{"label":["raw_m_i"],"name":[6],"type":["chr"],"align":["left"]},{"label":["raw_fr"],"name":[7],"type":["chr"],"align":["left"]},{"label":["raw_mrr"],"name":[8],"type":["chr"],"align":["left"]},{"label":["raw_origin"],"name":[9],"type":["chr"],"align":["left"]},{"label":["raw_presence_fl"],"name":[10],"type":["chr"],"align":["left"]},{"label":["raw_presence_br"],"name":[11],"type":["chr"],"align":["left"]},{"label":["raw_presence_wa"],"name":[12],"type":["chr"],"align":["left"]},{"label":["raw_d_n"],"name":[13],"type":["chr"],"align":["left"]},{"label":["raw_v_i"],"name":[14],"type":["chr"],"align":["left"]},{"label":["raw_taxon_rank"],"name":[15],"type":["chr"],"align":["left"]},{"label":["raw_scientific_name_id"],"name":[16],"type":["chr"],"align":["left"]},{"label":["raw_habitat"],"name":[17],"type":["chr"],"align":["left"]},{"label":["raw_name_excl_author_citation"],"name":[18],"type":["chr"],"align":["left"]},{"label":["raw_taxonID"],"name":[19],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"Acanthus mollis L.","3":"NA","4":"NA","5":"Acanthaceae","6":"D","7":"1998","8":"2016","9":"E AF","10":"X","11":"NA","12":"X","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:44892-1","17":"Terrestrial","18":"Acanthus mollis","19":"alien-plants-belgium:taxon:509ddbbaa5ecbb8d91899905cfc9491c"},{"1":"2","2":"Acanthus spinosus L.","3":"NA","4":"NA","5":"Acanthaceae","6":"D","7":"2016","8":"2017","9":"E AF AS-Te","10":"X","11":"NA","12":"NA","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:44920-1","17":"Terrestrial","18":"Acanthus spinosus","19":"alien-plants-belgium:taxon:a65145fd1f24f081a1931f9874af48d9"},{"1":"3","2":"Acorus calamus L.","3":"NA","4":"NA","5":"Acoraceae","6":"D","7":"1680","8":"N","9":"AS-Te","10":"X","11":"X","12":"X","13":"Nat.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:84009-1","17":"Terrestrial/fresh water","18":"Acorus calamus","19":"alien-plants-belgium:taxon:574eaf931730ba162e0226a425247660"},{"1":"4","2":"Actinidia deliciosa (Chevalier) C.S. Liang & A.R. Ferguson","3":"NA","4":"NA","5":"Actinidiaceae","6":"D","7":"2000","8":"Ann.","9":"AS-Te","10":"X","11":"NA","12":"X","13":"Cas.","14":"Food refuse","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:913605-1","17":"Terrestrial","18":"Actinidia deliciosa","19":"alien-plants-belgium:taxon:5c33253debbe5777c0499b5c4d76b6e4"},{"1":"5","2":"Sambucus canadensis L.","3":"NA","4":"NA","5":"Adoxaceae","6":"D","7":"1972","8":"2017","9":"NAM","10":"X","11":"NA","12":"NA","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:321978-2","17":"Terrestrial","18":"Sambucus canadensis","19":"alien-plants-belgium:taxon:03206f4a769c6649658ab96839e8a016"},{"1":"6","2":"Viburnum davidii Franch.","3":"NA","4":"NA","5":"Adoxaceae","6":"D","7":"2014","8":"2015","9":"AS-Te","10":"X","11":"NA","12":"NA","13":"Cas.","14":"Hort.","15":"species","16":"http://ipni.org/urn:lsid:ipni.org:names:149642-1","17":"Terrestrial","18":"Viburnum davidii","19":"alien-plants-belgium:taxon:12212e50c4f6c9b79616e9d7f95a1cfb"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -434,7 +435,7 @@ raw_data %&lt;&gt;% mutate(taxonID = paste(&quot;alien-plants-belgium&quot;, &qu
   </script>
 </div>
 <p>Save to CSV:</p>
-<pre class="r"><code>write.csv(taxon, file = dwc_taxon_file, na = &quot;&quot;, row.names = FALSE, fileEncoding = &quot;UTF-8&quot;)</code></pre>
+<pre class="r"><code>write_csv(taxon, dwc_taxon_file, na = &quot;&quot;)</code></pre>
 </div>
 </div>
 <div id="create-distribution-extension" class="section level1">
@@ -498,7 +499,7 @@ This should look like this:
   arrange(Flanders, Wallonia, Brussels)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["raw_presence_fl"],"name":[1],"type":["chr"],"align":["left"]},{"label":["raw_presence_br"],"name":[2],"type":["chr"],"align":["left"]},{"label":["raw_presence_wa"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Flanders"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Wallonia"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Brussels"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Belgium"],"name":[7],"type":["chr"],"align":["left"]},{"label":["records"],"name":[8],"type":["int"],"align":["right"]}],"data":[{"1":"?","2":"?","3":"?","4":"?","5":"?","6":"?","7":"?","8":"21"},{"1":"?","2":"X","3":"?","4":"?","5":"?","6":"S","7":"S","8":"1"},{"1":"X","2":"?","3":"X","4":"M","5":"M","6":"?","7":"S","8":"5"},{"1":"X","2":"X","3":"X","4":"M","5":"M","6":"M","7":"S","8":"497"},{"1":"X","2":"NA","3":"X","4":"M","5":"M","6":"__NA__","7":"S","8":"627"},{"1":"X","2":"X","3":"NA","4":"M","5":"__NA__","6":"M","7":"S","8":"74"},{"1":"NA","2":"X","3":"X","4":"__NA__","5":"M","6":"M","7":"S","8":"24"},{"1":"NA","2":"NA","3":"NA","4":"__NA__","5":"__NA__","6":"__NA__","7":"NA","8":"2"},{"1":"NA","2":"X","3":"NA","4":"__NA__","5":"__NA__","6":"S","7":"S","8":"35"},{"1":"NA","2":"NA","3":"X","4":"__NA__","5":"S","6":"__NA__","7":"S","8":"461"},{"1":"X","2":"?","3":"?","4":"S","5":"?","6":"?","7":"S","8":"3"},{"1":"X","2":"NA","3":"?","4":"S","5":"?","6":"__NA__","7":"S","8":"1"},{"1":"X","2":"NA","3":"NA","4":"S","5":"__NA__","6":"__NA__","7":"S","8":"774"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["raw_presence_fl"],"name":[1],"type":["chr"],"align":["left"]},{"label":["raw_presence_br"],"name":[2],"type":["chr"],"align":["left"]},{"label":["raw_presence_wa"],"name":[3],"type":["chr"],"align":["left"]},{"label":["Flanders"],"name":[4],"type":["chr"],"align":["left"]},{"label":["Wallonia"],"name":[5],"type":["chr"],"align":["left"]},{"label":["Brussels"],"name":[6],"type":["chr"],"align":["left"]},{"label":["Belgium"],"name":[7],"type":["chr"],"align":["left"]},{"label":["records"],"name":[8],"type":["int"],"align":["right"]}],"data":[{"1":"?","2":"?","3":"?","4":"?","5":"?","6":"?","7":"?","8":"21"},{"1":"?","2":"X","3":"?","4":"?","5":"?","6":"S","7":"S","8":"1"},{"1":"X","2":"?","3":"X","4":"M","5":"M","6":"?","7":"S","8":"5"},{"1":"X","2":"X","3":"X","4":"M","5":"M","6":"M","7":"S","8":"497"},{"1":"X","2":"NA","3":"X","4":"M","5":"M","6":"__NA__","7":"S","8":"628"},{"1":"X","2":"X","3":"NA","4":"M","5":"__NA__","6":"M","7":"S","8":"74"},{"1":"NA","2":"X","3":"X","4":"__NA__","5":"M","6":"M","7":"S","8":"24"},{"1":"NA","2":"NA","3":"NA","4":"__NA__","5":"__NA__","6":"__NA__","7":"NA","8":"2"},{"1":"NA","2":"X","3":"NA","4":"__NA__","5":"__NA__","6":"S","7":"S","8":"35"},{"1":"NA","2":"NA","3":"X","4":"__NA__","5":"S","6":"__NA__","7":"S","8":"461"},{"1":"X","2":"?","3":"?","4":"S","5":"?","6":"?","7":"S","8":"3"},{"1":"X","2":"NA","3":"?","4":"S","5":"?","6":"__NA__","7":"S","8":"1"},{"1":"X","2":"NA","3":"NA","4":"S","5":"__NA__","6":"__NA__","7":"S","8":"779"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>One line should represent the presence information of a species in one region or Belgium. We need to transform <code>raw_data</code> from a wide to a long table (i.e. create a <code>key</code> and <code>value</code> column):</p>
@@ -545,7 +546,7 @@ distribution %&lt;&gt;% mutate(end_year = recode(end_year,
   arrange(raw_year)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["raw_year"],"name":[1],"type":["chr"],"align":["left"]},{"label":["formatted_year"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"1813?","2":"1813"},{"1":"1817?","2":"1817"},{"1":"1860?","2":"1860"},{"1":"1866?","2":"1866"},{"1":"1886?","2":"1886"},{"1":"1893?","2":"1893"},{"1":"1911?","2":"1911"},{"1":"1912?","2":"1912"},{"1":"1931?","2":"1931"},{"1":"1947?","2":"1947"},{"1":"1955?","2":"1955"},{"1":"1959?","2":"1959"},{"1":"1960?","2":"1960"},{"1":"1963?","2":"1963"},{"1":"1965?","2":"1965"},{"1":"1972?","2":"1972"},{"1":"1975?","2":"1975"},{"1":"1976?","2":"1976"},{"1":"1979?","2":"1979"},{"1":"1985?","2":"1985"},{"1":"1998?","2":"1998"},{"1":"2000?","2":"2000"},{"1":"2002?","2":"2002"},{"1":"2004?","2":"2004"},{"1":"2006?","2":"2006"},{"1":"2010?","2":"2010"},{"1":"<1800","2":"1800"},{"1":"<1812","2":"1812"},{"1":"<1824","2":"1824"},{"1":"<1827","2":"1827"},{"1":"<1830","2":"1830"},{"1":"<1834","2":"1834"},{"1":"<1835","2":"1835"},{"1":"<1836","2":"1836"},{"1":"<1837","2":"1837"},{"1":"<1842","2":"1842"},{"1":"<1850","2":"1850"},{"1":"<1858","2":"1858"},{"1":"<1861","2":"1861"},{"1":"<1865","2":"1865"},{"1":"<1868","2":"1868"},{"1":"<1885","2":"1885"},{"1":"<1890","2":"1890"},{"1":"<1893","2":"1893"},{"1":"<1895","2":"1895"},{"1":"<1899","2":"1899"},{"1":"<1900","2":"1900"},{"1":"<1900?","2":"1900"},{"1":"<1914","2":"1914"},{"1":"<1927","2":"1927"},{"1":"<1929","2":"1929"},{"1":"<1934","2":"1934"},{"1":"<1949","2":"1949"},{"1":"<1950","2":"1950"},{"1":"<1951","2":"1951"},{"1":"<1957","2":"1957"},{"1":"<1963","2":"1963"},{"1":"<1979","2":"1979"},{"1":"<1980","2":"1980"},{"1":"<1994","2":"1994"},{"1":"<1997","2":"1997"},{"1":"<1999","2":"1999"},{"1":"<2003","2":"2003"},{"1":"<2010","2":"2010"},{"1":"<2011","2":"2011"},{"1":"<2012","2":"2012"},{"1":">1940","2":"1940"},{"1":">1972","2":"1972"},{"1":"?","2":""},{"1":"N","2":"2018"},{"1":"N?","2":"2018"},{"1":"ca. 1975","2":"1975"},{"1":"ca. 1985?","2":"1985"},{"1":"ca. 1996","2":"1996"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["raw_year"],"name":[1],"type":["chr"],"align":["left"]},{"label":["formatted_year"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"?","2":""},{"1":"<1800","2":"1800"},{"1":"<1812","2":"1812"},{"1":"<1824","2":"1824"},{"1":"<1827","2":"1827"},{"1":"<1830","2":"1830"},{"1":"<1834","2":"1834"},{"1":"<1835","2":"1835"},{"1":"<1836","2":"1836"},{"1":"<1837","2":"1837"},{"1":"<1842","2":"1842"},{"1":"<1850","2":"1850"},{"1":"<1858","2":"1858"},{"1":"<1861","2":"1861"},{"1":"<1865","2":"1865"},{"1":"<1868","2":"1868"},{"1":"<1885","2":"1885"},{"1":"<1890","2":"1890"},{"1":"<1893","2":"1893"},{"1":"<1895","2":"1895"},{"1":"<1899","2":"1899"},{"1":"<1900","2":"1900"},{"1":"<1900?","2":"1900"},{"1":"<1914","2":"1914"},{"1":"<1927","2":"1927"},{"1":"<1929","2":"1929"},{"1":"<1934","2":"1934"},{"1":"<1949","2":"1949"},{"1":"<1950","2":"1950"},{"1":"<1951","2":"1951"},{"1":"<1957","2":"1957"},{"1":"<1963","2":"1963"},{"1":"<1979","2":"1979"},{"1":"<1980","2":"1980"},{"1":"<1994","2":"1994"},{"1":"<1997","2":"1997"},{"1":"<1999","2":"1999"},{"1":"<2003","2":"2003"},{"1":"<2010","2":"2010"},{"1":"<2011","2":"2011"},{"1":"<2012","2":"2012"},{"1":">1940","2":"1940"},{"1":">1972","2":"1972"},{"1":"1813?","2":"1813"},{"1":"1817?","2":"1817"},{"1":"1860?","2":"1860"},{"1":"1866?","2":"1866"},{"1":"1886?","2":"1886"},{"1":"1893?","2":"1893"},{"1":"1911?","2":"1911"},{"1":"1912?","2":"1912"},{"1":"1931?","2":"1931"},{"1":"1947?","2":"1947"},{"1":"1955?","2":"1955"},{"1":"1959?","2":"1959"},{"1":"1960?","2":"1960"},{"1":"1963?","2":"1963"},{"1":"1965?","2":"1965"},{"1":"1972?","2":"1972"},{"1":"1975?","2":"1975"},{"1":"1976?","2":"1976"},{"1":"1979?","2":"1979"},{"1":"1985?","2":"1985"},{"1":"1998?","2":"1998"},{"1":"2000?","2":"2000"},{"1":"2002?","2":"2002"},{"1":"2004?","2":"2004"},{"1":"2006?","2":"2006"},{"1":"2010?","2":"2010"},{"1":"ca. 1975","2":"1975"},{"1":"ca. 1985?","2":"1985"},{"1":"ca. 1996","2":"1996"},{"1":"N","2":"2018"},{"1":"N?","2":"2018"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Check if any <code>start_year</code> fall after <code>end_year</code> (expected to be none):</p>
@@ -590,7 +591,7 @@ distribution %&lt;&gt;% mutate(end_year = recode(end_year,
   summarize(records = n()) </code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["location"],"name":[1],"type":["chr"],"align":["left"]},{"label":["presence"],"name":[2],"type":["chr"],"align":["left"]},{"label":["occurrenceStatus"],"name":[3],"type":["chr"],"align":["left"]},{"label":["records"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"Belgium","2":"?","3":"presence uncertain","4":"21"},{"1":"Belgium","2":"S","3":"present","4":"2502"},{"1":"Brussels","2":"?","3":"presence uncertain","4":"29"},{"1":"Brussels","2":"M","3":"present","4":"595"},{"1":"Brussels","2":"S","3":"present","4":"36"},{"1":"Flanders","2":"?","3":"presence uncertain","4":"22"},{"1":"Flanders","2":"M","3":"present","4":"1203"},{"1":"Flanders","2":"S","3":"present","4":"778"},{"1":"Wallonia","2":"?","3":"presence uncertain","4":"26"},{"1":"Wallonia","2":"M","3":"present","4":"1153"},{"1":"Wallonia","2":"S","3":"present","4":"461"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["location"],"name":[1],"type":["chr"],"align":["left"]},{"label":["presence"],"name":[2],"type":["chr"],"align":["left"]},{"label":["occurrenceStatus"],"name":[3],"type":["chr"],"align":["left"]},{"label":["records"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"Belgium","2":"?","3":"presence uncertain","4":"21"},{"1":"Belgium","2":"S","3":"present","4":"2508"},{"1":"Brussels","2":"?","3":"presence uncertain","4":"29"},{"1":"Brussels","2":"M","3":"present","4":"595"},{"1":"Brussels","2":"S","3":"present","4":"36"},{"1":"Flanders","2":"?","3":"presence uncertain","4":"22"},{"1":"Flanders","2":"M","3":"present","4":"1204"},{"1":"Flanders","2":"S","3":"present","4":"783"},{"1":"Wallonia","2":"?","3":"presence uncertain","4":"26"},{"1":"Wallonia","2":"M","3":"present","4":"1154"},{"1":"Wallonia","2":"S","3":"present","4":"461"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Populate <code>eventDate</code> only when <code>presence</code> = <code>S</code>:</p>
@@ -660,7 +661,7 @@ occurrenceStatus_ALO %&lt;&gt;% mutate(eventDate = case_when(
   </script>
 </div>
 <p>Save to CSV:</p>
-<pre class="r"><code>write.csv(distribution, file = dwc_distribution_file, na = &quot;&quot;, row.names = FALSE, fileEncoding = &quot;UTF-8&quot;)</code></pre>
+<pre class="r"><code>write_csv(distribution, dwc_distribution_file, na = &quot;&quot;)</code></pre>
 </div>
 </div>
 <div id="create-species-profile-extension" class="section level1">
@@ -674,9 +675,11 @@ occurrenceStatus_ALO %&lt;&gt;% mutate(eventDate = case_when(
   arrange(raw_habitat)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["raw_habitat"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"Fresh water"},{"1":"Terrestrial"},{"1":"Terrestrial/Fresh water"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["raw_habitat"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":"Fresh water"},{"1":"terrestrial"},{"1":"Terrestrial"},{"1":"Terrestrial/fresh water"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
+<p>Clean content somewhat, i.e. change uppercase to lowercase</p>
+<pre class="r"><code>species_profile %&lt;&gt;% mutate(raw_habitat = str_to_lower(raw_habitat)) </code></pre>
 <p>We map this information respectively to <code>isFreshwater</code>, <code>isTerrestrial</code> or both terms in the species profile extension.</p>
 <div id="term-mapping-2" class="section level2">
 <h2><span class="header-section-number">5.1</span> Term mapping</h2>
@@ -692,14 +695,14 @@ occurrenceStatus_ALO %&lt;&gt;% mutate(eventDate = case_when(
 <div id="isfreshwater" class="section level3">
 <h3><span class="header-section-number">5.1.3</span> isFreshwater</h3>
 <pre class="r"><code>species_profile %&lt;&gt;% mutate(isFreshwater = case_when(
-  raw_habitat == &quot;Fresh water&quot; | raw_habitat == &quot;Terrestrial/Fresh water&quot; ~ &quot;TRUE&quot;,
+  raw_habitat == &quot;fresh water&quot; | raw_habitat == &quot;terrestrial/fresh water&quot; ~ &quot;TRUE&quot;,
   TRUE ~&quot;FALSE&quot;
 ))</code></pre>
 </div>
 <div id="isterrestrial" class="section level3">
 <h3><span class="header-section-number">5.1.4</span> isTerrestrial</h3>
 <pre class="r"><code>species_profile %&lt;&gt;% mutate(isTerrestrial = case_when(
-  raw_habitat == &quot;Terrestrial&quot; | raw_habitat == &quot;Terrestrial/Fresh water&quot; ~ &quot;TRUE&quot;,
+  raw_habitat == &quot;terrestrial&quot; | raw_habitat == &quot;terrestrial/fresh water&quot; ~ &quot;TRUE&quot;,
   TRUE ~&quot;FALSE&quot;
 ))</code></pre>
 <p>Show mapped values:</p>
@@ -709,7 +712,7 @@ occurrenceStatus_ALO %&lt;&gt;% mutate(eventDate = case_when(
   summarize(records = n())</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["raw_habitat"],"name":[1],"type":["chr"],"align":["left"]},{"label":["isMarine"],"name":[2],"type":["chr"],"align":["left"]},{"label":["isFreshwater"],"name":[3],"type":["chr"],"align":["left"]},{"label":["isTerrestrial"],"name":[4],"type":["chr"],"align":["left"]},{"label":["records"],"name":[5],"type":["int"],"align":["right"]}],"data":[{"1":"Fresh water","2":"FALSE","3":"TRUE","4":"FALSE","5":"29"},{"1":"Terrestrial","2":"FALSE","3":"FALSE","4":"TRUE","5":"2490"},{"1":"Terrestrial/Fresh water","2":"FALSE","3":"TRUE","4":"TRUE","5":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["raw_habitat"],"name":[1],"type":["chr"],"align":["left"]},{"label":["isMarine"],"name":[2],"type":["chr"],"align":["left"]},{"label":["isFreshwater"],"name":[3],"type":["chr"],"align":["left"]},{"label":["isTerrestrial"],"name":[4],"type":["chr"],"align":["left"]},{"label":["records"],"name":[5],"type":["int"],"align":["right"]}],"data":[{"1":"fresh water","2":"FALSE","3":"TRUE","4":"FALSE","5":"29"},{"1":"terrestrial","2":"FALSE","3":"FALSE","4":"TRUE","5":"2496"},{"1":"terrestrial/fresh water","2":"FALSE","3":"TRUE","4":"TRUE","5":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -728,7 +731,7 @@ occurrenceStatus_ALO %&lt;&gt;% mutate(eventDate = case_when(
   </script>
 </div>
 <p>Save to CSV:</p>
-<pre class="r"><code>write.csv(species_profile, file = dwc_profile_file, na = &quot;&quot;, row.names = FALSE, fileEncoding = &quot;UTF-8&quot;)</code></pre>
+<pre class="r"><code>write_csv(species_profile, dwc_profile_file, na = &quot;&quot;)</code></pre>
 </div>
 </div>
 <div id="create-description-extension" class="section level1">
@@ -793,7 +796,7 @@ occurrenceStatus_ALO %&lt;&gt;% mutate(eventDate = case_when(
   arrange(value)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["value"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mapped_value"],"name":[2],"type":["chr"],"align":["left"]},{"label":["records"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"","2":"","3":"1"},{"1":"AF","2":"Africa (WGSRPD:2)","3":"641"},{"1":"AM","2":"pan-American","3":"94"},{"1":"AS","2":"Asia","3":"73"},{"1":"AS-Te","2":"temperate Asia (WGSRPD:3)","3":"1058"},{"1":"AS-Tr","2":"tropical Asia (WGSRPD:4)","3":"12"},{"1":"AUS","2":"Australasia (WGSRPD:5)","3":"117"},{"1":"Cult.","2":"cultivated origin","3":"93"},{"1":"E","2":"Europe (WGSRPD:1)","3":"1125"},{"1":"Hybr.","2":"hybrid origin","3":"69"},{"1":"NAM","2":"Northern America (WGSRPD:7)","3":"366"},{"1":"SAM","2":"Southern America (WGSRPD:8)","3":"158"},{"1":"Trop.","2":"Pantropical","3":"37"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["value"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mapped_value"],"name":[2],"type":["chr"],"align":["left"]},{"label":["records"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"","2":"","3":"1"},{"1":"AF","2":"Africa (WGSRPD:2)","3":"642"},{"1":"AM","2":"pan-American","3":"94"},{"1":"AS","2":"Asia","3":"73"},{"1":"AS-Te","2":"temperate Asia (WGSRPD:3)","3":"1061"},{"1":"AS-Tr","2":"tropical Asia (WGSRPD:4)","3":"12"},{"1":"AUS","2":"Australasia (WGSRPD:5)","3":"117"},{"1":"Cult.","2":"cultivated origin","3":"93"},{"1":"E","2":"Europe (WGSRPD:1)","3":"1127"},{"1":"Hybr.","2":"hybrid origin","3":"69"},{"1":"NAM","2":"Northern America (WGSRPD:7)","3":"368"},{"1":"SAM","2":"Southern America (WGSRPD:8)","3":"158"},{"1":"Trop.","2":"Pantropical","3":"37"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Drop <code>key</code> and <code>value</code> column and rename <code>mapped value</code>:</p>
@@ -834,7 +837,7 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   arrange(value) </code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["value"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":""},{"1":"..."},{"1":"Ore"},{"1":"agric."},{"1":"birdseed"},{"1":"etc."},{"1":"grain"},{"1":"grain?"},{"1":"hort."},{"1":"hort.?"},{"1":"nurseries"},{"1":"ore"},{"1":"ore?"},{"1":"salt"},{"1":"seeds"},{"1":"seeds?"},{"1":"timber?"},{"1":"tourists"},{"1":"urban weed"},{"1":"wool"},{"1":"…"},{"1":"..."},{"1":"?"},{"1":"Agric."},{"1":"Bird seed"},{"1":"Birdseed"},{"1":"Birdseed?"},{"1":"Bulbs?"},{"1":"Coconut mats"},{"1":"Fish"},{"1":"Food refuse"},{"1":"Food refuse?"},{"1":"Grain"},{"1":"Grain (rice)"},{"1":"Grain?"},{"1":"Grass seed"},{"1":"Grass seed?"},{"1":"Hay?"},{"1":"Hort"},{"1":"Hort."},{"1":"Hort.?"},{"1":"Hybridization"},{"1":"Military troops"},{"1":"Military troops?"},{"1":"Nurseries"},{"1":"Nurseries?"},{"1":"Ore"},{"1":"Ore?"},{"1":"Pines"},{"1":"Rice"},{"1":"Seeds"},{"1":"Seeds?"},{"1":"Timber"},{"1":"Timber?"},{"1":"Tourists"},{"1":"Traffic?"},{"1":"Urban weed"},{"1":"Waterfowl"},{"1":"Waterfowl?"},{"1":"Wool"},{"1":"Wool alien"},{"1":"Wool?"},{"1":"hort."},{"1":"…"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["value"],"name":[1],"type":["chr"],"align":["left"]}],"data":[{"1":""},{"1":"..."},{"1":"…"},{"1":"agric."},{"1":"birdseed"},{"1":"etc."},{"1":"grain"},{"1":"grain?"},{"1":"hort."},{"1":"hort.?"},{"1":"nurseries"},{"1":"ore"},{"1":"Ore"},{"1":"ore?"},{"1":"salt"},{"1":"seeds"},{"1":"seeds?"},{"1":"timber?"},{"1":"tourists"},{"1":"urban weed"},{"1":"wool"},{"1":"?"},{"1":"..."},{"1":"…"},{"1":"Agric."},{"1":"Bird seed"},{"1":"Birdseed"},{"1":"Birdseed?"},{"1":"Bulbs?"},{"1":"Coconut mats"},{"1":"Fish"},{"1":"Food refuse"},{"1":"Food refuse?"},{"1":"Grain"},{"1":"Grain (rice)"},{"1":"Grain?"},{"1":"Grass seed"},{"1":"Grass seed?"},{"1":"Hay?"},{"1":"Hort"},{"1":"hort."},{"1":"Hort."},{"1":"Hort.?"},{"1":"Hybridization"},{"1":"Military troops"},{"1":"Military troops?"},{"1":"Nurseries"},{"1":"Nurseries?"},{"1":"Ore"},{"1":"Ore?"},{"1":"Pines"},{"1":"Rice"},{"1":"Seeds"},{"1":"Seeds?"},{"1":"Timber"},{"1":"Timber?"},{"1":"Tourists"},{"1":"Traffic?"},{"1":"Urban weed"},{"1":"Waterfowl"},{"1":"Waterfowl?"},{"1":"Wool"},{"1":"Wool alien"},{"1":"Wool?"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Clean values:</p>
@@ -887,7 +890,7 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   arrange(value) </code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["value"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mapped_value"],"name":[2],"type":["chr"],"align":["left"]},{"label":["records"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"","2":"","3":"545"},{"1":"agric.","2":"cbd_2014_pathway:escape_agriculture","3":"86"},{"1":"bird seed","2":"cbd_2014_pathway:contaminant_seed","3":"1"},{"1":"birdseed","2":"cbd_2014_pathway:contaminant_seed","3":"31"},{"1":"bulbs","2":"","3":"1"},{"1":"coconut mats","2":"cbd_2014_pathway:contaminant_seed","3":"1"},{"1":"etc.","2":"","3":"1"},{"1":"fish","2":"","3":"3"},{"1":"food refuse","2":"cbd_2014_pathway:escape_food_bait","3":"23"},{"1":"grain","2":"cbd_2014_pathway:contaminant_seed","3":"545"},{"1":"grain (rice)","2":"cbd_2014_pathway:contaminant_seed","3":"3"},{"1":"grass seed","2":"cbd_2014_pathway:contaminant_seed","3":"8"},{"1":"hay","2":"","3":"1"},{"1":"hort","2":"cbd_2014_pathway:escape_horticulture","3":"2"},{"1":"hort.","2":"cbd_2014_pathway:escape_horticulture","3":"1107"},{"1":"hybridization","2":"","3":"50"},{"1":"military troops","2":"","3":"9"},{"1":"nurseries","2":"cbd_2014_pathway:contaminant_nursery","3":"21"},{"1":"ore","2":"cbd_2014_pathway:contaminant_habitat_material","3":"94"},{"1":"pines","2":"cbd_2014_pathway:contaminant_on_plants","3":"4"},{"1":"rice","2":"","3":"1"},{"1":"salt","2":"","3":"2"},{"1":"seeds","2":"cbd_2014_pathway:contaminant_seed","3":"64"},{"1":"timber","2":"cbd_2014_pathway:contaminant_timber","3":"10"},{"1":"tourists","2":"cbd_2014_pathway:stowaway_people_luggage","3":"10"},{"1":"traffic","2":"","3":"4"},{"1":"urban weed","2":"cbd_2014_pathway:stowaway","3":"10"},{"1":"waterfowl","2":"cbd_2014_pathway:contaminant_on_animals","3":"14"},{"1":"wool","2":"cbd_2014_pathway:contaminant_on_animals","3":"566"},{"1":"wool alien","2":"cbd_2014_pathway:contaminant_on_animals","3":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["value"],"name":[1],"type":["chr"],"align":["left"]},{"label":["mapped_value"],"name":[2],"type":["chr"],"align":["left"]},{"label":["records"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"","2":"","3":"546"},{"1":"agric.","2":"cbd_2014_pathway:escape_agriculture","3":"86"},{"1":"bird seed","2":"cbd_2014_pathway:contaminant_seed","3":"1"},{"1":"birdseed","2":"cbd_2014_pathway:contaminant_seed","3":"31"},{"1":"bulbs","2":"","3":"1"},{"1":"coconut mats","2":"cbd_2014_pathway:contaminant_seed","3":"1"},{"1":"etc.","2":"","3":"1"},{"1":"fish","2":"","3":"3"},{"1":"food refuse","2":"cbd_2014_pathway:escape_food_bait","3":"23"},{"1":"grain","2":"cbd_2014_pathway:contaminant_seed","3":"547"},{"1":"grain (rice)","2":"cbd_2014_pathway:contaminant_seed","3":"3"},{"1":"grass seed","2":"cbd_2014_pathway:contaminant_seed","3":"8"},{"1":"hay","2":"","3":"1"},{"1":"hort","2":"cbd_2014_pathway:escape_horticulture","3":"2"},{"1":"hort.","2":"cbd_2014_pathway:escape_horticulture","3":"1110"},{"1":"hybridization","2":"","3":"50"},{"1":"military troops","2":"","3":"9"},{"1":"nurseries","2":"cbd_2014_pathway:contaminant_nursery","3":"21"},{"1":"ore","2":"cbd_2014_pathway:contaminant_habitat_material","3":"94"},{"1":"pines","2":"cbd_2014_pathway:contaminant_on_plants","3":"4"},{"1":"rice","2":"","3":"2"},{"1":"salt","2":"","3":"2"},{"1":"seeds","2":"cbd_2014_pathway:contaminant_seed","3":"64"},{"1":"timber","2":"cbd_2014_pathway:contaminant_timber","3":"10"},{"1":"tourists","2":"cbd_2014_pathway:stowaway_people_luggage","3":"10"},{"1":"traffic","2":"","3":"4"},{"1":"urban weed","2":"cbd_2014_pathway:stowaway","3":"10"},{"1":"waterfowl","2":"cbd_2014_pathway:contaminant_on_animals","3":"14"},{"1":"wool","2":"cbd_2014_pathway:contaminant_on_animals","3":"566"},{"1":"wool alien","2":"cbd_2014_pathway:contaminant_on_animals","3":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Drop <code>key</code>,<code>value</code> and <code>cbd_stand</code> column:</p>
@@ -903,7 +906,7 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   summarize(records = n())</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["description"],"name":[1],"type":["chr"],"align":["left"]},{"label":["records"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"","2":"617"},{"1":"cbd_2014_pathway:contaminant_habitat_material","2":"94"},{"1":"cbd_2014_pathway:contaminant_nursery","2":"21"},{"1":"cbd_2014_pathway:contaminant_on_animals","2":"581"},{"1":"cbd_2014_pathway:contaminant_on_plants","2":"4"},{"1":"cbd_2014_pathway:contaminant_seed","2":"653"},{"1":"cbd_2014_pathway:contaminant_timber","2":"10"},{"1":"cbd_2014_pathway:escape_agriculture","2":"86"},{"1":"cbd_2014_pathway:escape_food_bait","2":"23"},{"1":"cbd_2014_pathway:escape_horticulture","2":"1109"},{"1":"cbd_2014_pathway:stowaway","2":"10"},{"1":"cbd_2014_pathway:stowaway_people_luggage","2":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["description"],"name":[1],"type":["chr"],"align":["left"]},{"label":["records"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"","2":"619"},{"1":"cbd_2014_pathway:contaminant_habitat_material","2":"94"},{"1":"cbd_2014_pathway:contaminant_nursery","2":"21"},{"1":"cbd_2014_pathway:contaminant_on_animals","2":"581"},{"1":"cbd_2014_pathway:contaminant_on_plants","2":"4"},{"1":"cbd_2014_pathway:contaminant_seed","2":"655"},{"1":"cbd_2014_pathway:contaminant_timber","2":"10"},{"1":"cbd_2014_pathway:escape_agriculture","2":"86"},{"1":"cbd_2014_pathway:escape_food_bait","2":"23"},{"1":"cbd_2014_pathway:escape_horticulture","2":"1112"},{"1":"cbd_2014_pathway:stowaway","2":"10"},{"1":"cbd_2014_pathway:stowaway_people_luggage","2":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Keep only non-empty descriptions:</p>
@@ -920,7 +923,7 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   summarize(records = n()) </code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["raw_d_n"],"name":[1],"type":["chr"],"align":["left"]},{"label":["records"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"Cas.","2":"1828"},{"1":"Cas.?","2":"50"},{"1":"Ext.","2":"15"},{"1":"Ext./Cas.","2":"4"},{"1":"Ext.?","2":"4"},{"1":"Inv.","2":"64"},{"1":"Nat.","2":"460"},{"1":"Nat.?","2":"99"},{"1":"NA","2":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["raw_d_n"],"name":[1],"type":["chr"],"align":["left"]},{"label":["records"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"Cas.","2":"1834"},{"1":"Cas.?","2":"50"},{"1":"Ext.","2":"15"},{"1":"Ext.?","2":"4"},{"1":"Ext./Cas.","2":"4"},{"1":"Inv.","2":"64"},{"1":"Nat.","2":"460"},{"1":"Nat.?","2":"99"},{"1":"NA","2":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Clean the data:</p>
@@ -943,7 +946,7 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   summarize(records = n())</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["raw_d_n"],"name":[1],"type":["chr"],"align":["left"]},{"label":["description"],"name":[2],"type":["chr"],"align":["left"]},{"label":["records"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"Cas.","2":"casual","3":"1828"},{"1":"Cas.?","2":"casual","3":"50"},{"1":"Ext.","2":"extinct","3":"15"},{"1":"Ext./Cas.","2":"casual","3":"4"},{"1":"Ext.?","2":"extinct","3":"4"},{"1":"Inv.","2":"established","3":"64"},{"1":"Nat.","2":"established","3":"460"},{"1":"Nat.?","2":"established","3":"99"},{"1":"NA","2":"","3":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["raw_d_n"],"name":[1],"type":["chr"],"align":["left"]},{"label":["description"],"name":[2],"type":["chr"],"align":["left"]},{"label":["records"],"name":[3],"type":["int"],"align":["right"]}],"data":[{"1":"Cas.","2":"casual","3":"1834"},{"1":"Cas.?","2":"casual","3":"50"},{"1":"Ext.","2":"extinct","3":"15"},{"1":"Ext.?","2":"extinct","3":"4"},{"1":"Ext./Cas.","2":"casual","3":"4"},{"1":"Inv.","2":"established","3":"64"},{"1":"Nat.","2":"established","3":"460"},{"1":"Nat.?","2":"established","3":"99"},{"1":"NA","2":"","3":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Create a <code>type</code> field to indicate the type of description:</p>
@@ -990,7 +993,7 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   </script>
 </div>
 <p>Save to CSV:</p>
-<pre class="r"><code>write.csv(description_ext, file = dwc_description_file, na = &quot;&quot;, row.names = FALSE, fileEncoding = &quot;UTF-8&quot;)</code></pre>
+<pre class="r"><code>write_csv(description_ext, dwc_description_file, na = &quot;&quot;)</code></pre>
 </div>
 </div>
 
