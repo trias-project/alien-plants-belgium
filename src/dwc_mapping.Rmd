@@ -22,8 +22,6 @@ output:
 
 This document describes how we map the checklist data to Darwin Core. The source file for this document can be found [here](https://github.com/trias-project/alien-plants-belgium/blob/master/src/dwc_mapping.Rmd).
 
-General setup:
-
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 ```
