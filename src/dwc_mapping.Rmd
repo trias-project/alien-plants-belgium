@@ -91,8 +91,6 @@ taxon <- input_data %>% distinct(taxon_id, .keep_all = TRUE)
 
 Map the data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml).
 
-Start with record-level terms which contain metadata about the dataset (which is generally the same for all records).
-
 ### language
 
 ```{r}
@@ -292,7 +290,7 @@ Remove species for which we lack presence information (i.e. `presence` = `NA``):
 distribution %<>% filter(!presence == "NA")
 ```
 
-Now, we will Clean date information
+Now, we will clean date information
 
 Create `start_year` from `fr`: 
 
