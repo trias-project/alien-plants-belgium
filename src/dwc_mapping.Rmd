@@ -938,27 +938,25 @@ species_profile %<>% arrange(taxonID)
 description_ext %<>% arrange(taxonID)
 ```
 
-Preview data:
-
-Taxon Core
+Preview taxon core:
 
 ```{r}
 taxon %>% head(10)
 ```
 
-Distribution Extension:
+Preview distribution extension:
 
 ```{r}
 distribution %>% head(10)
 ```
 
-Species profile Extension:
+Preview species profile extension:
 
 ```{r}
 species_profile %>% head(10)
 ```
 
-Description Extension:
+Preview description extension:
 
 ```{r}
 description_ext %>% head(10)
