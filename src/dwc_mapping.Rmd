@@ -439,7 +439,7 @@ distribution %<>% mutate(dwc_taxonID = taxon_id)
 ### locationID
 
 ```{r}
-distribution %<>% mutate(locationID = case_when(
+distribution %<>% mutate(dwc_locationID = case_when(
   location == "Belgium" ~ "ISO_3166-2:BE",
   location == "Flanders" ~ "ISO_3166-2:BE-VLG",
   location == "Wallonia" ~ "ISO_3166-2:BE-WAL",
@@ -450,7 +450,7 @@ distribution %<>% mutate(locationID = case_when(
 ### locality
 
 ```{r}
-distribution %<>% mutate(locality = case_when(
+distribution %<>% mutate(dwc_locality = case_when(
   location == "Belgium" ~ "Belgium",
   location == "Flanders" ~ "Flemish Region",
   location == "Wallonia" ~ "Walloon Region",
