@@ -167,32 +167,6 @@ taxon %<>% mutate(dwc_taxonRank = taxon_rank)
 taxon %<>% mutate(dwc_nomenclaturalCode = "ICN")
 ```
 
-## Post-processing
-
-Only keep the Darwin Core columns:
-
-```{r}
-taxon %<>% select(starts_with("dwc_"))
-```
-
-Drop the `dwc_` prefix:
-
-```{r}
-colnames(taxon) <- str_remove(colnames(taxon), "dwc_")
-```
-Preview data:
-
-```{r}
-taxon %>% head()
-```
-
-Save to CSV:
-
-```{r}
-write_csv(taxon, here("data", "processed", "taxon.csv"), na = "")
-```
-
-# Create distribution extension
 ## Create distribution extension
 
 ```{r start_distribution}
@@ -508,39 +482,6 @@ distribution %<>% mutate(dwc_establishmentMeans = "introduced")
 distribution %<>% mutate(dwc_eventDate = eventDate) 
 ```
 
-## Post-processing
-
-Only keep the Darwin Core columns:
-
-```{r}
-distribution %<>% select(starts_with("dwc_"))
-```
-
-Drop the `dwc_` prefix:
-
-```{r}
-colnames(distribution) <- str_remove(colnames(distribution), "dwc_")
-```
-
-Sort on `taxonID`:
-
-```{r}
-distribution %<>% arrange(taxonID)
-```
-
-Preview data:
-
-```{r}
-distribution %>% head()
-```
-
-Save to CSV:
-
-```{r}
-write_csv(distribution, here("data", "processed", "distribution.csv"), na = "")
-```
-
-# Create species profile extension
 ## Create species profile extension
 
 In this extension will express broad habitat characteristics (e.g. `isTerrestrial`) of the species.
@@ -608,40 +549,8 @@ species_profile %>%
   summarize(records = n())
 ```
 
-## Post-processing
-
-Remove the original columns:
-
-```{r}
-species_profile %<>% select(starts_with("dwc_"))
-```
-
-Drop the `dwc_` prefix:
-
-```{r}
-colnames(species_profile) <- str_remove(colnames(species_profile), "dwc_")
-```
-
-Sort on `taxonID`:
-
-```{r}
-species_profile %<>% arrange(taxonID)
-```
-
-Preview data:
 ## Create description extension
 
-```{r}
-species_profile %>% head()
-```
-
-Save to CSV:
-
-```{r}
-write_csv(species_profile, here("data", "processed", "speciesprofile.csv"), na = "")
-```
-
-# Create description extension
 Map the data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml).
 
 In the description extension we want to include several important characteristics (hereafter refered to as descriptors) about the species:
@@ -1006,33 +915,64 @@ description_ext %<>% mutate(dwc_type = type)
 description_ext %<>% mutate(dwc_language = "en")
 ```
 
-## Post-processing
+# Post-processing
 
-Remove the original columns:
+Remove the original columns for each of the generated files:
 
 ```{r}
+taxon %<>% select(starts_with("dwc_")) 
+distribution %<>% select(starts_with("dwc_")) 
+species_profile %<>% select(starts_with("dwc_")) 
 description_ext %<>% select(starts_with("dwc_"))
 ```
 
 Drop the `dwc_` prefix:
 
 ```{r}
+colnames(taxon) <- str_remove(colnames(taxon), "dwc_")
+colnames(distribution) <- str_remove(colnames(distribution), "dwc_")
+colnames(species_profile) <- str_remove(colnames(species_profile), "dwc_")
 colnames(description_ext) <- str_remove(colnames(description_ext), "dwc_")
 ```
 
-Move `taxonID` to the first position:
+Move `taxonID` to the first position (not for taxon core as metadata terms come first):
 
 ```{r}
+distribution %<>% select(taxonID, everything())
+species_profile %<>% select(taxonID, everything())
 description_ext %<>% select(taxonID, everything())
 ```
 
 Sort on `taxonID` to group description information per taxon:
 
 ```{r}
+taxon %<>% arrange(taxonID)
+distribution %<>% arrange(taxonID)
+species_profile %<>% arrange(taxonID)
 description_ext %<>% arrange(taxonID)
 ```
 
 Preview data:
+
+Taxon Core
+
+```{r}
+taxon %>% head(10)
+```
+
+Distribution Extension:
+
+```{r}
+distribution %>% head(10)
+```
+
+Species profile Extension:
+
+```{r}
+species_profile %>% head(10)
+```
+
+Description Extension:
 
 ```{r}
 description_ext %>% head(10)
@@ -1041,5 +981,8 @@ description_ext %>% head(10)
 Save to CSV:
 
 ```{r}
+write_csv(taxon, here("data", "processed", "taxon.csv"), na = "")
+write_csv(distribution, here("data", "processed", "distribution.csv"), na = "")
+write_csv(species_profile, here("data", "processed", "speciesprofile.csv"), na = "")
 write_csv(description_ext, here("data", "processed", "description.csv"), na = "")
 ```
