@@ -89,7 +89,7 @@ Create a dataframe with unique taxa only (ignoring multiple distribution rows):
 taxon <- input_data %>% distinct(taxon_id, .keep_all = TRUE)
 ```
 
-Map the data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml).
+Map the data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml):
 
 ### language
 
@@ -424,7 +424,7 @@ Bind `occurrenceStatus_ALO` and `distribution` by rows:
 distribution %<>% bind_rows(occurrenceStatus_ALO)
 ```
 
-Map the data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml).
+Map the data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
 
 ### taxonID
 
@@ -504,7 +504,7 @@ species_profile %<>% mutate(habitat = str_to_lower(habitat))
 
 We map this information respectively to `isFreshwater`, `isTerrestrial` or both terms in the species profile extension.
 
-Map the data to [Species Profile](http://rs.gbif.org/extension/gbif/1.0/speciesprofile.xml).
+Map the data to [Species Profile](http://rs.gbif.org/extension/gbif/1.0/speciesprofile.xml):
 
 ### taxonID
 
@@ -546,8 +546,6 @@ species_profile %>%
 ```
 
 ## Create description extension
-
-Map the data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml).
 
 In the description extension we want to include several important characteristics (hereafter refered to as descriptors) about the species:
 
@@ -888,6 +886,8 @@ description_ext <- bind_rows(native_range, pathway_desc, invasion_stage)
 ```
 
 Rename `description`
+Map the data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml):
+
 
 ```{r}
 description_ext %<>% rename(dwc_description = description)
