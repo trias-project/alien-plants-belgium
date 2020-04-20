@@ -22,7 +22,7 @@ output:
 
 This document describes how we map the checklist data to Darwin Core. The source file for this document can be found [here](https://github.com/trias-project/alien-plants-belgium/blob/master/src/dwc_mapping.Rmd).
 
-# Setup
+General setup:
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
@@ -53,7 +53,7 @@ Preview data:
 input_data %>% head(n = 5)
 ```
 
-# Process source data
+# Preprocessing
 
 ## Tidy data
 
@@ -63,7 +63,7 @@ input_data %<>%
   clean_names()                  # Have sensible (lowercase) column names
 ```
 
-## Taxon IDs
+## Generate Taxon ID
 
 To uniquely identify a taxon in the taxon core and reference taxa in the extensions, we need a `taxonID`. Since we need it in all generated files, we generate it here in the raw data frame. It is a combination of `dataset-shortname:taxon:` and a hash based on the scientific name. As long as the scientific name doesn't change, the ID will be stable:
 
@@ -75,13 +75,15 @@ vdigest <- Vectorize(digest)
 input_data %<>% mutate(taxon_id = paste("alien-plants-belgium", "taxon", vdigest (taxon, algo="md5"), sep=":"))
 ```
 
-## Preview data:
+Preview data:
 
 ```{r}
 input_data %>% head()
 ```
 
-# Create taxon core
+# Darwin Core Mapping
+
+## Create taxon core
 
 Create a dataframe with unique taxa only (ignoring multiple distribution rows):
 
@@ -89,8 +91,6 @@ Create a dataframe with unique taxa only (ignoring multiple distribution rows):
 taxon <- input_data %>% distinct(taxon_id, .keep_all = TRUE)
 ```
 
-## Term mapping
- 
 Map the data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml).
 
 Start with record-level terms which contain metadata about the dataset (which is generally the same for all records).
@@ -193,12 +193,11 @@ write_csv(taxon, here("data", "processed", "taxon.csv"), na = "")
 ```
 
 # Create distribution extension
+## Create distribution extension
 
 ```{r start_distribution}
 distribution <- input_data
 ```
-
-## Pre-processing
 
 Before we start mapping the distribution extensions, we focus on two terms: `occurrenceStatus` and  `eventDate`:
 
@@ -220,8 +219,6 @@ The easiest way to do use a stepwize approach:
 4. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `occurrenceStatus_ALO` (for `eventDate` = most recent observation - current date)
 5. Bind both dataframes by row.
 6. Map the other Darwin Core terms in the distribution extension
-
-### Clean presence information: occurrenceStatus for regions and Belgium
 
 The checklist contains minimal presence information (`X`,`?` or `NA`) for the three regions in Belgium: Flanders, Wallonia and the Brussels-Capital Region, contained in `presence_fl`, `presence_wa` and `presence_br` respectively. Information regarding the first/last recorded observation applies to the distribution in Belgium as a whole. Both national and regional information is required in the checklist. In the `distribution.csv`, we will first provide `occurrenceStatus` and `eventDate`` on a **national level**, followed by specific information for the **regions**. 
 
@@ -323,7 +320,7 @@ Remove species for which we lack presence information (i.e. `presence` = `NA``):
 distribution %<>% filter(!presence == "NA")
 ```
 
-### Clean date information
+Now, we will Clean date information
 
 Create `start_year` from `fr`: 
 
@@ -402,13 +399,13 @@ distribution %<>% mutate(Date = case_when(
 ))
 ```
 
-### Generate `occurrenceStatus_ALO`
+In a next step, we will generate `occurrenceStatus_ALO`
 
 ```{r}
 occurrenceStatus_ALO <- distribution %>% filter(d_n == "Ext." | d_n == "Ext./Cas.")
 ```
 
-### Map occurrenceStatus and eventDate for `distribution`:
+Then, we map occurrenceStatus and eventDate for `distribution`:
 
 Map `occurrenceStaus` using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
 
@@ -438,7 +435,7 @@ distribution %<>% mutate(eventDate = case_when(
 ))
 ```
 
-### Map `occurrenceStatus` and `eventDate` for `occurrenceStatus_ALO`:
+Map `occurrenceStatus` and `eventDate` for `occurrenceStatus_ALO`:
 
 ```{r}
 occurrenceStatus_ALO %<>% mutate(occurrenceStatus = case_when(
@@ -451,13 +448,11 @@ occurrenceStatus_ALO %<>% mutate(eventDate = case_when(
 ))
 ```
 
-### Bind `occurrenceStatus_ALO` and `distribution` by rows:
+Bind `occurrenceStatus_ALO` and `distribution` by rows:
 
 ```{r}
 distribution %<>% bind_rows(occurrenceStatus_ALO)
 ```
-
-## Term mapping
 
 Map the data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml).
 
@@ -546,6 +541,7 @@ write_csv(distribution, here("data", "processed", "distribution.csv"), na = "")
 ```
 
 # Create species profile extension
+## Create species profile extension
 
 In this extension will express broad habitat characteristics (e.g. `isTerrestrial`) of the species.
 
@@ -570,8 +566,6 @@ species_profile %<>% mutate(habitat = str_to_lower(habitat))
 ```
 
 We map this information respectively to `isFreshwater`, `isTerrestrial` or both terms in the species profile extension.
-
-## Term mapping
 
 Map the data to [Species Profile](http://rs.gbif.org/extension/gbif/1.0/speciesprofile.xml).
 
@@ -635,6 +629,7 @@ species_profile %<>% arrange(taxonID)
 ```
 
 Preview data:
+## Create description extension
 
 ```{r}
 species_profile %>% head()
@@ -647,6 +642,7 @@ write_csv(species_profile, here("data", "processed", "speciesprofile.csv"), na =
 ```
 
 # Create description extension
+Map the data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml).
 
 In the description extension we want to include several important characteristics (hereafter refered to as descriptors) about the species:
 
@@ -658,7 +654,9 @@ A single taxon can have multiple descriptions of the same type (e.g. multiple na
 
 For each descriptor, we create a separate dataframe to process the specific information. We always specify _which descriptor_ we map (`type` column) and its _specific content_ (`description` column). After the mapping of these Darwin Core terms `type` and `value`, we merge the dataframes to generate one single description extension. We then continue the mapping process by adding the other Darwin Core terms (which content is independent of the type of descriptor, such as `language`).
 
-## Native range
+### description
+
+#### native range
  
 `origin` contains native range information (e.g. `E AS-Te NAM`). We'll separate, clean, map and combine these values.
 
@@ -766,7 +764,7 @@ Create a `type` field to indicate the type of description:
 native_range %<>% mutate(type = "native range")
 ```
 
-## Pathway of introduction
+#### pathway of introduction
 
 pathway_desc` (pathway description) information is based on `v_i`, which contains a list of introduction pathways (e.g. `Agric., wool`). We'll separate, clean, map and combine these values.
 
@@ -923,7 +921,7 @@ Keep only non-empty descriptions:
 pathway_desc %<>% filter(!is.na(description) & description != "")
 ```
 
-## Invasion stage
+#### invasion stage
 
 Create separate dataframe:
 
@@ -978,28 +976,22 @@ Create a `type` field to indicate the type of description:
 invasion_stage %<>% mutate(type = "invasion stage")
 ```
 
-## Union descriptions
-
 Union native range, pathway of introduction and invasion stage:
 
 ```{r start_description_ext}
 description_ext <- bind_rows(native_range, pathway_desc, invasion_stage)
 ```
 
-## Term mapping
+Rename `description`
 
-Map the data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml).
+```{r}
+description_ext %<>% rename(dwc_description = description)
+```
 
 ### taxonID
 
 ```{r}
 description_ext %<>% mutate(dwc_taxonID = taxon_id)
-```
-
-### description
-
-```{r}
-description_ext %<>% mutate(dwc_description = description)
 ```
 
 ### type
