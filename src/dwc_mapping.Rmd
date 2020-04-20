@@ -557,8 +557,6 @@ A single taxon can have multiple descriptions of the same type (e.g. multiple na
 
 For each descriptor, we create a separate dataframe to process the specific information. We always specify _which descriptor_ we map (`type` column) and its _specific content_ (`description` column). After the mapping of these Darwin Core terms `type` and `value`, we merge the dataframes to generate one single description extension. We then continue the mapping process by adding the other Darwin Core terms (which content is independent of the type of descriptor, such as `language`).
 
-### description
-
 #### native range
  
 `origin` contains native range information (e.g. `E AS-Te NAM`). We'll separate, clean, map and combine these values.
@@ -885,18 +883,18 @@ Union native range, pathway of introduction and invasion stage:
 description_ext <- bind_rows(native_range, pathway_desc, invasion_stage)
 ```
 
-Rename `description`
 Map the data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml):
-
-
-```{r}
-description_ext %<>% rename(dwc_description = description)
-```
 
 ### taxonID
 
 ```{r}
 description_ext %<>% mutate(dwc_taxonID = taxon_id)
+```
+
+### description
+
+```{r}
+description_ext %<>% mutate(dwc_description = description)
 ```
 
 ### type
@@ -929,14 +927,6 @@ colnames(taxon) <- str_remove(colnames(taxon), "dwc_")
 colnames(distribution) <- str_remove(colnames(distribution), "dwc_")
 colnames(species_profile) <- str_remove(colnames(species_profile), "dwc_")
 colnames(description_ext) <- str_remove(colnames(description_ext), "dwc_")
-```
-
-Move `taxonID` to the first position (not for taxon core as metadata terms come first):
-
-```{r}
-distribution %<>% select(taxonID, everything())
-species_profile %<>% select(taxonID, everything())
-description_ext %<>% select(taxonID, everything())
 ```
 
 Sort on `taxonID` to group description information per taxon:
