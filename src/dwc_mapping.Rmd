@@ -295,7 +295,7 @@ distribution %<>%
 Summary of the previous action:
 
 ```{r}
-distribution %>% select(raw_presence_fl, raw_presence_br, raw_presence_wa, Flanders, Wallonia, Brussels, Belgium) %>%
+distribution %>% select(presence_fl, presence_br, presence_wa, Flanders, Wallonia, Brussels, Belgium) %>%
   group_by_all() %>%
   summarize(records = n()) %>%
   arrange(Flanders, Wallonia, Brussels)
@@ -442,8 +442,8 @@ distribution %<>% mutate(eventDate = case_when(
 
 ```{r}
 occurrenceStatus_ALO %<>% mutate(occurrenceStatus = case_when(
-  raw_d_n == "Ext." ~ "absent",
-  raw_d_n == "Ext./Cas." ~ "present"
+  d_n == "Ext." ~ "absent",
+  d_n == "Ext./Cas." ~ "present"
 ))
 
 occurrenceStatus_ALO %<>% mutate(eventDate = case_when(
