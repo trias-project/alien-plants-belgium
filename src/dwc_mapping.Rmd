@@ -79,7 +79,7 @@ Preview data:
 input_data %>% head()
 ```
 
-# Darwin Core Mapping
+# Darwin Core mapping
 
 ## Create taxon core
 
