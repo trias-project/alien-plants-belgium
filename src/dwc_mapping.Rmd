@@ -42,7 +42,7 @@ library(digest)         # To generate hashes
 Create a data frame `input_data` from the source data:
  
 ```{r}
-input_data <- read_excel(path = here("data", "raw", "checklist5.xlsx")) 
+input_data <- read_excel(path = here("data", "raw", "checklist.xlsx")) 
 ```
 
 Preview data:
