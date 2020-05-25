@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Manual of the Alien Plants of Belgium"
 ---
 
 ```{r, child = "../README.md"}
