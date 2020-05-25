@@ -818,13 +818,13 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
 </div>
 <div id="pathway-of-introduction" class="section level3">
 <h3><span class="header-section-number">3.4.2</span> pathway of introduction</h3>
-<p>pathway_desc<code>(pathway description) information is based on</code>v_i<code>, which contains a list of introduction pathways (e.g.</code>Agric., wool`). We’ll separate, clean, map and combine these values.</p>
+<p><code>pathway</code> (pathway description) information is based on <code>v_i</code>, which contains a list of introduction pathways (e.g. <code>Agric., wool</code>). We’ll separate, clean, map and combine these values.</p>
 <p>Create separate dataframe:</p>
-<pre class="r"><code>pathway_desc &lt;- input_data</code></pre>
+<pre class="r"><code>pathway &lt;- input_data</code></pre>
 <p>Create <code>pathway</code> from <code>v_i</code>:</p>
-<pre class="r"><code>pathway_desc %&lt;&gt;% mutate(pathway = v_i)</code></pre>
+<pre class="r"><code>pathway %&lt;&gt;% mutate(pathway = v_i)</code></pre>
 <p>Separate <code>pathway</code> on <code>,</code> in 4 columns: In case there are more than 4 values, these will be merged in pathway_4. The dataset currently contains no more than 3 values per record.</p>
-<pre class="r"><code>pathway_desc %&lt;&gt;% separate(
+<pre class="r"><code>pathway %&lt;&gt;% separate(
   pathway,
   into = c(&quot;pathway_1&quot;, &quot;pathway_2&quot;, &quot;pathway_3&quot;, &quot;pathway_4&quot;),
   sep = &quot;,&quot;,
@@ -834,16 +834,16 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   fill = &quot;right&quot;
 )</code></pre>
 <p>Gather pathways in a key and value column:</p>
-<pre class="r"><code>pathway_desc %&lt;&gt;% gather(
+<pre class="r"><code>pathway %&lt;&gt;% gather(
   key, value,
   pathway_1, pathway_2, pathway_3, pathway_4,
   na.rm = TRUE, # Also removes records for which there is no pathway_1
   convert = FALSE
 )</code></pre>
 <p>Sort on <code>taxon_id</code> to see pathways in context for each record:</p>
-<pre class="r"><code>pathway_desc %&lt;&gt;% arrange(taxon_id)</code></pre>
+<pre class="r"><code>pathway %&lt;&gt;% arrange(taxon_id)</code></pre>
 <p>Show unique values:</p>
-<pre class="r"><code>pathway_desc %&gt;%
+<pre class="r"><code>pathway %&gt;%
   distinct(value) %&gt;%
   arrange(value) </code></pre>
 <div data-pagedtable="false">
@@ -852,13 +852,13 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   </script>
 </div>
 <p>Clean values:</p>
-<pre class="r"><code>pathway_desc %&lt;&gt;% mutate(
+<pre class="r"><code>pathway %&lt;&gt;% mutate(
   value = str_replace_all(value, &quot;\\?|…|\\.{3}&quot;, &quot;&quot;), # Strip ?, …, ...
   value = str_to_lower(value), # Convert to lowercase
   value = str_trim(value) # Clean whitespace
 )</code></pre>
 <p>Map values to the CBD standard::</p>
-<pre class="r"><code>pathway_desc %&lt;&gt;% mutate(cbd_stand = recode(value, 
+<pre class="r"><code>pathway %&lt;&gt;% mutate(cbd_stand = recode(value, 
   &quot;agric.&quot; = &quot;escape_agriculture&quot;,
   &quot;bird seed&quot; = &quot;contaminant_seed&quot;,
   &quot;birdseed&quot; = &quot;contaminant_seed&quot;,
@@ -892,12 +892,12 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   .missing = &quot;&quot; # As result of stripping, records with no pathway already removed by gather()
 ))</code></pre>
 <p>Add prefix <code>cbd_2014_pathway</code> in case there is a match with the CBD standard:</p>
-<pre class="r"><code>pathway_desc %&lt;&gt;% mutate(mapped_value = case_when(
+<pre class="r"><code>pathway %&lt;&gt;% mutate(mapped_value = case_when(
   cbd_stand != &quot;&quot; ~ paste (&quot;cbd_2014_pathway&quot;, cbd_stand, sep = &quot;:&quot;),
   TRUE ~ &quot;&quot;
 ))</code></pre>
 <p>Show mapped values:</p>
-<pre class="r"><code>pathway_desc %&gt;%
+<pre class="r"><code>pathway %&gt;%
   select(value, mapped_value) %&gt;%
   group_by(value, mapped_value) %&gt;%
   summarize(records = n()) %&gt;%
@@ -908,13 +908,13 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   </script>
 </div>
 <p>Drop <code>key</code>,<code>value</code> and <code>cbd_stand</code> column:</p>
-<pre class="r"><code>pathway_desc %&lt;&gt;% select(-key, -value, -cbd_stand)</code></pre>
+<pre class="r"><code>pathway %&lt;&gt;% select(-key, -value, -cbd_stand)</code></pre>
 <p>Change column name <code>mapped_value</code> to <code>description</code>:</p>
-<pre class="r"><code>pathway_desc %&lt;&gt;%  rename(description = mapped_value)</code></pre>
+<pre class="r"><code>pathway %&lt;&gt;%  rename(description = mapped_value)</code></pre>
 <p>Create a <code>type</code> field to indicate the type of description:</p>
-<pre class="r"><code>pathway_desc %&lt;&gt;% mutate (type = &quot;pathway&quot;)</code></pre>
+<pre class="r"><code>pathway %&lt;&gt;% mutate (type = &quot;pathway&quot;)</code></pre>
 <p>Show pathway descriptions:</p>
-<pre class="r"><code>pathway_desc %&gt;% 
+<pre class="r"><code>pathway %&gt;% 
   select(description) %&gt;% 
   group_by(description) %&gt;% 
   summarize(records = n())</code></pre>
@@ -924,14 +924,14 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   </script>
 </div>
 <p>Keep only non-empty descriptions:</p>
-<pre class="r"><code>pathway_desc %&lt;&gt;% filter(!is.na(description) &amp; description != &quot;&quot;)</code></pre>
+<pre class="r"><code>pathway %&lt;&gt;% filter(!is.na(description) &amp; description != &quot;&quot;)</code></pre>
 </div>
-<div id="invasion-stage" class="section level3">
-<h3><span class="header-section-number">3.4.3</span> invasion stage</h3>
+<div id="degree-of-establishment" class="section level3">
+<h3><span class="header-section-number">3.4.3</span> Degree of establishment</h3>
 <p>Create separate dataframe:</p>
-<pre class="r"><code>invasion_stage &lt;- input_data</code></pre>
-<p>The information for invasion stage is contained in <code>d_n</code>:</p>
-<pre class="r"><code>invasion_stage %&gt;%
+<pre class="r"><code>degree_of_establishment &lt;- input_data</code></pre>
+<p>The information for degree of establishment is contained in <code>d_n</code>:</p>
+<pre class="r"><code>degree_of_establishment %&gt;%
   select(d_n) %&gt;%
   group_by_all() %&gt;%
   summarize(records = n()) </code></pre>
@@ -941,14 +941,14 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   </script>
 </div>
 <p>Clean the data:</p>
-<pre class="r"><code>invasion_stage %&lt;&gt;% mutate(description = recode(d_n,
+<pre class="r"><code>degree_of_establishment %&lt;&gt;% mutate(description = recode(d_n,
   &quot;Ext.?&quot; = &quot;Ext.&quot;,
   &quot;Cas.?&quot; = &quot;Cas.&quot;,
   &quot;Nat.?&quot; = &quot;Nat.&quot;,
   .missing = &quot;&quot;
 ))</code></pre>
 <p>We decided to use the unified framework for biological invasions of <a href="http://doc.rero.ch/record/24725/files/bach_puf.pdf">Blackburn et al. 2011</a> for <code>invasion stage</code>. <code>casual</code>, <code>naturalized</code> and <code>invasive</code> are terms included in this framework. However, we decided to discard the terms <code>naturalized</code> and <code>invasive</code> listed in Blackburn et al. (see trias-project/alien-fishes-checklist#6 (comment)). So, <code>naturalized</code> and <code>invasive</code> are replaced by <code>established</code>. For <code>extinct</code> (introduced taxa that once were naturalized but that have not been confirmed in recent times) and <code>extinct/casual</code> species (taxa are no longer considered as naturalized but still occur as casuals), we map the most recent invasion stage (i.e. <code>extinct</code> and <code>casual</code> respectively):</p>
-<pre class="r"><code>invasion_stage %&lt;&gt;% mutate(description = recode(description,
+<pre class="r"><code>degree_of_establishment %&lt;&gt;% mutate(description = recode(description,
   &quot;Cas.&quot; = &quot;casual&quot;,
   &quot;Inv.&quot; = &quot;established&quot;,
   &quot;Nat.&quot; = &quot;established&quot;,
@@ -956,7 +956,7 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   &quot;Ext./Cas.&quot; = &quot;casual&quot;
 ))</code></pre>
 <p>Show mapped values:</p>
-<pre class="r"><code>invasion_stage %&gt;%
+<pre class="r"><code>degree_of_establishment %&gt;%
   select(d_n, description) %&gt;%
   group_by_all() %&gt;%
   summarize(records = n())</code></pre>
@@ -966,26 +966,26 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
   </script>
 </div>
 <p>Create a <code>type</code> field to indicate the type of description:</p>
-<pre class="r"><code>invasion_stage %&lt;&gt;% mutate(type = &quot;invasion stage&quot;)</code></pre>
-<p>Union native range, pathway of introduction and invasion stage:</p>
-<pre class="r"><code>description_ext &lt;- bind_rows(native_range, pathway_desc, invasion_stage)</code></pre>
+<pre class="r"><code>degree_of_establishment %&lt;&gt;% mutate(type = &quot;degree of establishment&quot;)</code></pre>
+<p>Union native range, pathway of introduction and degree of establishment:</p>
+<pre class="r"><code>description &lt;- bind_rows(native_range, pathway, degree_of_establishment)</code></pre>
 <p>Map the data to <a href="http://rs.gbif.org/extension/gbif/1.0/description.xml">Taxon Description</a>:</p>
 </div>
 <div id="taxonid-3" class="section level3">
 <h3><span class="header-section-number">3.4.4</span> taxonID</h3>
-<pre class="r"><code>description_ext %&lt;&gt;% mutate(dwc_taxonID = taxon_id)</code></pre>
+<pre class="r"><code>description %&lt;&gt;% mutate(dwc_taxonID = taxon_id)</code></pre>
 </div>
 <div id="description" class="section level3">
 <h3><span class="header-section-number">3.4.5</span> description</h3>
-<pre class="r"><code>description_ext %&lt;&gt;% mutate(dwc_description = description)</code></pre>
+<pre class="r"><code>description %&lt;&gt;% mutate(dwc_description = description)</code></pre>
 </div>
 <div id="type" class="section level3">
 <h3><span class="header-section-number">3.4.6</span> type</h3>
-<pre class="r"><code>description_ext %&lt;&gt;% mutate(dwc_type = type)</code></pre>
+<pre class="r"><code>description %&lt;&gt;% mutate(dwc_type = type)</code></pre>
 </div>
 <div id="language-1" class="section level3">
 <h3><span class="header-section-number">3.4.7</span> language</h3>
-<pre class="r"><code>description_ext %&lt;&gt;% mutate(dwc_language = &quot;en&quot;)</code></pre>
+<pre class="r"><code>description %&lt;&gt;% mutate(dwc_language = &quot;en&quot;)</code></pre>
 </div>
 </div>
 </div>
@@ -995,17 +995,17 @@ native_range %&lt;&gt;% rename(description = mapped_value)</code></pre>
 <pre class="r"><code>taxon %&lt;&gt;% select(starts_with(&quot;dwc_&quot;)) 
 distribution %&lt;&gt;% select(starts_with(&quot;dwc_&quot;)) 
 species_profile %&lt;&gt;% select(starts_with(&quot;dwc_&quot;)) 
-description_ext %&lt;&gt;% select(starts_with(&quot;dwc_&quot;))</code></pre>
+description %&lt;&gt;% select(starts_with(&quot;dwc_&quot;))</code></pre>
 <p>Drop the <code>dwc_</code> prefix:</p>
 <pre class="r"><code>colnames(taxon) &lt;- str_remove(colnames(taxon), &quot;dwc_&quot;)
 colnames(distribution) &lt;- str_remove(colnames(distribution), &quot;dwc_&quot;)
 colnames(species_profile) &lt;- str_remove(colnames(species_profile), &quot;dwc_&quot;)
-colnames(description_ext) &lt;- str_remove(colnames(description_ext), &quot;dwc_&quot;)</code></pre>
+colnames(description) &lt;- str_remove(colnames(description), &quot;dwc_&quot;)</code></pre>
 <p>Sort on <code>taxonID</code> to group description information per taxon:</p>
 <pre class="r"><code>taxon %&lt;&gt;% arrange(taxonID)
 distribution %&lt;&gt;% arrange(taxonID)
 species_profile %&lt;&gt;% arrange(taxonID)
-description_ext %&lt;&gt;% arrange(taxonID)</code></pre>
+description %&lt;&gt;% arrange(taxonID)</code></pre>
 <p>Preview taxon core:</p>
 <pre class="r"><code>taxon %&gt;% head(10)</code></pre>
 <div data-pagedtable="false">
@@ -1028,17 +1028,17 @@ description_ext %&lt;&gt;% arrange(taxonID)</code></pre>
   </script>
 </div>
 <p>Preview description extension:</p>
-<pre class="r"><code>description_ext %&gt;% head(10)</code></pre>
+<pre class="r"><code>description %&gt;% head(10)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["taxonID"],"name":[1],"type":["chr"],"align":["left"]},{"label":["description"],"name":[2],"type":["chr"],"align":["left"]},{"label":["type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["language"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520","2":"temperate Asia (WGSRPD:3)","3":"native range","4":"en"},{"1":"alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520","2":"cbd_2014_pathway:escape_horticulture","3":"pathway","4":"en"},{"1":"alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520","2":"casual","3":"invasion stage","4":"en"},{"1":"alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9","2":"temperate Asia (WGSRPD:3)","3":"native range","4":"en"},{"1":"alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9","2":"cbd_2014_pathway:escape_horticulture","3":"pathway","4":"en"},{"1":"alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9","2":"casual","3":"invasion stage","4":"en"},{"1":"alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98","2":"Northern America (WGSRPD:7)","3":"native range","4":"en"},{"1":"alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98","2":"cbd_2014_pathway:escape_horticulture","3":"pathway","4":"en"},{"1":"alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98","2":"casual","3":"invasion stage","4":"en"},{"1":"alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148","2":"Europe (WGSRPD:1)","3":"native range","4":"en"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["taxonID"],"name":[1],"type":["chr"],"align":["left"]},{"label":["description"],"name":[2],"type":["chr"],"align":["left"]},{"label":["type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["language"],"name":[4],"type":["chr"],"align":["left"]}],"data":[{"1":"alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520","2":"temperate Asia (WGSRPD:3)","3":"native range","4":"en"},{"1":"alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520","2":"cbd_2014_pathway:escape_horticulture","3":"pathway","4":"en"},{"1":"alien-plants-belgium:taxon:0005624db3a63ca28d63626bbe47e520","2":"casual","3":"degree of establishment","4":"en"},{"1":"alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9","2":"temperate Asia (WGSRPD:3)","3":"native range","4":"en"},{"1":"alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9","2":"cbd_2014_pathway:escape_horticulture","3":"pathway","4":"en"},{"1":"alien-plants-belgium:taxon:0046a7ee2325ad057382bd9fd726cef9","2":"casual","3":"degree of establishment","4":"en"},{"1":"alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98","2":"Northern America (WGSRPD:7)","3":"native range","4":"en"},{"1":"alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98","2":"cbd_2014_pathway:escape_horticulture","3":"pathway","4":"en"},{"1":"alien-plants-belgium:taxon:004f8d63026942a6baf80b67b6d40b98","2":"casual","3":"degree of establishment","4":"en"},{"1":"alien-plants-belgium:taxon:0057c474d19804c969845b5697f69148","2":"Europe (WGSRPD:1)","3":"native range","4":"en"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <p>Save to CSV:</p>
 <pre class="r"><code>write_csv(taxon, here(&quot;data&quot;, &quot;processed&quot;, &quot;taxon.csv&quot;), na = &quot;&quot;)
 write_csv(distribution, here(&quot;data&quot;, &quot;processed&quot;, &quot;distribution.csv&quot;), na = &quot;&quot;)
 write_csv(species_profile, here(&quot;data&quot;, &quot;processed&quot;, &quot;speciesprofile.csv&quot;), na = &quot;&quot;)
-write_csv(description_ext, here(&quot;data&quot;, &quot;processed&quot;, &quot;description.csv&quot;), na = &quot;&quot;)</code></pre>
+write_csv(description, here(&quot;data&quot;, &quot;processed&quot;, &quot;description.csv&quot;), na = &quot;&quot;)</code></pre>
 </div>
 
 

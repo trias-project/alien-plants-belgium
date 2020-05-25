@@ -482,7 +482,7 @@ distribution %<>% mutate(dwc_eventDate = eventDate)
 
 In this extension will express broad habitat characteristics (e.g. `isTerrestrial`) of the species.
 
-```{r start_species_profile}
+```{r}
 species_profile <- input_data
 ```
 
@@ -563,7 +563,7 @@ For each descriptor, we create a separate dataframe to process the specific info
 
 Create separate dataframe:
 
-```{r start_native_range}
+```{r}
 native_range <- input_data
 ```
 
@@ -667,18 +667,18 @@ native_range %<>% mutate(type = "native range")
 
 ### pathway of introduction
 
-pathway_desc` (pathway description) information is based on `v_i`, which contains a list of introduction pathways (e.g. `Agric., wool`). We'll separate, clean, map and combine these values.
+Pathway information is based on `v_i`, which contains a list of introduction pathways (e.g. `Agric., wool`). We'll separate, clean, map and combine these values.
 
 Create separate dataframe:
 
-```{r start_pathway}
-pathway_desc <- input_data
+```{r}
+pathway <- input_data
 ```
 
 Create `pathway` from `v_i`:
 
 ```{r}
-pathway_desc %<>% mutate(pathway = v_i)
+pathway %<>% mutate(pathway = v_i)
 ```
 
 Separate `pathway` on `,` in 4 columns:
@@ -686,7 +686,7 @@ In case there are more than 4 values, these will be merged in pathway_4.
 The dataset currently contains no more than 3 values per record.
 
 ```{r}
-pathway_desc %<>% separate(
+pathway %<>% separate(
   pathway,
   into = c("pathway_1", "pathway_2", "pathway_3", "pathway_4"),
   sep = ",",
@@ -700,7 +700,7 @@ pathway_desc %<>% separate(
 Gather pathways in a key and value column:
 
 ```{r}
-pathway_desc %<>% gather(
+pathway %<>% gather(
   key, value,
   pathway_1, pathway_2, pathway_3, pathway_4,
   na.rm = TRUE, # Also removes records for which there is no pathway_1
@@ -711,13 +711,13 @@ pathway_desc %<>% gather(
 Sort on `taxon_id` to see pathways in context for each record:
 
 ```{r}
-pathway_desc %<>% arrange(taxon_id)
+pathway %<>% arrange(taxon_id)
 ```
 
 Show unique values:
 
 ```{r}
-pathway_desc %>%
+pathway %>%
   distinct(value) %>%
   arrange(value) 
 ```
@@ -725,7 +725,7 @@ pathway_desc %>%
 Clean values:
 
 ```{r}
-pathway_desc %<>% mutate(
+pathway %<>% mutate(
   value = str_replace_all(value, "\\?|…|\\.{3}", ""), # Strip ?, …, ...
   value = str_to_lower(value), # Convert to lowercase
   value = str_trim(value) # Clean whitespace
@@ -735,7 +735,7 @@ pathway_desc %<>% mutate(
 Map values to the CBD standard::
 
 ```{r}
-pathway_desc %<>% mutate(cbd_stand = recode(value, 
+pathway %<>% mutate(cbd_stand = recode(value, 
   "agric." = "escape_agriculture",
   "bird seed" = "contaminant_seed",
   "birdseed" = "contaminant_seed",
@@ -773,7 +773,7 @@ pathway_desc %<>% mutate(cbd_stand = recode(value,
 Add prefix `cbd_2014_pathway` in case there is a match with the CBD standard:
 
 ```{r}
-pathway_desc %<>% mutate(mapped_value = case_when(
+pathway %<>% mutate(mapped_value = case_when(
   cbd_stand != "" ~ paste ("cbd_2014_pathway", cbd_stand, sep = ":"),
   TRUE ~ ""
 ))
@@ -782,7 +782,7 @@ pathway_desc %<>% mutate(mapped_value = case_when(
 Show mapped values:
 
 ```{r}
-pathway_desc %>%
+pathway %>%
   select(value, mapped_value) %>%
   group_by(value, mapped_value) %>%
   summarize(records = n()) %>%
@@ -792,25 +792,25 @@ pathway_desc %>%
 Drop `key`,`value` and `cbd_stand` column:
 
 ```{r}
-pathway_desc %<>% select(-key, -value, -cbd_stand)
+pathway %<>% select(-key, -value, -cbd_stand)
 ```
 
 Change column name `mapped_value` to `description`:
 
 ```{r}
-pathway_desc %<>%  rename(description = mapped_value)
+pathway %<>%  rename(description = mapped_value)
 ```
 
 Create a `type` field to indicate the type of description:
 
 ```{r}
-pathway_desc %<>% mutate (type = "pathway")
+pathway %<>% mutate (type = "pathway")
 ```
 
 Show pathway descriptions:
 
 ```{r}
-pathway_desc %>% 
+pathway %>% 
   select(description) %>% 
   group_by(description) %>% 
   summarize(records = n())
@@ -819,21 +819,21 @@ pathway_desc %>%
 Keep only non-empty descriptions:
 
 ```{r}
-pathway_desc %<>% filter(!is.na(description) & description != "")
+pathway %<>% filter(!is.na(description) & description != "")
 ```
 
-### invasion stage
+### Degree of establishment
 
 Create separate dataframe:
 
 ```{r start_invasion_stage}
-invasion_stage <- input_data
+degree_of_establishment <- input_data
 ```
 
-The information for invasion stage is contained in `d_n`:
+The information for degree of establishment is contained in `d_n`:
 
 ```{r}
-invasion_stage %>%
+degree_of_establishment %>%
   select(d_n) %>%
   group_by_all() %>%
   summarize(records = n()) 
@@ -842,7 +842,7 @@ invasion_stage %>%
 Clean the data:
 
 ```{r}
-invasion_stage %<>% mutate(description = recode(d_n,
+degree_of_establishment %<>% mutate(description = recode(d_n,
   "Ext.?" = "Ext.",
   "Cas.?" = "Cas.",
   "Nat.?" = "Nat.",
@@ -853,7 +853,7 @@ invasion_stage %<>% mutate(description = recode(d_n,
 We decided to use the unified framework for biological invasions of [Blackburn et al. 2011](http://doc.rero.ch/record/24725/files/bach_puf.pdf) for `invasion stage`. `casual`, `naturalized` and `invasive` are terms included in this framework. However, we decided to discard the terms `naturalized` and `invasive` listed in Blackburn et al. (see trias-project/alien-fishes-checklist#6 (comment)). So, `naturalized` and `invasive` are replaced by `established`. For `extinct` (introduced taxa that once were naturalized but that have not been confirmed in recent times) and `extinct/casual` species (taxa are no longer considered as naturalized but still occur as casuals), we map the most recent invasion stage (i.e. `extinct` and `casual` respectively):
 
 ```{r}
-invasion_stage %<>% mutate(description = recode(description,
+degree_of_establishment %<>% mutate(description = recode(description,
   "Cas." = "casual",
   "Inv." = "established",
   "Nat." = "established",
@@ -865,7 +865,7 @@ invasion_stage %<>% mutate(description = recode(description,
 Show mapped values:
 
 ```{r}
-invasion_stage %>%
+degree_of_establishment %>%
   select(d_n, description) %>%
   group_by_all() %>%
   summarize(records = n())
@@ -874,13 +874,13 @@ invasion_stage %>%
 Create a `type` field to indicate the type of description:
 
 ```{r}
-invasion_stage %<>% mutate(type = "invasion stage")
+degree_of_establishment %<>% mutate(type = "degree of establishment")
 ```
 
-Union native range, pathway of introduction and invasion stage:
+Union native range, pathway of introduction and degree of establishment:
 
-```{r start_description_ext}
-description_ext <- bind_rows(native_range, pathway_desc, invasion_stage)
+```{r}
+description <- bind_rows(native_range, pathway, degree_of_establishment)
 ```
 
 Map the data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/description.xml):
@@ -888,25 +888,25 @@ Map the data to [Taxon Description](http://rs.gbif.org/extension/gbif/1.0/descri
 ### taxonID
 
 ```{r}
-description_ext %<>% mutate(dwc_taxonID = taxon_id)
+description %<>% mutate(dwc_taxonID = taxon_id)
 ```
 
 ### description
 
 ```{r}
-description_ext %<>% mutate(dwc_description = description)
+description %<>% mutate(dwc_description = description)
 ```
 
 ### type
 
 ```{r}
-description_ext %<>% mutate(dwc_type = type)
+description %<>% mutate(dwc_type = type)
 ```
 
 ### language
 
 ```{r}
-description_ext %<>% mutate(dwc_language = "en")
+description %<>% mutate(dwc_language = "en")
 ```
 
 # Post-processing
@@ -917,7 +917,7 @@ Remove the original columns for each of the generated files:
 taxon %<>% select(starts_with("dwc_")) 
 distribution %<>% select(starts_with("dwc_")) 
 species_profile %<>% select(starts_with("dwc_")) 
-description_ext %<>% select(starts_with("dwc_"))
+description %<>% select(starts_with("dwc_"))
 ```
 
 Drop the `dwc_` prefix:
@@ -926,7 +926,7 @@ Drop the `dwc_` prefix:
 colnames(taxon) <- str_remove(colnames(taxon), "dwc_")
 colnames(distribution) <- str_remove(colnames(distribution), "dwc_")
 colnames(species_profile) <- str_remove(colnames(species_profile), "dwc_")
-colnames(description_ext) <- str_remove(colnames(description_ext), "dwc_")
+colnames(description) <- str_remove(colnames(description), "dwc_")
 ```
 
 Sort on `taxonID` to group description information per taxon:
@@ -935,7 +935,7 @@ Sort on `taxonID` to group description information per taxon:
 taxon %<>% arrange(taxonID)
 distribution %<>% arrange(taxonID)
 species_profile %<>% arrange(taxonID)
-description_ext %<>% arrange(taxonID)
+description %<>% arrange(taxonID)
 ```
 
 Preview taxon core:
@@ -959,7 +959,7 @@ species_profile %>% head(10)
 Preview description extension:
 
 ```{r}
-description_ext %>% head(10)
+description %>% head(10)
 ```
 
 Save to CSV:
@@ -968,5 +968,5 @@ Save to CSV:
 write_csv(taxon, here("data", "processed", "taxon.csv"), na = "")
 write_csv(distribution, here("data", "processed", "distribution.csv"), na = "")
 write_csv(species_profile, here("data", "processed", "speciesprofile.csv"), na = "")
-write_csv(description_ext, here("data", "processed", "description.csv"), na = "")
+write_csv(description, here("data", "processed", "description.csv"), na = "")
 ```
