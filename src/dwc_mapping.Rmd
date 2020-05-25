@@ -81,7 +81,7 @@ input_data %>% head()
 
 # Darwin Core mapping
 
-## Create taxon core
+## Taxon core
 
 Create a dataframe with unique taxa only (ignoring multiple distribution rows):
 
@@ -163,7 +163,7 @@ taxon %<>% mutate(dwc_taxonRank = taxon_rank)
 taxon %<>% mutate(dwc_nomenclaturalCode = "ICN")
 ```
 
-## Create distribution extension
+## Distribution extension
 
 ```{r start_distribution}
 distribution <- input_data
@@ -478,7 +478,7 @@ distribution %<>% mutate(dwc_establishmentMeans = "introduced")
 distribution %<>% mutate(dwc_eventDate = eventDate) 
 ```
 
-## Create species profile extension
+## Species profile extension
 
 In this extension will express broad habitat characteristics (e.g. `isTerrestrial`) of the species.
 
@@ -545,7 +545,7 @@ species_profile %>%
   summarize(records = n())
 ```
 
-## Create description extension
+## Description extension
 
 In the description extension we want to include several important characteristics (hereafter refered to as descriptors) about the species:
 
@@ -557,7 +557,7 @@ A single taxon can have multiple descriptions of the same type (e.g. multiple na
 
 For each descriptor, we create a separate dataframe to process the specific information. We always specify _which descriptor_ we map (`type` column) and its _specific content_ (`description` column). After the mapping of these Darwin Core terms `type` and `value`, we merge the dataframes to generate one single description extension. We then continue the mapping process by adding the other Darwin Core terms (which content is independent of the type of descriptor, such as `language`).
 
-#### native range
+### native range
  
 `origin` contains native range information (e.g. `E AS-Te NAM`). We'll separate, clean, map and combine these values.
 
@@ -665,7 +665,7 @@ Create a `type` field to indicate the type of description:
 native_range %<>% mutate(type = "native range")
 ```
 
-#### pathway of introduction
+### pathway of introduction
 
 pathway_desc` (pathway description) information is based on `v_i`, which contains a list of introduction pathways (e.g. `Agric., wool`). We'll separate, clean, map and combine these values.
 
@@ -822,7 +822,7 @@ Keep only non-empty descriptions:
 pathway_desc %<>% filter(!is.na(description) & description != "")
 ```
 
-#### invasion stage
+### invasion stage
 
 Create separate dataframe:
 
