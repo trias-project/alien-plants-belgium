@@ -157,9 +157,6 @@ alien-plants-belgium:taxon:047bea1a4e448882ec99d9a33cc3bbea,established,degree o
 alien-plants-belgium:taxon:047e9aec6a1130bc002e6186d5116186,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:047e9aec6a1130bc002e6186d5116186,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:047e9aec6a1130bc002e6186d5116186,casual,degree of establishment,en
-alien-plants-belgium:taxon:0491148a429ce3d9612505b7b4f1476e,Northern America (WGSRPD:7),native range,en
-alien-plants-belgium:taxon:0491148a429ce3d9612505b7b4f1476e,cbd_2014_pathway:contaminant_on_animals,pathway,en
-alien-plants-belgium:taxon:0491148a429ce3d9612505b7b4f1476e,established,degree of establishment,en
 alien-plants-belgium:taxon:04b51a54b7d64877089a0c0e412f0800,Northern America (WGSRPD:7),native range,en
 alien-plants-belgium:taxon:04b51a54b7d64877089a0c0e412f0800,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:04b51a54b7d64877089a0c0e412f0800,established,degree of establishment,en
@@ -372,6 +369,9 @@ alien-plants-belgium:taxon:096c69912fd3d0b7c0d805021998cbb4,cbd_2014_pathway:con
 alien-plants-belgium:taxon:096c69912fd3d0b7c0d805021998cbb4,casual,degree of establishment,en
 alien-plants-belgium:taxon:09739742a42d384bf226a369e8b6de29,Northern America (WGSRPD:7),native range,en
 alien-plants-belgium:taxon:09739742a42d384bf226a369e8b6de29,casual,degree of establishment,en
+alien-plants-belgium:taxon:0977b5469a730f81787c32530cd144fc,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:0977b5469a730f81787c32530cd144fc,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:0977b5469a730f81787c32530cd144fc,casual,degree of establishment,en
 alien-plants-belgium:taxon:099f8ea7399187fbd15cf6338f7389e0,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:099f8ea7399187fbd15cf6338f7389e0,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:099f8ea7399187fbd15cf6338f7389e0,established,degree of establishment,en
@@ -703,6 +703,7 @@ alien-plants-belgium:taxon:13e0288bcc09d034e7bbefa0601944c4,Europe (WGSRPD:1),na
 alien-plants-belgium:taxon:13e0288bcc09d034e7bbefa0601944c4,Africa (WGSRPD:2),native range,en
 alien-plants-belgium:taxon:13e0288bcc09d034e7bbefa0601944c4,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:13e0288bcc09d034e7bbefa0601944c4,cbd_2014_pathway:contaminant_timber,pathway,en
+alien-plants-belgium:taxon:13e0288bcc09d034e7bbefa0601944c4,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:13e0288bcc09d034e7bbefa0601944c4,casual,degree of establishment,en
 alien-plants-belgium:taxon:142d9ab6a09a648218957b99ac98ca5d,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:142d9ab6a09a648218957b99ac98ca5d,temperate Asia (WGSRPD:3),native range,en
@@ -937,6 +938,9 @@ alien-plants-belgium:taxon:1b69614adaf46bee9ccf3433b4e81c8b,casual,degree of est
 alien-plants-belgium:taxon:1b6f69e754f917f0476820fcfd4ca15f,cultivated origin,native range,en
 alien-plants-belgium:taxon:1b6f69e754f917f0476820fcfd4ca15f,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:1b6f69e754f917f0476820fcfd4ca15f,casual,degree of establishment,en
+alien-plants-belgium:taxon:1b7f12ae4b4052900e0810242f7280f7,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:1b7f12ae4b4052900e0810242f7280f7,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:1b7f12ae4b4052900e0810242f7280f7,established,degree of establishment,en
 alien-plants-belgium:taxon:1bb14755477ae5aa03930cd061199c15,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:1bb14755477ae5aa03930cd061199c15,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:1bb14755477ae5aa03930cd061199c15,established,degree of establishment,en
@@ -1151,6 +1155,9 @@ alien-plants-belgium:taxon:208a47081bb282c1287ac8c71a4d9a63,casual,degree of est
 alien-plants-belgium:taxon:20974e64c6027e8c00729135835d827b,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:20974e64c6027e8c00729135835d827b,cbd_2014_pathway:contaminant_seed,pathway,en
 alien-plants-belgium:taxon:20974e64c6027e8c00729135835d827b,casual,degree of establishment,en
+alien-plants-belgium:taxon:20af79abc2b7fd551377017e769e5d9e,Australasia (WGSRPD:5),native range,en
+alien-plants-belgium:taxon:20af79abc2b7fd551377017e769e5d9e,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:20af79abc2b7fd551377017e769e5d9e,established,degree of establishment,en
 alien-plants-belgium:taxon:20e915b59bfe45483f840a2b466007ce,pan-American,native range,en
 alien-plants-belgium:taxon:20e915b59bfe45483f840a2b466007ce,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:20e915b59bfe45483f840a2b466007ce,casual,degree of establishment,en
@@ -1268,6 +1275,8 @@ alien-plants-belgium:taxon:24229a959e388261b86f00706b48656d,Northern America (WG
 alien-plants-belgium:taxon:24229a959e388261b86f00706b48656d,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:24229a959e388261b86f00706b48656d,cbd_2014_pathway:contaminant_on_animals,pathway,en
 alien-plants-belgium:taxon:24229a959e388261b86f00706b48656d,established,degree of establishment,en
+alien-plants-belgium:taxon:242332c7e55565eed14996331ff2f36b,hybrid origin,native range,en
+alien-plants-belgium:taxon:242332c7e55565eed14996331ff2f36b,casual,degree of establishment,en
 alien-plants-belgium:taxon:24268a21f91418597b434ced43a75e4d,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:24268a21f91418597b434ced43a75e4d,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:24268a21f91418597b434ced43a75e4d,established,degree of establishment,en
@@ -1301,6 +1310,10 @@ alien-plants-belgium:taxon:251982d2f52ee4fa8e858b433302ff64,Africa (WGSRPD:2),na
 alien-plants-belgium:taxon:251982d2f52ee4fa8e858b433302ff64,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:251982d2f52ee4fa8e858b433302ff64,cbd_2014_pathway:contaminant_seed,pathway,en
 alien-plants-belgium:taxon:251982d2f52ee4fa8e858b433302ff64,casual,degree of establishment,en
+alien-plants-belgium:taxon:252b2659a5a9b986db4e1ca657ad8cbb,Europe (WGSRPD:1),native range,en
+alien-plants-belgium:taxon:252b2659a5a9b986db4e1ca657ad8cbb,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:252b2659a5a9b986db4e1ca657ad8cbb,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:252b2659a5a9b986db4e1ca657ad8cbb,casual,degree of establishment,en
 alien-plants-belgium:taxon:253ae3d7b22a96ec4f80d82e674a880d,hybrid origin,native range,en
 alien-plants-belgium:taxon:253ae3d7b22a96ec4f80d82e674a880d,casual,degree of establishment,en
 alien-plants-belgium:taxon:2542085b855c4c02e0639c11a0f89890,Europe (WGSRPD:1),native range,en
@@ -1576,6 +1589,9 @@ alien-plants-belgium:taxon:2b7bf6eed5a14ae97bc1adf73d1d8b31,established,degree o
 alien-plants-belgium:taxon:2b870cceba6ce126c9615ab27c0d8c4f,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:2b870cceba6ce126c9615ab27c0d8c4f,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:2b870cceba6ce126c9615ab27c0d8c4f,casual,degree of establishment,en
+alien-plants-belgium:taxon:2bd322bbb4303d1e882ba1f3160c0d97,Europe (WGSRPD:1),native range,en
+alien-plants-belgium:taxon:2bd322bbb4303d1e882ba1f3160c0d97,Africa (WGSRPD:2),native range,en
+alien-plants-belgium:taxon:2bd322bbb4303d1e882ba1f3160c0d97,established,degree of establishment,en
 alien-plants-belgium:taxon:2be22faad594dba9707a1751252e2620,Africa (WGSRPD:2),native range,en
 alien-plants-belgium:taxon:2be22faad594dba9707a1751252e2620,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:2be22faad594dba9707a1751252e2620,established,degree of establishment,en
@@ -1740,6 +1756,9 @@ alien-plants-belgium:taxon:3007fbc807c3e721f1d44cf493ea4f63,Africa (WGSRPD:2),na
 alien-plants-belgium:taxon:3007fbc807c3e721f1d44cf493ea4f63,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:3007fbc807c3e721f1d44cf493ea4f63,cbd_2014_pathway:contaminant_seed,pathway,en
 alien-plants-belgium:taxon:3007fbc807c3e721f1d44cf493ea4f63,casual,degree of establishment,en
+alien-plants-belgium:taxon:301c260a9cefeaca9a24e845bbeb9082,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:301c260a9cefeaca9a24e845bbeb9082,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:301c260a9cefeaca9a24e845bbeb9082,established,degree of establishment,en
 alien-plants-belgium:taxon:3037f3ba8dd5971fa96dfabed9bc2174,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:3037f3ba8dd5971fa96dfabed9bc2174,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:3037f3ba8dd5971fa96dfabed9bc2174,casual,degree of establishment,en
@@ -1759,6 +1778,10 @@ alien-plants-belgium:taxon:30b1e6d3c1998406fae6d3a4433787b6,casual,degree of est
 alien-plants-belgium:taxon:30c37d8b89d4b0b6bf97cef5ea512eab,hybrid origin,native range,en
 alien-plants-belgium:taxon:30c37d8b89d4b0b6bf97cef5ea512eab,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:30c37d8b89d4b0b6bf97cef5ea512eab,casual,degree of establishment,en
+alien-plants-belgium:taxon:30cb7af01998b994b5cc10ab01030bb6,Europe (WGSRPD:1),native range,en
+alien-plants-belgium:taxon:30cb7af01998b994b5cc10ab01030bb6,Africa (WGSRPD:2),native range,en
+alien-plants-belgium:taxon:30cb7af01998b994b5cc10ab01030bb6,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:30cb7af01998b994b5cc10ab01030bb6,casual,degree of establishment,en
 alien-plants-belgium:taxon:3121f16e8ba5514ef2f72ae8a3b5f20e,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:3121f16e8ba5514ef2f72ae8a3b5f20e,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:3121f16e8ba5514ef2f72ae8a3b5f20e,established,degree of establishment,en
@@ -1872,6 +1895,9 @@ alien-plants-belgium:taxon:34336092e623f613f70f4ec327898f4e,established,degree o
 alien-plants-belgium:taxon:343e449df01b18b90853258a84012149,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:343e449df01b18b90853258a84012149,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:343e449df01b18b90853258a84012149,casual,degree of establishment,en
+alien-plants-belgium:taxon:34982dcd41ef56f761c5a2bd8c5c86d6,Australasia (WGSRPD:5),native range,en
+alien-plants-belgium:taxon:34982dcd41ef56f761c5a2bd8c5c86d6,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:34982dcd41ef56f761c5a2bd8c5c86d6,casual,degree of establishment,en
 alien-plants-belgium:taxon:3499334c31a4b5e0718b3b9c0e9062f1,Africa (WGSRPD:2),native range,en
 alien-plants-belgium:taxon:3499334c31a4b5e0718b3b9c0e9062f1,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:3499334c31a4b5e0718b3b9c0e9062f1,cbd_2014_pathway:contaminant_seed,pathway,en
@@ -2424,7 +2450,7 @@ alien-plants-belgium:taxon:4274fe8a2bce5e3cd6161d2a4745920d,cbd_2014_pathway:esc
 alien-plants-belgium:taxon:4274fe8a2bce5e3cd6161d2a4745920d,casual,degree of establishment,en
 alien-plants-belgium:taxon:429cf81f3dd3d4e50c3fd9e57ae87cb2,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:429cf81f3dd3d4e50c3fd9e57ae87cb2,cbd_2014_pathway:escape_horticulture,pathway,en
-alien-plants-belgium:taxon:429cf81f3dd3d4e50c3fd9e57ae87cb2,casual,degree of establishment,en
+alien-plants-belgium:taxon:429cf81f3dd3d4e50c3fd9e57ae87cb2,established,degree of establishment,en
 alien-plants-belgium:taxon:42d90d3d3665c3a1e49bb374a44c496f,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:42d90d3d3665c3a1e49bb374a44c496f,cbd_2014_pathway:escape_agriculture,pathway,en
 alien-plants-belgium:taxon:42d90d3d3665c3a1e49bb374a44c496f,casual,degree of establishment,en
@@ -2776,6 +2802,7 @@ alien-plants-belgium:taxon:4c38a3fc4c5853fd4a8a804f448cf8e7,temperate Asia (WGSR
 alien-plants-belgium:taxon:4c38a3fc4c5853fd4a8a804f448cf8e7,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:4c38a3fc4c5853fd4a8a804f448cf8e7,established,degree of establishment,en
 alien-plants-belgium:taxon:4c5b42a966454adb3df26a2e541dab93,Europe (WGSRPD:1),native range,en
+alien-plants-belgium:taxon:4c5b42a966454adb3df26a2e541dab93,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:4c5b42a966454adb3df26a2e541dab93,casual,degree of establishment,en
 alien-plants-belgium:taxon:4c726d3ab4f4717a2019e7d81cf9b26c,Northern America (WGSRPD:7),native range,en
 alien-plants-belgium:taxon:4c726d3ab4f4717a2019e7d81cf9b26c,cbd_2014_pathway:escape_horticulture,pathway,en
@@ -3171,7 +3198,7 @@ alien-plants-belgium:taxon:568710c65fbc900f03a4c46efd6c378e,cbd_2014_pathway:esc
 alien-plants-belgium:taxon:568710c65fbc900f03a4c46efd6c378e,casual,degree of establishment,en
 alien-plants-belgium:taxon:56a7f564c9adb83c2d667010e4f07783,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:56a7f564c9adb83c2d667010e4f07783,cbd_2014_pathway:escape_horticulture,pathway,en
-alien-plants-belgium:taxon:56a7f564c9adb83c2d667010e4f07783,casual,degree of establishment,en
+alien-plants-belgium:taxon:56a7f564c9adb83c2d667010e4f07783,established,degree of establishment,en
 alien-plants-belgium:taxon:56abfceb3c3fbbf09f299292469e3809,hybrid origin,native range,en
 alien-plants-belgium:taxon:56abfceb3c3fbbf09f299292469e3809,established,degree of establishment,en
 alien-plants-belgium:taxon:56ba36f851ab49b757b1aaf125bed53a,Southern America (WGSRPD:8),native range,en
@@ -3301,6 +3328,10 @@ alien-plants-belgium:taxon:5a2b32a48cdd2e172a7e88c2b4f9f235,casual,degree of est
 alien-plants-belgium:taxon:5a2b6630fde0d250797ab6406dc16f84,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:5a2b6630fde0d250797ab6406dc16f84,cbd_2014_pathway:escape_agriculture,pathway,en
 alien-plants-belgium:taxon:5a2b6630fde0d250797ab6406dc16f84,casual,degree of establishment,en
+alien-plants-belgium:taxon:5a3b8f02e2bd281411c58753f47c732e,Europe (WGSRPD:1),native range,en
+alien-plants-belgium:taxon:5a3b8f02e2bd281411c58753f47c732e,Africa (WGSRPD:2),native range,en
+alien-plants-belgium:taxon:5a3b8f02e2bd281411c58753f47c732e,cbd_2014_pathway:contaminant_habitat_material,pathway,en
+alien-plants-belgium:taxon:5a3b8f02e2bd281411c58753f47c732e,casual,degree of establishment,en
 alien-plants-belgium:taxon:5a4adfdba4876fe64861c6898db60347,cultivated origin,native range,en
 alien-plants-belgium:taxon:5a4adfdba4876fe64861c6898db60347,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:5a4adfdba4876fe64861c6898db60347,established,degree of establishment,en
@@ -3467,6 +3498,10 @@ alien-plants-belgium:taxon:5e4e3581bdf9a1ff972ef1c1f2ab880e,Africa (WGSRPD:2),na
 alien-plants-belgium:taxon:5e4e3581bdf9a1ff972ef1c1f2ab880e,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:5e4e3581bdf9a1ff972ef1c1f2ab880e,cbd_2014_pathway:contaminant_seed,pathway,en
 alien-plants-belgium:taxon:5e4e3581bdf9a1ff972ef1c1f2ab880e,established,degree of establishment,en
+alien-plants-belgium:taxon:5e6f327d8faaa5a82700e2bd8b09f4a4,Europe (WGSRPD:1),native range,en
+alien-plants-belgium:taxon:5e6f327d8faaa5a82700e2bd8b09f4a4,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:5e6f327d8faaa5a82700e2bd8b09f4a4,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:5e6f327d8faaa5a82700e2bd8b09f4a4,casual,degree of establishment,en
 alien-plants-belgium:taxon:5e7a6cb85105fa7b8dd1c349749db9b4,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:5e7a6cb85105fa7b8dd1c349749db9b4,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:5e7a6cb85105fa7b8dd1c349749db9b4,cbd_2014_pathway:contaminant_seed,pathway,en
@@ -3506,6 +3541,9 @@ alien-plants-belgium:taxon:5f169fe02cfcf61e40960e414e8d7645,Africa (WGSRPD:2),na
 alien-plants-belgium:taxon:5f169fe02cfcf61e40960e414e8d7645,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:5f169fe02cfcf61e40960e414e8d7645,cbd_2014_pathway:contaminant_seed,pathway,en
 alien-plants-belgium:taxon:5f169fe02cfcf61e40960e414e8d7645,casual,degree of establishment,en
+alien-plants-belgium:taxon:5f31948f04d4cd3de7aa22d84a430754,Northern America (WGSRPD:7),native range,en
+alien-plants-belgium:taxon:5f31948f04d4cd3de7aa22d84a430754,cbd_2014_pathway:contaminant_on_animals,pathway,en
+alien-plants-belgium:taxon:5f31948f04d4cd3de7aa22d84a430754,established,degree of establishment,en
 alien-plants-belgium:taxon:5f67ba062229103d8418780abd8d8054,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:5f67ba062229103d8418780abd8d8054,Africa (WGSRPD:2),native range,en
 alien-plants-belgium:taxon:5f67ba062229103d8418780abd8d8054,temperate Asia (WGSRPD:3),native range,en
@@ -3727,11 +3765,6 @@ alien-plants-belgium:taxon:654d8c1183629ef19206126092d9f3c5,established,degree o
 alien-plants-belgium:taxon:656bc45a0fb7fb93b265ced9c1a502d8,Southern America (WGSRPD:8),native range,en
 alien-plants-belgium:taxon:656bc45a0fb7fb93b265ced9c1a502d8,cbd_2014_pathway:contaminant_seed,pathway,en
 alien-plants-belgium:taxon:656bc45a0fb7fb93b265ced9c1a502d8,casual,degree of establishment,en
-alien-plants-belgium:taxon:657380b429ff7a77d2517447b6cb044b,Europe (WGSRPD:1),native range,en
-alien-plants-belgium:taxon:657380b429ff7a77d2517447b6cb044b,Africa (WGSRPD:2),native range,en
-alien-plants-belgium:taxon:657380b429ff7a77d2517447b6cb044b,temperate Asia (WGSRPD:3),native range,en
-alien-plants-belgium:taxon:657380b429ff7a77d2517447b6cb044b,cbd_2014_pathway:escape_horticulture,pathway,en
-alien-plants-belgium:taxon:657380b429ff7a77d2517447b6cb044b,casual,degree of establishment,en
 alien-plants-belgium:taxon:6575c3b2eb4f8be83cf1829689e26150,cultivated origin,native range,en
 alien-plants-belgium:taxon:6575c3b2eb4f8be83cf1829689e26150,cbd_2014_pathway:contaminant_seed,pathway,en
 alien-plants-belgium:taxon:6575c3b2eb4f8be83cf1829689e26150,casual,degree of establishment,en
@@ -3958,7 +3991,7 @@ alien-plants-belgium:taxon:6ad874d390c1746caa4dfdd8659b5cee,casual,degree of est
 alien-plants-belgium:taxon:6ae4baebe84e4d3f5376e85f5e08ac82,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:6ae4baebe84e4d3f5376e85f5e08ac82,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:6ae4baebe84e4d3f5376e85f5e08ac82,cbd_2014_pathway:escape_horticulture,pathway,en
-alien-plants-belgium:taxon:6ae4baebe84e4d3f5376e85f5e08ac82,casual,degree of establishment,en
+alien-plants-belgium:taxon:6ae4baebe84e4d3f5376e85f5e08ac82,established,degree of establishment,en
 alien-plants-belgium:taxon:6b152d839e8e07c17f6b0791d88252ff,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:6b152d839e8e07c17f6b0791d88252ff,Africa (WGSRPD:2),native range,en
 alien-plants-belgium:taxon:6b152d839e8e07c17f6b0791d88252ff,temperate Asia (WGSRPD:3),native range,en
@@ -5035,6 +5068,10 @@ alien-plants-belgium:taxon:89ba10e3114a0f1bd233637191f78b59,Africa (WGSRPD:2),na
 alien-plants-belgium:taxon:89ba10e3114a0f1bd233637191f78b59,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:89ba10e3114a0f1bd233637191f78b59,cbd_2014_pathway:contaminant_on_animals,pathway,en
 alien-plants-belgium:taxon:89ba10e3114a0f1bd233637191f78b59,casual,degree of establishment,en
+alien-plants-belgium:taxon:89bd99ece4aac168dcf2212b66497ee5,Europe (WGSRPD:1),native range,en
+alien-plants-belgium:taxon:89bd99ece4aac168dcf2212b66497ee5,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:89bd99ece4aac168dcf2212b66497ee5,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:89bd99ece4aac168dcf2212b66497ee5,casual,degree of establishment,en
 alien-plants-belgium:taxon:89c83d63cafc92dd6d8a5931c2e523da,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:89c83d63cafc92dd6d8a5931c2e523da,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:89c83d63cafc92dd6d8a5931c2e523da,cbd_2014_pathway:contaminant_seed,pathway,en
@@ -5052,6 +5089,9 @@ alien-plants-belgium:taxon:8a2c25906888a98d9eeec22e36a497bd,established,degree o
 alien-plants-belgium:taxon:8a5868c8dfc393c7483ed8f7867d578f,Northern America (WGSRPD:7),native range,en
 alien-plants-belgium:taxon:8a5868c8dfc393c7483ed8f7867d578f,cbd_2014_pathway:contaminant_on_animals,pathway,en
 alien-plants-belgium:taxon:8a5868c8dfc393c7483ed8f7867d578f,casual,degree of establishment,en
+alien-plants-belgium:taxon:8a5bf353c002c8afcb8708fbc1fa5697,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:8a5bf353c002c8afcb8708fbc1fa5697,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:8a5bf353c002c8afcb8708fbc1fa5697,casual,degree of establishment,en
 alien-plants-belgium:taxon:8a6bd99ed3e22469d85cb278b1d3d6e8,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:8a6bd99ed3e22469d85cb278b1d3d6e8,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:8a6bd99ed3e22469d85cb278b1d3d6e8,established,degree of establishment,en
@@ -5808,6 +5848,9 @@ alien-plants-belgium:taxon:9e5515900fe36efae428dd1fed05806a,Europe (WGSRPD:1),na
 alien-plants-belgium:taxon:9e5515900fe36efae428dd1fed05806a,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:9e5515900fe36efae428dd1fed05806a,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:9e5515900fe36efae428dd1fed05806a,established,degree of establishment,en
+alien-plants-belgium:taxon:9e5c5f7e539e1d27cb4671bc103f4bf3,Africa (WGSRPD:2),native range,en
+alien-plants-belgium:taxon:9e5c5f7e539e1d27cb4671bc103f4bf3,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:9e5c5f7e539e1d27cb4671bc103f4bf3,casual,degree of establishment,en
 alien-plants-belgium:taxon:9e6243d29509bf0f3d387d8324b5145b,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:9e6243d29509bf0f3d387d8324b5145b,cbd_2014_pathway:contaminant_habitat_material,pathway,en
 alien-plants-belgium:taxon:9e6243d29509bf0f3d387d8324b5145b,established,degree of establishment,en
@@ -5816,7 +5859,7 @@ alien-plants-belgium:taxon:9e6785083cad63071ea4a843c109baee,cbd_2014_pathway:esc
 alien-plants-belgium:taxon:9e6785083cad63071ea4a843c109baee,casual,degree of establishment,en
 alien-plants-belgium:taxon:9e6c653092cb49515456dfa5aa5d2139,pan-American,native range,en
 alien-plants-belgium:taxon:9e6c653092cb49515456dfa5aa5d2139,cbd_2014_pathway:contaminant_on_animals,pathway,en
-alien-plants-belgium:taxon:9e6c653092cb49515456dfa5aa5d2139,casual,degree of establishment,en
+alien-plants-belgium:taxon:9e6c653092cb49515456dfa5aa5d2139,established,degree of establishment,en
 alien-plants-belgium:taxon:9e72afa545643abe2c0f9c1e55f89500,Northern America (WGSRPD:7),native range,en
 alien-plants-belgium:taxon:9e72afa545643abe2c0f9c1e55f89500,cbd_2014_pathway:contaminant_seed,pathway,en
 alien-plants-belgium:taxon:9e72afa545643abe2c0f9c1e55f89500,casual,degree of establishment,en
@@ -6074,6 +6117,9 @@ alien-plants-belgium:taxon:a409526a89a99ebd766c8b70a7d9fda5,established,degree o
 alien-plants-belgium:taxon:a41a985d043d4c289f8a188b8bc3ffdf,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:a41a985d043d4c289f8a188b8bc3ffdf,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:a41a985d043d4c289f8a188b8bc3ffdf,casual,degree of establishment,en
+alien-plants-belgium:taxon:a44bb5cc0af7cafae96ddd82105d6b0f,Northern America (WGSRPD:7),native range,en
+alien-plants-belgium:taxon:a44bb5cc0af7cafae96ddd82105d6b0f,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:a44bb5cc0af7cafae96ddd82105d6b0f,casual,degree of establishment,en
 alien-plants-belgium:taxon:a46271644392bc6412bff1ebf244e4bc,hybrid origin,native range,en
 alien-plants-belgium:taxon:a46271644392bc6412bff1ebf244e4bc,casual,degree of establishment,en
 alien-plants-belgium:taxon:a467760752035d6508ddbb5656429688,cultivated origin,native range,en
@@ -6174,6 +6220,9 @@ alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,Africa (WGSRPD:2),na
 alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,cbd_2014_pathway:contaminant_seed,pathway,en
 alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,established,degree of establishment,en
+alien-plants-belgium:taxon:a6d957168d81d3fe1ae4c94a0487af83,Europe (WGSRPD:1),native range,en
+alien-plants-belgium:taxon:a6d957168d81d3fe1ae4c94a0487af83,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:a6d957168d81d3fe1ae4c94a0487af83,casual,degree of establishment,en
 alien-plants-belgium:taxon:a6e85604ae9537c591f4d851b0dd23df,Southern America (WGSRPD:8),native range,en
 alien-plants-belgium:taxon:a6e85604ae9537c591f4d851b0dd23df,cbd_2014_pathway:contaminant_seed,pathway,en
 alien-plants-belgium:taxon:a6e85604ae9537c591f4d851b0dd23df,cbd_2014_pathway:contaminant_on_animals,pathway,en
@@ -6392,6 +6441,10 @@ alien-plants-belgium:taxon:ae771ec605d6ee2f333aff2f8a87e851,cbd_2014_pathway:esc
 alien-plants-belgium:taxon:ae771ec605d6ee2f333aff2f8a87e851,casual,degree of establishment,en
 alien-plants-belgium:taxon:ae8006fab3f73c2db75df10f41dd82bd,hybrid origin,native range,en
 alien-plants-belgium:taxon:ae8006fab3f73c2db75df10f41dd82bd,casual,degree of establishment,en
+alien-plants-belgium:taxon:ae8494b75cee46d063f5ef2dd5a5d3cb,Europe (WGSRPD:1),native range,en
+alien-plants-belgium:taxon:ae8494b75cee46d063f5ef2dd5a5d3cb,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:ae8494b75cee46d063f5ef2dd5a5d3cb,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:ae8494b75cee46d063f5ef2dd5a5d3cb,casual,degree of establishment,en
 alien-plants-belgium:taxon:ae96e74062c47021ee9f81d837536775,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:ae96e74062c47021ee9f81d837536775,casual,degree of establishment,en
 alien-plants-belgium:taxon:ae97e00d1d57dd071d1c7408e1a8d7f1,temperate Asia (WGSRPD:3),native range,en
@@ -6619,6 +6672,9 @@ alien-plants-belgium:taxon:b5fd5d2c6d7a317265ca70fcc1fe0eeb,Europe (WGSRPD:1),na
 alien-plants-belgium:taxon:b5fd5d2c6d7a317265ca70fcc1fe0eeb,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:b5fd5d2c6d7a317265ca70fcc1fe0eeb,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:b5fd5d2c6d7a317265ca70fcc1fe0eeb,established,degree of establishment,en
+alien-plants-belgium:taxon:b6266f780313151c0ee762ad304d06a1,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:b6266f780313151c0ee762ad304d06a1,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:b6266f780313151c0ee762ad304d06a1,casual,degree of establishment,en
 alien-plants-belgium:taxon:b66ef1540ea9643a72c69a48cef60b5f,Africa (WGSRPD:2),native range,en
 alien-plants-belgium:taxon:b66ef1540ea9643a72c69a48cef60b5f,cbd_2014_pathway:contaminant_habitat_material,pathway,en
 alien-plants-belgium:taxon:b66ef1540ea9643a72c69a48cef60b5f,casual,degree of establishment,en
@@ -6774,6 +6830,9 @@ alien-plants-belgium:taxon:ba661dea545dafde212b2a5a2b2f613b,temperate Asia (WGSR
 alien-plants-belgium:taxon:ba661dea545dafde212b2a5a2b2f613b,cbd_2014_pathway:contaminant_seed,pathway,en
 alien-plants-belgium:taxon:ba661dea545dafde212b2a5a2b2f613b,cbd_2014_pathway:contaminant_on_animals,pathway,en
 alien-plants-belgium:taxon:ba661dea545dafde212b2a5a2b2f613b,casual,degree of establishment,en
+alien-plants-belgium:taxon:ba67f6046933a5194cfd5981e8b4d0be,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:ba67f6046933a5194cfd5981e8b4d0be,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:ba67f6046933a5194cfd5981e8b4d0be,casual,degree of establishment,en
 alien-plants-belgium:taxon:bae2d614545a9920247335302f57eeff,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:bae2d614545a9920247335302f57eeff,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:bae2d614545a9920247335302f57eeff,established,degree of establishment,en
@@ -7522,6 +7581,9 @@ alien-plants-belgium:taxon:d11157b5d535e7fd4daf2908083b7648,casual,degree of est
 alien-plants-belgium:taxon:d11182f346636877e383598e9d5698a5,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:d11182f346636877e383598e9d5698a5,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:d11182f346636877e383598e9d5698a5,established,degree of establishment,en
+alien-plants-belgium:taxon:d12a48c81fd20889817f9e0a07f241ea,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:d12a48c81fd20889817f9e0a07f241ea,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:d12a48c81fd20889817f9e0a07f241ea,casual,degree of establishment,en
 alien-plants-belgium:taxon:d1399c6a7d2f8460f9547010b9fb64bb,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:d1399c6a7d2f8460f9547010b9fb64bb,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:d1399c6a7d2f8460f9547010b9fb64bb,casual,degree of establishment,en
@@ -7570,9 +7632,6 @@ alien-plants-belgium:taxon:d2a39eec7e24b0efcda875891a050172,Northern America (WG
 alien-plants-belgium:taxon:d2a39eec7e24b0efcda875891a050172,cbd_2014_pathway:escape_food_bait,pathway,en
 alien-plants-belgium:taxon:d2a39eec7e24b0efcda875891a050172,cbd_2014_pathway:contaminant_on_animals,pathway,en
 alien-plants-belgium:taxon:d2a39eec7e24b0efcda875891a050172,casual,degree of establishment,en
-alien-plants-belgium:taxon:d2b0ba4e9eac5a7c674b974314498083,temperate Asia (WGSRPD:3),native range,en
-alien-plants-belgium:taxon:d2b0ba4e9eac5a7c674b974314498083,cbd_2014_pathway:escape_horticulture,pathway,en
-alien-plants-belgium:taxon:d2b0ba4e9eac5a7c674b974314498083,casual,degree of establishment,en
 alien-plants-belgium:taxon:d2b0bd2ca106d1add638b491b89126d5,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:d2b0bd2ca106d1add638b491b89126d5,Africa (WGSRPD:2),native range,en
 alien-plants-belgium:taxon:d2b0bd2ca106d1add638b491b89126d5,temperate Asia (WGSRPD:3),native range,en
@@ -7874,6 +7933,11 @@ alien-plants-belgium:taxon:db118839f57a3122bb15c967ed1d8e45,casual,degree of est
 alien-plants-belgium:taxon:db1c95cb546fe54145a59d9ce2868146,Northern America (WGSRPD:7),native range,en
 alien-plants-belgium:taxon:db1c95cb546fe54145a59d9ce2868146,cbd_2014_pathway:contaminant_seed,pathway,en
 alien-plants-belgium:taxon:db1c95cb546fe54145a59d9ce2868146,established,degree of establishment,en
+alien-plants-belgium:taxon:db31bb9bbb5400206ab2ca285c9571c0,Europe (WGSRPD:1),native range,en
+alien-plants-belgium:taxon:db31bb9bbb5400206ab2ca285c9571c0,Africa (WGSRPD:2),native range,en
+alien-plants-belgium:taxon:db31bb9bbb5400206ab2ca285c9571c0,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:db31bb9bbb5400206ab2ca285c9571c0,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:db31bb9bbb5400206ab2ca285c9571c0,casual,degree of establishment,en
 alien-plants-belgium:taxon:db60357ac764c5513bfc70255273c3b9,Africa (WGSRPD:2),native range,en
 alien-plants-belgium:taxon:db60357ac764c5513bfc70255273c3b9,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:db60357ac764c5513bfc70255273c3b9,cbd_2014_pathway:contaminant_on_animals,pathway,en
@@ -8111,6 +8175,9 @@ alien-plants-belgium:taxon:e2b520d7bf6cec7d659b35f2d4a28c14,cbd_2014_pathway:esc
 alien-plants-belgium:taxon:e2b520d7bf6cec7d659b35f2d4a28c14,established,degree of establishment,en
 alien-plants-belgium:taxon:e2cc1c649ddf4d8f9ec56997b78654ff,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:e2cc1c649ddf4d8f9ec56997b78654ff,casual,degree of establishment,en
+alien-plants-belgium:taxon:e2ccb50cebae4a5b6747fe2cdd2531af,Africa (WGSRPD:2),native range,en
+alien-plants-belgium:taxon:e2ccb50cebae4a5b6747fe2cdd2531af,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:e2ccb50cebae4a5b6747fe2cdd2531af,casual,degree of establishment,en
 alien-plants-belgium:taxon:e2d5de46587e0394d4791efe38599544,Southern America (WGSRPD:8),native range,en
 alien-plants-belgium:taxon:e2d5de46587e0394d4791efe38599544,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:e2d5de46587e0394d4791efe38599544,casual,degree of establishment,en
@@ -8140,7 +8207,7 @@ alien-plants-belgium:taxon:e39a8dab8e0d211dca7527aa0fa93d43,cbd_2014_pathway:esc
 alien-plants-belgium:taxon:e39a8dab8e0d211dca7527aa0fa93d43,established,degree of establishment,en
 alien-plants-belgium:taxon:e3b09a3228b85555709f32727e8a2a8f,Northern America (WGSRPD:7),native range,en
 alien-plants-belgium:taxon:e3b09a3228b85555709f32727e8a2a8f,cbd_2014_pathway:escape_horticulture,pathway,en
-alien-plants-belgium:taxon:e3b09a3228b85555709f32727e8a2a8f,casual,degree of establishment,en
+alien-plants-belgium:taxon:e3b09a3228b85555709f32727e8a2a8f,established,degree of establishment,en
 alien-plants-belgium:taxon:e3bb0f59e597e72b4901d224b7bcc25c,temperate Asia (WGSRPD:3),native range,en
 alien-plants-belgium:taxon:e3bb0f59e597e72b4901d224b7bcc25c,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:e3bb0f59e597e72b4901d224b7bcc25c,casual,degree of establishment,en
@@ -8702,6 +8769,9 @@ alien-plants-belgium:taxon:f27cf15d74e45d5b72f14e801f7be5be,Europe (WGSRPD:1),na
 alien-plants-belgium:taxon:f27cf15d74e45d5b72f14e801f7be5be,Africa (WGSRPD:2),native range,en
 alien-plants-belgium:taxon:f27cf15d74e45d5b72f14e801f7be5be,cbd_2014_pathway:contaminant_seed,pathway,en
 alien-plants-belgium:taxon:f27cf15d74e45d5b72f14e801f7be5be,casual,degree of establishment,en
+alien-plants-belgium:taxon:f296e599fd529aa90eaa74a4f80ab725,Africa (WGSRPD:2),native range,en
+alien-plants-belgium:taxon:f296e599fd529aa90eaa74a4f80ab725,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:f296e599fd529aa90eaa74a4f80ab725,casual,degree of establishment,en
 alien-plants-belgium:taxon:f297e1050d33618c6579d76ed3db6faa,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:f297e1050d33618c6579d76ed3db6faa,cbd_2014_pathway:escape_horticulture,pathway,en
 alien-plants-belgium:taxon:f297e1050d33618c6579d76ed3db6faa,established,degree of establishment,en
@@ -8797,6 +8867,9 @@ alien-plants-belgium:taxon:f433e77c2fb0b46b9d0e4766828235b9,casual,degree of est
 alien-plants-belgium:taxon:f498db40095671794426a72dc6d85c94,Europe (WGSRPD:1),native range,en
 alien-plants-belgium:taxon:f498db40095671794426a72dc6d85c94,cbd_2014_pathway:contaminant_on_animals,pathway,en
 alien-plants-belgium:taxon:f498db40095671794426a72dc6d85c94,casual,degree of establishment,en
+alien-plants-belgium:taxon:f4c9151f7f443ab4d607f154b2665484,temperate Asia (WGSRPD:3),native range,en
+alien-plants-belgium:taxon:f4c9151f7f443ab4d607f154b2665484,cbd_2014_pathway:escape_horticulture,pathway,en
+alien-plants-belgium:taxon:f4c9151f7f443ab4d607f154b2665484,casual,degree of establishment,en
 alien-plants-belgium:taxon:f51c04ae207885f4d2ee0ac440a52352,Northern America (WGSRPD:7),native range,en
 alien-plants-belgium:taxon:f51c04ae207885f4d2ee0ac440a52352,cbd_2014_pathway:contaminant_timber,pathway,en
 alien-plants-belgium:taxon:f51c04ae207885f4d2ee0ac440a52352,established,degree of establishment,en
