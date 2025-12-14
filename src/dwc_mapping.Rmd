@@ -422,12 +422,12 @@ input_data <-
   mutate(
     degree_of_establishment = case_match(
       d_n,
-      "Ext." ~ "extinct",
-      "Ext.?" ~ "extinct",
+      "Ext." ~ NA_character_,
+      "Ext.?" ~ NA_character_,
       "Ext./Cas." ~ "casual",
       "Cas." ~ "casual",
       "Cas.?" ~ "casual",
-      "Inv." ~ "established",
+      "Inv." ~ "invasive",
       "Nat." ~ "established",
       "Nat.?" ~ "established",
       .default = NA_character_

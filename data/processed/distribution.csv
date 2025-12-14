@@ -63,10 +63,10 @@ alien-plants-belgium:taxon:010c66ec5f02586a9c88c1f8f46a0c85,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:010c66ec5f02586a9c88c1f8f46a0c85,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1862/2019
 alien-plants-belgium:taxon:010c66ec5f02586a9c88c1f8f46a0c85,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1862/2019
 alien-plants-belgium:taxon:010c66ec5f02586a9c88c1f8f46a0c85,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1862/2019
-alien-plants-belgium:taxon:013e021016ae1a6385b1468645c286ff,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:013e021016ae1a6385b1468645c286ff,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:013e021016ae1a6385b1468645c286ff,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:013e021016ae1a6385b1468645c286ff,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1955/2025
+alien-plants-belgium:taxon:013e021016ae1a6385b1468645c286ff,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:013e021016ae1a6385b1468645c286ff,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:013e021016ae1a6385b1468645c286ff,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:013e021016ae1a6385b1468645c286ff,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1955/2025
 alien-plants-belgium:taxon:015d3a5ea74185002c94c3e5c68de810,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2009/2020
 alien-plants-belgium:taxon:015d3a5ea74185002c94c3e5c68de810,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2009/2020
 alien-plants-belgium:taxon:01669964adcde8cac0e8e73d1a0dc839,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,1988
@@ -150,9 +150,9 @@ alien-plants-belgium:taxon:047bea1a4e448882ec99d9a33cc3bbea,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:047bea1a4e448882ec99d9a33cc3bbea,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_nursery,1920/2025
 alien-plants-belgium:taxon:047e9aec6a1130bc002e6186d5116186,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,1900/2008
 alien-plants-belgium:taxon:047e9aec6a1130bc002e6186d5116186,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1900/2008
-alien-plants-belgium:taxon:04b51a54b7d64877089a0c0e412f0800,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:04b51a54b7d64877089a0c0e412f0800,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:04b51a54b7d64877089a0c0e412f0800,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1849/2025
+alien-plants-belgium:taxon:04b51a54b7d64877089a0c0e412f0800,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:04b51a54b7d64877089a0c0e412f0800,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:04b51a54b7d64877089a0c0e412f0800,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1849/2025
 alien-plants-belgium:taxon:04bb22d9d2543d5c6e2fba95b4c755f5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2020
 alien-plants-belgium:taxon:04bb22d9d2543d5c6e2fba95b4c755f5,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2020
 alien-plants-belgium:taxon:04bbea142d4bab111055a71b21d8a7e5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_on_animals,
@@ -344,10 +344,10 @@ alien-plants-belgium:taxon:08ba0d493538930ca2b95cdc6d9e4999,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:08ba0d493538930ca2b95cdc6d9e4999,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,2025
 alien-plants-belgium:taxon:08c6b92bd9cdc59866e8f0d7aa0b76b3,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1903/1909
 alien-plants-belgium:taxon:08c6b92bd9cdc59866e8f0d7aa0b76b3,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1903/1909
-alien-plants-belgium:taxon:08d788df618d1a564edbe8db7409d69d,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:08d788df618d1a564edbe8db7409d69d,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:08d788df618d1a564edbe8db7409d69d,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:08d788df618d1a564edbe8db7409d69d,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1835/2025
+alien-plants-belgium:taxon:08d788df618d1a564edbe8db7409d69d,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:08d788df618d1a564edbe8db7409d69d,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:08d788df618d1a564edbe8db7409d69d,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:08d788df618d1a564edbe8db7409d69d,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1835/2025
 alien-plants-belgium:taxon:08eaf4acea6e84a94b8416f65bedcc29,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2013/2017
 alien-plants-belgium:taxon:08eaf4acea6e84a94b8416f65bedcc29,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2013/2017
 alien-plants-belgium:taxon:08f7f2f4409eb00f3039e76bb31e0194,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_seed,1954/1955
@@ -520,10 +520,10 @@ alien-plants-belgium:taxon:0c81063e1e8dc2df47b6f70ad289db2c,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:0c81063e1e8dc2df47b6f70ad289db2c,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_habitat_material,
 alien-plants-belgium:taxon:0c81063e1e8dc2df47b6f70ad289db2c,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,contaminant_habitat_material,
 alien-plants-belgium:taxon:0c81063e1e8dc2df47b6f70ad289db2c,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_habitat_material,1857/2025
-alien-plants-belgium:taxon:0cd72d49338dd4b4de81599dbb3338bd,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:0cd72d49338dd4b4de81599dbb3338bd,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:0cd72d49338dd4b4de81599dbb3338bd,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:0cd72d49338dd4b4de81599dbb3338bd,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1895/2025
+alien-plants-belgium:taxon:0cd72d49338dd4b4de81599dbb3338bd,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:0cd72d49338dd4b4de81599dbb3338bd,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:0cd72d49338dd4b4de81599dbb3338bd,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:0cd72d49338dd4b4de81599dbb3338bd,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1895/2025
 alien-plants-belgium:taxon:0cdc595c6fb0d8d48cba6b921e35bb97,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:0cdc595c6fb0d8d48cba6b921e35bb97,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:0cdc595c6fb0d8d48cba6b921e35bb97,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,escape_horticulture,
@@ -558,10 +558,10 @@ alien-plants-belgium:taxon:0e12a1245cecaad3206f837e189f674e,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:0e12a1245cecaad3206f837e189f674e,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2007/2014
 alien-plants-belgium:taxon:0e3c6947a62ed7b8ee71e96eac696fd7,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,1835/1893
 alien-plants-belgium:taxon:0e3c6947a62ed7b8ee71e96eac696fd7,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1835/1893
-alien-plants-belgium:taxon:0e3f93033067eedb17ba8de2cab4eb93,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:0e3f93033067eedb17ba8de2cab4eb93,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:0e3f93033067eedb17ba8de2cab4eb93,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:0e3f93033067eedb17ba8de2cab4eb93,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1856/2025
+alien-plants-belgium:taxon:0e3f93033067eedb17ba8de2cab4eb93,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:0e3f93033067eedb17ba8de2cab4eb93,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:0e3f93033067eedb17ba8de2cab4eb93,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:0e3f93033067eedb17ba8de2cab4eb93,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1856/2025
 alien-plants-belgium:taxon:0e74806a50723af0baf306dcbcf7c39c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_on_animals,
 alien-plants-belgium:taxon:0e74806a50723af0baf306dcbcf7c39c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:0e74806a50723af0baf306dcbcf7c39c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,
@@ -714,10 +714,10 @@ alien-plants-belgium:taxon:129ef90ccc49ca71a65bd01f28997c13,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:129ef90ccc49ca71a65bd01f28997c13,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1980
 alien-plants-belgium:taxon:12af2863f8ed5ca1a6f6c2394a87abb0,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2004/2016
 alien-plants-belgium:taxon:12af2863f8ed5ca1a6f6c2394a87abb0,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2004/2016
-alien-plants-belgium:taxon:12b4f403db2a517d779bddf0e62c98a9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:12b4f403db2a517d779bddf0e62c98a9,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:12b4f403db2a517d779bddf0e62c98a9,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:12b4f403db2a517d779bddf0e62c98a9,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1930/2025
+alien-plants-belgium:taxon:12b4f403db2a517d779bddf0e62c98a9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:12b4f403db2a517d779bddf0e62c98a9,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:12b4f403db2a517d779bddf0e62c98a9,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:12b4f403db2a517d779bddf0e62c98a9,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1930/2025
 alien-plants-belgium:taxon:1307108f51b11db65c95beec1360c998,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,1851/2025
 alien-plants-belgium:taxon:1307108f51b11db65c95beec1360c998,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1851/2025
 alien-plants-belgium:taxon:13b5d872e33040f8d258800757816d9d,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,1998
@@ -901,9 +901,9 @@ alien-plants-belgium:taxon:1999a9245f2513b4830d6a7a2fff3bfc,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:19cef7da5e4ce1ff165f86c7017f69f7,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_agriculture,
 alien-plants-belgium:taxon:19cef7da5e4ce1ff165f86c7017f69f7,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_agriculture,
 alien-plants-belgium:taxon:19cef7da5e4ce1ff165f86c7017f69f7,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_agriculture,1871/2025
-alien-plants-belgium:taxon:19e08ba46ec5d0e5566a6bdf4ed1bf27,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:19e08ba46ec5d0e5566a6bdf4ed1bf27,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:19e08ba46ec5d0e5566a6bdf4ed1bf27,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1898/2025
+alien-plants-belgium:taxon:19e08ba46ec5d0e5566a6bdf4ed1bf27,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:19e08ba46ec5d0e5566a6bdf4ed1bf27,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:19e08ba46ec5d0e5566a6bdf4ed1bf27,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1898/2025
 alien-plants-belgium:taxon:19f8cc0764e42bc3c487e55ea5870a7d,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,1948
 alien-plants-belgium:taxon:19f8cc0764e42bc3c487e55ea5870a7d,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1948
 alien-plants-belgium:taxon:1a2bdaf34d284faa9ae4bd8d4bb19d86,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
@@ -916,10 +916,10 @@ alien-plants-belgium:taxon:1a2bdaf34d284faa9ae4bd8d4bb19d86,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:1a2bdaf34d284faa9ae4bd8d4bb19d86,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1813/2016
 alien-plants-belgium:taxon:1a4d1a68dca66c060cf543c57ae3286d,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,2007
 alien-plants-belgium:taxon:1a4d1a68dca66c060cf543c57ae3286d,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2007
-alien-plants-belgium:taxon:1a84582bd2467f3ac43899947de3d4e1,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:1a84582bd2467f3ac43899947de3d4e1,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:1a84582bd2467f3ac43899947de3d4e1,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:1a84582bd2467f3ac43899947de3d4e1,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1952/2025
+alien-plants-belgium:taxon:1a84582bd2467f3ac43899947de3d4e1,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:1a84582bd2467f3ac43899947de3d4e1,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:1a84582bd2467f3ac43899947de3d4e1,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:1a84582bd2467f3ac43899947de3d4e1,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1952/2025
 alien-plants-belgium:taxon:1acde857772e8299a302d952d4dcce9f,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_seed,2001/2025
 alien-plants-belgium:taxon:1acde857772e8299a302d952d4dcce9f,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_seed,2001/2025
 alien-plants-belgium:taxon:1ad2f61eab9f0f9243c568b0a537ce82,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_agriculture,
@@ -1117,9 +1117,9 @@ alien-plants-belgium:taxon:1e6507057cfb25f99cd98b73777d1fbe,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:1e6507057cfb25f99cd98b73777d1fbe,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1886/1955
 alien-plants-belgium:taxon:1e6ceef1485b168d6aaf3ef51030531a,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,2011/2014
 alien-plants-belgium:taxon:1e6ceef1485b168d6aaf3ef51030531a,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,2011/2014
-alien-plants-belgium:taxon:1e777628694be078e0403ae065613d94,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:1e777628694be078e0403ae065613d94,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:1e777628694be078e0403ae065613d94,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1983/2025
+alien-plants-belgium:taxon:1e777628694be078e0403ae065613d94,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:1e777628694be078e0403ae065613d94,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:1e777628694be078e0403ae065613d94,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1983/2025
 alien-plants-belgium:taxon:1e91724d7308d3ea9f2e90fcaf7ef901,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:1e91724d7308d3ea9f2e90fcaf7ef901,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:1e91724d7308d3ea9f2e90fcaf7ef901,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
@@ -1572,9 +1572,9 @@ alien-plants-belgium:taxon:2a9d44225a106c00983c3c6e7c5b70c6,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:2a9d44225a106c00983c3c6e7c5b70c6,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2014/2016
 alien-plants-belgium:taxon:2ab0638bd342f27a11dbaf54e6fcbd6e,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,2004/2010
 alien-plants-belgium:taxon:2ab0638bd342f27a11dbaf54e6fcbd6e,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,2004/2010
-alien-plants-belgium:taxon:2ac59ada4bbf11376e74a313aff52477,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:2ac59ada4bbf11376e74a313aff52477,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:2ac59ada4bbf11376e74a313aff52477,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1997/2025
+alien-plants-belgium:taxon:2ac59ada4bbf11376e74a313aff52477,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:2ac59ada4bbf11376e74a313aff52477,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:2ac59ada4bbf11376e74a313aff52477,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1997/2025
 alien-plants-belgium:taxon:2ac6aa778aaca85a463176665b9ee081,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2011/2018
 alien-plants-belgium:taxon:2ac6aa778aaca85a463176665b9ee081,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2011/2018
 alien-plants-belgium:taxon:2ac9c629168046755067a47f8353c482,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_timber,2015
@@ -1597,8 +1597,8 @@ alien-plants-belgium:taxon:2afe8f474d2325fe605b0def06f9b4cb,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:2afe8f474d2325fe605b0def06f9b4cb,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,,
 alien-plants-belgium:taxon:2afe8f474d2325fe605b0def06f9b4cb,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1811/2018
 alien-plants-belgium:taxon:2afe8f474d2325fe605b0def06f9b4cb,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1811/2018
-alien-plants-belgium:taxon:2afe9b98551b4198bc03d3ddd0cb7447,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,escape_horticulture,1955/1975
-alien-plants-belgium:taxon:2afe9b98551b4198bc03d3ddd0cb7447,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1955/1975
+alien-plants-belgium:taxon:2afe9b98551b4198bc03d3ddd0cb7447,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,escape_horticulture,1955/1975
+alien-plants-belgium:taxon:2afe9b98551b4198bc03d3ddd0cb7447,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1955/1975
 alien-plants-belgium:taxon:2b00394f0c0a380788c5699703a8090a,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,2015/2018
 alien-plants-belgium:taxon:2b00394f0c0a380788c5699703a8090a,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,2015/2018
 alien-plants-belgium:taxon:2b0d7f07926f94d4a8e082641b8bea92,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2013
@@ -1651,10 +1651,10 @@ alien-plants-belgium:taxon:2c773e1ccf2e895187c4002717381075,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:2c773e1ccf2e895187c4002717381075,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_agriculture,
 alien-plants-belgium:taxon:2c773e1ccf2e895187c4002717381075,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,escape_agriculture,
 alien-plants-belgium:taxon:2c773e1ccf2e895187c4002717381075,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_agriculture,1850/2019
-alien-plants-belgium:taxon:2c77c34a91dbd9d7cc7821c06a65c21f,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:2c77c34a91dbd9d7cc7821c06a65c21f,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:2c77c34a91dbd9d7cc7821c06a65c21f,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:2c77c34a91dbd9d7cc7821c06a65c21f,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1882/2025
+alien-plants-belgium:taxon:2c77c34a91dbd9d7cc7821c06a65c21f,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:2c77c34a91dbd9d7cc7821c06a65c21f,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:2c77c34a91dbd9d7cc7821c06a65c21f,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:2c77c34a91dbd9d7cc7821c06a65c21f,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1882/2025
 alien-plants-belgium:taxon:2c7cc031c44e226c21d3dde428e554ee,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2005/2018
 alien-plants-belgium:taxon:2c7cc031c44e226c21d3dde428e554ee,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2005/2018
 alien-plants-belgium:taxon:2c9181e000b463db30ed42c77c67d8da,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,2016/2020
@@ -1762,10 +1762,10 @@ alien-plants-belgium:taxon:2fb851e4f733067804a9bd342972510c,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:2fb851e4f733067804a9bd342972510c,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1877/2004
 alien-plants-belgium:taxon:2fbeeaf454fa7fa276959d03860d8fb4,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,1889
 alien-plants-belgium:taxon:2fbeeaf454fa7fa276959d03860d8fb4,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1889
-alien-plants-belgium:taxon:2fd5a64378cfa27566aff779303becb7,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:2fd5a64378cfa27566aff779303becb7,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:2fd5a64378cfa27566aff779303becb7,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:2fd5a64378cfa27566aff779303becb7,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1992/2025
+alien-plants-belgium:taxon:2fd5a64378cfa27566aff779303becb7,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:2fd5a64378cfa27566aff779303becb7,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:2fd5a64378cfa27566aff779303becb7,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:2fd5a64378cfa27566aff779303becb7,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1992/2025
 alien-plants-belgium:taxon:2fe365606cbe9ca2acf79d0152f97237,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1902/1904
 alien-plants-belgium:taxon:2fe365606cbe9ca2acf79d0152f97237,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1902/1904
 alien-plants-belgium:taxon:3007fbc807c3e721f1d44cf493ea4f63,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,1978
@@ -1789,10 +1789,10 @@ alien-plants-belgium:taxon:30c37d8b89d4b0b6bf97cef5ea512eab,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:30c37d8b89d4b0b6bf97cef5ea512eab,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2003
 alien-plants-belgium:taxon:30cb7af01998b994b5cc10ab01030bb6,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,2020
 alien-plants-belgium:taxon:30cb7af01998b994b5cc10ab01030bb6,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,2020
-alien-plants-belgium:taxon:3121f16e8ba5514ef2f72ae8a3b5f20e,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:3121f16e8ba5514ef2f72ae8a3b5f20e,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:3121f16e8ba5514ef2f72ae8a3b5f20e,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:3121f16e8ba5514ef2f72ae8a3b5f20e,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1934/2025
+alien-plants-belgium:taxon:3121f16e8ba5514ef2f72ae8a3b5f20e,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:3121f16e8ba5514ef2f72ae8a3b5f20e,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:3121f16e8ba5514ef2f72ae8a3b5f20e,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:3121f16e8ba5514ef2f72ae8a3b5f20e,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1934/2025
 alien-plants-belgium:taxon:312779908405d5c3cea6e747e1405533,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,,1961/1994
 alien-plants-belgium:taxon:312779908405d5c3cea6e747e1405533,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1961/1994
 alien-plants-belgium:taxon:31385efbc6ac759c63a5a23abdfe42d9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
@@ -1870,10 +1870,10 @@ alien-plants-belgium:taxon:32fb9d8d0d7a3dc3eca4c6bd838a68d8,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:32fb9d8d0d7a3dc3eca4c6bd838a68d8,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1973/2025
 alien-plants-belgium:taxon:32fc9ffc6f532b0a199e3a316d5cf568,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,1895
 alien-plants-belgium:taxon:32fc9ffc6f532b0a199e3a316d5cf568,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1895
-alien-plants-belgium:taxon:332c24404a2457453cf9db13a8a65db5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:332c24404a2457453cf9db13a8a65db5,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:332c24404a2457453cf9db13a8a65db5,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:332c24404a2457453cf9db13a8a65db5,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1861/2025
+alien-plants-belgium:taxon:332c24404a2457453cf9db13a8a65db5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:332c24404a2457453cf9db13a8a65db5,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:332c24404a2457453cf9db13a8a65db5,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:332c24404a2457453cf9db13a8a65db5,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1861/2025
 alien-plants-belgium:taxon:332d8e3a5fb870c022d110806b3e4923,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,1956/2017
 alien-plants-belgium:taxon:332d8e3a5fb870c022d110806b3e4923,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1956/2017
 alien-plants-belgium:taxon:333f80dfc895d5f043a5c8773cb764a4,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_habitat_material,
@@ -1895,9 +1895,9 @@ alien-plants-belgium:taxon:3360cd04cc94a221dbd253c4452194ab,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:3360cd04cc94a221dbd253c4452194ab,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1867/1956
 alien-plants-belgium:taxon:3360cd04cc94a221dbd253c4452194ab,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1867/1956
 alien-plants-belgium:taxon:3360cd04cc94a221dbd253c4452194ab,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1867/1956
-alien-plants-belgium:taxon:337e8a516e3fd8c7c1b16788c849333c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:337e8a516e3fd8c7c1b16788c849333c,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:337e8a516e3fd8c7c1b16788c849333c,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1982/2025
+alien-plants-belgium:taxon:337e8a516e3fd8c7c1b16788c849333c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:337e8a516e3fd8c7c1b16788c849333c,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:337e8a516e3fd8c7c1b16788c849333c,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1982/2025
 alien-plants-belgium:taxon:339eca1f9f78d32831e7e2d46a5ee46f,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,1975/2018
 alien-plants-belgium:taxon:339eca1f9f78d32831e7e2d46a5ee46f,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1975/2018
 alien-plants-belgium:taxon:33a9cce3455d2da2dfc40cffde1b670e,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
@@ -2026,15 +2026,15 @@ alien-plants-belgium:taxon:36aa90abf7f00c7759232c01fbcbd967,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:36aa90abf7f00c7759232c01fbcbd967,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1876/1913
 alien-plants-belgium:taxon:36b098b6acc85013275e04664bbda67c,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1948
 alien-plants-belgium:taxon:36b098b6acc85013275e04664bbda67c,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1948
-alien-plants-belgium:taxon:36bd45adf509afc49de6e3f44ece4c48,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,1870/2025
-alien-plants-belgium:taxon:36bd45adf509afc49de6e3f44ece4c48,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1870/2025
+alien-plants-belgium:taxon:36bd45adf509afc49de6e3f44ece4c48,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,1870/2025
+alien-plants-belgium:taxon:36bd45adf509afc49de6e3f44ece4c48,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1870/2025
 alien-plants-belgium:taxon:36d0b742bd8c6149b9294d0cb552723d,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,1877/1896
 alien-plants-belgium:taxon:36d0b742bd8c6149b9294d0cb552723d,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1877/1896
 alien-plants-belgium:taxon:36f18607ddd57d34aaeec45289749190,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_on_animals,1884
 alien-plants-belgium:taxon:36f18607ddd57d34aaeec45289749190,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1884
-alien-plants-belgium:taxon:37221d3623d378370ef2b422ddb21c31,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:37221d3623d378370ef2b422ddb21c31,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:37221d3623d378370ef2b422ddb21c31,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1821/1953
+alien-plants-belgium:taxon:37221d3623d378370ef2b422ddb21c31,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:37221d3623d378370ef2b422ddb21c31,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:37221d3623d378370ef2b422ddb21c31,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1821/1953
 alien-plants-belgium:taxon:37416139e3e33fb7957e8b377e9b2ddd,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:37416139e3e33fb7957e8b377e9b2ddd,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,
 alien-plants-belgium:taxon:37416139e3e33fb7957e8b377e9b2ddd,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_seed,
@@ -2083,12 +2083,12 @@ alien-plants-belgium:taxon:37c4eb05b42781504be8346867b51afb,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:37c4eb05b42781504be8346867b51afb,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,,
 alien-plants-belgium:taxon:37c4eb05b42781504be8346867b51afb,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1880/2020
 alien-plants-belgium:taxon:37c4eb05b42781504be8346867b51afb,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1880/2020
-alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1861/1939
-alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,escape_horticulture,1939/2025
+alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1861/1939
+alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:3811bd39b730fc14dd0e8c5132a085c3,ISO_3166-2:BE,Belgium,BE,absent,introduced,,escape_horticulture,1939/2025
 alien-plants-belgium:taxon:382f2895e511631136433ea77cc33696,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:382f2895e511631136433ea77cc33696,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:382f2895e511631136433ea77cc33696,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1892/2025
@@ -2123,14 +2123,14 @@ alien-plants-belgium:taxon:38d17d83c1c33ad82117b66967d0a71c,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:38d17d83c1c33ad82117b66967d0a71c,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_food_bait,1994/2004
 alien-plants-belgium:taxon:38fb35974b3b6965be2682f5d2c5d7d5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_food_bait,1950/2015
 alien-plants-belgium:taxon:38fb35974b3b6965be2682f5d2c5d7d5,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_food_bait,1950/2015
-alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_agriculture,
-alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_agriculture,
-alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_agriculture,
-alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1893/2025
-alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_agriculture,1893/2025
+alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_agriculture,
+alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_agriculture,
+alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_agriculture,
+alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1893/2025
+alien-plants-belgium:taxon:39228e1da3c767f8e58496b7e6ca2b03,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_agriculture,1893/2025
 alien-plants-belgium:taxon:394f089f7715ae076410dc01dfa24253,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_seed,1954
 alien-plants-belgium:taxon:394f089f7715ae076410dc01dfa24253,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1954
 alien-plants-belgium:taxon:396dab253b552e5b6fb51f8fbff01375,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_seed,
@@ -2163,10 +2163,10 @@ alien-plants-belgium:taxon:3a04753f66c81b639d543a8da18586a8,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:3a04753f66c81b639d543a8da18586a8,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1877/1999
 alien-plants-belgium:taxon:3a07999509219d2352af3a2d99cf0dc4,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,2016
 alien-plants-belgium:taxon:3a07999509219d2352af3a2d99cf0dc4,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,2016
-alien-plants-belgium:taxon:3a133ba0ffc3a0575e35cbb9be157b1f,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:3a133ba0ffc3a0575e35cbb9be157b1f,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:3a133ba0ffc3a0575e35cbb9be157b1f,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:3a133ba0ffc3a0575e35cbb9be157b1f,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1994/2025
+alien-plants-belgium:taxon:3a133ba0ffc3a0575e35cbb9be157b1f,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:3a133ba0ffc3a0575e35cbb9be157b1f,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:3a133ba0ffc3a0575e35cbb9be157b1f,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:3a133ba0ffc3a0575e35cbb9be157b1f,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1994/2025
 alien-plants-belgium:taxon:3a36795cdea5b9ec0bd70a29848768ec,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_habitat_material,
 alien-plants-belgium:taxon:3a36795cdea5b9ec0bd70a29848768ec,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_habitat_material,
 alien-plants-belgium:taxon:3a36795cdea5b9ec0bd70a29848768ec,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,contaminant_habitat_material,
@@ -2190,8 +2190,8 @@ alien-plants-belgium:taxon:3acf3c6009e8937dfe7bf68a118575fc,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:3acf3c6009e8937dfe7bf68a118575fc,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1947
 alien-plants-belgium:taxon:3ae350a4dea352a8cd001e40c999e4ca,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_seed,1954/1955
 alien-plants-belgium:taxon:3ae350a4dea352a8cd001e40c999e4ca,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1954/1955
-alien-plants-belgium:taxon:3af23a2194b975b4265db831883255be,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,2008/2018
-alien-plants-belgium:taxon:3af23a2194b975b4265db831883255be,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,2008/2018
+alien-plants-belgium:taxon:3af23a2194b975b4265db831883255be,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,2008/2018
+alien-plants-belgium:taxon:3af23a2194b975b4265db831883255be,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,2008/2018
 alien-plants-belgium:taxon:3af76deb12b9cd3765065d5ec6ac6017,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:3af76deb12b9cd3765065d5ec6ac6017,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:3af76deb12b9cd3765065d5ec6ac6017,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2012/2021
@@ -2200,10 +2200,10 @@ alien-plants-belgium:taxon:3b0c8c3cb8302c8592db9ce06563a4ed,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:3b2540232f6fffc82badd86147063473,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:3b2540232f6fffc82badd86147063473,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:3b2540232f6fffc82badd86147063473,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2006/2013
-alien-plants-belgium:taxon:3b30e715629fbddaa6555d25943242ec,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:3b30e715629fbddaa6555d25943242ec,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:3b30e715629fbddaa6555d25943242ec,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:3b30e715629fbddaa6555d25943242ec,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_on_animals,1983/2025
+alien-plants-belgium:taxon:3b30e715629fbddaa6555d25943242ec,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:3b30e715629fbddaa6555d25943242ec,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:3b30e715629fbddaa6555d25943242ec,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:3b30e715629fbddaa6555d25943242ec,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,contaminant_on_animals,1983/2025
 alien-plants-belgium:taxon:3b535f505358a8dcfde4a8136e45d482,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:3b535f505358a8dcfde4a8136e45d482,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_on_animals,
 alien-plants-belgium:taxon:3b535f505358a8dcfde4a8136e45d482,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_seed,
@@ -2532,10 +2532,10 @@ alien-plants-belgium:taxon:4401d7ad3380172b3e887860e0b1f55f,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:4401d7ad3380172b3e887860e0b1f55f,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1911/1951
 alien-plants-belgium:taxon:4448a39d5832b8a0a7123b4a7546e2d9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,1974/2014
 alien-plants-belgium:taxon:4448a39d5832b8a0a7123b4a7546e2d9,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1974/2014
-alien-plants-belgium:taxon:445e09130920322762d0ae1bf8ce1dcc,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:445e09130920322762d0ae1bf8ce1dcc,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:445e09130920322762d0ae1bf8ce1dcc,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:445e09130920322762d0ae1bf8ce1dcc,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1880/2025
+alien-plants-belgium:taxon:445e09130920322762d0ae1bf8ce1dcc,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:445e09130920322762d0ae1bf8ce1dcc,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:445e09130920322762d0ae1bf8ce1dcc,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:445e09130920322762d0ae1bf8ce1dcc,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1880/2025
 alien-plants-belgium:taxon:447f5dc38c88110b3d77c7d8018eaa1d,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:447f5dc38c88110b3d77c7d8018eaa1d,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:447f5dc38c88110b3d77c7d8018eaa1d,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
@@ -2579,10 +2579,10 @@ alien-plants-belgium:taxon:45486bd1125667e9fe666d2f938fcdca,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:45486bd1125667e9fe666d2f938fcdca,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1943/2025
 alien-plants-belgium:taxon:459ac8bb61d38f1ac897de6f98dc1435,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,1993/2025
 alien-plants-belgium:taxon:459ac8bb61d38f1ac897de6f98dc1435,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1993/2025
-alien-plants-belgium:taxon:45a1b20285d897664ab1315da1a04d90,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:45a1b20285d897664ab1315da1a04d90,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:45a1b20285d897664ab1315da1a04d90,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:45a1b20285d897664ab1315da1a04d90,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,2006/2025
+alien-plants-belgium:taxon:45a1b20285d897664ab1315da1a04d90,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:45a1b20285d897664ab1315da1a04d90,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:45a1b20285d897664ab1315da1a04d90,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:45a1b20285d897664ab1315da1a04d90,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,2006/2025
 alien-plants-belgium:taxon:45b8bade5d79946b59a32f9f8f4a15bf,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2018
 alien-plants-belgium:taxon:45b8bade5d79946b59a32f9f8f4a15bf,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2018
 alien-plants-belgium:taxon:45c603ed2b5bfcb0e64fce4641f6df5e,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2012/2018
@@ -2608,10 +2608,10 @@ alien-plants-belgium:taxon:45feab5c8a708c744d57b75209b2ced8,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:461b442ad45f07470ba851a880e33110,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:461b442ad45f07470ba851a880e33110,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:461b442ad45f07470ba851a880e33110,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1844/1911
-alien-plants-belgium:taxon:4636e61e162b235eee746494152b7652,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:4636e61e162b235eee746494152b7652,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:4636e61e162b235eee746494152b7652,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:4636e61e162b235eee746494152b7652,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1950/2025
+alien-plants-belgium:taxon:4636e61e162b235eee746494152b7652,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:4636e61e162b235eee746494152b7652,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:4636e61e162b235eee746494152b7652,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:4636e61e162b235eee746494152b7652,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1950/2025
 alien-plants-belgium:taxon:463700df4eb2eeacfa053a359930049e,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,stowaway_people_luggage,1918/2020
 alien-plants-belgium:taxon:463700df4eb2eeacfa053a359930049e,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,stowaway_people_luggage,1918/2020
 alien-plants-belgium:taxon:463c3c0724ccf32136d71b693bc2f01a,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
@@ -2639,10 +2639,10 @@ alien-plants-belgium:taxon:47160f9a115f9be4fbcf589521a27a0e,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:47160f9a115f9be4fbcf589521a27a0e,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:47160f9a115f9be4fbcf589521a27a0e,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:47160f9a115f9be4fbcf589521a27a0e,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,2025
-alien-plants-belgium:taxon:4734f269bd911038c6b81d3a66268b76,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:4734f269bd911038c6b81d3a66268b76,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:4734f269bd911038c6b81d3a66268b76,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:4734f269bd911038c6b81d3a66268b76,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1982/2025
+alien-plants-belgium:taxon:4734f269bd911038c6b81d3a66268b76,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:4734f269bd911038c6b81d3a66268b76,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:4734f269bd911038c6b81d3a66268b76,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:4734f269bd911038c6b81d3a66268b76,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1982/2025
 alien-plants-belgium:taxon:477f3b3e8a4f245ec7445c042bf54d38,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,stowaway,
 alien-plants-belgium:taxon:477f3b3e8a4f245ec7445c042bf54d38,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,,
 alien-plants-belgium:taxon:477f3b3e8a4f245ec7445c042bf54d38,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,stowaway,
@@ -2969,20 +2969,20 @@ alien-plants-belgium:taxon:4f63e469936b95bfcfe53980ca10688f,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:4f63e469936b95bfcfe53980ca10688f,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1856/2025
 alien-plants-belgium:taxon:4f9757155ade85b996e5abe5ad4c7f15,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2017
 alien-plants-belgium:taxon:4f9757155ade85b996e5abe5ad4c7f15,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2017
-alien-plants-belgium:taxon:4f9ebdf8c631b75515e08f633c37f9f9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:4f9ebdf8c631b75515e08f633c37f9f9,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:4f9ebdf8c631b75515e08f633c37f9f9,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:4f9ebdf8c631b75515e08f633c37f9f9,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1885/2025
+alien-plants-belgium:taxon:4f9ebdf8c631b75515e08f633c37f9f9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:4f9ebdf8c631b75515e08f633c37f9f9,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:4f9ebdf8c631b75515e08f633c37f9f9,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:4f9ebdf8c631b75515e08f633c37f9f9,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1885/2025
 alien-plants-belgium:taxon:4fc400c020de0c0ecca2888ded745bb3,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1947/1948
 alien-plants-belgium:taxon:4fc400c020de0c0ecca2888ded745bb3,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1947/1948
 alien-plants-belgium:taxon:4ff053dce9d6932ff85da422263696c9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,2017
 alien-plants-belgium:taxon:4ff053dce9d6932ff85da422263696c9,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,2017
 alien-plants-belgium:taxon:4ff124f6dc5681787ddbc341d831a905,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_habitat_material,2001/2018
 alien-plants-belgium:taxon:4ff124f6dc5681787ddbc341d831a905,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_habitat_material,2001/2018
-alien-plants-belgium:taxon:4ff992ebe34847877ae78df17e742c1e,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:4ff992ebe34847877ae78df17e742c1e,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:4ff992ebe34847877ae78df17e742c1e,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:4ff992ebe34847877ae78df17e742c1e,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1920/2025
+alien-plants-belgium:taxon:4ff992ebe34847877ae78df17e742c1e,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:4ff992ebe34847877ae78df17e742c1e,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:4ff992ebe34847877ae78df17e742c1e,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:4ff992ebe34847877ae78df17e742c1e,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1920/2025
 alien-plants-belgium:taxon:502959445aa73e98c5cc511b991c56b2,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1895/1952
 alien-plants-belgium:taxon:502959445aa73e98c5cc511b991c56b2,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1895/1952
 alien-plants-belgium:taxon:505b84f45533baae990be0c63f47151b,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1911
@@ -3188,15 +3188,15 @@ alien-plants-belgium:taxon:559e420fa95c4f23a3b9ca3e67be3e48,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:559e420fa95c4f23a3b9ca3e67be3e48,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,,
 alien-plants-belgium:taxon:559e420fa95c4f23a3b9ca3e67be3e48,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1922/2013
 alien-plants-belgium:taxon:559e420fa95c4f23a3b9ca3e67be3e48,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1922/2013
-alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_seed,
-alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,,
-alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_seed,
-alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,,
-alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_seed,1896/2025
-alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_on_animals,1896/2025
-alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE,Belgium,BE,present,introduced,established,,1896/2025
+alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,contaminant_seed,
+alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,,
+alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,contaminant_seed,
+alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,,
+alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,contaminant_seed,1896/2025
+alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,contaminant_on_animals,1896/2025
+alien-plants-belgium:taxon:55a54e69356bf6dd62320772264d5972,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,,1896/2025
 alien-plants-belgium:taxon:55a8bc8aa85cd5bf2b08a809f42a4f5c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:55a8bc8aa85cd5bf2b08a809f42a4f5c,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:55a8bc8aa85cd5bf2b08a809f42a4f5c,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,2008/2025
@@ -3261,8 +3261,8 @@ alien-plants-belgium:taxon:56a7f564c9adb83c2d667010e4f07783,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:56a7f564c9adb83c2d667010e4f07783,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:56a7f564c9adb83c2d667010e4f07783,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:56a7f564c9adb83c2d667010e4f07783,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1850/2025
-alien-plants-belgium:taxon:56abfceb3c3fbbf09f299292469e3809,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,,1938/2025
-alien-plants-belgium:taxon:56abfceb3c3fbbf09f299292469e3809,ISO_3166-2:BE,Belgium,BE,present,introduced,established,,1938/2025
+alien-plants-belgium:taxon:56abfceb3c3fbbf09f299292469e3809,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,,1938/2025
+alien-plants-belgium:taxon:56abfceb3c3fbbf09f299292469e3809,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,,1938/2025
 alien-plants-belgium:taxon:56ba36f851ab49b757b1aaf125bed53a,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1906/1907
 alien-plants-belgium:taxon:56ba36f851ab49b757b1aaf125bed53a,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1906/1907
 alien-plants-belgium:taxon:56d6564f59d9092401c454849213366f,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
@@ -3331,10 +3331,10 @@ alien-plants-belgium:taxon:58e38f66532437c7a4ce41ecc56de4fd,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:58e38f66532437c7a4ce41ecc56de4fd,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2018
 alien-plants-belgium:taxon:58ea11423180a6acfd500d9c08ddbcc4,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,escape_horticulture,1997
 alien-plants-belgium:taxon:58ea11423180a6acfd500d9c08ddbcc4,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1997
-alien-plants-belgium:taxon:58f88bcf0108c096a6a79002a7392ee9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:58f88bcf0108c096a6a79002a7392ee9,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:58f88bcf0108c096a6a79002a7392ee9,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:58f88bcf0108c096a6a79002a7392ee9,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1906/2025
+alien-plants-belgium:taxon:58f88bcf0108c096a6a79002a7392ee9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:58f88bcf0108c096a6a79002a7392ee9,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:58f88bcf0108c096a6a79002a7392ee9,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:58f88bcf0108c096a6a79002a7392ee9,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1906/2025
 alien-plants-belgium:taxon:591f7b248dd334d3ca91d6f646efaedf,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_seed,
 alien-plants-belgium:taxon:591f7b248dd334d3ca91d6f646efaedf,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,,
 alien-plants-belgium:taxon:591f7b248dd334d3ca91d6f646efaedf,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_seed,
@@ -3801,10 +3801,10 @@ alien-plants-belgium:taxon:64ba6413fea87ffb4ad1aa3acd525b3b,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:64ba6413fea87ffb4ad1aa3acd525b3b,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1992/2025
 alien-plants-belgium:taxon:64f77a073352950dc2c8f97466cbd684,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2013
 alien-plants-belgium:taxon:64f77a073352950dc2c8f97466cbd684,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2013
-alien-plants-belgium:taxon:652bcfc7d6a401388fbf4c4a50e761ad,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:652bcfc7d6a401388fbf4c4a50e761ad,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:652bcfc7d6a401388fbf4c4a50e761ad,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:652bcfc7d6a401388fbf4c4a50e761ad,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1924/2025
+alien-plants-belgium:taxon:652bcfc7d6a401388fbf4c4a50e761ad,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:652bcfc7d6a401388fbf4c4a50e761ad,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:652bcfc7d6a401388fbf4c4a50e761ad,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:652bcfc7d6a401388fbf4c4a50e761ad,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1924/2025
 alien-plants-belgium:taxon:653f2ab4bf41fb5a84d5888dbff8bcf8,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2014
 alien-plants-belgium:taxon:653f2ab4bf41fb5a84d5888dbff8bcf8,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2014
 alien-plants-belgium:taxon:654124f3ee48a35f328c96d46c6950d3,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
@@ -3818,10 +3818,10 @@ alien-plants-belgium:taxon:654aae4fd3890e9f499c99c0f1dc7f9a,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:654aae4fd3890e9f499c99c0f1dc7f9a,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,,
 alien-plants-belgium:taxon:654aae4fd3890e9f499c99c0f1dc7f9a,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1835/1892
 alien-plants-belgium:taxon:654aae4fd3890e9f499c99c0f1dc7f9a,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1835/1892
-alien-plants-belgium:taxon:654d8c1183629ef19206126092d9f3c5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_timber,
-alien-plants-belgium:taxon:654d8c1183629ef19206126092d9f3c5,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_timber,
-alien-plants-belgium:taxon:654d8c1183629ef19206126092d9f3c5,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,contaminant_timber,
-alien-plants-belgium:taxon:654d8c1183629ef19206126092d9f3c5,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_timber,1839/2025
+alien-plants-belgium:taxon:654d8c1183629ef19206126092d9f3c5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,contaminant_timber,
+alien-plants-belgium:taxon:654d8c1183629ef19206126092d9f3c5,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,contaminant_timber,
+alien-plants-belgium:taxon:654d8c1183629ef19206126092d9f3c5,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,contaminant_timber,
+alien-plants-belgium:taxon:654d8c1183629ef19206126092d9f3c5,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,contaminant_timber,1839/2025
 alien-plants-belgium:taxon:656bc45a0fb7fb93b265ced9c1a502d8,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,2001/2002
 alien-plants-belgium:taxon:656bc45a0fb7fb93b265ced9c1a502d8,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,2001/2002
 alien-plants-belgium:taxon:6575c3b2eb4f8be83cf1829689e26150,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,2011/2013
@@ -3915,10 +3915,10 @@ alien-plants-belgium:taxon:67728cb2759feab42356e3d83309cb4c,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:678b6cc33ed53990ae75377d75b1fec3,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:678b6cc33ed53990ae75377d75b1fec3,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:678b6cc33ed53990ae75377d75b1fec3,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,2001/2025
-alien-plants-belgium:taxon:678f226859749c156ad8d5ada662f6ed,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:678f226859749c156ad8d5ada662f6ed,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:678f226859749c156ad8d5ada662f6ed,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:678f226859749c156ad8d5ada662f6ed,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1865/2025
+alien-plants-belgium:taxon:678f226859749c156ad8d5ada662f6ed,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:678f226859749c156ad8d5ada662f6ed,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:678f226859749c156ad8d5ada662f6ed,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:678f226859749c156ad8d5ada662f6ed,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1865/2025
 alien-plants-belgium:taxon:67b2853f6877c2057c08466eac7ba50a,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1911
 alien-plants-belgium:taxon:67b2853f6877c2057c08466eac7ba50a,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1911
 alien-plants-belgium:taxon:67b689555667201d3b27f930dfdc52f3,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_nursery,
@@ -4272,8 +4272,8 @@ alien-plants-belgium:taxon:71186d5c563d1b85a2337cc8b86c6a94,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:711b75a032839feeb88bf15ad37fe737,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:711b75a032839feeb88bf15ad37fe737,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:711b75a032839feeb88bf15ad37fe737,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1992/2017
-alien-plants-belgium:taxon:711e2271b3870cf8354bde70da6667b9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,1999/2025
-alien-plants-belgium:taxon:711e2271b3870cf8354bde70da6667b9,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1999/2025
+alien-plants-belgium:taxon:711e2271b3870cf8354bde70da6667b9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,1999/2025
+alien-plants-belgium:taxon:711e2271b3870cf8354bde70da6667b9,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1999/2025
 alien-plants-belgium:taxon:71240bfe1da08c8b2e3a32dd71bfb3a1,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2011/2019
 alien-plants-belgium:taxon:71240bfe1da08c8b2e3a32dd71bfb3a1,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2011/2019
 alien-plants-belgium:taxon:712c3521f0dee1d14a12d1897348fd42,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
@@ -4596,10 +4596,10 @@ alien-plants-belgium:taxon:77e448f1b965ecf70d6563d15e510d14,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:7838d40464ae3bc7a86bd684f4e7611e,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:7838d40464ae3bc7a86bd684f4e7611e,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:7838d40464ae3bc7a86bd684f4e7611e,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1946/2018
-alien-plants-belgium:taxon:78434a047de1de055575280416a9829d,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,extinct,escape_horticulture,1960/1969
-alien-plants-belgium:taxon:78434a047de1de055575280416a9829d,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1960/1969
-alien-plants-belgium:taxon:78434a047de1de055575280416a9829d,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,absent,introduced,extinct,escape_horticulture,1969/2025
-alien-plants-belgium:taxon:78434a047de1de055575280416a9829d,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,escape_horticulture,1969/2025
+alien-plants-belgium:taxon:78434a047de1de055575280416a9829d,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,,escape_horticulture,1960/1969
+alien-plants-belgium:taxon:78434a047de1de055575280416a9829d,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1960/1969
+alien-plants-belgium:taxon:78434a047de1de055575280416a9829d,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,absent,introduced,,escape_horticulture,1969/2025
+alien-plants-belgium:taxon:78434a047de1de055575280416a9829d,ISO_3166-2:BE,Belgium,BE,absent,introduced,,escape_horticulture,1969/2025
 alien-plants-belgium:taxon:7859d73d4f50f5c314276535b753553c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2011/2013
 alien-plants-belgium:taxon:7859d73d4f50f5c314276535b753553c,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2011/2013
 alien-plants-belgium:taxon:786ad30792023653fd9c7e63901faa3f,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
@@ -4707,10 +4707,10 @@ alien-plants-belgium:taxon:7b397fbda2fee9c8af52c0a266a053d3,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:7b397fbda2fee9c8af52c0a266a053d3,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1998/2005
 alien-plants-belgium:taxon:7b39e3286b4fa41f5f599b4df8e4e193,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,1970
 alien-plants-belgium:taxon:7b39e3286b4fa41f5f599b4df8e4e193,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1970
-alien-plants-belgium:taxon:7b48e979502c3079ce3eb37f00c21fbf,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,contaminant_habitat_material,1860/1884
-alien-plants-belgium:taxon:7b48e979502c3079ce3eb37f00c21fbf,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,contaminant_habitat_material,1860/1884
-alien-plants-belgium:taxon:7b48e979502c3079ce3eb37f00c21fbf,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,contaminant_habitat_material,1884/2025
-alien-plants-belgium:taxon:7b48e979502c3079ce3eb37f00c21fbf,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,contaminant_habitat_material,1884/2025
+alien-plants-belgium:taxon:7b48e979502c3079ce3eb37f00c21fbf,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,contaminant_habitat_material,1860/1884
+alien-plants-belgium:taxon:7b48e979502c3079ce3eb37f00c21fbf,ISO_3166-2:BE,Belgium,BE,present,introduced,,contaminant_habitat_material,1860/1884
+alien-plants-belgium:taxon:7b48e979502c3079ce3eb37f00c21fbf,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,contaminant_habitat_material,1884/2025
+alien-plants-belgium:taxon:7b48e979502c3079ce3eb37f00c21fbf,ISO_3166-2:BE,Belgium,BE,absent,introduced,,contaminant_habitat_material,1884/2025
 alien-plants-belgium:taxon:7bf201f08df0d8c6d0ba2638d0ffcf5f,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,,1887/1920
 alien-plants-belgium:taxon:7bf201f08df0d8c6d0ba2638d0ffcf5f,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1887/1920
 alien-plants-belgium:taxon:7c09764802ec24bc9e8ff3665c65b097,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,2012/2016
@@ -4902,10 +4902,10 @@ alien-plants-belgium:taxon:81bd9dc5caf237845f1188a91ad190a7,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:81c6a4cd927f7f422c8d6d06abd60534,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,
 alien-plants-belgium:taxon:81c6a4cd927f7f422c8d6d06abd60534,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,,
 alien-plants-belgium:taxon:81c6a4cd927f7f422c8d6d06abd60534,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1815/1952
-alien-plants-belgium:taxon:81d0d3390592317b14d837d25acfef82,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,escape_horticulture,1858/1880
-alien-plants-belgium:taxon:81d0d3390592317b14d837d25acfef82,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1858/1880
-alien-plants-belgium:taxon:81d0d3390592317b14d837d25acfef82,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,escape_horticulture,1880/2025
-alien-plants-belgium:taxon:81d0d3390592317b14d837d25acfef82,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,escape_horticulture,1880/2025
+alien-plants-belgium:taxon:81d0d3390592317b14d837d25acfef82,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,escape_horticulture,1858/1880
+alien-plants-belgium:taxon:81d0d3390592317b14d837d25acfef82,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1858/1880
+alien-plants-belgium:taxon:81d0d3390592317b14d837d25acfef82,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,escape_horticulture,1880/2025
+alien-plants-belgium:taxon:81d0d3390592317b14d837d25acfef82,ISO_3166-2:BE,Belgium,BE,absent,introduced,,escape_horticulture,1880/2025
 alien-plants-belgium:taxon:81d201652154e88c5b2394a48271d646,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1893
 alien-plants-belgium:taxon:81d201652154e88c5b2394a48271d646,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1893
 alien-plants-belgium:taxon:82158abb8bb149553eae77a58fad79a4,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
@@ -4934,10 +4934,10 @@ alien-plants-belgium:taxon:82b154545d4828cbd65161710d7ccb7d,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:82b154545d4828cbd65161710d7ccb7d,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1831/2016
 alien-plants-belgium:taxon:82b8792180c04f1e72743042b2b23b91,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1948
 alien-plants-belgium:taxon:82b8792180c04f1e72743042b2b23b91,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1948
-alien-plants-belgium:taxon:82c15b1c806ddfc36b0569c944dfd9f5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:82c15b1c806ddfc36b0569c944dfd9f5,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:82c15b1c806ddfc36b0569c944dfd9f5,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:82c15b1c806ddfc36b0569c944dfd9f5,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1869/2025
+alien-plants-belgium:taxon:82c15b1c806ddfc36b0569c944dfd9f5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:82c15b1c806ddfc36b0569c944dfd9f5,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:82c15b1c806ddfc36b0569c944dfd9f5,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:82c15b1c806ddfc36b0569c944dfd9f5,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1869/2025
 alien-plants-belgium:taxon:82c697ed0f957dfeda19e9c789533b9d,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,escape_agriculture,1948/2017
 alien-plants-belgium:taxon:82c697ed0f957dfeda19e9c789533b9d,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_agriculture,1948/2017
 alien-plants-belgium:taxon:830d8dc954860f95ea5fff39d57f65bf,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_habitat_material,2017/2018
@@ -5092,10 +5092,10 @@ alien-plants-belgium:taxon:86ee8cbd017e33529193b58c3bb5dd48,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:87362eb881f5d7677b91fd59a063ca97,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:87362eb881f5d7677b91fd59a063ca97,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:87362eb881f5d7677b91fd59a063ca97,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1824/1892
-alien-plants-belgium:taxon:87543dfb426da13687d602e9e1207f0a,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:87543dfb426da13687d602e9e1207f0a,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:87543dfb426da13687d602e9e1207f0a,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:87543dfb426da13687d602e9e1207f0a,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1983/2025
+alien-plants-belgium:taxon:87543dfb426da13687d602e9e1207f0a,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:87543dfb426da13687d602e9e1207f0a,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:87543dfb426da13687d602e9e1207f0a,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:87543dfb426da13687d602e9e1207f0a,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1983/2025
 alien-plants-belgium:taxon:8760e4555011845f6ad6df92131ef9f8,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1897
 alien-plants-belgium:taxon:8760e4555011845f6ad6df92131ef9f8,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1897
 alien-plants-belgium:taxon:87a38998d3a2eea5b1227dd6344dfc4b,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1894
@@ -5424,10 +5424,10 @@ alien-plants-belgium:taxon:8f7857841e213fb32c9668e17a8e8663,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:8f79d5a23dd4fccf9ab0dc8f230dcf30,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:8f79d5a23dd4fccf9ab0dc8f230dcf30,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:8f79d5a23dd4fccf9ab0dc8f230dcf30,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1850/2017
-alien-plants-belgium:taxon:8fa3e26a32c3a238e01bcaab2ff337c3,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,escape_horticulture,1835/1889
-alien-plants-belgium:taxon:8fa3e26a32c3a238e01bcaab2ff337c3,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1835/1889
-alien-plants-belgium:taxon:8fa3e26a32c3a238e01bcaab2ff337c3,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,escape_horticulture,1889/2025
-alien-plants-belgium:taxon:8fa3e26a32c3a238e01bcaab2ff337c3,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,escape_horticulture,1889/2025
+alien-plants-belgium:taxon:8fa3e26a32c3a238e01bcaab2ff337c3,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,escape_horticulture,1835/1889
+alien-plants-belgium:taxon:8fa3e26a32c3a238e01bcaab2ff337c3,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1835/1889
+alien-plants-belgium:taxon:8fa3e26a32c3a238e01bcaab2ff337c3,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,escape_horticulture,1889/2025
+alien-plants-belgium:taxon:8fa3e26a32c3a238e01bcaab2ff337c3,ISO_3166-2:BE,Belgium,BE,absent,introduced,,escape_horticulture,1889/2025
 alien-plants-belgium:taxon:8fb3bd83ff482341ef184c8ef9fbc8e5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,1998/2015
 alien-plants-belgium:taxon:8fb3bd83ff482341ef184c8ef9fbc8e5,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1998/2015
 alien-plants-belgium:taxon:8fd960a005f3593c49fb04c3cb9a1a23,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_habitat_material,
@@ -5459,9 +5459,9 @@ alien-plants-belgium:taxon:90fadf87c16ec9a09caf71962a29d91b,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:90fadf87c16ec9a09caf71962a29d91b,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1907
 alien-plants-belgium:taxon:910d73a24fffa617d284cf030da03aa6,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_seed,1909
 alien-plants-belgium:taxon:910d73a24fffa617d284cf030da03aa6,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1909
-alien-plants-belgium:taxon:910e2f69082c73b02b4969d1ff674f48,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:910e2f69082c73b02b4969d1ff674f48,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:910e2f69082c73b02b4969d1ff674f48,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1897/2025
+alien-plants-belgium:taxon:910e2f69082c73b02b4969d1ff674f48,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:910e2f69082c73b02b4969d1ff674f48,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:910e2f69082c73b02b4969d1ff674f48,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1897/2025
 alien-plants-belgium:taxon:9123041feaa2fb97d12d5459e7ae215a,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:9123041feaa2fb97d12d5459e7ae215a,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:9123041feaa2fb97d12d5459e7ae215a,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1997/2017
@@ -5523,10 +5523,10 @@ alien-plants-belgium:taxon:926b81b543e2c8eaf7550a6fbd49370a,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:926b81b543e2c8eaf7550a6fbd49370a,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_agriculture,1858/2025
 alien-plants-belgium:taxon:9299fc9a961c59dadcd2e7d17e4a816d,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,1987/2025
 alien-plants-belgium:taxon:9299fc9a961c59dadcd2e7d17e4a816d,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1987/2025
-alien-plants-belgium:taxon:92aa0434d9da7752b992be54b25e353d,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:92aa0434d9da7752b992be54b25e353d,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:92aa0434d9da7752b992be54b25e353d,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:92aa0434d9da7752b992be54b25e353d,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1904/2025
+alien-plants-belgium:taxon:92aa0434d9da7752b992be54b25e353d,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:92aa0434d9da7752b992be54b25e353d,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:92aa0434d9da7752b992be54b25e353d,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:92aa0434d9da7752b992be54b25e353d,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1904/2025
 alien-plants-belgium:taxon:92aede3ce6fecb9c320c4b42c7ea8879,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1893/1948
 alien-plants-belgium:taxon:92aede3ce6fecb9c320c4b42c7ea8879,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1893/1948
 alien-plants-belgium:taxon:92b0d88ba8bf5cce250bfecef0313aa6,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_agriculture,
@@ -5603,12 +5603,12 @@ alien-plants-belgium:taxon:9473a2954bec5029fc29a606cb5ff385,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:9473a2954bec5029fc29a606cb5ff385,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1891/1927
 alien-plants-belgium:taxon:947f02aa297952ed3d9b36871810c8b3,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,,1908
 alien-plants-belgium:taxon:947f02aa297952ed3d9b36871810c8b3,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1908
-alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,,
-alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,,
-alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,,1944/1957
-alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,,
-alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,extinct,,
-alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,,1957/2025
+alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,,
+alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,,
+alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857,ISO_3166-2:BE,Belgium,BE,present,introduced,,,1944/1957
+alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,,
+alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,,,
+alien-plants-belgium:taxon:948ed09e70935c29494e600897c45857,ISO_3166-2:BE,Belgium,BE,absent,introduced,,,1957/2025
 alien-plants-belgium:taxon:94907cda2944b2d015f16dcc843677a0,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2007/2018
 alien-plants-belgium:taxon:94907cda2944b2d015f16dcc843677a0,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2007/2018
 alien-plants-belgium:taxon:9495b1e7dc471eb9ea13088444ba26aa,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
@@ -5987,12 +5987,12 @@ alien-plants-belgium:taxon:9e7ff7e69362eea8bfce94244527bacf,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:9e7ff7e69362eea8bfce94244527bacf,ISO_3166-2:BE-WAL,Walloon Region,BE,presence uncertain,introduced,casual,escape_agriculture,
 alien-plants-belgium:taxon:9e7ff7e69362eea8bfce94244527bacf,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,presence uncertain,introduced,casual,escape_agriculture,
 alien-plants-belgium:taxon:9e7ff7e69362eea8bfce94244527bacf,ISO_3166-2:BE,Belgium,BE,presence uncertain,introduced,casual,escape_agriculture,
-alien-plants-belgium:taxon:9e9ed9a25b84aac0cc2d110cbc2a38d5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:9e9ed9a25b84aac0cc2d110cbc2a38d5,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:9e9ed9a25b84aac0cc2d110cbc2a38d5,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:9e9ed9a25b84aac0cc2d110cbc2a38d5,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1898/2025
-alien-plants-belgium:taxon:9e9f5180fb71e141217bdabb6f18f487,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,1924/2025
-alien-plants-belgium:taxon:9e9f5180fb71e141217bdabb6f18f487,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1924/2025
+alien-plants-belgium:taxon:9e9ed9a25b84aac0cc2d110cbc2a38d5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:9e9ed9a25b84aac0cc2d110cbc2a38d5,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:9e9ed9a25b84aac0cc2d110cbc2a38d5,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:9e9ed9a25b84aac0cc2d110cbc2a38d5,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1898/2025
+alien-plants-belgium:taxon:9e9f5180fb71e141217bdabb6f18f487,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,1924/2025
+alien-plants-belgium:taxon:9e9f5180fb71e141217bdabb6f18f487,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1924/2025
 alien-plants-belgium:taxon:9ea96b8a5fb967a2bafbd13b38413573,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:9ea96b8a5fb967a2bafbd13b38413573,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:9ea96b8a5fb967a2bafbd13b38413573,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1895/1961
@@ -6310,14 +6310,14 @@ alien-plants-belgium:taxon:a673e842ea176c05793150ad01e72e5b,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:a673e842ea176c05793150ad01e72e5b,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1800/2025
 alien-plants-belgium:taxon:a689caee7321d61396da7779efc809ca,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1911
 alien-plants-belgium:taxon:a689caee7321d61396da7779efc809ca,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1911
-alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_seed,
-alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,,
-alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_seed,
-alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,,
-alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,contaminant_seed,
-alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,,
-alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_seed,1840/2025
-alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE,Belgium,BE,present,introduced,established,,1840/2025
+alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,contaminant_seed,
+alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,,
+alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,contaminant_seed,
+alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,,
+alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,contaminant_seed,
+alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,,
+alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,contaminant_seed,1840/2025
+alien-plants-belgium:taxon:a68bc48767ddebcfbcd3021801b53068,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,,1840/2025
 alien-plants-belgium:taxon:a6d957168d81d3fe1ae4c94a0487af83,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2020
 alien-plants-belgium:taxon:a6d957168d81d3fe1ae4c94a0487af83,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2020
 alien-plants-belgium:taxon:a6e85604ae9537c591f4d851b0dd23df,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
@@ -6340,12 +6340,12 @@ alien-plants-belgium:taxon:a6e9ca9f871aa9398ccad5483867108f,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:a6e9ca9f871aa9398ccad5483867108f,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:a6e9ca9f871aa9398ccad5483867108f,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1835/2014
 alien-plants-belgium:taxon:a6e9ca9f871aa9398ccad5483867108f,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1835/2014
-alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1827/2018
-alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,escape_horticulture,2018/2025
+alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1827/2018
+alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:a70bd599868bf246597e982f428da0de,ISO_3166-2:BE,Belgium,BE,absent,introduced,,escape_horticulture,2018/2025
 alien-plants-belgium:taxon:a710afb5eb87f1360ca04bc3db0ee263,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,1949
 alien-plants-belgium:taxon:a710afb5eb87f1360ca04bc3db0ee263,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1949
 alien-plants-belgium:taxon:a71d7d83cb17eb501b4564c935ede35c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
@@ -6369,10 +6369,10 @@ alien-plants-belgium:taxon:a806c20b0ecf2b38633d67b8a3c78479,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:a806c20b0ecf2b38633d67b8a3c78479,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2019
 alien-plants-belgium:taxon:a80ba3871188e18b9f4d0b1a30245f7b,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,1977
 alien-plants-belgium:taxon:a80ba3871188e18b9f4d0b1a30245f7b,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1977
-alien-plants-belgium:taxon:a84c6cce3263d281d4b9f20a075bef91,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,escape_horticulture,1830/1884
-alien-plants-belgium:taxon:a84c6cce3263d281d4b9f20a075bef91,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1830/1884
-alien-plants-belgium:taxon:a84c6cce3263d281d4b9f20a075bef91,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,extinct,escape_horticulture,1884/2025
-alien-plants-belgium:taxon:a84c6cce3263d281d4b9f20a075bef91,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,escape_horticulture,1884/2025
+alien-plants-belgium:taxon:a84c6cce3263d281d4b9f20a075bef91,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,escape_horticulture,1830/1884
+alien-plants-belgium:taxon:a84c6cce3263d281d4b9f20a075bef91,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1830/1884
+alien-plants-belgium:taxon:a84c6cce3263d281d4b9f20a075bef91,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,,escape_horticulture,1884/2025
+alien-plants-belgium:taxon:a84c6cce3263d281d4b9f20a075bef91,ISO_3166-2:BE,Belgium,BE,absent,introduced,,escape_horticulture,1884/2025
 alien-plants-belgium:taxon:a86ddb904454647d14227d19aece6435,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1887/1947
 alien-plants-belgium:taxon:a86ddb904454647d14227d19aece6435,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1887/1947
 alien-plants-belgium:taxon:a8bd72057e4025512f756e17572e11ff,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_on_animals,
@@ -6608,9 +6608,9 @@ alien-plants-belgium:taxon:b01baf36a1270cf3cec8a44c0ee241ed,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:b09200421042873350d6689e6983570b,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:b09200421042873350d6689e6983570b,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:b09200421042873350d6689e6983570b,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1926/2025
-alien-plants-belgium:taxon:b0a3665d652c656af07654f0422f128e,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:b0a3665d652c656af07654f0422f128e,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:b0a3665d652c656af07654f0422f128e,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1997/2025
+alien-plants-belgium:taxon:b0a3665d652c656af07654f0422f128e,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:b0a3665d652c656af07654f0422f128e,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:b0a3665d652c656af07654f0422f128e,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1997/2025
 alien-plants-belgium:taxon:b0f609ce20536f9fc93a5a92c54e39c9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:b0f609ce20536f9fc93a5a92c54e39c9,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:b0f609ce20536f9fc93a5a92c54e39c9,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1946/2025
@@ -6650,10 +6650,10 @@ alien-plants-belgium:taxon:b2918151483c1610d47f7765c1a5cb2e,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:b2918151483c1610d47f7765c1a5cb2e,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_habitat_material,
 alien-plants-belgium:taxon:b2918151483c1610d47f7765c1a5cb2e,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,contaminant_habitat_material,
 alien-plants-belgium:taxon:b2918151483c1610d47f7765c1a5cb2e,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_habitat_material,1882/2025
-alien-plants-belgium:taxon:b2a6b9e65d82667b67a6bc984326c2bf,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:b2a6b9e65d82667b67a6bc984326c2bf,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:b2a6b9e65d82667b67a6bc984326c2bf,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:b2a6b9e65d82667b67a6bc984326c2bf,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_on_animals,1892/2025
+alien-plants-belgium:taxon:b2a6b9e65d82667b67a6bc984326c2bf,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:b2a6b9e65d82667b67a6bc984326c2bf,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:b2a6b9e65d82667b67a6bc984326c2bf,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:b2a6b9e65d82667b67a6bc984326c2bf,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,contaminant_on_animals,1892/2025
 alien-plants-belgium:taxon:b2c99ee5891207a6b9d2d945bbe59da4,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,1850
 alien-plants-belgium:taxon:b2c99ee5891207a6b9d2d945bbe59da4,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1850
 alien-plants-belgium:taxon:b2cd8f541c236d177d7dfd445732d015,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_seed,
@@ -6742,10 +6742,10 @@ alien-plants-belgium:taxon:b4741388ff41cf284f847568d5ee256f,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:b4741388ff41cf284f847568d5ee256f,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1956/2018
 alien-plants-belgium:taxon:b47efc3c62e52de9211573d1012a468b,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,2013/2025
 alien-plants-belgium:taxon:b47efc3c62e52de9211573d1012a468b,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,2013/2025
-alien-plants-belgium:taxon:b481a88a6a30dac0f8b0435bbb448e15,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:b481a88a6a30dac0f8b0435bbb448e15,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:b481a88a6a30dac0f8b0435bbb448e15,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:b481a88a6a30dac0f8b0435bbb448e15,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1882/2025
+alien-plants-belgium:taxon:b481a88a6a30dac0f8b0435bbb448e15,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:b481a88a6a30dac0f8b0435bbb448e15,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:b481a88a6a30dac0f8b0435bbb448e15,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:b481a88a6a30dac0f8b0435bbb448e15,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1882/2025
 alien-plants-belgium:taxon:b4b2035ca408deed6bf8ee5dd2edf710,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2004/2018
 alien-plants-belgium:taxon:b4b2035ca408deed6bf8ee5dd2edf710,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2004/2018
 alien-plants-belgium:taxon:b4df2f743ddaf0aeb2758880bd297527,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_on_animals,
@@ -6754,8 +6754,8 @@ alien-plants-belgium:taxon:b4df2f743ddaf0aeb2758880bd297527,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:b4df2f743ddaf0aeb2758880bd297527,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:b4df2f743ddaf0aeb2758880bd297527,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1900/1992
 alien-plants-belgium:taxon:b4df2f743ddaf0aeb2758880bd297527,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1900/1992
-alien-plants-belgium:taxon:b4f3dc82eb331940950d6d26abde4fb1,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,,1993/2025
-alien-plants-belgium:taxon:b4f3dc82eb331940950d6d26abde4fb1,ISO_3166-2:BE,Belgium,BE,present,introduced,established,,1993/2025
+alien-plants-belgium:taxon:b4f3dc82eb331940950d6d26abde4fb1,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,,1993/2025
+alien-plants-belgium:taxon:b4f3dc82eb331940950d6d26abde4fb1,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,,1993/2025
 alien-plants-belgium:taxon:b4f5de96304a2a4dba68dcf7f859aade,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:b4f5de96304a2a4dba68dcf7f859aade,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:b4f5de96304a2a4dba68dcf7f859aade,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1835/2025
@@ -6794,14 +6794,14 @@ alien-plants-belgium:taxon:b7293ef030faba9fa1089106f48acd19,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:b7293ef030faba9fa1089106f48acd19,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1862/1879
 alien-plants-belgium:taxon:b754cf4dcf4744922ab6aeb4c48843dc,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2013/2018
 alien-plants-belgium:taxon:b754cf4dcf4744922ab6aeb4c48843dc,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2013/2018
-alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,contaminant_habitat_material,
-alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,contaminant_habitat_material,
-alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,extinct,contaminant_habitat_material,
-alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,contaminant_habitat_material,1835/2021
-alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,contaminant_habitat_material,
-alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,extinct,contaminant_habitat_material,
-alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,absent,introduced,extinct,contaminant_habitat_material,
-alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,contaminant_habitat_material,2021/2025
+alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,contaminant_habitat_material,
+alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,contaminant_habitat_material,
+alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,,contaminant_habitat_material,
+alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE,Belgium,BE,present,introduced,,contaminant_habitat_material,1835/2021
+alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,contaminant_habitat_material,
+alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,,contaminant_habitat_material,
+alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,absent,introduced,,contaminant_habitat_material,
+alien-plants-belgium:taxon:b795c0c7d12d19c12edc62c88a3e237b,ISO_3166-2:BE,Belgium,BE,absent,introduced,,contaminant_habitat_material,2021/2025
 alien-plants-belgium:taxon:b7b9ed2f6c29e75dbc2f35d40dbf0273,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2013/2014
 alien-plants-belgium:taxon:b7b9ed2f6c29e75dbc2f35d40dbf0273,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2013/2014
 alien-plants-belgium:taxon:b7fb3ad71d118420ff60b7884b637208,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
@@ -6960,14 +6960,14 @@ alien-plants-belgium:taxon:bb2876bde6635211bec579090ae35ec5,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:bb3d4cdd2dc052054a627e383c8a5e27,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:bb3d4cdd2dc052054a627e383c8a5e27,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:bb3d4cdd2dc052054a627e383c8a5e27,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2011/2018
-alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1836/2018
-alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,absent,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,escape_horticulture,2018/2025
+alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1836/2018
+alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,absent,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:bb84d75fd097f36f75532233269c6ff0,ISO_3166-2:BE,Belgium,BE,absent,introduced,,escape_horticulture,2018/2025
 alien-plants-belgium:taxon:bbb0020f26b1359111b9585ca1390dcc,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_on_animals,
 alien-plants-belgium:taxon:bbb0020f26b1359111b9585ca1390dcc,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,
 alien-plants-belgium:taxon:bbb0020f26b1359111b9585ca1390dcc,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,
@@ -6982,10 +6982,10 @@ alien-plants-belgium:taxon:bbe3e1e0d90e6a6f732f1c5201c847c6,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:bc1c5e5b7a025e81209473e7b963fa6f,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:bc1c5e5b7a025e81209473e7b963fa6f,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:bc1c5e5b7a025e81209473e7b963fa6f,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2015/2018
-alien-plants-belgium:taxon:bc1dff51f45192c12c91cd348c9f608a,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:bc1dff51f45192c12c91cd348c9f608a,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:bc1dff51f45192c12c91cd348c9f608a,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:bc1dff51f45192c12c91cd348c9f608a,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1944/2025
+alien-plants-belgium:taxon:bc1dff51f45192c12c91cd348c9f608a,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:bc1dff51f45192c12c91cd348c9f608a,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:bc1dff51f45192c12c91cd348c9f608a,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:bc1dff51f45192c12c91cd348c9f608a,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1944/2025
 alien-plants-belgium:taxon:bc521860555f55dab7283440c3b30312,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:bc521860555f55dab7283440c3b30312,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:bc521860555f55dab7283440c3b30312,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2011/2018
@@ -7124,10 +7124,10 @@ alien-plants-belgium:taxon:c07d8bbce750f5c7076495efcbf808ef,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:c07d8bbce750f5c7076495efcbf808ef,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_agriculture,
 alien-plants-belgium:taxon:c07d8bbce750f5c7076495efcbf808ef,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_agriculture,
 alien-plants-belgium:taxon:c07d8bbce750f5c7076495efcbf808ef,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_agriculture,1813/2025
-alien-plants-belgium:taxon:c0994f2c057216371e974287f12fa356,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:c0994f2c057216371e974287f12fa356,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:c0994f2c057216371e974287f12fa356,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:c0994f2c057216371e974287f12fa356,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_on_animals,1886/2025
+alien-plants-belgium:taxon:c0994f2c057216371e974287f12fa356,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:c0994f2c057216371e974287f12fa356,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:c0994f2c057216371e974287f12fa356,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:c0994f2c057216371e974287f12fa356,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,contaminant_on_animals,1886/2025
 alien-plants-belgium:taxon:c0a8ac0540854a64289c0d8634c530e6,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,2008/2009
 alien-plants-belgium:taxon:c0a8ac0540854a64289c0d8634c530e6,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2008/2009
 alien-plants-belgium:taxon:c0ad67caa5bc2b6e97ac28a711aa9d58,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1947
@@ -7244,9 +7244,9 @@ alien-plants-belgium:taxon:c45f859072301f4103d52a7a865a14da,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:c45f859072301f4103d52a7a865a14da,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,2003/2004
 alien-plants-belgium:taxon:c45fd7624a951bdbe6794a6d15b9280f,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2014/2017
 alien-plants-belgium:taxon:c45fd7624a951bdbe6794a6d15b9280f,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2014/2017
-alien-plants-belgium:taxon:c4a3c0c6598b589dbfd2a815a6c9c6fb,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:c4a3c0c6598b589dbfd2a815a6c9c6fb,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:c4a3c0c6598b589dbfd2a815a6c9c6fb,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1811/2018
+alien-plants-belgium:taxon:c4a3c0c6598b589dbfd2a815a6c9c6fb,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:c4a3c0c6598b589dbfd2a815a6c9c6fb,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:c4a3c0c6598b589dbfd2a815a6c9c6fb,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1811/2018
 alien-plants-belgium:taxon:c4b0a0e31371223dfdc0e5c0b3502ce3,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_nursery,
 alien-plants-belgium:taxon:c4b0a0e31371223dfdc0e5c0b3502ce3,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_nursery,
 alien-plants-belgium:taxon:c4b0a0e31371223dfdc0e5c0b3502ce3,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,contaminant_nursery,
@@ -7255,10 +7255,10 @@ alien-plants-belgium:taxon:c4dfd13611998afb132fd530e20216e5,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:c4dfd13611998afb132fd530e20216e5,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_habitat_material,1933/2007
 alien-plants-belgium:taxon:c510b9c042fd219b1a80bbe3cb3cf2e1,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1902/1949
 alien-plants-belgium:taxon:c510b9c042fd219b1a80bbe3cb3cf2e1,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1902/1949
-alien-plants-belgium:taxon:c51c039727f105136fd60ced69f5b74d,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:c51c039727f105136fd60ced69f5b74d,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:c51c039727f105136fd60ced69f5b74d,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:c51c039727f105136fd60ced69f5b74d,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1863/2025
+alien-plants-belgium:taxon:c51c039727f105136fd60ced69f5b74d,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:c51c039727f105136fd60ced69f5b74d,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:c51c039727f105136fd60ced69f5b74d,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:c51c039727f105136fd60ced69f5b74d,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1863/2025
 alien-plants-belgium:taxon:c5340586d474e06153ba64b24d0a0d10,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,,1985
 alien-plants-belgium:taxon:c5340586d474e06153ba64b24d0a0d10,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1985
 alien-plants-belgium:taxon:c535af82e0a846bcdd8e06fb26f0b2e6,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_on_animals,
@@ -7366,10 +7366,10 @@ alien-plants-belgium:taxon:c7b86ba37be8d7a4a6647cdf6f8a6157,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:c7b86ba37be8d7a4a6647cdf6f8a6157,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1921
 alien-plants-belgium:taxon:c7b9e8811b0135237b4c8938ffa53690,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,2001
 alien-plants-belgium:taxon:c7b9e8811b0135237b4c8938ffa53690,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,2001
-alien-plants-belgium:taxon:c7cd7584396e36a61503269eb5e93d47,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:c7cd7584396e36a61503269eb5e93d47,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:c7cd7584396e36a61503269eb5e93d47,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:c7cd7584396e36a61503269eb5e93d47,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1912/2025
+alien-plants-belgium:taxon:c7cd7584396e36a61503269eb5e93d47,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:c7cd7584396e36a61503269eb5e93d47,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:c7cd7584396e36a61503269eb5e93d47,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:c7cd7584396e36a61503269eb5e93d47,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1912/2025
 alien-plants-belgium:taxon:c7e1d52b842dd23845b98b0fddc2417c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:c7e1d52b842dd23845b98b0fddc2417c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_on_animals,
 alien-plants-belgium:taxon:c7e1d52b842dd23845b98b0fddc2417c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,
@@ -7425,18 +7425,18 @@ alien-plants-belgium:taxon:c8f7664662ff83f4ab275a55a34c1070,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:c8f7664662ff83f4ab275a55a34c1070,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1893
 alien-plants-belgium:taxon:c901db456aefee88bead7a825e0f8586,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1904
 alien-plants-belgium:taxon:c901db456aefee88bead7a825e0f8586,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1904
-alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,contaminant_on_animals,
-alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,,
-alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,contaminant_on_animals,
-alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,,
-alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,contaminant_on_animals,1823/1956
-alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,,1823/1956
-alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,contaminant_on_animals,
-alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,,
-alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,extinct,contaminant_on_animals,
-alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,extinct,,
-alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,contaminant_on_animals,1956/2025
-alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,,1956/2025
+alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,contaminant_on_animals,
+alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,,
+alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,contaminant_on_animals,
+alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,,
+alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE,Belgium,BE,present,introduced,,contaminant_on_animals,1823/1956
+alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE,Belgium,BE,present,introduced,,,1823/1956
+alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,contaminant_on_animals,
+alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,,
+alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,,contaminant_on_animals,
+alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,,,
+alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE,Belgium,BE,absent,introduced,,contaminant_on_animals,1956/2025
+alien-plants-belgium:taxon:c90c04b67cd750bd717264a5e7bb8f53,ISO_3166-2:BE,Belgium,BE,absent,introduced,,,1956/2025
 alien-plants-belgium:taxon:c93aca5bc5d7b3df31338aacce44814f,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,2011/2013
 alien-plants-belgium:taxon:c93aca5bc5d7b3df31338aacce44814f,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,2011/2013
 alien-plants-belgium:taxon:c94279c3e761142327dcee108c303899,ISO_3166-2:BE-VLG,Flemish Region,BE,presence uncertain,introduced,casual,,
@@ -7635,10 +7635,10 @@ alien-plants-belgium:taxon:cdc60a51cd5a6c74a9bbc654e817d374,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:ce0be0822aef2a13f461bc9547198035,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:ce0be0822aef2a13f461bc9547198035,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:ce0be0822aef2a13f461bc9547198035,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1977/2018
-alien-plants-belgium:taxon:ce0db2d6c7c4771862d3f13b4d92f252,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:ce0db2d6c7c4771862d3f13b4d92f252,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:ce0db2d6c7c4771862d3f13b4d92f252,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:ce0db2d6c7c4771862d3f13b4d92f252,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1953/2025
+alien-plants-belgium:taxon:ce0db2d6c7c4771862d3f13b4d92f252,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:ce0db2d6c7c4771862d3f13b4d92f252,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:ce0db2d6c7c4771862d3f13b4d92f252,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:ce0db2d6c7c4771862d3f13b4d92f252,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1953/2025
 alien-plants-belgium:taxon:ce1b8d8bcd9bd2d79022ee8928962667,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:ce1b8d8bcd9bd2d79022ee8928962667,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:ce1b8d8bcd9bd2d79022ee8928962667,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
@@ -7712,10 +7712,10 @@ alien-plants-belgium:taxon:cff08ad36c879d0a080aa4c73d26911d,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:cff9c94d389eba63b67b59a46ee30c5b,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,
 alien-plants-belgium:taxon:cff9c94d389eba63b67b59a46ee30c5b,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,,
 alien-plants-belgium:taxon:cff9c94d389eba63b67b59a46ee30c5b,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1955/2014
-alien-plants-belgium:taxon:d0023308d55b17d4bd38bb2c8cbf9cd1,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:d0023308d55b17d4bd38bb2c8cbf9cd1,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:d0023308d55b17d4bd38bb2c8cbf9cd1,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:d0023308d55b17d4bd38bb2c8cbf9cd1,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_on_animals,1860/2025
+alien-plants-belgium:taxon:d0023308d55b17d4bd38bb2c8cbf9cd1,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:d0023308d55b17d4bd38bb2c8cbf9cd1,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:d0023308d55b17d4bd38bb2c8cbf9cd1,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:d0023308d55b17d4bd38bb2c8cbf9cd1,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,contaminant_on_animals,1860/2025
 alien-plants-belgium:taxon:d03d62a1cb76f079db900772bebf02b6,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:d03d62a1cb76f079db900772bebf02b6,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,
 alien-plants-belgium:taxon:d03d62a1cb76f079db900772bebf02b6,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_seed,
@@ -7776,10 +7776,10 @@ alien-plants-belgium:taxon:d1ecb91a1aa39f3c4ffaa8f7d4977a1e,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:d1ecb91a1aa39f3c4ffaa8f7d4977a1e,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,2012/2025
 alien-plants-belgium:taxon:d20955fe87534b393d123f09946d3023,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,,1850/1892
 alien-plants-belgium:taxon:d20955fe87534b393d123f09946d3023,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1850/1892
-alien-plants-belgium:taxon:d20cb66e9dcbd2618541fb5d077b37b1,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:d20cb66e9dcbd2618541fb5d077b37b1,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:d20cb66e9dcbd2618541fb5d077b37b1,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:d20cb66e9dcbd2618541fb5d077b37b1,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1885/2025
+alien-plants-belgium:taxon:d20cb66e9dcbd2618541fb5d077b37b1,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:d20cb66e9dcbd2618541fb5d077b37b1,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:d20cb66e9dcbd2618541fb5d077b37b1,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:d20cb66e9dcbd2618541fb5d077b37b1,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1885/2025
 alien-plants-belgium:taxon:d2160a70e9dbf79371ddf44d6bd41179,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,1988/2013
 alien-plants-belgium:taxon:d2160a70e9dbf79371ddf44d6bd41179,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1988/2013
 alien-plants-belgium:taxon:d241470cb377c5f37b9137e1427b2715,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2011/2018
@@ -7842,9 +7842,9 @@ alien-plants-belgium:taxon:d3d2da9ae62a2c268b89392cf4c0bb1e,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:d3d2da9ae62a2c268b89392cf4c0bb1e,ISO_3166-2:BE-WAL,Walloon Region,BE,presence uncertain,introduced,casual,,
 alien-plants-belgium:taxon:d3d2da9ae62a2c268b89392cf4c0bb1e,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,presence uncertain,introduced,casual,,
 alien-plants-belgium:taxon:d3d2da9ae62a2c268b89392cf4c0bb1e,ISO_3166-2:BE,Belgium,BE,presence uncertain,introduced,casual,,
-alien-plants-belgium:taxon:d3fd6b0b45b204812dc024576675f37b,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:d3fd6b0b45b204812dc024576675f37b,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:d3fd6b0b45b204812dc024576675f37b,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1993/2025
+alien-plants-belgium:taxon:d3fd6b0b45b204812dc024576675f37b,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:d3fd6b0b45b204812dc024576675f37b,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:d3fd6b0b45b204812dc024576675f37b,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1993/2025
 alien-plants-belgium:taxon:d41137ce9798bde0c06885338cbeeb47,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:d41137ce9798bde0c06885338cbeeb47,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:d41137ce9798bde0c06885338cbeeb47,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
@@ -7883,10 +7883,10 @@ alien-plants-belgium:taxon:d4ab677f5b6c2430bed3cc6203f3a60a,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:d4ab677f5b6c2430bed3cc6203f3a60a,ISO_3166-2:BE,Belgium,BE,present,introduced,established,,1938/2025
 alien-plants-belgium:taxon:d4b8052e246fa13614970793fc7ed750,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1924/1948
 alien-plants-belgium:taxon:d4b8052e246fa13614970793fc7ed750,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1924/1948
-alien-plants-belgium:taxon:d4bdbbb158e7b3d8a1ebc507640efda5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:d4bdbbb158e7b3d8a1ebc507640efda5,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:d4bdbbb158e7b3d8a1ebc507640efda5,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:d4bdbbb158e7b3d8a1ebc507640efda5,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1954/2025
+alien-plants-belgium:taxon:d4bdbbb158e7b3d8a1ebc507640efda5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:d4bdbbb158e7b3d8a1ebc507640efda5,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:d4bdbbb158e7b3d8a1ebc507640efda5,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:d4bdbbb158e7b3d8a1ebc507640efda5,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1954/2025
 alien-plants-belgium:taxon:d4e8c32c243a32537a3ce8530ca6da94,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:d4e8c32c243a32537a3ce8530ca6da94,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_on_animals,
 alien-plants-belgium:taxon:d4e8c32c243a32537a3ce8530ca6da94,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_seed,
@@ -7951,10 +7951,10 @@ alien-plants-belgium:taxon:d72dbfeaa1a71141ab432aff734f3ecb,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:d72dbfeaa1a71141ab432aff734f3ecb,ISO_3166-2:BE,Belgium,BE,present,introduced,established,,2000/2025
 alien-plants-belgium:taxon:d731c892b801dac3b0374d14b55e16b9,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1911/1949
 alien-plants-belgium:taxon:d731c892b801dac3b0374d14b55e16b9,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1911/1949
-alien-plants-belgium:taxon:d749b04c46af8a97e4bcf1ef7512d8bb,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:d749b04c46af8a97e4bcf1ef7512d8bb,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:d749b04c46af8a97e4bcf1ef7512d8bb,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:d749b04c46af8a97e4bcf1ef7512d8bb,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1876/2025
+alien-plants-belgium:taxon:d749b04c46af8a97e4bcf1ef7512d8bb,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:d749b04c46af8a97e4bcf1ef7512d8bb,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:d749b04c46af8a97e4bcf1ef7512d8bb,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:d749b04c46af8a97e4bcf1ef7512d8bb,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1876/2025
 alien-plants-belgium:taxon:d764e3b240f9dca899536624ac5df5f9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2014/2017
 alien-plants-belgium:taxon:d764e3b240f9dca899536624ac5df5f9,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2014/2017
 alien-plants-belgium:taxon:d76ca1ca189e43c83a7b75e0eae2f50b,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
@@ -7979,8 +7979,8 @@ alien-plants-belgium:taxon:d83d37c53f9f3ecd611cdca3c314c329,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:d83d37c53f9f3ecd611cdca3c314c329,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1994
 alien-plants-belgium:taxon:d8684f42a945f34f0f26fa8a5f860964,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,2009/2025
 alien-plants-belgium:taxon:d8684f42a945f34f0f26fa8a5f860964,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,2009/2025
-alien-plants-belgium:taxon:d86c4911fedada9e8a178a65a7c31cd5,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,escape_horticulture,1850/1948
-alien-plants-belgium:taxon:d86c4911fedada9e8a178a65a7c31cd5,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1850/1948
+alien-plants-belgium:taxon:d86c4911fedada9e8a178a65a7c31cd5,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,escape_horticulture,1850/1948
+alien-plants-belgium:taxon:d86c4911fedada9e8a178a65a7c31cd5,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1850/1948
 alien-plants-belgium:taxon:d87b2768e0bf267f75125a8621cd7018,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:d87b2768e0bf267f75125a8621cd7018,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,
 alien-plants-belgium:taxon:d87b2768e0bf267f75125a8621cd7018,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_seed,
@@ -8118,10 +8118,10 @@ alien-plants-belgium:taxon:db60357ac764c5513bfc70255273c3b9,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:db60357ac764c5513bfc70255273c3b9,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,,
 alien-plants-belgium:taxon:db60357ac764c5513bfc70255273c3b9,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1891/2015
 alien-plants-belgium:taxon:db60357ac764c5513bfc70255273c3b9,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1891/2015
-alien-plants-belgium:taxon:db781580782108c0bf7214b8dc706185,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:db781580782108c0bf7214b8dc706185,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:db781580782108c0bf7214b8dc706185,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:db781580782108c0bf7214b8dc706185,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1945/2025
+alien-plants-belgium:taxon:db781580782108c0bf7214b8dc706185,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:db781580782108c0bf7214b8dc706185,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:db781580782108c0bf7214b8dc706185,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:db781580782108c0bf7214b8dc706185,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1945/2025
 alien-plants-belgium:taxon:db7f294737cd817870f36d2b1bb2979e,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2018
 alien-plants-belgium:taxon:db7f294737cd817870f36d2b1bb2979e,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2018
 alien-plants-belgium:taxon:dbae95a54ca9dcbdd5250cf2d2325d12,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
@@ -8189,9 +8189,9 @@ alien-plants-belgium:taxon:de12bc62967cb4da7fea42191c5c3729,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:de12bc62967cb4da7fea42191c5c3729,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1995/2000
 alien-plants-belgium:taxon:de3550fa769289f16b8dc273a8e22838,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,2010/2025
 alien-plants-belgium:taxon:de3550fa769289f16b8dc273a8e22838,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,2010/2025
-alien-plants-belgium:taxon:de3923afd6f856c6625c4d787a993776,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:de3923afd6f856c6625c4d787a993776,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:de3923afd6f856c6625c4d787a993776,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1993/2025
+alien-plants-belgium:taxon:de3923afd6f856c6625c4d787a993776,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:de3923afd6f856c6625c4d787a993776,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:de3923afd6f856c6625c4d787a993776,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1993/2025
 alien-plants-belgium:taxon:de6b3eced8dd16d38158f0450046eea9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_nursery,
 alien-plants-belgium:taxon:de6b3eced8dd16d38158f0450046eea9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_on_animals,
 alien-plants-belgium:taxon:de6b3eced8dd16d38158f0450046eea9,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_nursery,
@@ -8204,10 +8204,10 @@ alien-plants-belgium:taxon:de761198efc8492456dc790d14de73d6,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:de761198efc8492456dc790d14de73d6,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1941/2025
 alien-plants-belgium:taxon:ded52a07b79cace12e064d3dd6d5ba3c,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1895
 alien-plants-belgium:taxon:ded52a07b79cace12e064d3dd6d5ba3c,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1895
-alien-plants-belgium:taxon:defe90489ff33a744621df91dccbf454,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:defe90489ff33a744621df91dccbf454,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:defe90489ff33a744621df91dccbf454,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:defe90489ff33a744621df91dccbf454,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1891/2025
+alien-plants-belgium:taxon:defe90489ff33a744621df91dccbf454,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:defe90489ff33a744621df91dccbf454,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:defe90489ff33a744621df91dccbf454,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:defe90489ff33a744621df91dccbf454,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1891/2025
 alien-plants-belgium:taxon:df255c4f639c0698afb2ba6fd6eef810,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:df255c4f639c0698afb2ba6fd6eef810,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_on_animals,
 alien-plants-belgium:taxon:df255c4f639c0698afb2ba6fd6eef810,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,
@@ -8678,10 +8678,10 @@ alien-plants-belgium:taxon:eacad91fd496be918ce6cfae005240b2,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:eacad91fd496be918ce6cfae005240b2,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1891/1920
 alien-plants-belgium:taxon:eacad91fd496be918ce6cfae005240b2,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1891/1920
 alien-plants-belgium:taxon:eacad91fd496be918ce6cfae005240b2,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1891/1920
-alien-plants-belgium:taxon:ead6a3602f57d855a118b670b1c02402,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:ead6a3602f57d855a118b670b1c02402,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:ead6a3602f57d855a118b670b1c02402,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:ead6a3602f57d855a118b670b1c02402,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1803/2025
+alien-plants-belgium:taxon:ead6a3602f57d855a118b670b1c02402,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:ead6a3602f57d855a118b670b1c02402,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:ead6a3602f57d855a118b670b1c02402,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:ead6a3602f57d855a118b670b1c02402,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1803/2025
 alien-plants-belgium:taxon:eae9f4542796436b8ad78ac80badbaca,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,2015/2016
 alien-plants-belgium:taxon:eae9f4542796436b8ad78ac80badbaca,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,2015/2016
 alien-plants-belgium:taxon:eaeac51f981efab1197add5fcc7d43bc,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,stowaway,
@@ -8809,10 +8809,10 @@ alien-plants-belgium:taxon:ee5e65e2b7c872c3303240f896474d56,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:ee5e65e2b7c872c3303240f896474d56,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1893
 alien-plants-belgium:taxon:ee77c0d013bb46d9802ea9946168a873,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,1947
 alien-plants-belgium:taxon:ee77c0d013bb46d9802ea9946168a873,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1947
-alien-plants-belgium:taxon:ee85feb384f3128b7feb03ea24310a79,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,escape_horticulture,1792/2018
-alien-plants-belgium:taxon:ee85feb384f3128b7feb03ea24310a79,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1792/2018
-alien-plants-belgium:taxon:ee85feb384f3128b7feb03ea24310a79,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,escape_horticulture,2018/2025
-alien-plants-belgium:taxon:ee85feb384f3128b7feb03ea24310a79,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,escape_horticulture,2018/2025
+alien-plants-belgium:taxon:ee85feb384f3128b7feb03ea24310a79,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,escape_horticulture,1792/2018
+alien-plants-belgium:taxon:ee85feb384f3128b7feb03ea24310a79,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1792/2018
+alien-plants-belgium:taxon:ee85feb384f3128b7feb03ea24310a79,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,escape_horticulture,2018/2025
+alien-plants-belgium:taxon:ee85feb384f3128b7feb03ea24310a79,ISO_3166-2:BE,Belgium,BE,absent,introduced,,escape_horticulture,2018/2025
 alien-plants-belgium:taxon:eebefecdfb86d52487e7dcb13757f617,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_seed,
 alien-plants-belgium:taxon:eebefecdfb86d52487e7dcb13757f617,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_on_animals,
 alien-plants-belgium:taxon:eebefecdfb86d52487e7dcb13757f617,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,,
@@ -8851,8 +8851,8 @@ alien-plants-belgium:taxon:ef21c7d22bf38cb73a4069bf54d865eb,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:ef21c7d22bf38cb73a4069bf54d865eb,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1892/2016
 alien-plants-belgium:taxon:ef21c7d22bf38cb73a4069bf54d865eb,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1892/2016
 alien-plants-belgium:taxon:ef21c7d22bf38cb73a4069bf54d865eb,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1892/2016
-alien-plants-belgium:taxon:ef2c43d3459fd8519c07f724f712267b,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,1939/2025
-alien-plants-belgium:taxon:ef2c43d3459fd8519c07f724f712267b,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1939/2025
+alien-plants-belgium:taxon:ef2c43d3459fd8519c07f724f712267b,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,1939/2025
+alien-plants-belgium:taxon:ef2c43d3459fd8519c07f724f712267b,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1939/2025
 alien-plants-belgium:taxon:ef5385bb91126eb76a5986c5743760cf,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_seed,
 alien-plants-belgium:taxon:ef5385bb91126eb76a5986c5743760cf,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_on_animals,
 alien-plants-belgium:taxon:ef5385bb91126eb76a5986c5743760cf,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,,
@@ -9037,12 +9037,12 @@ alien-plants-belgium:taxon:f33d6d2dca86b53e5a09cbda787f300f,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:f33fe6a97cdb5c41ab6f23b067a32369,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:f33fe6a97cdb5c41ab6f23b067a32369,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:f33fe6a97cdb5c41ab6f23b067a32369,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1984/1993
-alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1861/1924
-alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,absent,introduced,extinct,escape_horticulture,
-alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,escape_horticulture,1924/2025
+alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1861/1924
+alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,absent,introduced,,escape_horticulture,
+alien-plants-belgium:taxon:f35c41f893da561c843307ce4e922fd2,ISO_3166-2:BE,Belgium,BE,absent,introduced,,escape_horticulture,1924/2025
 alien-plants-belgium:taxon:f360418bbb9ef5d94dd6dc4f39ca1ad5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2009/2016
 alien-plants-belgium:taxon:f360418bbb9ef5d94dd6dc4f39ca1ad5,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2009/2016
 alien-plants-belgium:taxon:f3611a65691d8b76edea9d31154ef0c6,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
@@ -9099,10 +9099,10 @@ alien-plants-belgium:taxon:f4c9151f7f443ab4d607f154b2665484,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:f4c9151f7f443ab4d607f154b2665484,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2018/2019
 alien-plants-belgium:taxon:f4e7df92dce0bba8031f6ae8c7804816,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,2021
 alien-plants-belgium:taxon:f4e7df92dce0bba8031f6ae8c7804816,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2021
-alien-plants-belgium:taxon:f51c04ae207885f4d2ee0ac440a52352,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_timber,
-alien-plants-belgium:taxon:f51c04ae207885f4d2ee0ac440a52352,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_timber,
-alien-plants-belgium:taxon:f51c04ae207885f4d2ee0ac440a52352,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,contaminant_timber,
-alien-plants-belgium:taxon:f51c04ae207885f4d2ee0ac440a52352,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_timber,1952/2025
+alien-plants-belgium:taxon:f51c04ae207885f4d2ee0ac440a52352,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,contaminant_timber,
+alien-plants-belgium:taxon:f51c04ae207885f4d2ee0ac440a52352,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,contaminant_timber,
+alien-plants-belgium:taxon:f51c04ae207885f4d2ee0ac440a52352,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,contaminant_timber,
+alien-plants-belgium:taxon:f51c04ae207885f4d2ee0ac440a52352,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,contaminant_timber,1952/2025
 alien-plants-belgium:taxon:f53ef0997d7d6b518e762d254d1a46d8,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,stowaway_people_luggage,
 alien-plants-belgium:taxon:f53ef0997d7d6b518e762d254d1a46d8,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_on_animals,
 alien-plants-belgium:taxon:f53ef0997d7d6b518e762d254d1a46d8,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,,
@@ -9124,10 +9124,10 @@ alien-plants-belgium:taxon:f5748e57b82dbb226d90b78b0413615b,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:f5869c9c460c08f0f05a41d60f3ab73c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:f5869c9c460c08f0f05a41d60f3ab73c,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:f5869c9c460c08f0f05a41d60f3ab73c,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1850/2018
-alien-plants-belgium:taxon:f5a1f5f91eb164289f881c26ddd8eda4,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:f5a1f5f91eb164289f881c26ddd8eda4,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:f5a1f5f91eb164289f881c26ddd8eda4,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,contaminant_on_animals,
-alien-plants-belgium:taxon:f5a1f5f91eb164289f881c26ddd8eda4,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_on_animals,1939/2025
+alien-plants-belgium:taxon:f5a1f5f91eb164289f881c26ddd8eda4,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:f5a1f5f91eb164289f881c26ddd8eda4,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:f5a1f5f91eb164289f881c26ddd8eda4,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,contaminant_on_animals,
+alien-plants-belgium:taxon:f5a1f5f91eb164289f881c26ddd8eda4,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,contaminant_on_animals,1939/2025
 alien-plants-belgium:taxon:f5aa3dfc81ce3258a9b365c003ba1e6e,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_agriculture,
 alien-plants-belgium:taxon:f5aa3dfc81ce3258a9b365c003ba1e6e,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_agriculture,
 alien-plants-belgium:taxon:f5aa3dfc81ce3258a9b365c003ba1e6e,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,escape_agriculture,
@@ -9177,8 +9177,8 @@ alien-plants-belgium:taxon:f691b9905d6ab5206d30b9c496b2ac20,ISO_3166-2:BE-VLG,Fl
 alien-plants-belgium:taxon:f691b9905d6ab5206d30b9c496b2ac20,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1854/1874
 alien-plants-belgium:taxon:f69c3eadb376f8479ef7f405a042c8de,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,1974/1981
 alien-plants-belgium:taxon:f69c3eadb376f8479ef7f405a042c8de,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1974/1981
-alien-plants-belgium:taxon:f6a5ed9e46401695632bb3bbf5cc5eb4,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,1946/2025
-alien-plants-belgium:taxon:f6a5ed9e46401695632bb3bbf5cc5eb4,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1946/2025
+alien-plants-belgium:taxon:f6a5ed9e46401695632bb3bbf5cc5eb4,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,1946/2025
+alien-plants-belgium:taxon:f6a5ed9e46401695632bb3bbf5cc5eb4,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1946/2025
 alien-plants-belgium:taxon:f6ab6e0e10e1bb783da428147aee4d0a,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,,1850
 alien-plants-belgium:taxon:f6ab6e0e10e1bb783da428147aee4d0a,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1850
 alien-plants-belgium:taxon:f6d40bea4078eb2af791b2898526e989,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,1952
@@ -9188,10 +9188,10 @@ alien-plants-belgium:taxon:f6d9c1dd0c51cb2dcc6b1ec223346fac,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:f6d9c1dd0c51cb2dcc6b1ec223346fac,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1973/2025
 alien-plants-belgium:taxon:f73f8951a92046f13811c8c6f9430b7a,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2012/2016
 alien-plants-belgium:taxon:f73f8951a92046f13811c8c6f9430b7a,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2012/2016
-alien-plants-belgium:taxon:f75f43697e40e0d31d19559b405acb0c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:f75f43697e40e0d31d19559b405acb0c,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:f75f43697e40e0d31d19559b405acb0c,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,escape_horticulture,
-alien-plants-belgium:taxon:f75f43697e40e0d31d19559b405acb0c,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,1977/2025
+alien-plants-belgium:taxon:f75f43697e40e0d31d19559b405acb0c,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:f75f43697e40e0d31d19559b405acb0c,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:f75f43697e40e0d31d19559b405acb0c,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,escape_horticulture,
+alien-plants-belgium:taxon:f75f43697e40e0d31d19559b405acb0c,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,escape_horticulture,1977/2025
 alien-plants-belgium:taxon:f778710fdb78f81c99c9cd80ec80afbb,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:f778710fdb78f81c99c9cd80ec80afbb,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_on_animals,
 alien-plants-belgium:taxon:f778710fdb78f81c99c9cd80ec80afbb,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,,
@@ -9240,10 +9240,10 @@ alien-plants-belgium:taxon:f9bfae3851c403502db0e806bf643ba8,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:f9bfae3851c403502db0e806bf643ba8,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1912
 alien-plants-belgium:taxon:f9c823de563a05475aadc175609c8579,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,2014
 alien-plants-belgium:taxon:f9c823de563a05475aadc175609c8579,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2014
-alien-plants-belgium:taxon:f9cfc6b67e0c2bd68c9941a5371e3746,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,,
-alien-plants-belgium:taxon:f9cfc6b67e0c2bd68c9941a5371e3746,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,,
-alien-plants-belgium:taxon:f9cfc6b67e0c2bd68c9941a5371e3746,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,,
-alien-plants-belgium:taxon:f9cfc6b67e0c2bd68c9941a5371e3746,ISO_3166-2:BE,Belgium,BE,present,introduced,established,,1823/2025
+alien-plants-belgium:taxon:f9cfc6b67e0c2bd68c9941a5371e3746,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,invasive,,
+alien-plants-belgium:taxon:f9cfc6b67e0c2bd68c9941a5371e3746,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,invasive,,
+alien-plants-belgium:taxon:f9cfc6b67e0c2bd68c9941a5371e3746,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,invasive,,
+alien-plants-belgium:taxon:f9cfc6b67e0c2bd68c9941a5371e3746,ISO_3166-2:BE,Belgium,BE,present,introduced,invasive,,1823/2025
 alien-plants-belgium:taxon:f9d053025cf121298063e4f22b290de5,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_food_bait,
 alien-plants-belgium:taxon:f9d053025cf121298063e4f22b290de5,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_food_bait,
 alien-plants-belgium:taxon:f9d053025cf121298063e4f22b290de5,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,escape_food_bait,
@@ -9258,10 +9258,10 @@ alien-plants-belgium:taxon:fa0b89c767083ffb8778e47b8ae705af,ISO_3166-2:BE-WAL,Wa
 alien-plants-belgium:taxon:fa0b89c767083ffb8778e47b8ae705af,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1911/1912
 alien-plants-belgium:taxon:fa206c4f55ba50cc268b984099132702,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,1972
 alien-plants-belgium:taxon:fa206c4f55ba50cc268b984099132702,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1972
-alien-plants-belgium:taxon:fa2265e30e94d78492d88afcee963a8d,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,escape_horticulture,1850/1920
-alien-plants-belgium:taxon:fa2265e30e94d78492d88afcee963a8d,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,escape_horticulture,1850/1920
-alien-plants-belgium:taxon:fa2265e30e94d78492d88afcee963a8d,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,extinct,escape_horticulture,1920/2025
-alien-plants-belgium:taxon:fa2265e30e94d78492d88afcee963a8d,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,escape_horticulture,1920/2025
+alien-plants-belgium:taxon:fa2265e30e94d78492d88afcee963a8d,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,escape_horticulture,1850/1920
+alien-plants-belgium:taxon:fa2265e30e94d78492d88afcee963a8d,ISO_3166-2:BE,Belgium,BE,present,introduced,,escape_horticulture,1850/1920
+alien-plants-belgium:taxon:fa2265e30e94d78492d88afcee963a8d,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,,escape_horticulture,1920/2025
+alien-plants-belgium:taxon:fa2265e30e94d78492d88afcee963a8d,ISO_3166-2:BE,Belgium,BE,absent,introduced,,escape_horticulture,1920/2025
 alien-plants-belgium:taxon:fa4f96281402a26072705b73f02950d3,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:fa4f96281402a26072705b73f02950d3,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:fa4f96281402a26072705b73f02950d3,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1950/1956
@@ -9413,18 +9413,18 @@ alien-plants-belgium:taxon:fe14151fa06b8fcd9f331f5edf57923b,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:fe14151fa06b8fcd9f331f5edf57923b,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_seed,1850/2013
 alien-plants-belgium:taxon:fe14151fa06b8fcd9f331f5edf57923b,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,contaminant_on_animals,1850/2013
 alien-plants-belgium:taxon:fe14151fa06b8fcd9f331f5edf57923b,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,,1850/2013
-alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,contaminant_on_animals,
-alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,extinct,contaminant_habitat_material,
-alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,contaminant_on_animals,
-alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,extinct,contaminant_habitat_material,
-alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,contaminant_on_animals,1813/1916
-alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE,Belgium,BE,present,introduced,extinct,contaminant_habitat_material,1813/1916
-alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,contaminant_on_animals,
-alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,extinct,contaminant_habitat_material,
-alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,extinct,contaminant_on_animals,
-alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,extinct,contaminant_habitat_material,
-alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,contaminant_on_animals,1916/2025
-alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE,Belgium,BE,absent,introduced,extinct,contaminant_habitat_material,1916/2025
+alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,contaminant_on_animals,
+alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,,contaminant_habitat_material,
+alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,contaminant_on_animals,
+alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,,contaminant_habitat_material,
+alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE,Belgium,BE,present,introduced,,contaminant_on_animals,1813/1916
+alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE,Belgium,BE,present,introduced,,contaminant_habitat_material,1813/1916
+alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,contaminant_on_animals,
+alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-VLG,Flemish Region,BE,absent,introduced,,contaminant_habitat_material,
+alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,,contaminant_on_animals,
+alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE-WAL,Walloon Region,BE,absent,introduced,,contaminant_habitat_material,
+alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE,Belgium,BE,absent,introduced,,contaminant_on_animals,1916/2025
+alien-plants-belgium:taxon:fe1d6bc47b13c9123410610d893a17cb,ISO_3166-2:BE,Belgium,BE,absent,introduced,,contaminant_habitat_material,1916/2025
 alien-plants-belgium:taxon:fe5991761f326f4f32bbcdf65aabbf53,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:fe5991761f326f4f32bbcdf65aabbf53,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:fe5991761f326f4f32bbcdf65aabbf53,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,1887/2018
