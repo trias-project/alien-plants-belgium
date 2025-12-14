@@ -49,7 +49,7 @@ glimpse(raw_data)
 
 # Preprocessing
 
-## Taxon IDs
+## Add Taxon IDs
 
 To link taxa with information in the extension(s), each taxon needs a unique and relatively stable `taxonID`. Here we create one in the form of `dataset_shortname:taxon:hash`, where `hash` is unique code based on scientific name (not kingdom).
 
@@ -71,7 +71,7 @@ input_data <-
   )
 ```
 
-## Location information
+## Process distribution information (adds rows)
 
 1. Information on the occurrences is given for the **regions**, while date information is given for **Belgium** as a whole. Some transformations and clarifications are needed.
 
@@ -145,7 +145,7 @@ input_data <-
       (is.na(presence_wa) | presence_wa == "?")
         ~ "S",
       presence_fl == "?" ~ "?",
-      is.na(presence_fl) ~ "NA",
+      is.na(presence_fl) ~ NA_character_,
       TRUE ~ "M"
     ),
     brussels = case_when(
@@ -154,7 +154,7 @@ input_data <-
       (is.na(presence_wa) | presence_wa == "?")
         ~ "S",
       presence_br == "?" ~ "?",
-      is.na(presence_br) ~ "NA",
+      is.na(presence_br) ~ NA_character_,
       TRUE ~ "M"
     ),
     wallonia = case_when(
@@ -163,7 +163,7 @@ input_data <-
       presence_wa == "X"
         ~ "S",
       presence_wa == "?" ~ "?",
-      is.na(presence_wa) ~ "NA",
+      is.na(presence_wa) ~ NA_character_,
       TRUE ~ "M"
     ),
     belgium = case_when(
@@ -190,18 +190,19 @@ input_data |>
   arrange(flanders, wallonia, brussels)
 ```
 
-One line should represent the presence information of a species in one region or Belgium. We'll therefore transform `input_data` from a wide to a long table (i.e. create a `location` and `presence` column):
+Transform from wide to long (one line per distribution):
 
 ```{r}
 input_data <-
   input_data |>
-  gather(
-    key, value,
-    flanders, wallonia, brussels, belgium,
-    convert = FALSE
+  pivot_longer(
+    cols = c(flanders, wallonia, brussels, belgium),
+    names_to = "location",
+    values_to = "presence",
+    values_drop_na = FALSE
   ) |>
-  rename("location" = "key", "presence" = "value") |>
-  filter(!presence == "NA") # Remove species which lack presence information
+  # Remove empty presence, but keep at least Belgium (for records without any distribution)
+  filter(!is.na(presence) | location == "belgium")
 ```
 
 Now we'll create and clean a start and end year:
