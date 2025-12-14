@@ -13,26 +13,40 @@
 
 <title>Manual of the Alien Plants of Belgium</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.30/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -45,32 +59,8 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 <link rel="stylesheet" href="static/css/trias.css" type="text/css" />
 
@@ -81,10 +71,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -101,40 +87,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 45px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 50px;
-  margin-top: -50px;
-}
-.section h2 {
-  padding-top: 50px;
-  margin-top: -50px;
-}
-.section h3 {
-  padding-top: 50px;
-  margin-top: -50px;
-}
-.section h4 {
-  padding-top: 50px;
-  margin-top: -50px;
-}
-.section h5 {
-  padding-top: 50px;
-  margin-top: -50px;
-}
-.section h6 {
-  padding-top: 50px;
-  margin-top: -50px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -162,7 +124,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -174,7 +136,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -184,11 +146,28 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.parent().addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -200,13 +179,12 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -214,16 +192,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -267,7 +238,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -292,7 +263,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -305,22 +276,40 @@ $(document).ready(function () {
 <h1>Manual of the Alien Plants of Belgium</h1>
 <div id="rationale" class="section level2">
 <h2>Rationale</h2>
-<p>This repository contains the functionality to standardize the <a href="http://alienplantsbelgium.be/">Manual of the Alien Plants of Belgium</a> to a <a href="https://www.gbif.org/dataset-classes">Darwin Core checklist</a> that can be harvested by <a href="http://www.gbif.org">GBIF</a>. It was developed for the <a href="http://trias-project.be">TrIAS project</a>.</p>
+<p>This repository contains the functionality to standardize the <a
+href="http://alienplantsbelgium.be/">Manual of the Alien Plants of
+Belgium</a> to a <a href="https://www.gbif.org/dataset-classes">Darwin
+Core checklist</a> that can be harvested by <a
+href="http://www.gbif.org">GBIF</a>. It was developed for the <a
+href="http://trias-project.be">TrIAS project</a>.</p>
 </div>
 <div id="workflow" class="section level2">
 <h2>Workflow</h2>
-<p><a href="https://github.com/trias-project/alien-plants-belgium/tree/master/data/raw">source data</a> → Darwin Core <a href="http://trias-project.github.io/alien-plants-belgium/dwc_mapping.html">mapping script</a> → generated <a href="https://github.com/trias-project/alien-plants-belgium/tree/master/data/processed">Darwin Core files</a></p>
+<p><a
+href="https://github.com/trias-project/alien-plants-belgium/tree/master/data/raw">source
+data</a> → Darwin Core <a
+href="http://trias-project.github.io/alien-plants-belgium/dwc_mapping.html">mapping
+script</a> → generated <a
+href="https://github.com/trias-project/alien-plants-belgium/tree/master/data/processed">Darwin
+Core files</a></p>
 </div>
 <div id="published-dataset" class="section level2">
 <h2>Published dataset</h2>
 <ul>
-<li><a href="http://ipt.biodiversity.be/resource?r=alien-plants-belgium">Dataset on the IPT</a></li>
+<li><a
+href="http://ipt.biodiversity.be/resource?r=alien-plants-belgium">Dataset
+on the IPT</a></li>
 <li><a href="https://doi.org/10.15468/wtda1m">Dataset on GBIF</a></li>
 </ul>
 </div>
 <div id="repo-structure" class="section level2">
 <h2>Repo structure</h2>
-<p>The repository structure is based on <a href="http://drivendata.github.io/cookiecutter-data-science/">Cookiecutter Data Science</a> and the <a href="https://github.com/trias-project/checklist-recipe">Checklist recipe</a>. Files and directories indicated with <code>GENERATED</code> should not be edited manually.</p>
+<p>The repository structure is based on <a
+href="http://drivendata.github.io/cookiecutter-data-science/">Cookiecutter
+Data Science</a> and the <a
+href="https://github.com/trias-project/checklist-recipe">Checklist
+recipe</a>. Files and directories indicated with <code>GENERATED</code>
+should not be edited manually.</p>
 <pre><code>├── README.md              : Description of this repository
 ├── LICENSE                : Repository license
 ├── alien-plants-belgium.Rproj : RStudio project file
@@ -342,19 +331,28 @@ $(document).ready(function () {
 <ol style="list-style-type: decimal">
 <li>Clone this repository to your computer</li>
 <li>Open the RStudio project file</li>
-<li>Open the <code>dwc_mapping.Rmd</code> <a href="https://rmarkdown.rstudio.com/">R Markdown file</a> in RStudio</li>
+<li>Open the <code>dwc_mapping.Rmd</code> <a
+href="https://rmarkdown.rstudio.com/">R Markdown file</a> in
+RStudio</li>
 <li>Install any required packages</li>
-<li>Click <code>Run &gt; Run All</code> to generate the processed data</li>
-<li>Alternatively, click <code>Build &gt; Build website</code> to generate the processed data and build the website in <code>docs/</code></li>
+<li>Click <code>Run &gt; Run All</code> to generate the processed
+data</li>
+<li>Alternatively, click <code>Build &gt; Build website</code> to
+generate the processed data and build the website in
+<code>docs/</code></li>
 </ol>
 </div>
 <div id="contributors" class="section level2">
 <h2>Contributors</h2>
-<p><a href="https://github.com/trias-project/alien-plants-belgium/contributors">List of contributors</a></p>
+<p><a
+href="https://github.com/trias-project/alien-plants-belgium/contributors">List
+of contributors</a></p>
 </div>
 <div id="license" class="section level2">
 <h2>License</h2>
-<p><a href="https://github.com/trias-project/alien-plants-belgium/blob/master/LICENSE">MIT License</a></p>
+<p><a
+href="https://github.com/trias-project/alien-plants-belgium/blob/master/LICENSE">MIT
+License</a></p>
 </div>
 </div>
 
@@ -367,7 +365,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -385,7 +383,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
