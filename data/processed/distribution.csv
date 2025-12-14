@@ -38,7 +38,6 @@ alien-plants-belgium:taxon:008e914a35deab07270b333c73bfba14,ISO_3166-2:BE-BRU,Br
 alien-plants-belgium:taxon:008e914a35deab07270b333c73bfba14,ISO_3166-2:BE-BRU,Brussels-Capital Region,BE,present,introduced,established,,
 alien-plants-belgium:taxon:008e914a35deab07270b333c73bfba14,ISO_3166-2:BE,Belgium,BE,present,introduced,established,contaminant_habitat_material,2025
 alien-plants-belgium:taxon:008e914a35deab07270b333c73bfba14,ISO_3166-2:BE,Belgium,BE,present,introduced,established,,2025
-alien-plants-belgium:taxon:00bb2bc05d9481b0bc8b5b57117fa799,ISO_3166-2:BE,Belgium,BE,,introduced,,,
 alien-plants-belgium:taxon:00bff53bc6ed2a1d60d89bc060abba2f,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:00bff53bc6ed2a1d60d89bc060abba2f,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,escape_horticulture,
 alien-plants-belgium:taxon:00bff53bc6ed2a1d60d89bc060abba2f,ISO_3166-2:BE,Belgium,BE,present,introduced,casual,escape_horticulture,2010/2025
@@ -7170,7 +7169,6 @@ alien-plants-belgium:taxon:c199cbc385b0c6e833bd5856b161c454,ISO_3166-2:BE,Belgiu
 alien-plants-belgium:taxon:c1c2a0bfe0b8b90510377772e6547fe9,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:c1c2a0bfe0b8b90510377772e6547fe9,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,established,escape_horticulture,
 alien-plants-belgium:taxon:c1c2a0bfe0b8b90510377772e6547fe9,ISO_3166-2:BE,Belgium,BE,present,introduced,established,escape_horticulture,2001/2025
-alien-plants-belgium:taxon:c1c53f29a84fb869e4ba12dc675f91df,ISO_3166-2:BE,Belgium,BE,,introduced,casual,contaminant_on_animals,
 alien-plants-belgium:taxon:c1f7dbb4335a677cf65cd08c2300f804,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_on_animals,
 alien-plants-belgium:taxon:c1f7dbb4335a677cf65cd08c2300f804,ISO_3166-2:BE-VLG,Flemish Region,BE,present,introduced,casual,contaminant_seed,
 alien-plants-belgium:taxon:c1f7dbb4335a677cf65cd08c2300f804,ISO_3166-2:BE-WAL,Walloon Region,BE,present,introduced,casual,contaminant_on_animals,

@@ -481,6 +481,7 @@ Map the data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/dis
 ```{r}
 distribution <-
   input_data |>
+  filter(!is.na(presence)) |> # Only keep taxa with a distribution
   mutate(
     .keep = "none",
     taxonID = taxon_id,
