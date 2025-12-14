@@ -49,6 +49,8 @@ glimpse(raw_data)
 
 # Preprocessing
 
+## Taxon IDs
+
 To link taxa with information in the extension(s), each taxon needs a unique and relatively stable `taxonID`. Here we create one in the form of `dataset_shortname:taxon:hash`, where `hash` is unique code based on scientific name (not kingdom).
 
 ```{r}
@@ -69,38 +71,7 @@ input_data <-
   )
 ```
 
-# Darwin Core mapping
-
-## Taxon core
-
-Map the data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml):
-
-```{r}
-taxon <-
-  input_data |>
-  distinct(taxon_id, .keep_all = TRUE) |>
-  mutate(
-    .keep = "none",
-    language = "en",
-    license = "http://creativecommons.org/publicdomain/zero/1.0/",
-    rightsHolder = "Meise Botanic Garden",
-    datasetID = "https://doi.org/10.15468/wtda1m",
-    datasetName = "Manual of the Alien Plants of Belgium",
-    taxonID = taxon_id,
-    scientificNameID = scientific_name_id,
-    scientificName = taxon,
-    kingdom = "Plantae",
-    family = family,
-    taxonRank = taxon_rank,
-    nomenclaturalCode = "ICN"
-  ) |>
-  relocate(family, .after = kingdom) |>
-  arrange(taxonID)
-```
-
-## Distribution extension
-
-Before we start mapping the distribution extension, we focus on two terms: `occurrenceStatus` and  `eventDate`. That is because:
+## Location information
 
 1. Information on the occurrences is given for the **regions**, while date information is given for **Belgium** as a whole. Some transformations and clarifications are needed.
 
@@ -111,7 +82,7 @@ Before we start mapping the distribution extension, we focus on two terms: `occu
  
 For these species, we include the occurrenceStatus **within** the specified time frame (`eventDate` = first - most recent observation) and **after** the last observation (`eventDate` = most recent observation - current date).
 
-The easiest way to do use a stepwize approach:
+The easiest way to do use a stepwise approach:
 
 1. Clean presence information and date information in `distribution`
 2. Create a separate dataframe `occurrenceStatus_ALO` (ALO = after last observation) for extinct and extinct/casual species
@@ -162,10 +133,10 @@ as.data.frame(matrix(
 ))
 ```
 
-We translate this to the distribution extension:
+Add location columns:
 
 ```{r}
-input_distribution <-
+input_data <-
   input_data |>
   mutate(
     flanders = case_when(
@@ -205,7 +176,7 @@ input_distribution <-
 Summary of the previous action:
 
 ```{r}
-input_distribution |>
+input_data |>
   select(
     presence_fl,
     presence_br,
@@ -219,11 +190,11 @@ input_distribution |>
   arrange(flanders, wallonia, brussels)
 ```
 
-One line should represent the presence information of a species in one region or Belgium. We need to transform `input_distribution` from a wide to a long table (i.e. create a `location` and `presence` column):
+One line should represent the presence information of a species in one region or Belgium. We'll therefore transform `input_data` from a wide to a long table (i.e. create a `location` and `presence` column):
 
 ```{r}
-input_distribution <-
-  input_distribution |>
+input_data <-
+  input_data |>
   gather(
     key, value,
     flanders, wallonia, brussels, belgium,
@@ -238,8 +209,8 @@ Now we'll create and clean a start and end year:
 ```{r}
 current_year = format(Sys.Date(), "%Y")
 
-input_distribution <-
-  input_distribution |>
+input_data <-
+  input_data |>
   mutate(
     # start_year = first record (fr), end_year = most recent record (mrr)
     # Cleaning strips out ?, ca., < and >
@@ -260,7 +231,7 @@ input_distribution <-
 Check if any `start_year` fall after `end_year` (expected to be none):
 
 ```{r}
-input_distribution |>
+input_data |>
   select(start_year, end_year) |>
   mutate(start_year = as.numeric(start_year)) |>
   mutate(end_year = as.numeric(end_year)) |>
@@ -272,8 +243,8 @@ input_distribution |>
 Combine `start_year` and `end_year` in an ranged `date` (ISO 8601 format). If any those two dates is empty or the same, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
 
 ```{r}
-input_distribution <-
-  input_distribution |>
+input_data <-
+  input_data |>
   mutate(
     date = case_when(
       start_year == "" & end_year == "" ~ "",
@@ -288,8 +259,8 @@ input_distribution <-
 Then, we map `occurrence_status` using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources) and set `event_date` only when `presence` = `S`:
 
 ```{r}
-input_distribution <-
-  input_distribution |>
+input_data <-
+  input_data |>
   mutate(
     occurrence_status = case_match(
       presence,
@@ -308,7 +279,7 @@ input_distribution <-
 Overview of `occurrence_status` for each location x presence combination:
 
 ```{r}
-input_distribution |>
+input_data |>
   select (location, presence, occurrence_status) |>
   group_by_all() |>
   summarize(records = n()) 
@@ -318,7 +289,7 @@ Now we create `occurrence_status_ALO`:
 
 ```{r}
 occurrence_status_ALO <-
-  input_distribution |>
+  input_data |>
   filter(d_n == "Ext." | d_n == "Ext./Cas.")
 ```
 
@@ -338,17 +309,48 @@ occurrence_status_ALO <-
   )
 ```
 
-Bind `occurrence_status_ALO` and `input_distribution` by rows:
+Bind `input_data` with `occurrence_status_ALO` by rows:
 
 ```{r}
-input_distribution <- bind_rows(input_distribution, occurrence_status_ALO)
+input_data <- bind_rows(input_data, occurrence_status_ALO)
 ```
+
+# Darwin Core mapping
+
+## Taxon core
+
+Map the data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml):
+
+```{r}
+taxon <-
+  input_data |>
+  distinct(taxon_id, .keep_all = TRUE) |>
+  mutate(
+    .keep = "none",
+    language = "en",
+    license = "http://creativecommons.org/publicdomain/zero/1.0/",
+    rightsHolder = "Meise Botanic Garden",
+    datasetID = "https://doi.org/10.15468/wtda1m",
+    datasetName = "Manual of the Alien Plants of Belgium",
+    taxonID = taxon_id,
+    scientificNameID = scientific_name_id,
+    scientificName = taxon,
+    kingdom = "Plantae",
+    family = family,
+    taxonRank = taxon_rank,
+    nomenclaturalCode = "ICN"
+  ) |>
+  relocate(family, .after = kingdom) |>
+  arrange(taxonID)
+```
+
+## Distribution extension
 
 Map the data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
 
 ```{r}
 distribution <-
-  input_distribution |>
+  input_data |>
   mutate(
     .keep = "none",
     taxonID = taxon_id,
