@@ -42,7 +42,7 @@ Read source data:
 raw_data <- read_excel(path = here("data", "raw", "checklist.xlsx")) 
 ```
 
-Preview data:
+Preview raw data:
 
 ```{r}
 glimpse(raw_data)
@@ -70,6 +70,18 @@ input_data <-
   )
 ```
 
+Add prefix to column names to avoid naming conflicts:
+
+```{r}
+colnames(input_data) <- paste0(".", colnames(input_data))
+```
+
+Preview input data:
+
+```{r}
+glimpse(input_data)
+```
+
 # Darwin Core mapping
 
 ## Taxon core
@@ -79,27 +91,23 @@ Map the data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24
 ```{r}
 taxon <-
   input_data |>
-  distinct(taxon_id, .keep_all = TRUE) |>
+  distinct(.taxon_id, .keep_all = TRUE) |>
   mutate(
+    .keep = "none",
     language = "en",
     license = "http://creativecommons.org/publicdomain/zero/1.0/",
     rightsHolder = "Botanic Garden Meise", # TODO: Meise Botanic Garden
     datasetID = "https://doi.org/10.15468/wtda1m",
     datasetName = "Manual of the Alien Plants of Belgium",
-    taxonID = .data$taxon_id,
-    scientificNameID = .data$scientific_name_id,
-    scientificName = .data$taxon,
+    taxonID = .taxon_id,
+    scientificNameID = .scientific_name_id,
+    scientificName = .taxon,
     kingdom = "Plantae",
-    family = .data$family,
-    taxonRank = .data$taxon_rank,
+    family = .family,
+    taxonRank = .taxon_rank,
     nomenclaturalCode = "ICN"
   ) |>
-  arrange(taxonID) |>
-  select(
-    "language", "license", "rightsHolder", "datasetID", "datasetName",
-    "taxonID", "scientificNameID", "scientificName", "kingdom",
-    "family", "taxonRank", "nomenclaturalCode"
-  )
+  arrange(taxonID)
 ```
 
 ## Distribution extension
