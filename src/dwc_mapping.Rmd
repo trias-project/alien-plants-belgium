@@ -96,7 +96,7 @@ taxon <-
     .keep = "none",
     language = "en",
     license = "http://creativecommons.org/publicdomain/zero/1.0/",
-    rightsHolder = "Botanic Garden Meise", # TODO: Meise Botanic Garden
+    rightsHolder = "Meise Botanic Garden",
     datasetID = "https://doi.org/10.15468/wtda1m",
     datasetName = "Manual of the Alien Plants of Belgium",
     taxonID = .taxon_id,
