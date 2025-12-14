@@ -412,7 +412,7 @@ input_data |>
 
 ## Process degree of establishment
 
-The information for degree of establishment is contained in `d_n`. We decided to use the unified framework for biological invasions of [Blackburn et al. 2011](http://doc.rero.ch/record/24725/files/bach_puf.pdf) for `invasion stage`. `casual`, `naturalized` and `invasive` are terms included in this framework. However, we decided to discard the terms `naturalized` and `invasive` listed in Blackburn et al. (see trias-project/alien-fishes-checklist#6 (comment)). So, `naturalized` and `invasive` are replaced by `established`. For `extinct` (introduced taxa that once were naturalized but that have not been confirmed in recent times) and `extinct/casual` species (taxa are no longer considered as naturalized but still occur as casuals), we map the most recent invasion stage (i.e. `extinct` and `casual` respectively):
+The information for degree of establishment is contained in `d_n`. Is is mapped to <http://rs.tdwg.org/dwc/doc/doe/>:
 
 Map values:
 
@@ -477,12 +477,11 @@ taxon <-
 
 ## Distribution extension
 
-Map the data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
+Map the data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution_2022-02-02.xml):
 
 ```{r}
 distribution <-
   input_data |>
-  distinct(taxon_id, location, event_date, .keep_all = TRUE) |> # Only keep one row per distribution
   mutate(
     .keep = "none",
     taxonID = taxon_id,
@@ -503,8 +502,11 @@ distribution <-
     countryCode = "BE",
     occurrenceStatus = occurrence_status,
     establishmentMeans = "introduced",
+    degreeOfEstablishment = degree_of_establishment,
+    pathway = mapped_pathway,
     eventDate = event_date
   ) |>
+  relocate(pathway, .after = degreeOfEstablishment) |>
   arrange(taxonID)
 ```
 
