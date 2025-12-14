@@ -350,7 +350,7 @@ input_data <-
   filter(!is.na(pathway) | pathway_key == "pathway_1")
 ```
 
-Map values:
+Map values to <http://rs.tdwg.org/dwc/doc/pw/>:
 
 ```{r}
 input_data <-
@@ -365,35 +365,35 @@ input_data <-
     type = "pathway",
     mapped_pathway = case_match(
       pathway,
-      "agric." ~ "escape_agriculture",
-      "bird seed" ~ "contaminant_seed",
-      "birdseed" ~ "contaminant_seed",
-      "bulbs" ~ NA_character_,
-      "coconut mats" ~ "contaminant_seed",
+      "agric." ~ "agriculture",
+      "bird seed" ~ "seedContaminant",
+      "birdseed" ~ "seedContaminant",
+      "bulbs" ~ NA_character_, # horticulture?
+      "coconut mats" ~ "seedContaminant",
       "fish" ~ NA_character_,
-      "food refuse" ~ "escape_food_bait",
-      "grain" ~ "contaminant_seed",
-      "grain (rice)" ~ "contaminant_seed",
-      "grass seed" ~ "contaminant_seed",
+      "food refuse" ~ "liveFoodLiveBait",
+      "grain" ~ "seedContaminant",
+      "grain (rice)" ~ "seedContaminant",
+      "grass seed" ~ "seedContaminant",
       "hay" ~ NA_character_,
-      "hort" ~ "escape_horticulture",
-      "hort." ~ "escape_horticulture",
+      "hort" ~ "horticulture",
+      "hort." ~ "horticulture",
       "hybridization" ~ NA_character_,
       "military troops" ~ NA_character_,
-      "nurseries" ~ "contaminant_nursery",
-      "ore" ~ "contaminant_habitat_material",
-      "pines" ~ "contaminant_on_plants",
+      "nurseries" ~ "contaminantNursery",
+      "ore" ~ "transportationHabitatMaterial",
+      "pines" ~ "contaminantOnPlants", # timberTrade?
       "rice" ~ NA_character_,
       "salt" ~ NA_character_,
-      "seeds" ~ "contaminant_seed",
-      "timber" ~ "contaminant_timber",
-      "tourists" ~ "stowaway_people_luggage",
+      "seeds" ~ "seedContaminant",
+      "timber" ~ "timberTrade",
+      "tourists" ~ "containerBulk",
       "traffic" ~ NA_character_,
-      "unknown" ~ "unknown",
-      "urban weed" ~ "stowaway",
-      "waterfowl" ~ "contaminant_on_animals",
-      "wool" ~ "contaminant_on_animals",
-      "wool alien" ~ "contaminant_on_animals",
+      "unknown" ~ NA_character_,
+      "urban weed" ~ "stowaway", # NA_character_ ?
+      "waterfowl" ~ "contaminantOnAnimals",
+      "wool" ~ "contaminantOnAnimals",
+      "wool alien" ~ "contaminantOnAnimals",
       .default = NA_character_
     )
   )
@@ -411,9 +411,9 @@ input_data |>
 
 ## Process degree of establishment
 
-The information for degree of establishment is contained in `d_n`. Is is mapped to <http://rs.tdwg.org/dwc/doc/doe/>:
+The information for degree of establishment is contained in `d_n`.
 
-Map values:
+Map values to <http://rs.tdwg.org/dwc/doc/doe/>:
 
 ```{r}
 input_data <-
