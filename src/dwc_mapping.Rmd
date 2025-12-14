@@ -15,7 +15,7 @@ output:
     toc_float: yes
 ---
 
-This document describes how we map the checklist data to Darwin Core. The source file for this document can be found [here](https://github.com/trias-project/alien-plants-belgium/blob/master/src/dwc_mapping.Rmd).
+This document describes how we map the checklist data to Darwin Core.
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
@@ -34,128 +34,72 @@ library(digest)         # To generate hashes
 
 # Read source data
 
-Create a data frame `input_data` from the source data:
+The source data is maintained as an Excel file elsewhere. It is manually copied to this repository.
+
+Read source data:
  
 ```{r}
-input_data <- read_excel(path = here("data", "raw", "checklist.xlsx")) 
+raw_data <- read_excel(path = here("data", "raw", "checklist.xlsx")) 
 ```
 
 Preview data:
 
 ```{r}
-input_data %>% head(n = 5)
+glimpse(raw_data)
 ```
 
 # Preprocessing
 
-## Tidy data
-
-```{r}
-input_data %<>%
-  remove_empty("rows") %>%       # Remove empty rows
-  clean_names()                  # Have sensible (lowercase) column names
-```
-
-## Taxon IDs
-
-To uniquely identify a taxon in the taxon core and reference taxa in the extensions, we need a `taxonID`. Since we need it in all generated files, we generate it here in the raw data frame. It is a combination of `dataset-shortname:taxon:` and a hash based on the scientific name. As long as the scientific name doesn't change, the ID will be stable:
+To link taxa with information in the extension(s), each taxon needs a unique and relatively stable `taxonID`. Here we create one in the form of `dataset_shortname:taxon:hash`, where `hash` is unique code based on scientific name (not kingdom).
 
 ```{r}
 # Vectorize the digest function (The digest() function isn't vectorized. So if you pass in a vector, you get one value for the whole vector rather than a digest for each element of the vector):
 vdigest <- Vectorize(digest)
 
-# Generate taxonID:
-input_data %<>% mutate(taxon_id = paste("alien-plants-belgium", "taxon", vdigest (taxon, algo="md5"), sep=":"))
-```
-
-Preview data:
-
-```{r}
-input_data %>% head()
+input_data <-
+  raw_data |>
+  remove_empty("rows") |>
+  clean_names() |>
+  mutate(
+    taxon_id = paste(
+      "alien-plants-belgium",
+      "taxon",
+      vdigest(taxon, algo = "md5"),
+      sep = ":"
+    )
+  )
 ```
 
 # Darwin Core mapping
 
 ## Taxon core
 
-Create a dataframe with unique taxa only (ignoring multiple distribution rows):
-
-```{r}
-taxon <- input_data %>% distinct(taxon_id, .keep_all = TRUE)
-```
-
 Map the data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml):
 
-### language
-
 ```{r}
-taxon %<>% mutate(dwc_language = "en")
-```
-
-### license
-
-```{r}
-taxon %<>% mutate(dwc_license = "http://creativecommons.org/publicdomain/zero/1.0/")
-```
-
-### rightsHolder
-
-```{r}
-taxon %<>% mutate(dwc_rightsHolder = "Botanic Garden Meise")
-```
-
-### datasetID
-
-```{r}
-taxon %<>% mutate(dwc_datasetID = "https://doi.org/10.15468/wtda1m")
-```
-
-### datasetName
-
-```{r}
-taxon %<>% mutate(dwc_datasetName = "Manual of the Alien Plants of Belgium")
-```
-
-### taxonID
-
-```{r}
-taxon %<>% mutate(dwc_taxonID = taxon_id)
-```
-
-### scientificNameID
-
-```{r}
-taxon %<>% mutate(dwc_scientificNameID = scientific_name_id)
-```
-
-### scientificName
-
-```{r}
-taxon %<>% mutate(dwc_scientificName = taxon)
-```
-
-### kingdom
-
-```{r}
-taxon %<>% mutate(dwc_kingdom = "Plantae")
-```
-
-### family
-
-```{r}
-taxon %<>% mutate(dwc_family = family)
-```
-
-### taxonRank
-
-```{r}
-taxon %<>% mutate(dwc_taxonRank = taxon_rank)
-```
-
-### nomenclaturalCode
-
-```{r}
-taxon %<>% mutate(dwc_nomenclaturalCode = "ICN")
+taxon <-
+  input_data |>
+  distinct(taxon_id, .keep_all = TRUE) |>
+  mutate(
+    language = "en",
+    license = "http://creativecommons.org/publicdomain/zero/1.0/",
+    rightsHolder = "Botanic Garden Meise", # TODO: Meise Botanic Garden
+    datasetID = "https://doi.org/10.15468/wtda1m",
+    datasetName = "Manual of the Alien Plants of Belgium",
+    taxonID = .data$taxon_id,
+    scientificNameID = .data$scientific_name_id,
+    scientificName = .data$taxon,
+    kingdom = "Plantae",
+    family = .data$family,
+    taxonRank = .data$taxon_rank,
+    nomenclaturalCode = "ICN"
+  ) |>
+  arrange(taxonID) |>
+  select(
+    "language", "license", "rightsHolder", "datasetID", "datasetName",
+    "taxonID", "scientificNameID", "scientificName", "kingdom",
+    "family", "taxonRank", "nomenclaturalCode"
+  )
 ```
 
 ## Distribution extension
@@ -909,7 +853,6 @@ description %<>% mutate(dwc_language = "en")
 Remove the original columns for each of the generated files:
 
 ```{r}
-taxon %<>% select(starts_with("dwc_")) 
 distribution %<>% select(starts_with("dwc_")) 
 species_profile %<>% select(starts_with("dwc_")) 
 description %<>% select(starts_with("dwc_"))
@@ -918,7 +861,6 @@ description %<>% select(starts_with("dwc_"))
 Drop the `dwc_` prefix:
 
 ```{r}
-colnames(taxon) <- str_remove(colnames(taxon), "dwc_")
 colnames(distribution) <- str_remove(colnames(distribution), "dwc_")
 colnames(species_profile) <- str_remove(colnames(species_profile), "dwc_")
 colnames(description) <- str_remove(colnames(description), "dwc_")
@@ -927,7 +869,6 @@ colnames(description) <- str_remove(colnames(description), "dwc_")
 Sort on `taxonID` to group description information per taxon:
 
 ```{r}
-taxon %<>% arrange(taxonID)
 distribution %<>% arrange(taxonID)
 species_profile %<>% arrange(taxonID)
 description %<>% arrange(taxonID)
