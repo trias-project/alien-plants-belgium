@@ -377,69 +377,41 @@ distribution <-
 
 ## Species profile extension
 
-In this extension will express broad habitat characteristics (e.g. `isTerrestrial`) of the species.
+In this extension will express broad habitat characteristics (e.g. `isTerrestrial`) of the species. Habitat information can be found in `habitat`, which describes whether a species is found in freshwater, terrestrial or both (terrestrial/freshwater) habitats.
 
 ```{r}
-species_profile <- input_data
+species_profile <-
+  input_data |>
+  mutate(habitat = str_to_lower(habitat))
 ```
-
-Habitat information can be found in `habitat`, which describes whether a species is found in freshwater, terrestrial or both (terrestrial/freshwater) habitats.
 
 Show unique values:
 
 ```{r}
-species_profile %>%
-  distinct(habitat) %>%
+species_profile |>
+  distinct(habitat) |>
   arrange(habitat)
 ```
 
-Clean content somewhat, i.e. change uppercase to lowercase
-
-```{r}
-species_profile %<>% mutate(habitat = str_to_lower(habitat)) 
-```
-
-We map this information respectively to `isFreshwater`, `isTerrestrial` or both terms in the species profile extension.
-
 Map the data to [Species Profile](http://rs.gbif.org/extension/gbif/1.0/speciesprofile.xml):
 
-### taxonID
-
 ```{r}
-species_profile %<>% mutate(dwc_taxonID = taxon_id)
-```
-
-### isMarine
-
-```{r}
-species_profile %<>% mutate(dwc_isMarine = "FALSE")
-```
-
-### isFreshwater
-
-```{r}
-species_profile %<>% mutate(dwc_isFreshwater = case_when(
-  habitat == "fresh water" | habitat == "terrestrial/fresh water" ~ "TRUE",
-  TRUE ~"FALSE"
-))
-```
-
-### isTerrestrial
-
-```{r}
-species_profile %<>% mutate(dwc_isTerrestrial = case_when(
-  habitat == "terrestrial" | habitat == "terrestrial/fresh water" ~ "TRUE",
-  TRUE ~"FALSE"
-))
-```
-
-Show mapped values:
-
-```{r}
-species_profile %>%
-  select(habitat, dwc_isMarine, dwc_isFreshwater, dwc_isTerrestrial) %>%
-  group_by_all() %>%
-  summarize(records = n())
+species_profile <-
+  species_profile |>
+  mutate(
+    .keep = "none",
+    taxonID = taxon_id,
+    isMarine = "FALSE",
+    isFreshwater = case_when(
+      habitat == "fresh water" | habitat == "terrestrial/fresh water" ~ "TRUE",
+      TRUE ~ "FALSE"
+    ),
+    isTerrestrial = case_when(
+      habitat == "terrestrial" | habitat == "terrestrial/fresh water" ~ "TRUE",
+      TRUE ~ "FALSE"
+    )
+  ) |>
+  arrange(taxonID)
 ```
 
 ## Description extension
@@ -811,22 +783,18 @@ description %<>% mutate(dwc_language = "en")
 Remove the original columns for each of the generated files:
 
 ```{r}
-distribution %<>% select(starts_with("dwc_")) 
-species_profile %<>% select(starts_with("dwc_")) 
 description %<>% select(starts_with("dwc_"))
 ```
 
 Drop the `dwc_` prefix:
 
 ```{r}
-colnames(species_profile) <- str_remove(colnames(species_profile), "dwc_")
 colnames(description) <- str_remove(colnames(description), "dwc_")
 ```
 
 Sort on `taxonID` to group description information per taxon:
 
 ```{r}
-species_profile %<>% arrange(taxonID)
 description %<>% arrange(taxonID)
 ```
 
