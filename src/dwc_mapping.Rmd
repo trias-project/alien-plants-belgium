@@ -268,12 +268,9 @@ input_data <-
       "S" ~ "present",
       "M" ~ "present",
       "?" ~ "presence uncertain",
-      .default = ""
+      .default = NA_character_
     ),
-    event_date = case_when(
-      presence == "S" ~ date,
-      TRUE ~ ""
-    )
+    event_date = if_else(presence == "S", date, NA_character_)
   )
 ```
 
@@ -304,8 +301,10 @@ occurrence_status_ALO <-
       d_n == "Ext." ~ "absent",
       d_n == "Ext./Cas." ~ "present"
     ),
-    event_date = case_when(
-      presence == "S" ~ paste(end_year, current_year, sep = "/")
+    event_date = if_else(
+      presence == "S",
+      paste(end_year, current_year, sep = "/"),
+      NA_character_
     )
   )
 ```
@@ -369,33 +368,33 @@ input_data <-
       "agric." ~ "escape_agriculture",
       "bird seed" ~ "contaminant_seed",
       "birdseed" ~ "contaminant_seed",
-      "bulbs" ~ "",
+      "bulbs" ~ NA_character_,
       "coconut mats" ~ "contaminant_seed",
-      "fish" ~ "",
+      "fish" ~ NA_character_,
       "food refuse" ~ "escape_food_bait",
       "grain" ~ "contaminant_seed",
       "grain (rice)" ~ "contaminant_seed",
       "grass seed" ~ "contaminant_seed",
-      "hay" ~ "",
+      "hay" ~ NA_character_,
       "hort" ~ "escape_horticulture",
       "hort." ~ "escape_horticulture",
-      "hybridization" ~ "",
-      "military troops" ~ "",
+      "hybridization" ~ NA_character_,
+      "military troops" ~ NA_character_,
       "nurseries" ~ "contaminant_nursery",
       "ore" ~ "contaminant_habitat_material",
       "pines" ~ "contaminant_on_plants",
-      "rice" ~ "",
-      "salt" ~ "",
+      "rice" ~ NA_character_,
+      "salt" ~ NA_character_,
       "seeds" ~ "contaminant_seed",
       "timber" ~ "contaminant_timber",
       "tourists" ~ "stowaway_people_luggage",
-      "traffic" ~ "",
+      "traffic" ~ NA_character_,
       "unknown" ~ "unknown",
       "urban weed" ~ "stowaway",
       "waterfowl" ~ "contaminant_on_animals",
       "wool" ~ "contaminant_on_animals",
       "wool alien" ~ "contaminant_on_animals",
-      .default = ""
+      .default = NA_character_
     )
   )
 ```
@@ -431,7 +430,7 @@ input_data <-
       "Inv." ~ "established",
       "Nat." ~ "established",
       "Nat.?" ~ "established",
-      .default = ""
+      .default = NA_character_
     )
   )
 ```
@@ -596,10 +595,10 @@ native_range <-
       "NAM" ~ "Northern America (WGSRPD:7)",
       "SAM" ~ "Southern America (WGSRPD:8)",
       "Trop." ~ "Pantropical",
-      .default = ""
+      .default = NA_character_
     )
   ) |>
-  filter(!is.na(mapped_native_range) & mapped_native_range != "")
+  filter(!is.na(mapped_native_range))
 ```
 
 Show mapped values:
