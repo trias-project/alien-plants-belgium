@@ -24,12 +24,12 @@ knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
 Load libraries:
 
 ```{r}
-library(tidyverse)      # To do data science
 library(magrittr)       # To use %<>% pipes
-library(here)           # To find files
-library(janitor)        # To clean input data
-library(readxl)         # To read Excel files
-library(digest)         # To generate hashes
+library(tidyverse)
+library(here)
+library(janitor)
+library(readxl)
+library(digest)
 ```
 
 # Read source data
@@ -74,7 +74,7 @@ input_data <-
 
 ## Taxon core
 
-Map the data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml).
+Map the data to [Darwin Core Taxon](http://rs.gbif.org/core/dwc_taxon_2015-04-24.xml):
 
 ```{r}
 taxon <-
@@ -101,28 +101,23 @@ taxon <-
 
 ## Distribution extension
 
-```{r start_distribution}
-distribution <- input_data
-```
-
-Before we start mapping the distribution extensions, we focus on two terms: `occurrenceStatus` and  `eventDate`:
-
-This is because:
+Before we start mapping the distribution extension, we focus on two terms: `occurrenceStatus` and  `eventDate`. That is because:
 
 1. Information on the occurrences is given for the **regions**, while date information is given for **Belgium** as a whole. Some transformations and clarifications are needed.
 
 2. Some species have two values for `occurrenceStatus` and `eventDate`, i.e. species with the degree of naturalisation (`d_n`) of extinct (`Ext.`) or extinct/casual (`Ext./Cas.`).
 
- > Extinct: introduced taxa that once were naturalized (usually rather locally) but that have not been confirmed in recent times in their known localities. Only taxa that are certainly extinct are indicated as such.   
+ > Extinct: introduced taxa that once were naturalized (usually rather locally) but that have not been confirmed in recent times in their known localities. Only taxa that are certainly extinct are indicated as such.
  > Extinct/casual: Some of these extinct taxa are no longer considered as naturalized but still occur as casuals; such taxa are indicated as “Ext./Cas.” (for instance _Tragopogon porrifolius_).
  
 For these species, we include the occurrenceStatus **within** the specified time frame (`eventDate` = first - most recent observation) and **after** the last observation (`eventDate` = most recent observation - current date).
 
 The easiest way to do use a stepwize approach:
+
 1. Clean presence information and date information in `distribution`
 2. Create a separate dataframe `occurrenceStatus_ALO` (ALO = after last observation) for extinct and extinct/casual species
 3. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `distribution` (for `eventDate` = first - most recent observation)
-4. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `occurrenceStatus_ALO` (for `eventDate` = most recent observation - current date)
+4. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `occurrence_status_ALO` (for `eventDate` = most recent observation - current date)
 5. Bind both dataframes by row.
 6. Map the other Darwin Core terms in the distribution extension
 
@@ -136,9 +131,7 @@ For this, we use the following principles:
 
 Thus, we need to specify when a species is present in only one of the regions.
 
-We generate 4 new columns: `Flanders`, `Brussels`,`Wallonia` and `Belgium`. 
-The content of these columns refers to the specific presence status of a species on a regional or national level.
-`S` if present in a single region or in Belgium, `?` if presence uncertain, `NA` if absent and `M` if present in multiple regions.
+We generate 4 new columns: `flanders`, `brussels`,`wallonia` and `belgium`. The content of these columns refers to the specific presence status of a species on a regional or national level. `S` if present in a single region or in Belgium, `?` if presence uncertain, `NA` if absent and `M` if present in multiple regions.
 
 This should look like this:
 
@@ -147,7 +140,7 @@ as.data.frame(matrix(
   c(
     "X", NA, NA, "S", NA, NA, "S",
     NA, "X", NA, NA, "S", NA, "S", 
-    NA, NA, "x", NA, NA, "S", "S",
+    NA, NA, "X", NA, NA, "S", "S",
     "X", "X", NA, "M", "M", NA, "S",
     "X", NA, "X", "M", NA, "M", "S",
     NA, "X", "X", NA, "M", "M", "S",
@@ -162,10 +155,10 @@ as.data.frame(matrix(
     "presence_fl",
     "presence_br", 
     "presence_wa", 
-    "Flanders", 
-    "Brussels", 
-    "Wallonia",
-    "Belgium"
+    "flanders", 
+    "brussels", 
+    "wallonia",
+    "belgium"
   ))
 ))
 ```
@@ -173,245 +166,213 @@ as.data.frame(matrix(
 We translate this to the distribution extension:
 
 ```{r}
-distribution %<>% 
-  mutate(Flanders = case_when(
-    presence_fl == "X" & (is.na(presence_br) | presence_br == "?") & (is.na(presence_wa) | presence_wa == "?") ~ "S",
-    presence_fl == "?" ~ "?",
-    is.na(presence_fl) ~ "NA",
-    TRUE ~ "M")) %>%
-  mutate(Brussels = case_when(
-    (is.na(presence_fl) | presence_fl == "?") & presence_br == "X" & (is.na(presence_wa) | presence_wa == "?") ~ "S",
-    presence_br == "?" ~ "?",
-    is.na(presence_br) ~ "NA",
-    TRUE ~ "M")) %>%
-  mutate(Wallonia = case_when(
-    (is.na(presence_fl) | presence_fl == "?") & (is.na(presence_br) | presence_br == "?") & presence_wa == "X" ~ "S",
-    presence_wa == "?" ~ "?",
-    is.na(presence_wa) ~ "NA",
-    TRUE ~ "M")) %>%
-  mutate(Belgium = case_when(
-    presence_fl == "X" | presence_br == "X" | presence_wa == "X" ~ "S", # One is "X"
-    presence_fl == "?" | presence_br == "?" | presence_wa == "?" ~ "?" # One is "?"
-  ))
+input_distribution <-
+  input_data |>
+  mutate(
+    flanders = case_when(
+      presence_fl == "X" &
+      (is.na(presence_br) | presence_br == "?") &
+      (is.na(presence_wa) | presence_wa == "?")
+        ~ "S",
+      presence_fl == "?" ~ "?",
+      is.na(presence_fl) ~ "NA",
+      TRUE ~ "M"
+    ),
+    brussels = case_when(
+      (is.na(presence_fl) | presence_fl == "?") &
+      presence_br == "X" &
+      (is.na(presence_wa) | presence_wa == "?")
+        ~ "S",
+      presence_br == "?" ~ "?",
+      is.na(presence_br) ~ "NA",
+      TRUE ~ "M"
+    ),
+    wallonia = case_when(
+      (is.na(presence_fl) | presence_fl == "?") &
+      (is.na(presence_br) | presence_br == "?") &
+      presence_wa == "X"
+        ~ "S",
+      presence_wa == "?" ~ "?",
+      is.na(presence_wa) ~ "NA",
+      TRUE ~ "M"
+    ),
+    belgium = case_when(
+      presence_fl == "X" | presence_br == "X" | presence_wa == "X" ~ "S", # One is "X"
+      presence_fl == "?" | presence_br == "?" | presence_wa == "?" ~ "?" # One is "?"
+    )
+  )
 ```
 
 Summary of the previous action:
 
 ```{r}
-distribution %>% select(presence_fl, presence_br, presence_wa, Flanders, Wallonia, Brussels, Belgium) %>%
-  group_by_all() %>%
-  summarize(records = n()) %>%
-  arrange(Flanders, Wallonia, Brussels)
+input_distribution |>
+  select(
+    presence_fl,
+    presence_br,
+    presence_wa,
+    flanders,
+    wallonia,
+    brussels,
+    belgium) |>
+  group_by_all() |>
+  summarize(records = n()) |>
+  arrange(flanders, wallonia, brussels)
 ```
 
-One line should represent the presence information of a species in one region or Belgium. We need to transform `distribution` from a wide to a long table (i.e. create a `key` and `value` column):
+One line should represent the presence information of a species in one region or Belgium. We need to transform `input_distribution` from a wide to a long table (i.e. create a `location` and `presence` column):
 
 ```{r}
-distribution %<>% gather(
-  key, value,
-  Flanders, Wallonia, Brussels, Belgium,
-  convert = FALSE
-) 
+input_distribution <-
+  input_distribution |>
+  gather(
+    key, value,
+    flanders, wallonia, brussels, belgium,
+    convert = FALSE
+  ) |>
+  rename("location" = "key", "presence" = "value") |>
+  filter(!presence == "NA") # Remove species which lack presence information
 ```
 
-Rename `key` and `value`:
-
-```{r}
-distribution %<>% rename("location" = "key", "presence" = "value")
-```
-
-Remove species for which we lack presence information (i.e. `presence` = `NA``):
-
-```{r}
-distribution %<>% filter(!presence == "NA")
-```
-
-Now, we will clean date information
-
-Create `start_year` from `fr`: 
-
-```{r}
-distribution %<>% mutate(start_year = fr)
-```
-
-Clean values:
-
-```{r}
-distribution %<>% mutate(start_year = 
-  str_replace_all(start_year, "(\\?|ca. |<|>)", "") # Strip ?, ca., < and >
-)
-```
-
-Create `end_year` from `mrr` (most recent record):
-
-```{r}
-distribution %<>% mutate(end_year = mrr)
-```
-
-Clean values:
-
-```{r}
-distribution %<>% mutate(end_year = 
-  str_replace_all(end_year, "(\\?|ca. |<|>)", "") # Strip ?, ca., < and >
-)
-```
-
-If `end_year` is `Ann.` or `N` use current year:
+Now we'll create and clean a start and end year:
 
 ```{r}
 current_year = format(Sys.Date(), "%Y")
-distribution %<>% mutate(end_year = recode(end_year,
-  "Ann." = current_year,
-  "N" = current_year)
-)
-```
 
-Show reformatted values for both `fr` and `mrr`:
-
-```{r}
-distribution %>%
-  select(fr, start_year) %>%
-  rename(year = fr, formatted_year = start_year) %>%
-  union( # Union with mrr. Will also remove duplicates
-    distribution %>%
-      select(mrr, end_year) %>%
-      rename(year = mrr, formatted_year = end_year)
-  ) %>%
-  filter(nchar(year) != 4) %>% # Don't show raw values that were already YYYY
-  arrange(year)
+input_distribution <-
+  input_distribution |>
+  mutate(
+    # start_year = first record (fr), end_year = most recent record (mrr)
+    # Cleaning strips out ?, ca., < and >
+    start_year = str_replace_all(fr, "(\\?|ca. |<|>)", ""),
+    end_year = str_replace_all(mrr, "(\\?|ca. |<|>)", "")
+  ) |>
+  # If end_year = "Ann." or "N", use current year
+  mutate(
+    end_year = case_match(
+      end_year,
+      "Ann." ~ current_year,
+      "N" ~ current_year,
+      .default = end_year
+    )
+  )
 ```
 
 Check if any `start_year` fall after `end_year` (expected to be none):
 
 ```{r}
-distribution %>%
-  select(start_year, end_year) %>%
-  mutate(start_year = as.numeric(start_year)) %>%
-  mutate(end_year = as.numeric(end_year)) %>%
-  group_by(start_year, end_year) %>%
-  summarize(records = n()) %>%
+input_distribution |>
+  select(start_year, end_year) |>
+  mutate(start_year = as.numeric(start_year)) |>
+  mutate(end_year = as.numeric(end_year)) |>
+  group_by(start_year, end_year) |>
+  summarize(records = n()) |>
   filter(start_year > end_year) 
 ```
 
-Combine `start_year` and `end_year` in an ranged `Date` (ISO 8601 format). If any those two dates is empty or the same, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
+Combine `start_year` and `end_year` in an ranged `date` (ISO 8601 format). If any those two dates is empty or the same, we use a single year, as a statement when it was seen once (either as a first record or a most recent record):
 
 ```{r}
-distribution %<>% mutate(Date = case_when(
-  start_year == "" & end_year == "" ~ "",
-  start_year == ""                  ~ end_year,
-  end_year == ""                    ~ start_year,
-  start_year == end_year            ~ start_year,
-  TRUE                              ~ paste(start_year, end_year, sep = "/")
-))
+input_distribution <-
+  input_distribution |>
+  mutate(
+    date = case_when(
+      start_year == "" & end_year == "" ~ "",
+      start_year == "" ~ end_year,
+      end_year == "" ~ start_year,
+      start_year == end_year ~ start_year,
+      TRUE ~ paste(start_year, end_year, sep = "/")
+    )
+  )
 ```
 
-In a next step, we will generate `occurrenceStatus_ALO`
+Then, we map `occurrence_status` using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources) and set `event_date` only when `presence` = `S`:
 
 ```{r}
-occurrenceStatus_ALO <- distribution %>% filter(d_n == "Ext." | d_n == "Ext./Cas.")
+input_distribution <-
+  input_distribution |>
+  mutate(
+    occurrence_status = case_match(
+      presence,
+      "S" ~ "present",
+      "M" ~ "present",
+      "?" ~ "presence uncertain",
+      .default = ""
+    ),
+    event_date = case_when(
+      presence == "S" ~ date,
+      TRUE ~ ""
+    )
+  )
 ```
 
-Then, we map occurrenceStatus and eventDate for `distribution`:
-
-Map `occurrenceStaus` using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources):
+Overview of `occurrence_status` for each location x presence combination:
 
 ```{r}
-distribution %<>% mutate(occurrenceStatus = recode(presence,
-  "S" = "present",
-  "M" = "present",
-  "?" = "presence uncertain",
-  .default = ""
-))
-```
-
-Overview of `occurrenceStatus` for each location x presence combination:
-
-```{r}
-distribution %>% select (location, presence, occurrenceStatus) %>%
-  group_by_all() %>%
+input_distribution |>
+  select (location, presence, occurrence_status) |>
+  group_by_all() |>
   summarize(records = n()) 
 ```
 
-Populate `eventDate` only when `presence` = `S`:
+Now we create `occurrence_status_ALO`:
 
 ```{r}
-distribution %<>% mutate(eventDate = case_when(
-  presence == "S" ~ Date,
-  TRUE ~ ""
-))
+occurrence_status_ALO <-
+  input_distribution |>
+  filter(d_n == "Ext." | d_n == "Ext./Cas.")
 ```
 
-Map `occurrenceStatus` and `eventDate` for `occurrenceStatus_ALO`:
+Map `occurrence_status` and `event_date` for `occurrence_status_ALO`:
 
 ```{r}
-occurrenceStatus_ALO %<>% mutate(occurrenceStatus = case_when(
-  d_n == "Ext." ~ "absent",
-  d_n == "Ext./Cas." ~ "present"
-))
-
-occurrenceStatus_ALO %<>% mutate(eventDate = case_when(
-  presence == "S" ~ paste(end_year, current_year, sep = "/")
-))
+occurrence_status_ALO <-
+  occurrence_status_ALO |>
+  mutate(
+    occurrence_status = case_when(
+      d_n == "Ext." ~ "absent",
+      d_n == "Ext./Cas." ~ "present"
+    ),
+    event_date = case_when(
+      presence == "S" ~ paste(end_year, current_year, sep = "/")
+    )
+  )
 ```
 
-Bind `occurrenceStatus_ALO` and `distribution` by rows:
+Bind `occurrence_status_ALO` and `input_distribution` by rows:
 
 ```{r}
-distribution %<>% bind_rows(occurrenceStatus_ALO)
+input_distribution <- bind_rows(input_distribution, occurrence_status_ALO)
 ```
 
 Map the data to [Species Distribution](http://rs.gbif.org/extension/gbif/1.0/distribution.xml):
 
-### taxonID
-
 ```{r}
-distribution %<>% mutate(dwc_taxonID = taxon_id)
-```
-
-### locationID
-
-```{r}
-distribution %<>% mutate(dwc_locationID = case_when(
-  location == "Belgium" ~ "ISO_3166-2:BE",
-  location == "Flanders" ~ "ISO_3166-2:BE-VLG",
-  location == "Wallonia" ~ "ISO_3166-2:BE-WAL",
-  location == "Brussels" ~ "ISO_3166-2:BE-BRU"
-))
-```
-
-### locality
-
-```{r}
-distribution %<>% mutate(dwc_locality = case_when(
-  location == "Belgium" ~ "Belgium",
-  location == "Flanders" ~ "Flemish Region",
-  location == "Wallonia" ~ "Walloon Region",
-  location == "Brussels" ~ "Brussels-Capital Region"
-))
-```
-
-### countryCode
-
-```{r}
-distribution %<>% mutate(dwc_countryCode = "BE")
-```
-
-### occurrenceStatus 
-
-```{r}
-distribution %<>% mutate(dwc_occurrenceStatus = occurrenceStatus) 
-```
-
-### establishmentMeans
-
-```{r}
-distribution %<>% mutate(dwc_establishmentMeans = "introduced")
-```
-
-### eventDate
-
-```{r}
-distribution %<>% mutate(dwc_eventDate = eventDate) 
+distribution <-
+  input_distribution |>
+  mutate(
+    .keep = "none",
+    taxonID = taxon_id,
+    locationID = case_match(
+      location,
+      "belgium" ~ "ISO_3166-2:BE",
+      "flanders" ~ "ISO_3166-2:BE-VLG",
+      "wallonia" ~ "ISO_3166-2:BE-WAL",
+      "brussels" ~ "ISO_3166-2:BE-BRU"
+    ),
+    locality = case_match(
+      location,
+      "belgium" ~ "Belgium",
+      "flanders" ~ "Flemish Region",
+      "wallonia" ~ "Walloon Region",
+      "brussels" ~ "Brussels-Capital Region"
+    ),
+    countryCode = "BE",
+    occurrenceStatus = occurrence_status,
+    establishmentMeans = "introduced",
+    eventDate = event_date
+  ) |>
+  arrange(taxonID)
 ```
 
 ## Species profile extension
@@ -858,7 +819,6 @@ description %<>% select(starts_with("dwc_"))
 Drop the `dwc_` prefix:
 
 ```{r}
-colnames(distribution) <- str_remove(colnames(distribution), "dwc_")
 colnames(species_profile) <- str_remove(colnames(species_profile), "dwc_")
 colnames(description) <- str_remove(colnames(description), "dwc_")
 ```
@@ -866,33 +826,8 @@ colnames(description) <- str_remove(colnames(description), "dwc_")
 Sort on `taxonID` to group description information per taxon:
 
 ```{r}
-distribution %<>% arrange(taxonID)
 species_profile %<>% arrange(taxonID)
 description %<>% arrange(taxonID)
-```
-
-Preview taxon core:
-
-```{r}
-taxon %>% head(10)
-```
-
-Preview distribution extension:
-
-```{r}
-distribution %>% head(10)
-```
-
-Preview species profile extension:
-
-```{r}
-species_profile %>% head(10)
-```
-
-Preview description extension:
-
-```{r}
-description %>% head(10)
 ```
 
 Save to CSV:
