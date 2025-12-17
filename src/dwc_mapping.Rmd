@@ -73,35 +73,14 @@ input_data <-
 
 ## Process distribution information (adds rows)
 
-1. Information on the occurrences is given for the **regions**, while date information is given for **Belgium** as a whole. Some transformations and clarifications are needed.
+### National and regional information
 
-2. Some species have two values for `occurrenceStatus` and `eventDate`, i.e. species with the degree of naturalisation (`d_n`) of extinct (`Ext.`) or extinct/casual (`Ext./Cas.`).
+The source checklist contains first/last recorded date, degree of establishment and pathway information at the **national level** and presence information (`X`,`?` or `NA`) at the **regional level** (in `presence_fl`, `presence_wa` and `presence_br`). We'll include both national and regional information in the processed checklist. For this, we use the following principles:
 
- > Extinct: introduced taxa that once were naturalized (usually rather locally) but that have not been confirmed in recent times in their known localities. Only taxa that are certainly extinct are indicated as such.
- > Extinct/casual: Some of these extinct taxa are no longer considered as naturalized but still occur as casuals; such taxa are indicated as “Ext./Cas.” (for instance _Tragopogon porrifolius_).
- 
-For these species, we include the occurrenceStatus **within** the specified time frame (`eventDate` = first - most recent observation) and **after** the last observation (`eventDate` = most recent observation - current date).
+1. When a species is present in _only one region_, we can assume `eventDate`, `degreeOfEstablishment` and `pathway` to be true for both national and regional level, so we provide the same information for both (see #45).
+2. When a species is present in _more than one_ region, it is impossible to extrapolate `eventDate`, `degreeOfEstablishment` and `pathway` for the regions. In this case, only provide it at national level, reducing the information at regional level to `occurrenceStatus` only.
 
-The easiest way to do use a stepwise approach:
-
-1. Clean presence information and date information in `distribution`
-2. Create a separate dataframe `occurrenceStatus_ALO` (ALO = after last observation) for extinct and extinct/casual species
-3. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `distribution` (for `eventDate` = first - most recent observation)
-4. Map `occurrenceStatus` and `eventDate` from cleaned presence and date information in `occurrence_status_ALO` (for `eventDate` = most recent observation - current date)
-5. Bind both dataframes by row.
-6. Map the other Darwin Core terms in the distribution extension
-
-The checklist contains minimal presence information (`X`,`?` or `NA`) for the three regions in Belgium: Flanders, Wallonia and the Brussels-Capital Region, contained in `presence_fl`, `presence_wa` and `presence_br` respectively. Information regarding the first/last recorded observation applies to the distribution in Belgium as a whole. Both national and regional information is required in the checklist. In the `distribution.csv`, we will first provide `occurrenceStatus` and `eventDate`` on a **national level**, followed by specific information for the **regions**. 
-
-For this, we use the following principles:
-
-1. When a species is present in _only one region_, we can assume `eventDate` relates to that specific region. In this case, we can keep lines for Belgium and for the specific region populated with these variables (see #45).
-
-2. When a species is present in _more than one_ region, it is impossible to extrapolate the date information for the regions. In this case, we decided to provide `occurrenceStatus` for the regional information, and specify dates only for Belgium.  
-
-Thus, we need to specify when a species is present in only one of the regions.
-
-We generate 4 new columns: `flanders`, `brussels`,`wallonia` and `belgium`. The content of these columns refers to the specific presence status of a species on a regional or national level. `S` if present in a single region or in Belgium, `?` if presence uncertain, `NA` if absent and `M` if present in multiple regions.
+To know if a species is present in one or more regions, we createe 4 new columns: `flanders`, `brussels`,`wallonia` and `belgium`. The content of these columns refers to the specific presence status of a species on a regional or national level. `S` if present in a single region or in Belgium, `?` if presence uncertain, `NA` if absent and `M` if present in multiple regions.
 
 This should look like this:
 
@@ -257,7 +236,7 @@ input_data <-
   )
 ```
 
-Then, we map `occurrence_status` using [IUCN definitions](http://www.iucnredlist.org/technical-documents/red-list-training/iucnspatialresources) and set `event_date` only when `presence` = `S`:
+Set occurrence status:
 
 ```{r}
 input_data <-
@@ -269,50 +248,41 @@ input_data <-
       "M" ~ "present",
       "?" ~ "presence uncertain",
       .default = NA_character_
-    ),
-    event_date = if_else(presence == "S", date, NA_character_)
-  )
-```
-
-Overview of `occurrence_status` for each location x presence combination:
-
-```{r}
-input_data |>
-  select (location, presence, occurrence_status) |>
-  group_by_all() |>
-  summarize(records = n()) 
-```
-
-Now we create `occurrence_status_ALO`:
-
-```{r}
-occurrence_status_ALO <-
-  input_data |>
-  filter(d_n == "Ext." | d_n == "Ext./Cas.")
-```
-
-Map `occurrence_status` and `event_date` for `occurrence_status_ALO`:
-
-```{r}
-occurrence_status_ALO <-
-  occurrence_status_ALO |>
-  mutate(
-    occurrence_status = case_when(
-      d_n == "Ext." ~ "absent",
-      d_n == "Ext./Cas." ~ "present"
-    ),
-    event_date = if_else(
-      presence == "S",
-      paste(end_year, current_year, sep = "/"),
-      NA_character_
     )
   )
 ```
 
-Bind `input_data` with `occurrence_status_ALO` by rows:
+### Extinct taxa
+
+Some species have a degree of naturalisation (`d_n`) of extinct (`Ext.`) or extinct/casual (`Ext./Cas.`).
+
+> Extinct: introduced taxa that once were naturalized (usually rather locally) but that have not been confirmed in recent times in their known localities. Only taxa that are certainly extinct are indicated as such.
+> Extinct/casual: Some of these extinct taxa are no longer considered as naturalized but still occur as casuals; such taxa are indicated as “Ext./Cas.” (for instance _Tragopogon porrifolius_).
+ 
+For these species, we create two distributions:
+
+- One within the specified time frame (`eventDate` = first/most recent observation), when the species was **present**. That one is already created.
+- One after the last observation (`eventDate` = most recent observation/current date), when the species was **absent**. We'll create this as a separate data frame `occurrenceStatus_ALO` (ALO = after last observation) which we will bind wind the first.
+
+Create `occurrence_status_alo`, update `date` and set occurrence status:
 
 ```{r}
-input_data <- bind_rows(input_data, occurrence_status_ALO)
+occurrence_status_alo <-
+  input_data |>
+  filter(d_n == "Ext." | d_n == "Ext./Cas.") |>
+  mutate(
+    date = paste(end_year, current_year, sep = "/"),
+    occurrence_status = case_when(
+      d_n == "Ext." ~ "absent",
+      d_n == "Ext./Cas." ~ "present"
+    )
+  )
+```
+
+Bind `input_data` with `occurrence_status_alo`:
+
+```{r}
+input_data <- bind_rows(input_data, occurrence_status_alo)
 ```
 
 ## Process pathways (adds rows)
@@ -504,7 +474,7 @@ distribution <-
     establishmentMeans = "introduced",
     degreeOfEstablishment = degree_of_establishment,
     pathway = mapped_pathway,
-    eventDate = event_date
+    eventDate = if_else(presence == "S", date, NA_character_)
   ) |>
   relocate(pathway, .after = degreeOfEstablishment) |>
   arrange(taxonID)
