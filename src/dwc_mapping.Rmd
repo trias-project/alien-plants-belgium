@@ -80,7 +80,7 @@ The source checklist contains first/last recorded date, degree of establishment 
 1. When a species is present in _only one region_, we can assume `eventDate`, `degreeOfEstablishment` and `pathway` to be true for both national and regional level, so we provide the same information for both (see #45).
 2. When a species is present in _more than one_ region, it is impossible to extrapolate `eventDate`, `degreeOfEstablishment` and `pathway` for the regions. In this case, only provide it at national level, reducing the information at regional level to `occurrenceStatus` only.
 
-To know if a species is present in one or more regions, we createe 4 new columns: `flanders`, `brussels`,`wallonia` and `belgium`. The content of these columns refers to the specific presence status of a species on a regional or national level. `S` if present in a single region or in Belgium, `?` if presence uncertain, `NA` if absent and `M` if present in multiple regions.
+To know if a species is present in one or more regions, we create 4 new columns: `flanders`, `brussels`,`wallonia` and `belgium`. The content of these columns refers to the specific presence status of a species on a regional or national level. `S` if present in a single region or in Belgium, `?` if presence uncertain, `NA` if absent and `M` if present in multiple regions.
 
 This should look like this:
 
@@ -315,9 +315,7 @@ input_data <-
     names_to = "pathway_key",
     values_to = "pathway",
     values_drop_na = FALSE
-  ) |>
-  # Remove empty pathways, but keep at least first (for records without any pathway)
-  filter(!is.na(pathway) | pathway_key == "pathway_1")
+  )
 ```
 
 Map values to <http://rs.tdwg.org/dwc/doc/pw/>:
@@ -366,7 +364,9 @@ input_data <-
       "wool alien" ~ "contaminantOnAnimals",
       .default = NA_character_
     )
-  )
+  ) |>
+  # Remove empty pathways, but keep at least first (for records without any pathway)
+  filter(!is.na(mapped_pathway) | pathway_key == "pathway_1")
 ```
 
 Show mapped values:
