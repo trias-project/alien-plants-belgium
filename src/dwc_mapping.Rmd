@@ -472,9 +472,21 @@ distribution <-
     countryCode = "BE",
     occurrenceStatus = occurrence_status,
     establishmentMeans = "introduced",
-    degreeOfEstablishment = degree_of_establishment,
-    pathway = mapped_pathway,
-    eventDate = if_else(presence == "S", date, NA_character_)
+    degreeOfEstablishment = if_else(
+      presence == "S",
+      degree_of_establishment,
+      NA_character_
+    ),
+    pathway = if_else(
+      presence == "S",
+      mapped_pathway,
+      NA_character_
+    ),
+    eventDate = if_else(
+      presence == "S",
+      date,
+      NA_character_
+    )
   ) |>
   relocate(pathway, .after = degreeOfEstablishment) |>
   arrange(taxonID)
