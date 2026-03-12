@@ -82,7 +82,7 @@ input_data <- input_data |>
          `introduction pathway 1` = NA_character_,
          `introduction pathway 2` = NA_character_,
          `introduction pathway 3` = NA_character_,
-         
+         `date of first observation` = 
          )
          
          
