@@ -51,9 +51,27 @@ glimpse(raw_data)
 input_data <- raw_data %>% clean_names()
 ```
 
+```{r}
+lookup <- c(
+      "AF" = "Africa",
+      "AM" = "pan-American",
+      "AS" = "Asia",
+      "AS-Te" = "temperate Asia",
+      "AS-Tr" = "tropical Asia",
+      "AUS" = "Australasia",
+      "Cult." = "cultivated origin",
+      "E" = "Europe",
+      "Hybr." = "hybrid origin",
+      "NAM" = "Northern America",
+      "SAM" = "Southern America",
+      "Trop." = "Pantropical")
+```
+
 
 
 ```{r}
+vdigest <- Vectorize(digest)
+
 input_data <- input_data |>
   mutate(`taxonID hash` = vdigest(taxon, algo = "md5"),
          `scientific name` = taxon,
@@ -61,12 +79,14 @@ input_data <- input_data |>
          phylum = NA_character_,
          class = NA_character_ ,
          order = NA_character_ ,
+         family = NA_character_,
          genus = NA_character_,
          `nomenclatural code` = "ICN",
          `country code` = "BE",
          `presence Flanders` = case_when(presence_fl == "X" ~ "TRUE", .default = "FALSE"),
          `presence Wallonia` = case_when(presence_wa == "X" ~ "TRUE", .default = "FALSE"),
          `presence Brussels` = case_when(presence_br == "X" ~ "TRUE", .default = "FALSE"),
+         `nr of regions` = NA_character_,
          `occurrence status` = case_when(d_n == "Nat." | 
                                            d_n == "Cas." | 
                                            d_n == "Cas.?" | 
@@ -82,7 +102,11 @@ input_data <- input_data |>
          `introduction pathway 1` = NA_character_,
          `introduction pathway 2` = NA_character_,
          `introduction pathway 3` = NA_character_,
-         `date of first observation` = 
+         `date first observation` = str_replace_all(fr, "(\\?|ca. |<|>)", ""),
+         `date last observation` = str_replace_all(fr, "(\\?|ca. |<|>)", ""),
+         `source` = NA_character_,
+         `occurrence remarks` = NA_character_,
+         `native range` = str_replace_all(origin, lookup)
          )
          
          
