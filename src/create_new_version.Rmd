@@ -31,8 +31,6 @@ library(digest)
 
 # Read source data
 
-The source data is maintained as an Excel file elsewhere. It is manually copied to this repository.
-
 Read source data:
  
 ```{r}
@@ -47,9 +45,13 @@ glimpse(raw_data)
 
 # Create version 2.0
 
+First clean-up of the data:
+
 ```{r}
 input_data <- raw_data %>% clean_names()
 ```
+
+Define look-up table for native ranges:
 
 ```{r}
 lookup <- c(
@@ -76,23 +78,44 @@ input_data <- input_data |>
   mutate(`taxonID hash` = vdigest(taxon, algo = "md5"),
          `scientific name` = taxon,
          kingdom = "Plantae",
-         phylum = NA_character_,
-         class = NA_character_ ,
-         order = NA_character_ ,
-         family = NA_character_,
-         genus = NA_character_,
          `nomenclatural code` = "ICN",
          `country code` = "BE",
-         `presence Flanders` = case_when(presence_fl == "X" ~ "TRUE", .default = "FALSE"),
-         `presence Wallonia` = case_when(presence_wa == "X" ~ "TRUE", .default = "FALSE"),
-         `presence Brussels` = case_when(presence_br == "X" ~ "TRUE", .default = "FALSE"),
-         `nr of regions` = NA_character_,
-         `occurrence status` = case_when(d_n == "Nat." | 
-                                           d_n == "Cas." | 
-                                           d_n == "Cas.?" | 
-                                           d_n == "Nat.?" | 
-                                           d_n == "Inv." ~ "present",
-                                         .default = as.character(d_n)),
+         
+      # Change `X`,`?` and NA to numerical values to calculate the total number of regions where a taxon occurs
+         `presence Flanders` = case_when(
+           presence_fl =="X" ~ "1",
+           is.na(presence_fl) ~ "0",
+           .default = "?"),
+         `presence Wallonia` = case_when(
+           presence_wa =="X" ~ "1",
+           is.na(presence_wa) ~ "0",
+           .default = "?"),
+         `presence Brussels` = case_when(
+           presence_br =="X" ~ "1",
+           is.na(presence_br) ~ "0",
+           .default = "?"),
+
+      # Calculate the total number of region where a taxon occurs
+         `nr of regions` = rowSums(
+           cbind(
+             as.numeric(na_if(`presence Flanders`, "?")),
+             as.numeric(na_if(`presence Wallonia`, "?")),
+             as.numeric(na_if(`presence Brussels`, "?"))
+           ),
+           na.rm = TRUE),
+      
+      # Determine whether a species is present in Belgium or not:
+         `occurrence status` = case_when(
+           
+           # If the total number of regions is not zero, the species is certainly present in Belgium 
+           `nr of regions` != 0 ~ "present",
+    
+           
+           # If the total number of regions is zero, it's only 100% certain that it's absent if it's absent in all regions
+           `presence Flanders` == "0" & `presence Wallonia` == "0" & `presence Brussels` == "0" ~ "absent",
+           .default = "presence uncertain"),
+  
+           
          `establishment means` = "introduced",
          `degree of establishment` = case_when(
            d_n == "Nat." | d_n == "Nat.?" ~ "established",
@@ -106,24 +129,47 @@ input_data <- input_data |>
          `date last observation` = str_replace_all(fr, "(\\?|ca. |<|>)", ""),
          `source` = NA_character_,
          `occurrence remarks` = NA_character_,
-         `native range` = str_replace_all(origin, lookup)
+         `native range` = str_replace_all(origin, lookup),
+         `native range` = str_replace_all(`native range`, "\\s+", " | "),
+         terrestrial = case_match(habitat,
+                                  "Terrestrial" ~ TRUE,
+                                  "terrestrial" ~ TRUE,
+                                  "Terrestrial/fresh water" ~ TRUE,
+                                  .default = FALSE),
+         freshwater = case_match(habitat,
+                                 "Terrestrial/fresh water" ~ TRUE,
+                                 "Fresh water" ~ TRUE,
+                                 .default = FALSE),
+         `date added` = NA_character_
          )
          
          
 ```
 
-
-
-
-
-To link taxa with information in the extension(s), each taxon needs a unique and relatively stable `taxonID`. Here we create one in the form of `dataset_shortname:taxon:hash`, where `hash` is unique code based on scientific name (not kingdom).
+Put all columns in order and rearrange:
 
 ```{r}
-# Vectorize the digest function (The digest() function isn't vectorized. So if you pass in a vector, you get one value for the whole vector rather than a digest for each element of the vector):
-vdigest <- Vectorize(digest)
-
 input_data <-
-  raw_data |>
-  clean_names() |>
-  mutate(taxon_id = vdigest(taxon, algo = "md5"))
+  input_data %>% select(
+    `taxonID hash`, scientific_name_id, `scientific name`, hybrid_formula,
+    kingdom, family, taxon_rank, `nomenclatural code`,
+    `presence Flanders`,`presence Wallonia`, `presence Brussels`, `nr of regions` ,`country code`,
+    `occurrence status`, 
+    `establishment means`, d_n ,`degree of establishment`,
+    m_i, v_i, `introduction pathway 1`, `introduction pathway 2`, `introduction pathway 3`,
+    fr, `date first observation`,
+    mrr, `date last observation`,
+    source,
+    origin, `native range`,
+    habitat, terrestrial, freshwater,
+    `date added`)
 ```
+
+Export as .csv:
+
+
+```{r}
+write_csv(input_data, here("data", "raw", "raw_new.csv"), na = "")
+
+```
+
