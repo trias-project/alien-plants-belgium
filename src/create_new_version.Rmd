@@ -34,7 +34,7 @@ library(digest)
 Read source data:
  
 ```{r}
-raw_data <- read_excel(path = here("data", "raw", "checklist.xlsx")) 
+raw_data <- read_excel(path = here("data", "raw", "checklist_update_2025.xlsx")) 
 ```
 
 Preview raw data:
@@ -126,7 +126,7 @@ input_data <- input_data |>
          `introduction pathway 2` = NA_character_,
          `introduction pathway 3` = NA_character_,
          `date first observation` = str_replace_all(fr, "(\\?|ca. |<|>)", ""),
-         `date last observation` = str_replace_all(fr, "(\\?|ca. |<|>)", ""),
+         `date last observation` = str_replace_all(mrr, "(\\?|ca. |<|>)", ""),
          `source` = NA_character_,
          `occurrence remarks` = NA_character_,
          `native range` = str_replace_all(origin, lookup),
